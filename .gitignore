@@ -19,6 +19,7 @@ pnpm-debug.log*
 
 # generated markdown (built from YAML data)
 public/*.md
+public/.well-known/
 
 # macOS-specific files
 .DS_Store
