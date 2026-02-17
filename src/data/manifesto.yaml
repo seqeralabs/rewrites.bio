@@ -1,0 +1,88 @@
+sections:
+  - title: Philosophy
+    principles:
+      - title: Credit the original authors
+        description: >
+          Always, everywhere. In the README, the docs, the paper, and any downstream reports.
+          The scientific insight behind these tools took years to develop. A dedicated credits
+          page should list every reimplemented tool with its full citation.
+      - title: Emulate exactly, then optimise
+        description: >
+          The first goal is bit-identical or numerically-identical output. This inherits the
+          validation history of the original tool and lets users switch with zero risk to their
+          scientific conclusions. Optimisations that change output should be opt-in and clearly
+          documented.
+      - title: Be transparent about AI
+        description: >
+          If AI coding assistants were used, say so. This is a strength, not a weakness.
+          It demonstrates that correctness was verified through output comparison, not code
+          review alone. Document the development process honestly.
+
+  - title: Planning
+    principles:
+      - title: Think big
+        description: >
+          Combine tools. Eliminate redundant I/O. Remove upstream prerequisites. A rewrite
+          that just ports one tool to a faster language misses the real opportunity: rethinking
+          how multiple tools share work.
+      - title: Work small
+        description: >
+          Small iteration loops. One tool at a time. Step-by-step validation against the
+          original output before moving on. The compound complexity of rewriting many things
+          at once will bury you.
+      - title: Engage upstream
+        description: >
+          Collaborate with the original developers rather than working in isolation.
+          Co-authorship, upstream contributions, or at minimum a conversation before public
+          release. Turn a potential competitor into a welcome complement.
+
+  - title: Building
+    principles:
+      - title: Test relentlessly
+        description: >
+          Different data types, different sizes, different edge cases. Missing prerequisites
+          should give clear error messages. Don't settle for 'it works on my machine' - test
+          on data that will break things.
+      - title: Use real test data
+        description: >
+          Don't rely on artificial inputs. Real sequencing data has quirks, edge cases, and
+          format variations that synthetic data never captures. Your tests should use the same
+          data that production pipelines see.
+      - title: Replicate, don't improve
+        description: >
+          Always target 1:1 replication of results. Avoid the temptation to 'fix' things
+          along the way. Changing results voids trust and creates a maintenance burden. If
+          you find genuine improvements, take them upstream first.
+      - title: Pin versions and document
+        description: >
+          Pin the exact version of every original tool you're emulating. Document the
+          comparison methodology. Future you (and every user) needs to know exactly what
+          was validated against what.
+
+  - title: Stewardship
+    principles:
+      - title: Maintain and govern
+        description: >
+          Adopt clear contribution guidelines, a code of conduct, and a release process.
+          Respond to issues. An unmaintained rewrite is worse than no rewrite because it
+          creates a false promise of continued support.
+      - title: Preserve compatibility
+        description: >
+          Output formats should be identical to the originals. Downstream tools, pipeline
+          integrations, and reporting frameworks should continue to work unmodified. This
+          includes MultiQC modules, file naming conventions, and header formats.
+      - title: Respect upstream licenses
+        description: >
+          Check the license of every tool you reimplement. Understand what it permits.
+          Your rewrite's license should be at least as permissive as the most restrictive
+          original.
+      - title: Release as open source
+        description: >
+          The tools you're rewriting were built by the open-source community for the
+          open-source community. Your rewrites should be too. Permissive licenses lower
+          the barrier to adoption and contribution.
+      - title: Don't file reckless bug reports
+        description: >
+          Before reporting a bug in the original tool, be sure. Really sure. Complete
+          replication with the original tool, full understanding by a human. No automated
+          AI bug reports - they put strain on volunteer maintainers.

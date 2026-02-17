@@ -1,69 +1,19 @@
 ---
+import { readFileSync } from 'node:fs';
+import { parse } from 'yaml';
+import { marked } from 'marked';
 import Layout from '../layouts/Layout.astro';
 import Footer from '../components/Footer.astro';
 
-interface Project {
-  name: string;
-  description: string;
-  replaces: string;
-  url: string;
-  paper?: string;
+const projects = parse(readFileSync('src/data/projects.yaml', 'utf-8'));
+
+// Parse all descriptions as inline markdown
+for (const p of projects.rewrites) {
+  p.description = await marked.parseInline(p.description.trim());
 }
-
-interface Library {
-  name: string;
-  description: string;
-  url: string;
-  paper?: string;
+for (const p of projects.libraries) {
+  p.description = await marked.parseInline(p.description.trim());
 }
-
-// Only genuine Rust REWRITES of existing bioinformatics tools
-const rewrites: Project[] = [
-  {
-    name: 'RustQC',
-    description: '15 RNA-seq QC tools consolidated into a single Rust binary with a single BAM pass. >34x speedup with numerically identical output.',
-    replaces: 'dupRadar, RSeQC (7 modules), preseq, featureCounts, Qualimap, samtools (3 commands)',
-    url: 'https://github.com/ewels/RustQC',
-  },
-  {
-    name: 'fastqc-rs',
-    description: 'A Rust reimplementation of FastQC, the ubiquitous sequencing quality control tool. Produces equivalent quality metrics with significantly faster execution.',
-    replaces: 'FastQC (Java)',
-    url: 'https://github.com/fastqc-rs/fastqc-rs',
-  },
-  {
-    name: 'Chopper',
-    description: 'Long-read filtering and trimming. Consolidates two Python tools into a single fast Rust binary.',
-    replaces: 'NanoFilt / NanoLyse (Python)',
-    url: 'https://github.com/wdecoster/chopper',
-    paper: 'https://doi.org/10.1093/bioinformatics/btad311',
-  },
-];
-
-// Rust libraries and frameworks that enable bioinformatics rewrites
-const libraries: Library[] = [
-  {
-    name: 'noodles',
-    description: 'Pure-Rust library for bioinformatics file formats: BAM, CRAM, VCF, BED, FASTA, FASTQ, GFF, SAM.',
-    url: 'https://github.com/zaeleus/noodles',
-  },
-  {
-    name: 'Rust-Bio',
-    description: 'Foundational bioinformatics algorithms: pattern matching, alignment, data structures.',
-    url: 'https://github.com/rust-bio/rust-bio',
-    paper: 'https://doi.org/10.1093/bioinformatics/btv573',
-  },
-  {
-    name: 'Rust-HTSlib',
-    description: 'Rust bindings to HTSlib for reading/writing BAM, CRAM, VCF, and BCF files.',
-    url: 'https://github.com/rust-bio/rust-htslib',
-  },
-  {
-    name: 'needletail',
-    description: 'Fast FASTX parsing library with SIMD-accelerated sequence validation.',
-    url: 'https://github.com/onecodex/needletail',
-  },
-];
 ---
 
 <Layout title="Projects - RiiR.bio" description="Bioinformatics tools rewritten in Rust." activePage="projects">
@@ -88,7 +38,7 @@ const libraries: Library[] = [
     <section class="project-category container">
       <h2 class="category-title reveal">Rust Rewrites</h2>
       <div class="project-grid reveal-stagger">
-        {rewrites.map((project) => (
+        {projects.rewrites.map((project: any) => (
           <div class="project-card reveal">
             <div class="card-header">
               <h3 class="card-name"><a href={project.url} target="_blank" rel="noopener noreferrer">{project.name}</a></h3>
@@ -96,7 +46,7 @@ const libraries: Library[] = [
                 <a href={project.paper} class="card-paper" target="_blank" rel="noopener noreferrer">Paper &#x2197;</a>
               )}
             </div>
-            <p class="card-desc">{project.description}</p>
+            <p class="card-desc" set:html={project.description} />
             <div class="card-footer">
               <span class="card-replaces">
                 Replaces: <span class="card-replaces-names">{project.replaces}</span>
@@ -113,7 +63,7 @@ const libraries: Library[] = [
         The building blocks that make bioinformatics rewrites possible.
       </p>
       <div class="project-grid reveal-stagger">
-        {libraries.map((lib) => (
+        {projects.libraries.map((lib: any) => (
           <div class="project-card project-card--lib reveal">
             <div class="card-header">
               <h3 class="card-name"><a href={lib.url} target="_blank" rel="noopener noreferrer">{lib.name}</a></h3>
@@ -121,7 +71,7 @@ const libraries: Library[] = [
                 <a href={lib.paper} class="card-paper" target="_blank" rel="noopener noreferrer">Paper &#x2197;</a>
               )}
             </div>
-            <p class="card-desc">{lib.description}</p>
+            <p class="card-desc" set:html={lib.description} />
           </div>
         ))}
       </div>
@@ -131,7 +81,7 @@ const libraries: Library[] = [
   <section class="closing reveal">
     <div class="container">
       <p class="closing-attribution">
-        Plain text version: <a href="/projects.md">riir.bio/projects.md</a>
+        Plain text version: <a href="/projects.md"><code>riir.bio/projects.md</code></a>
       </p>
     </div>
   </section>

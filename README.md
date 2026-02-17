@@ -2,9 +2,13 @@
   <a href="https://riir.bio"><img src="public/og-image.png" alt="RiiR.bio" /></a>
 </h1>
 
+## Rewrite it in Rust: Bioinformatics edition
+
 A manifesto for AI-assisted modernisation of bioinformatics software.
 
-**Live site:** [riir.bio](https://riir.bio)
+Live site: [riir.bio](https://riir.bio)
+
+
 
 ## Development
 
@@ -15,30 +19,16 @@ npm run build     # Build to ./dist/
 npm run preview   # Preview production build
 ```
 
-## Structure
+## Content
 
-```
-src/
-  layouts/Layout.astro        # Base layout with nav, progress bar, reveal animations
-  components/
-    Hero.astro                # Landing hero section
-    Section.astro             # Manifesto section wrapper
-    Principle.astro           # Individual numbered principle
-  pages/
-    index.astro               # Manifesto page
-    projects.astro            # Rust rewrite projects
-    og-image.astro            # Social share card (render page)
-  styles/global.css           # Theme, typography, animations
-public/
-  manifesto.md                # Plain markdown version of the manifesto
-  projects.md                 # Plain markdown version of the projects list
-  index.md                    # Alias for manifesto.md
-  og-image.png                # Social share card
-  favicon.svg                 # SVG favicon
-  favicon.ico                 # ICO favicon
-netlify/
-  edge-functions/markdown.ts  # Serves markdown for Accept: text/markdown requests
-```
+All manifesto principles and project listings are defined in YAML:
+
+- **`src/data/manifesto.yaml`** — Manifesto sections and principles
+- **`src/data/projects.yaml`** — Rust rewrite projects and libraries
+
+Edit these files to update the site content. Section numbering (I, II, 1.1, 1.2, etc.) is generated automatically. Principle descriptions are parsed as markdown, so you can use links and formatting.
+
+Plain-text `.md` versions of each page are generated at build time from the YAML data (via `scripts/generate-markdown.mjs`). These are served at `/manifesto.md` and `/projects.md`. A Netlify Edge Function also serves them automatically when a client sends `Accept: text/markdown` or `Accept: text/plain`.
 
 ## Deployment
 

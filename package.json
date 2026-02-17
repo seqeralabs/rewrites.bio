@@ -3,12 +3,14 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "build": "astro build",
-    "preview": "astro preview",
+    "dev": "node scripts/generate-markdown.mjs && astro dev",
+    "build": "node scripts/generate-markdown.mjs && astro build",
+    "preview": "node scripts/generate-markdown.mjs && astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^5.17.1"
+    "astro": "^5.17.1",
+    "marked": "^17.0.2",
+    "yaml": "^2.8.2"
   }
 }

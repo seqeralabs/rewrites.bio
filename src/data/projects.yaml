@@ -1,0 +1,44 @@
+rewrites:
+  - name: RustQC
+    description: >
+      15 RNA-seq QC tools consolidated into a single Rust binary with a single
+      BAM pass. >34x speedup with numerically identical output.
+    replaces: "dupRadar, RSeQC (7 modules), preseq, featureCounts, Qualimap, samtools (3 commands)"
+    url: https://github.com/ewels/RustQC
+
+  - name: fastqc-rs
+    description: >
+      A Rust reimplementation of FastQC, the ubiquitous sequencing quality control
+      tool. Produces equivalent quality metrics with significantly faster execution.
+    replaces: FastQC (Java)
+    url: https://github.com/fastqc-rs/fastqc-rs
+
+  - name: Chopper
+    description: >
+      Long-read filtering and trimming. Consolidates two Python tools into a
+      single fast Rust binary.
+    replaces: NanoFilt / NanoLyse (Python)
+    url: https://github.com/wdecoster/chopper
+    paper: https://doi.org/10.1093/bioinformatics/btad311
+
+libraries:
+  - name: noodles
+    description: >
+      Pure-Rust library for bioinformatics file formats: BAM, CRAM, VCF, BED,
+      FASTA, FASTQ, GFF, SAM.
+    url: https://github.com/zaeleus/noodles
+
+  - name: Rust-Bio
+    description: >
+      Foundational bioinformatics algorithms: pattern matching, alignment,
+      data structures.
+    url: https://github.com/rust-bio/rust-bio
+    paper: https://doi.org/10.1093/bioinformatics/btv573
+
+  - name: Rust-HTSlib
+    description: Rust bindings to HTSlib for reading/writing BAM, CRAM, VCF, and BCF files.
+    url: https://github.com/rust-bio/rust-htslib
+
+  - name: needletail
+    description: Fast FASTX parsing library with SIMD-accelerated sequence validation.
+    url: https://github.com/onecodex/needletail
