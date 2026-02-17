@@ -1,0 +1,469 @@
+---
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+  activePage?: 'manifesto' | 'projects';
+}
+
+const {
+  title,
+  description = 'Principles for responsible AI-assisted rewriting of bioinformatics tools in Rust.',
+  activePage = 'manifesto',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://riir.bio" />
+    <meta property="og:image" content="https://riir.bio/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="RiiR.bio - Rewrite it in Rust. Responsibly." />
+    <meta property="og:site_name" content="RiiR.bio" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content="https://riir.bio/og-image.png" />
+    <meta name="twitter:image:alt" content="RiiR.bio - Rewrite it in Rust. Responsibly." />
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body>
+    <div class="progress-bar" id="progress-bar"></div>
+    <nav class="site-nav">
+      <a href="/" class="nav-brand">
+        <span class="nav-riir">RiiR</span><span class="nav-dot">.</span><span class="nav-bio">bio</span>
+      </a>
+      <button class="nav-section-indicator" id="nav-section-indicator" aria-hidden="true" aria-expanded="false">
+        <span class="nav-section-text"></span>
+        <svg class="nav-section-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="nav-section-dropdown" id="nav-section-dropdown" aria-hidden="true"></div>
+      <div class="nav-links">
+        <a href="/" class:list={['nav-link', { active: activePage === 'manifesto' }]}>Manifesto</a>
+        <a href="/projects" class:list={['nav-link', { active: activePage === 'projects' }]}>Projects</a>
+      </div>
+    </nav>
+
+    <slot />
+
+    <script>
+      // Intersection Observer for reveal animations
+      function initReveals() {
+        const reveals = document.querySelectorAll('.reveal');
+        let initialLoad = true;
+
+        // Use setTimeout(0) to guarantee a paint cycle has occurred -
+        // rAF alone can still batch with the initial render on fast machines.
+        setTimeout(() => {
+          const observer = new IntersectionObserver(
+            (entries) => {
+              if (initialLoad) {
+                // On first observation, stagger all above-the-fold elements
+                // so they cascade in page order rather than appearing at once.
+                const visible = entries
+                  .filter((e) => e.isIntersecting)
+                  .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+
+                visible.forEach((entry, i) => {
+                  const el = entry.target;
+                  // Add incremental delay: existing transition-delay from
+                  // reveal-stagger is preserved via CSS; this adds on top.
+                  const baseDelay = parseFloat(getComputedStyle(el).transitionDelay) * 1000 || 0;
+                  el.style.transitionDelay = `${baseDelay + i * 60}ms`;
+                  el.classList.add('visible');
+                  // Clean up inline delay after animation completes
+                  el.addEventListener('transitionend', () => {
+                    el.style.transitionDelay = '';
+                  }, { once: true });
+                });
+
+                initialLoad = false;
+                return;
+              }
+
+              // Normal scroll-triggered reveals
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('visible');
+                }
+              });
+            },
+            { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+          );
+
+          reveals.forEach((el) => observer.observe(el));
+        }, 0);
+      }
+
+      // Track current section in navbar + dropdown ToC
+      function initSectionTracker() {
+        const indicator = document.getElementById('nav-section-indicator');
+        const textEl = indicator?.querySelector('.nav-section-text');
+        const dropdown = document.getElementById('nav-section-dropdown');
+        if (!indicator || !textEl || !dropdown) return;
+
+        const sections = document.querySelectorAll('.manifesto-section');
+        if (!sections.length) return;
+
+        // Build the dropdown ToC from the sections on the page
+        dropdown.innerHTML = '';
+        sections.forEach((section) => {
+          const number = section.querySelector('.section-number');
+          const title = section.querySelector('.section-title');
+          if (!number || !title) return;
+          const item = document.createElement('a');
+          item.className = 'nav-dropdown-item';
+          item.href = `#${section.id}`;
+          item.innerHTML = `<span class="nav-dropdown-number">${number.textContent}</span> ${title.textContent}`;
+          item.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeDropdown();
+            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+          dropdown.appendChild(item);
+        });
+
+        // Toggle dropdown
+        function openDropdown() {
+          dropdown.classList.add('open');
+          dropdown.setAttribute('aria-hidden', 'false');
+          indicator.setAttribute('aria-expanded', 'true');
+          indicator.classList.add('dropdown-open');
+          // Mark active item
+          sections.forEach((section, i) => {
+            const items = dropdown.querySelectorAll('.nav-dropdown-item');
+            const rect = section.getBoundingClientRect();
+            if (rect.top < 200 && rect.bottom > 56) {
+              items[i]?.classList.add('active');
+            } else {
+              items[i]?.classList.remove('active');
+            }
+          });
+        }
+
+        function closeDropdown() {
+          dropdown.classList.remove('open');
+          dropdown.setAttribute('aria-hidden', 'true');
+          indicator.setAttribute('aria-expanded', 'false');
+          indicator.classList.remove('dropdown-open');
+        }
+
+        indicator.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (dropdown.classList.contains('open')) {
+            closeDropdown();
+          } else {
+            openDropdown();
+          }
+        });
+
+        // Close on click outside
+        document.addEventListener('click', (e) => {
+          if (!dropdown.contains(e.target) && !indicator.contains(e.target)) {
+            closeDropdown();
+          }
+        });
+
+        // Close on scroll
+        window.addEventListener('scroll', () => {
+          if (dropdown.classList.contains('open')) {
+            closeDropdown();
+          }
+        }, { passive: true });
+
+        let currentSection = '';
+        let ticking = false;
+        let _timer = null;
+
+        function updateIndicator() {
+          const navHeight = 56;
+          let active = '';
+
+          const probeY = navHeight + 100;
+          let best = null;
+
+          for (const section of sections) {
+            const rect = section.getBoundingClientRect();
+            if (rect.top < probeY && rect.bottom > navHeight) {
+              best = section;
+            }
+          }
+
+          if (best) {
+            const title = best.querySelector('.section-title');
+            const number = best.querySelector('.section-number');
+            if (title && number) {
+              active = `${number.textContent} ${title.textContent}`;
+            }
+          }
+
+          if (active !== currentSection) {
+            if (_timer) {
+              clearTimeout(_timer);
+              _timer = null;
+            }
+
+            if (active && !currentSection) {
+              textEl.textContent = active;
+              indicator.classList.remove('fading');
+              indicator.classList.add('visible');
+            } else if (!active) {
+              textEl.textContent = '';
+              indicator.style.transition = 'none';
+              indicator.classList.remove('fading', 'visible', 'dropdown-open');
+              dropdown.classList.remove('open');
+              indicator.offsetHeight; /* force reflow */
+              indicator.style.transition = '';
+            } else {
+              indicator.classList.add('fading');
+              _timer = setTimeout(() => {
+                textEl.textContent = active;
+                indicator.classList.remove('fading');
+                indicator.classList.add('visible');
+                _timer = null;
+              }, 150);
+            }
+            currentSection = active;
+          }
+
+          ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(updateIndicator);
+            ticking = true;
+          }
+        }, { passive: true });
+
+        updateIndicator();
+      }
+
+      // Horizontal progress bar at top of page
+      function initProgressBar() {
+        const bar = document.getElementById('progress-bar');
+        if (!bar) return;
+
+        let ticking = false;
+        function update() {
+          const scrollTop = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0;
+          bar.style.transform = `scaleX(${progress})`;
+          ticking = false;
+        }
+
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(update);
+            ticking = true;
+          }
+        }, { passive: true });
+
+        update();
+      }
+
+      initReveals();
+      initSectionTracker();
+      initProgressBar();
+      document.addEventListener('astro:after-swap', () => {
+        initReveals();
+        initSectionTracker();
+        initProgressBar();
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--rust-500), var(--rust-400));
+    transform-origin: left;
+    transform: scaleX(0);
+    z-index: 1000;
+    pointer-events: none;
+    transition: transform 0.1s ease-out;
+  }
+
+  .site-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    padding: var(--space-md) var(--space-lg);
+    background: rgba(10, 10, 10, 0.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .nav-brand {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+  }
+
+  .nav-riir { color: var(--text-primary); }
+  .nav-dot { color: var(--rust-500); }
+  .nav-bio { color: var(--rust-400); }
+
+  .nav-links {
+    margin-left: auto;
+    display: flex;
+    gap: var(--space-lg);
+  }
+
+  .nav-link {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--text-secondary);
+  }
+
+  .nav-link.active {
+    color: var(--rust-400);
+  }
+
+  .nav-section-indicator {
+    all: unset;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    letter-spacing: 0.05em;
+    margin-left: var(--space-md);
+    padding-left: var(--space-md);
+    border-left: 1px solid rgba(255, 255, 255, 0.08);
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s ease;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 300px;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
+
+  .nav-section-indicator.visible {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  .nav-section-indicator.visible:hover {
+    color: var(--text-secondary);
+  }
+
+  .nav-section-indicator.fading {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  .nav-section-chevron {
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  .nav-section-indicator.dropdown-open .nav-section-chevron {
+    transform: rotate(180deg);
+  }
+
+  /* Dropdown */
+  .nav-section-dropdown {
+    position: fixed;
+    top: 52px;
+    left: 120px;
+    background: rgba(20, 20, 20, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 8px;
+    padding: 6px 0;
+    min-width: 200px;
+    z-index: 1001;
+    opacity: 0;
+    transform: translateY(-8px);
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .nav-section-dropdown.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+
+  :global(.nav-dropdown-item) {
+    display: block;
+    padding: 8px 16px;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    letter-spacing: 0.03em;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  :global(.nav-dropdown-item:hover) {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  :global(.nav-dropdown-item.active) {
+    color: var(--rust-400);
+  }
+
+  :global(.nav-dropdown-number) {
+    color: var(--rust-500);
+    margin-right: 4px;
+  }
+
+  /* Hide on mobile */
+  @media (max-width: 768px) {
+    .nav-section-indicator {
+      display: none;
+    }
+    .nav-section-dropdown {
+      display: none;
+    }
+  }
+</style>

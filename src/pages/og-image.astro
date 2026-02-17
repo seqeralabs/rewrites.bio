@@ -1,0 +1,133 @@
+---
+// This page exists only to be screenshotted as an OG image.
+// It won't be linked from the site.
+---
+<html>
+<head>
+  <meta charset="utf-8" />
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      width: 1200px;
+      height: 630px;
+      background: #0a0a0a;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle dot grid */
+    body::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+
+    /* Top accent line */
+    .accent-line {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, #CE412B, #f97316, #CE412B);
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .pre-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 120px;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .title .dot {
+      color: #f97316;
+    }
+
+    .title .bio {
+      color: #fb923c;
+    }
+
+    .tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 28px;
+      font-style: italic;
+      color: rgba(255, 255, 255, 0.5);
+      margin-top: 8px;
+    }
+
+    .divider {
+      width: 48px;
+      height: 3px;
+      background: linear-gradient(90deg, #CE412B, #f97316);
+      border-radius: 2px;
+      margin-top: 16px;
+    }
+
+    .subtitle {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      color: rgba(255, 255, 255, 0.35);
+      max-width: 700px;
+      line-height: 1.5;
+    }
+
+    /* Corner accents */
+    .corner {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      border-color: rgba(206, 65, 43, 0.3);
+      border-style: solid;
+    }
+    .corner-tl { top: 24px; left: 24px; border-width: 2px 0 0 2px; }
+    .corner-tr { top: 24px; right: 24px; border-width: 2px 2px 0 0; }
+    .corner-bl { bottom: 24px; left: 24px; border-width: 0 0 2px 2px; }
+    .corner-br { bottom: 24px; right: 24px; border-width: 0 2px 2px 0; }
+  </style>
+</head>
+<body>
+  <div class="accent-line"></div>
+  <div class="corner corner-tl"></div>
+  <div class="corner corner-tr"></div>
+  <div class="corner corner-bl"></div>
+  <div class="corner corner-br"></div>
+
+  <div class="content">
+    <div class="pre-text">A manifesto for bioinformatics</div>
+    <div class="title">RiiR<span class="dot">.</span><span class="bio">bio</span></div>
+    <div class="tagline">Rewrite it in Rust. Responsibly.</div>
+    <div class="divider"></div>
+    <div class="subtitle">Principles for AI-assisted modernisation of scientific software</div>
+  </div>
+
+</body>
+</html>

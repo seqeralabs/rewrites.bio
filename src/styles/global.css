@@ -1,0 +1,137 @@
+/* ============================================
+   RiiR.bio — Global Styles
+   ============================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+
+/* --- CSS Custom Properties --- */
+:root {
+  /* Background & Surface */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #111111;
+  --bg-surface: #1a1a1a;
+  --bg-surface-hover: #222222;
+
+  /* Rust / Orange palette */
+  --rust-50: #fff7ed;
+  --rust-100: #ffedd5;
+  --rust-200: #fed7aa;
+  --rust-300: #fdba74;
+  --rust-400: #fb923c;
+  --rust-500: #f97316;
+  --rust-600: #ea580c;
+  --rust-700: #c2410c;
+  --rust-800: #9a3412;
+  --rust-900: #7c2d12;
+
+  /* Accent: copper / warm */
+  --copper: #b87333;
+  --copper-light: #d4956b;
+  --copper-400: #c4a46a;
+
+  /* Text */
+  --text-primary: #f5f5f5;
+  --text-secondary: #a3a3a3;
+  --text-tertiary: #737373;
+  --text-accent: var(--rust-400);
+
+  /* Spacing */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+  --space-2xl: 8rem;
+
+  /* Typography */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+
+  /* Sizing */
+  --max-width: 720px;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --- Reset --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: 18px;
+  line-height: 1.7;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  overflow-x: hidden;
+}
+
+/* --- Dot Grid Background --- */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, var(--text-tertiary) 0.5px, transparent 0.5px);
+  background-size: 32px 32px;
+  opacity: 0.08;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- Selection --- */
+::selection {
+  background: var(--rust-600);
+  color: var(--text-primary);
+}
+
+/* --- Links --- */
+a {
+  color: var(--rust-400);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: var(--rust-300);
+}
+
+/* --- Scroll-triggered reveal animation --- */
+.reveal {
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Stagger children */
+.reveal-stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
+.reveal-stagger > .reveal:nth-child(2) { transition-delay: 50ms; }
+.reveal-stagger > .reveal:nth-child(3) { transition-delay: 100ms; }
+.reveal-stagger > .reveal:nth-child(4) { transition-delay: 150ms; }
+.reveal-stagger > .reveal:nth-child(5) { transition-delay: 200ms; }
+
+/* --- Container --- */
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+  position: relative;
+  z-index: 1;
+}

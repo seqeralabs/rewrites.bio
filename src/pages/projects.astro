@@ -1,0 +1,338 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Footer from '../components/Footer.astro';
+
+interface Project {
+  name: string;
+  description: string;
+  replaces: string;
+  url: string;
+  paper?: string;
+}
+
+interface Library {
+  name: string;
+  description: string;
+  url: string;
+  paper?: string;
+}
+
+// Only genuine Rust REWRITES of existing bioinformatics tools
+const rewrites: Project[] = [
+  {
+    name: 'RustQC',
+    description: '15 RNA-seq QC tools consolidated into a single Rust binary with a single BAM pass. >34x speedup with numerically identical output.',
+    replaces: 'dupRadar, RSeQC (7 modules), preseq, featureCounts, Qualimap, samtools (3 commands)',
+    url: 'https://github.com/ewels/RustQC',
+  },
+  {
+    name: 'fastqc-rs',
+    description: 'A Rust reimplementation of FastQC, the ubiquitous sequencing quality control tool. Produces equivalent quality metrics with significantly faster execution.',
+    replaces: 'FastQC (Java)',
+    url: 'https://github.com/fastqc-rs/fastqc-rs',
+  },
+  {
+    name: 'Chopper',
+    description: 'Long-read filtering and trimming. Consolidates two Python tools into a single fast Rust binary.',
+    replaces: 'NanoFilt / NanoLyse (Python)',
+    url: 'https://github.com/wdecoster/chopper',
+    paper: 'https://doi.org/10.1093/bioinformatics/btad311',
+  },
+];
+
+// Rust libraries and frameworks that enable bioinformatics rewrites
+const libraries: Library[] = [
+  {
+    name: 'noodles',
+    description: 'Pure-Rust library for bioinformatics file formats: BAM, CRAM, VCF, BED, FASTA, FASTQ, GFF, SAM.',
+    url: 'https://github.com/zaeleus/noodles',
+  },
+  {
+    name: 'Rust-Bio',
+    description: 'Foundational bioinformatics algorithms: pattern matching, alignment, data structures.',
+    url: 'https://github.com/rust-bio/rust-bio',
+    paper: 'https://doi.org/10.1093/bioinformatics/btv573',
+  },
+  {
+    name: 'Rust-HTSlib',
+    description: 'Rust bindings to HTSlib for reading/writing BAM, CRAM, VCF, and BCF files.',
+    url: 'https://github.com/rust-bio/rust-htslib',
+  },
+  {
+    name: 'needletail',
+    description: 'Fast FASTX parsing library with SIMD-accelerated sequence validation.',
+    url: 'https://github.com/onecodex/needletail',
+  },
+];
+---
+
+<Layout title="Projects - RiiR.bio" description="Bioinformatics tools rewritten in Rust." activePage="projects">
+  <main class="projects-page">
+    <header class="projects-hero container">
+      <div class="reveal">
+        <p class="projects-pre">RiiR.bio</p>
+        <h1 class="projects-title">Projects</h1>
+        <p class="projects-subtitle">
+          Bioinformatics tools that have been rewritten in Rust. Each replaces
+          an existing tool with a faster implementation, following the principles
+          of this manifesto.
+        </p>
+        <p class="projects-note">
+        </p>
+        <p class="projects-cta">
+          Know a project that belongs here? <a href="https://github.com/ewels/riir.bio/issues/new">Open an issue</a> or submit a PR.
+        </p>
+      </div>
+    </header>
+
+    <section class="project-category container">
+      <h2 class="category-title reveal">Rust Rewrites</h2>
+      <div class="project-grid reveal-stagger">
+        {rewrites.map((project) => (
+          <div class="project-card reveal">
+            <div class="card-header">
+              <h3 class="card-name"><a href={project.url} target="_blank" rel="noopener noreferrer">{project.name}</a></h3>
+              {project.paper && (
+                <a href={project.paper} class="card-paper" target="_blank" rel="noopener noreferrer">Paper &#x2197;</a>
+              )}
+            </div>
+            <p class="card-desc">{project.description}</p>
+            <div class="card-footer">
+              <span class="card-replaces">
+                Replaces: <span class="card-replaces-names">{project.replaces}</span>
+              </span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="project-category container">
+      <h2 class="category-title reveal">Rust Libraries & Frameworks</h2>
+      <p class="category-desc reveal">
+        The building blocks that make bioinformatics rewrites possible.
+      </p>
+      <div class="project-grid reveal-stagger">
+        {libraries.map((lib) => (
+          <div class="project-card project-card--lib reveal">
+            <div class="card-header">
+              <h3 class="card-name"><a href={lib.url} target="_blank" rel="noopener noreferrer">{lib.name}</a></h3>
+              {lib.paper && (
+                <a href={lib.paper} class="card-paper" target="_blank" rel="noopener noreferrer">Paper &#x2197;</a>
+              )}
+            </div>
+            <p class="card-desc">{lib.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+  </main>
+
+  <section class="closing reveal">
+    <div class="container">
+      <p class="closing-attribution">
+        Plain text version: <a href="/projects.md">riir.bio/projects.md</a>
+      </p>
+    </div>
+  </section>
+
+  <Footer />
+</Layout>
+
+<style>
+  .projects-page {
+    padding-top: calc(80px + var(--space-2xl));
+  }
+
+  .projects-hero {
+    padding-bottom: var(--space-2xl);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .projects-pre {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--rust-500);
+    letter-spacing: 0.08em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .projects-title {
+    font-family: var(--font-mono);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.02em;
+  }
+
+  .projects-subtitle {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 55ch;
+    margin-bottom: var(--space-sm);
+  }
+
+  .projects-note {
+    font-size: 0.95rem;
+    color: var(--text-tertiary);
+    font-style: italic;
+    margin-bottom: var(--space-md);
+  }
+
+  .projects-cta {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+    font-family: var(--font-mono);
+  }
+
+  .projects-cta a {
+    color: var(--text-tertiary);
+  }
+  .projects-cta a:hover {
+    color: var(--rust-400);
+  }
+
+  .project-category {
+    margin-bottom: var(--space-2xl);
+    max-width: 1000px;
+  }
+
+  .category-title {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--rust-500);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: var(--space-sm);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .category-desc {
+    font-size: 0.95rem;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-md);
+  }
+
+  .project-card {
+    display: flex;
+    flex-direction: column;
+    padding: var(--space-lg);
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    transition: border-color 0.2s ease, background 0.2s ease, opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+  }
+
+  .project-card:hover {
+    border-color: rgba(206, 65, 43, 0.3);
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  .project-card--lib {
+    background: rgba(255, 255, 255, 0.01);
+    border-color: rgba(255, 255, 255, 0.04);
+  }
+
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--space-sm);
+  }
+
+  .card-name {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .card-name a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+
+  .card-name a:hover {
+    color: var(--rust-400);
+  }
+
+  .card-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: var(--space-md);
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .card-replaces {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+  }
+
+  .card-replaces-names {
+    color: var(--text-secondary);
+  }
+
+  .card-paper {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--copper-400);
+    background: rgba(196, 164, 106, 0.08);
+    padding: 2px 8px;
+    border-radius: 3px;
+    border: 1px solid rgba(196, 164, 106, 0.15);
+    white-space: nowrap;
+    text-decoration: none;
+    transition: background 0.2s ease, border-color 0.2s ease;
+  }
+
+  .card-paper:hover {
+    background: rgba(196, 164, 106, 0.15);
+    border-color: rgba(196, 164, 106, 0.3);
+  }
+
+
+  .closing {
+    text-align: center;
+    padding: var(--space-xl) 0 var(--space-2xl);
+  }
+
+  .closing-attribution {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+  }
+
+  .closing-attribution a {
+    color: inherit;
+  }
+  .closing-attribution a:hover {
+    color: var(--rust-400);
+  }
+
+  @media (max-width: 640px) {
+    .project-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

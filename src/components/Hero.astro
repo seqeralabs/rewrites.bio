@@ -1,0 +1,108 @@
+---
+---
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-content">
+      <p class="hero-pre">A manifesto for bioinformatics</p>
+      <h1 class="hero-title">
+        <span class="hero-riir">RiiR</span><span class="hero-dot">.</span><span class="hero-bio">bio</span>
+      </h1>
+      <p class="hero-tagline">Rewrite it in Rust. Responsibly.</p>
+      <div class="hero-intro">
+        <p>
+          AI coding assistants have made it possible to rewrite established
+          scientific software in days rather than years. A wave of rewrites
+          is coming to bioinformatics. These are the principles for doing it right.
+        </p>
+      </div>
+      <div class="hero-scroll">
+        <span class="hero-scroll-line"></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-content {
+    text-align: center;
+    padding: var(--space-2xl) 0;
+  }
+
+  .hero-pre {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-lg);
+  }
+
+  .hero-title {
+    font-family: var(--font-mono);
+    font-size: clamp(4rem, 12vw, 9rem);
+    font-weight: 700;
+    line-height: 1;
+    margin-bottom: var(--space-lg);
+    letter-spacing: -0.02em;
+  }
+
+  .hero-riir {
+    color: var(--text-primary);
+  }
+
+  .hero-dot {
+    color: var(--rust-500);
+  }
+
+  .hero-bio {
+    color: var(--rust-400);
+  }
+
+  .hero-tagline {
+    font-family: var(--font-sans);
+    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+    font-weight: 300;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-xl);
+    font-style: italic;
+  }
+
+  .hero-intro {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+
+  .hero-intro p {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  .hero-scroll {
+    margin-top: var(--space-2xl);
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-scroll-line {
+    display: block;
+    width: 1px;
+    height: 48px;
+    background: linear-gradient(to bottom, var(--rust-500), transparent);
+    animation: scroll-pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scroll-pulse {
+    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
+    50% { opacity: 1; transform: scaleY(1); }
+  }
+</style>

@@ -1,0 +1,103 @@
+---
+interface Props {
+  id: string;
+  number: string;
+  title: string;
+}
+
+const { id, number, title } = Astro.props;
+---
+
+<section class="manifesto-section" id={id}>
+  <div class="container">
+    <div class="section-header-wrap">
+      <div class="section-header reveal">
+        <div class="section-header-inner">
+          <span class="section-number">{number}</span>
+          <h2 class="section-title">{title}</h2>
+        </div>
+        <div class="section-line"></div>
+      </div>
+    </div>
+    <div class="section-content reveal-stagger">
+      <slot />
+    </div>
+  </div>
+</section>
+
+<style>
+  .manifesto-section {
+    padding: var(--space-2xl) 0 var(--space-xl);
+  }
+
+  .section-header-wrap {
+    margin-bottom: var(--space-xl);
+  }
+
+  .section-header {
+    padding: var(--space-md) 0;
+  }
+
+  /* Sticky headers on mobile only (navbar shows section on desktop) */
+  @media (max-width: 768px) {
+    .section-header-wrap {
+      position: sticky;
+      top: 56px;
+      z-index: 50;
+      background: rgba(10, 10, 10, 0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      margin-left: calc(-1 * var(--space-lg));
+      margin-right: calc(-1 * var(--space-lg));
+      padding-left: var(--space-lg);
+      padding-right: var(--space-lg);
+      margin-bottom: var(--space-md);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    .section-header {
+      padding: var(--space-sm) 0;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+    }
+  }
+
+  .section-header-inner {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+  }
+
+  .section-number {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--rust-500);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-family: var(--font-mono);
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+  }
+
+  .section-line {
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--rust-500), transparent);
+    margin-top: var(--space-sm);
+  }
+
+  .section-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+</style>

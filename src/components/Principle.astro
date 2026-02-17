@@ -1,0 +1,71 @@
+---
+interface Props {
+  number: string;
+  title: string;
+  description: string;
+}
+
+const { number, title, description } = Astro.props;
+---
+
+<article class="principle reveal">
+  <div class="principle-number-col">
+    <span class="principle-number">{number}</span>
+  </div>
+  <div class="principle-body">
+    <h3 class="principle-title">{title}</h3>
+    <p class="principle-desc">{description}</p>
+  </div>
+</article>
+
+<style>
+  .principle {
+    display: flex;
+    gap: var(--space-lg);
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+  }
+
+  .principle:last-child {
+    border-bottom: none;
+  }
+
+  .principle-number-col {
+    flex-shrink: 0;
+    width: 48px;
+    padding-top: 2px;
+  }
+
+  .principle-number {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--rust-500);
+    opacity: 0.7;
+  }
+
+  .principle-title {
+    font-family: var(--font-mono);
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+    line-height: 1.4;
+  }
+
+  .principle-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  @media (max-width: 480px) {
+    .principle {
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+    .principle-number-col {
+      width: auto;
+    }
+  }
+</style>

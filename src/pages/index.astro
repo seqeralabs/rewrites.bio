@@ -1,0 +1,214 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import Principle from '../components/Principle.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="RiiR.bio - Rewrite it in Rust, for bioinformatics" activePage="manifesto">
+  <Hero />
+
+  <main class="manifesto">
+    <div class="preamble container reveal-stagger">
+      <p class="reveal">
+        Bioinformatics has a technical debt problem. Our most trusted tools were written
+        years or decades ago, when datasets were orders of magnitude smaller. They work
+        correctly. They are thoroughly validated. They are also slow, dependency-heavy,
+        and expensive to run at modern sequencing scale.
+      </p>
+      <p class="reveal">
+        AI coding assistants have changed the equation. A domain expert can now rewrite
+        established tools in compiled languages in days, not years. Fast code has become
+        cheap. The scientific insight, careful validation, and community trust behind the
+        original tools have not.
+      </p>
+      <p class="preamble-callout reveal">
+        A wave of AI-assisted rewrites is coming.<br />
+        The question is not <em>whether</em> it will happen, but whether it will happen <em>well</em>.
+      </p>
+      <p class="reveal">
+        These are the principles we follow.
+      </p>
+    </div>
+
+    <Section id="philosophy" number="I" title="Philosophy">
+      <Principle
+        number="1.1"
+        title="Credit the original authors"
+        description="Always, everywhere. In the README, the docs, the paper, and any downstream reports. The scientific insight behind these tools took years to develop. A dedicated credits page should list every reimplemented tool with its full citation."
+      />
+      <Principle
+        number="1.2"
+        title="Emulate exactly, then optimise"
+        description="The first goal is bit-identical or numerically-identical output. This inherits the validation history of the original tool and lets users switch with zero risk to their scientific conclusions. Optimisations that change output should be opt-in and clearly documented."
+      />
+      <Principle
+        number="1.3"
+        title="Be transparent about AI"
+        description="If AI coding assistants were used, say so. This is a strength, not a weakness. It demonstrates that correctness was verified through output comparison, not code review alone. Document the development process honestly."
+      />
+    </Section>
+
+    <Section id="planning" number="II" title="Planning">
+      <Principle
+        number="2.1"
+        title="Think big"
+        description="Combine tools. Eliminate redundant I/O. Remove upstream prerequisites. A rewrite that just ports one tool to a faster language misses the real opportunity: rethinking how multiple tools share work."
+      />
+      <Principle
+        number="2.2"
+        title="Work small"
+        description="Small iteration loops. One tool at a time. Step-by-step validation against the original output before moving on. The compound complexity of rewriting many things at once will bury you."
+      />
+      <Principle
+        number="2.3"
+        title="Engage upstream"
+        description="Collaborate with the original developers rather than working in isolation. Co-authorship, upstream contributions, or at minimum a conversation before public release. Turn a potential competitor into a welcome complement."
+      />
+    </Section>
+
+    <Section id="building" number="III" title="Building">
+      <Principle
+        number="3.1"
+        title="Test relentlessly"
+        description="Different data types, different sizes, different edge cases. Missing prerequisites should give clear error messages. Don't settle for 'it works on my machine' - test on data that will break things."
+      />
+      <Principle
+        number="3.2"
+        title="Use real test data"
+        description="Don't rely on artificial inputs. Real sequencing data has quirks, edge cases, and format variations that synthetic data never captures. Your tests should use the same data that production pipelines see."
+      />
+      <Principle
+        number="3.3"
+        title="Replicate, don't improve"
+        description="Always target 1:1 replication of results. Avoid the temptation to 'fix' things along the way. Changing results voids trust and creates a maintenance burden. If you find genuine improvements, take them upstream first."
+      />
+      <Principle
+        number="3.4"
+        title="Pin versions and document"
+        description="Pin the exact version of every original tool you're emulating. Document the comparison methodology. Future you (and every user) needs to know exactly what was validated against what."
+      />
+    </Section>
+
+    <Section id="stewardship" number="IV" title="Stewardship">
+      <Principle
+        number="4.1"
+        title="Maintain and govern"
+        description="Adopt clear contribution guidelines, a code of conduct, and a release process. Respond to issues. An unmaintained rewrite is worse than no rewrite because it creates a false promise of continued support."
+      />
+      <Principle
+        number="4.2"
+        title="Preserve compatibility"
+        description="Output formats should be identical to the originals. Downstream tools, pipeline integrations, and reporting frameworks should continue to work unmodified. This includes MultiQC modules, file naming conventions, and header formats."
+      />
+      <Principle
+        number="4.3"
+        title="Respect upstream licenses"
+        description="Check the license of every tool you reimplement. Understand what it permits. Your rewrite's license should be at least as permissive as the most restrictive original."
+      />
+      <Principle
+        number="4.4"
+        title="Release as open source"
+        description="The tools you're rewriting were built by the open-source community for the open-source community. Your rewrites should be too. Permissive licenses lower the barrier to adoption and contribution."
+      />
+      <Principle
+        number="4.5"
+        title="Don't file reckless bug reports"
+        description="Before reporting a bug in the original tool, be sure. Really sure. Complete replication with the original tool, full understanding by a human. No automated AI bug reports - they put strain on volunteer maintainers."
+      />
+    </Section>
+
+    <section class="closing container">
+      <div class="reveal">
+        <div class="closing-line"></div>
+        <p class="closing-text">
+          The wave is coming.<br />
+          Let us make sure it lifts all boats.
+        </p>
+        <p class="closing-attribution">
+          {/* Read the paper: <em>The Bioinformatics Rewrite</em> (preprint coming soon)<br /> */}
+          Plain text version: <a href="/manifesto.md">riir.bio/manifesto.md</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .manifesto {
+    padding-top: var(--space-xl);
+  }
+
+  .preamble {
+    padding-bottom: var(--space-2xl);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    margin-bottom: var(--space-2xl);
+  }
+
+  .preamble p {
+    font-size: 1.15rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+    max-width: 65ch;
+  }
+
+  .preamble-callout {
+    font-family: var(--font-mono);
+    font-size: 1.05rem !important;
+    color: var(--rust-400) !important;
+    border-left: 2px solid var(--rust-600);
+    padding-left: var(--space-lg);
+    margin: var(--space-xl) 0 !important;
+    line-height: 1.8 !important;
+  }
+
+  .preamble-callout em {
+    font-style: italic;
+    color: var(--rust-300);
+  }
+
+  .closing {
+    padding: var(--space-2xl) 0;
+    text-align: center;
+  }
+
+  .closing-line {
+    width: 48px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--rust-600), var(--rust-400));
+    margin: 0 auto var(--space-xl);
+  }
+
+  .closing-text {
+    font-family: var(--font-mono);
+    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    color: var(--text-primary);
+    line-height: 1.6;
+    margin-bottom: var(--space-xl);
+  }
+
+  .closing-text a {
+    color: inherit;
+  }
+  .closing-text a:hover {
+    color: var(--rust-400);
+  }
+
+  .closing-attribution {
+    font-size: 0.9rem;
+    color: var(--text-tertiary);
+    line-height: 1.8;
+  }
+
+  .closing-attribution a {
+    color: inherit;
+  }
+  .closing-attribution a:hover {
+    color: var(--rust-400);
+  }
+
+</style>
