@@ -6,6 +6,23 @@ const today = new Date().toISOString().split("T")[0];
 
 const manifesto = parse(readFileSync("src/data/manifesto.yaml", "utf-8"));
 
+// Count total principles
+const totalPrinciples = manifesto.sections.reduce(
+  (sum, s) => sum + s.principles.length,
+  0,
+);
+
+// Build preamble from YAML
+const preambleText = manifesto.preamble
+  .map((p) => p.trim())
+  .join("\n\n");
+
+const calloutText = manifesto.callout
+  .trim()
+  .split("\n")
+  .map((line) => `> ${line.trim()}`)
+  .join("\n");
+
 // Generate manifesto markdown
 let md = `---
 title: rewrites.bio
@@ -19,16 +36,11 @@ updated: ${today}
 
 > Rewriting bioinformatics tools with AI. Responsibly.
 
-Many of our most trusted tools were written years ago, when datasets were orders of magnitude smaller. They work correctly. They are thoroughly validated. They are also slow, dependency-heavy, and expensive to run at modern sequencing scale.
+${preambleText}
 
-Tools that were fast enough ten years ago are now a bottleneck: in time, in cost, and in environmental impact. Rewrites that cut runtimes, reduce dependencies, and lower resource consumption are not just nice to have. At modern scale, they are becoming essential.
+${calloutText}
 
-AI coding assistants have changed the equation. A domain expert can now rewrite established tools in compiled languages in days, not years. Fast code has become cheap. The scientific insight, careful validation, and community trust behind the original tools have not.
-
-> *A wave of AI-assisted rewrites is coming.*
-> *The question is not whether it will happen, but whether it will happen well.*
-
-These are the principles we follow.
+${manifesto.preamble_closing.trim()}
 
 ---
 
@@ -66,7 +78,7 @@ updated: ${today}
 
 ## What this is
 
-rewrites.bio is a manifesto defining 15 principles for the responsible AI-assisted rewriting of established bioinformatics tools in faster, compiled languages.
+rewrites.bio is a manifesto defining ${totalPrinciples} principles for the responsible AI-assisted rewriting of established bioinformatics tools in faster, compiled languages.
 
 ## How to access content
 
@@ -76,7 +88,7 @@ rewrites.bio is a manifesto defining 15 principles for the responsible AI-assist
 
 ## Docs
 
-- [The Manifesto](https://rewrites.bio/manifesto.md): The full set of 15 principles across 4 sections (Philosophy, Planning, Building, Stewardship)
+- [The Manifesto](https://rewrites.bio/manifesto.md): The full set of ${totalPrinciples} principles across ${manifesto.sections.length} sections (${manifesto.sections.map((s) => s.title).join(", ")})
 `;
 
 writeFileSync("public/.well-known/agent.md", agentMd);

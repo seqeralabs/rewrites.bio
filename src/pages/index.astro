@@ -17,6 +17,9 @@ for (const section of manifesto.sections) {
     p.description = await marked.parseInline(p.description.trim());
   }
 }
+
+// Parse callout as inline markdown (for emphasis)
+const callout = await marked.parseInline(manifesto.callout.trim());
 ---
 
 <Layout title="rewrites.bio - Rewrite it, for bioinformatics">
@@ -24,29 +27,12 @@ for (const section of manifesto.sections) {
 
   <main class="manifesto">
     <div class="preamble container reveal-stagger">
+      {manifesto.preamble.map((paragraph: string) => (
+        <p class="reveal">{paragraph.trim()}</p>
+      ))}
+      <p class="preamble-callout reveal" set:html={callout} />
       <p class="reveal">
-        Many of our most trusted tools were written years ago, when datasets were orders
-        of magnitude smaller. They work correctly. They are thoroughly validated. They are
-        also slow, dependency-heavy, and expensive to run at modern sequencing scale.
-      </p>
-      <p class="reveal">
-        Tools that were fast enough ten years ago are now a bottleneck: in time, in
-        cost, and in environmental impact. Rewrites that cut runtimes, reduce dependencies,
-        and lower resource consumption are not just nice to have. At modern scale, they are
-        becoming essential.
-      </p>
-      <p class="reveal">
-        AI coding assistants have changed the equation. A domain expert can now rewrite
-        established tools in compiled languages in days, not years. Fast code has become
-        cheap. The scientific insight, careful validation, and community trust behind the
-        original tools have not.
-      </p>
-      <p class="preamble-callout reveal">
-        A wave of AI-assisted rewrites is coming.<br />
-        The question is not <em>whether</em> it will happen, but whether it will happen <em>well</em>.
-      </p>
-      <p class="reveal">
-        These are the principles we follow.
+        {manifesto.preamble_closing.trim()}
       </p>
     </div>
 

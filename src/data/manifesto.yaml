@@ -1,3 +1,32 @@
+preamble:
+  - >
+    Many of our most trusted tools were written years ago, when datasets were orders
+    of magnitude smaller. They work correctly. They are thoroughly validated. They are
+    also slow, dependency-heavy, and expensive to run at modern sequencing scale.
+  - >
+    The scale of the problem is real. Widely-used pipelines like nf-core/rnaseq have
+    thousands of users and tens of thousands of pipeline runs. When a single tool
+    wastes even a few CPU-minutes per run, the inefficiency compounds to millions of
+    wasted CPU-hours across the community.
+  - >
+    Those wasted CPU-hours have a physical cost. At modern sequencing scale, the
+    cumulative compute savings from faster tools translate directly into reduced energy
+    consumption and CO2 emissions. Even conservative estimates suggest savings on the
+    order of hundreds of tonnes of CO2e per year for widely-used pipelines. Efficiency
+    is not just a convenience - it is an environmental responsibility.
+  - >
+    AI coding assistants have changed the equation. A domain expert can now rewrite
+    established tools in compiled languages in days, not years. Fast code has become
+    cheap. The scientific insight, careful validation, and community trust behind the
+    original tools have not.
+
+callout: |
+  *A wave of AI-assisted rewrites is coming.*
+  *The question is not **whether** it will happen, but whether it will happen **well**.*
+
+preamble_closing: >
+  These are the principles we follow.
+
 sections:
   - title: Philosophy
     principles:
@@ -44,6 +73,13 @@ sections:
           Different data types, different sizes, different edge cases. Don't rely on artificial
           inputs - real sequencing data has quirks and format variations that synthetic data
           never captures.
+      - title: Benchmark rigorously
+        description: >
+          Provide quantitative comparisons on realistic datasets: execution time, memory
+          usage, and most importantly output equivalence. Reference inputs and expected
+          outputs should be committed to the repository so anyone can reproduce the
+          comparison. Include benchmarking scripts and document how to run them. Numbers
+          without reproducibility are anecdotes.
       - title: Build for users
         description: >
           Clear error messages, helpful documentation, sensible defaults. Missing prerequisites
@@ -72,6 +108,9 @@ sections:
           Output formats should be identical to the originals. Downstream tools, pipeline
           integrations, and reporting frameworks should continue to work unmodified. This
           includes MultiQC modules, file naming conventions, and header formats.
+          Format-identical output makes rewrites hot-swappable: users and pipeline developers
+          can drop in the rewrite or revert to the original at any time with no change to
+          results or downstream workflows. Adoption is risk-free because it is fully reversible.
       - title: Respect upstream licenses
         description: >
           Check the license of every tool you reimplement. Understand what it permits.
