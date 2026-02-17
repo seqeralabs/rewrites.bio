@@ -127,6 +127,18 @@ a:hover {
 .reveal-stagger > .reveal:nth-child(4) { transition-delay: 150ms; }
 .reveal-stagger > .reveal:nth-child(5) { transition-delay: 200ms; }
 
+/* Disable reveal animations on mobile and for users who prefer reduced motion */
+@media (max-width: 768px), (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .reveal-stagger > .reveal {
+    transition-delay: 0ms !important;
+  }
+}
+
 /* --- Container --- */
 .container {
   max-width: var(--max-width);
