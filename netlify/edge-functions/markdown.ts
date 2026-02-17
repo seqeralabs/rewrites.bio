@@ -5,7 +5,7 @@ import type { Context } from "https://edge.netlify.com";
  * when the client sends an Accept header preferring text/markdown.
  *
  * This allows LLM agents and CLI tools to get clean markdown
- * by requesting: curl -H "Accept: text/markdown" https://riir.bio/
+ * by requesting: curl -H "Accept: text/markdown" https://rewrites.bio/
  */
 export default async function handler(
   request: Request,
@@ -18,7 +18,6 @@ export default async function handler(
   const pathname = url.pathname.replace(/\/+$/, "") || "/";
   const mdMap: Record<string, string> = {
     "/": "/manifesto.md",
-    "/projects": "/projects.md",
   };
 
   const mdPath = mdMap[pathname];
@@ -107,5 +106,5 @@ function preferredMarkdownType(accept: string): string | null {
 }
 
 export const config = {
-  path: ["/", "/projects"],
+  path: ["/"],
 };

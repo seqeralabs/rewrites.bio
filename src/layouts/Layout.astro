@@ -4,13 +4,11 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
-  activePage?: 'manifesto' | 'projects';
 }
 
 const {
   title,
-  description = 'Principles for responsible AI-assisted rewriting of bioinformatics tools in Rust.',
-  activePage = 'manifesto',
+  description = 'Principles for responsible AI-assisted rewriting of bioinformatics tools.',
 } = Astro.props;
 
 const siteUrl = Astro.site?.origin ?? Astro.url.origin;
@@ -36,15 +34,15 @@ const ogImage = `${siteUrl}/og-image.png`;
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="RiiR.bio - Rewrite it in Rust. Responsibly." />
-    <meta property="og:site_name" content="RiiR.bio" />
+    <meta property="og:image:alt" content="rewrites.bio - Rewriting bioinformatics tools with AI. Responsibly." />
+    <meta property="og:site_name" content="rewrites.bio" />
 
     <!-- Twitter / X -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="twitter:image:alt" content="RiiR.bio - Rewrite it in Rust. Responsibly." />
+    <meta name="twitter:image:alt" content="rewrites.bio - Rewriting bioinformatics tools with AI. Responsibly." />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -53,17 +51,14 @@ const ogImage = `${siteUrl}/og-image.png`;
     <div class="progress-bar" id="progress-bar"></div>
     <nav class="site-nav">
       <a href="/" class="nav-brand">
-        <span class="nav-riir">RiiR</span><span class="nav-dot">.</span><span class="nav-bio">bio</span>
+        <span class="nav-rewrites">rewrites</span><span class="nav-dot">.</span><span class="nav-bio">bio</span>
       </a>
       <button class="nav-section-indicator" id="nav-section-indicator" aria-hidden="true" aria-expanded="false">
         <span class="nav-section-text"></span>
         <svg class="nav-section-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="nav-section-dropdown" id="nav-section-dropdown" aria-hidden="true"></div>
-      <div class="nav-links">
-        <a href="/" class:list={['nav-link', { active: activePage === 'manifesto' }]}>Manifesto</a>
-        <a href="/projects" class:list={['nav-link', { active: activePage === 'projects' }]}>Projects</a>
-      </div>
+
     </nav>
 
     <slot />
@@ -334,33 +329,9 @@ const ogImage = `${siteUrl}/og-image.png`;
     text-decoration: none;
   }
 
-  .nav-riir { color: var(--text-primary); }
+  .nav-rewrites { color: var(--text-primary); }
   .nav-dot { color: var(--rust-500); }
   .nav-bio { color: var(--rust-400); }
-
-  .nav-links {
-    margin-left: auto;
-    display: flex;
-    gap: var(--space-lg);
-  }
-
-  .nav-link {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 400;
-    color: var(--text-tertiary);
-    text-decoration: none;
-    letter-spacing: 0.05em;
-    transition: color 0.2s ease;
-  }
-
-  .nav-link:hover {
-    color: var(--text-secondary);
-  }
-
-  .nav-link.active {
-    color: var(--rust-400);
-  }
 
   .nav-section-indicator {
     all: unset;
@@ -460,13 +431,14 @@ const ogImage = `${siteUrl}/og-image.png`;
     margin-right: 4px;
   }
 
-  /* Hide on mobile */
   @media (max-width: 768px) {
     .nav-section-indicator {
-      display: none;
+      max-width: 50vw;
     }
     .nav-section-dropdown {
-      display: none;
+      left: var(--space-md);
+      right: var(--space-md);
+      min-width: auto;
     }
   }
 </style>

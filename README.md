@@ -1,12 +1,12 @@
 <h1 align="center">
-  <a href="https://riir.bio"><img src="public/og-image.png" alt="RiiR.bio" /></a>
+  <a href="https://rewrites.bio"><img src="public/og-image.png" alt="rewrites.bio" /></a>
 </h1>
 
-## Rewrite it in Rust: Bioinformatics edition
+## Rewrite it: Bioinformatics edition
 
 A manifesto for AI-assisted modernisation of bioinformatics software.
 
-Live site: [riir.bio](https://riir.bio)
+Live site: [rewrites.bio](https://rewrites.bio)
 
 
 
@@ -24,7 +24,7 @@ npm run preview   # Preview production build
 All manifesto principles and project listings are defined in YAML:
 
 - **`src/data/manifesto.yaml`** — Manifesto sections and principles
-- **`src/data/projects.yaml`** — Rust rewrite projects and libraries
+- **`src/data/projects.yaml`** — Rewrite projects and libraries
 
 Edit these files to update the site content. Section numbering (I, II, 1.1, 1.2, etc.) is generated automatically. Principle descriptions are parsed as markdown, so you can use links and formatting.
 

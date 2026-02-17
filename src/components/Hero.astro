@@ -6,9 +6,9 @@
     <div class="hero-content">
       <p class="hero-pre">A manifesto for bioinformatics</p>
       <h1 class="hero-title">
-        <span class="hero-riir">RiiR</span><span class="hero-dot">.</span><span class="hero-bio">bio</span>
+        <span class="hero-rewrites">rewrites</span><span class="hero-dot">.</span><span class="hero-bio">bio</span>
       </h1>
-      <p class="hero-tagline">Rewrite it in Rust. Responsibly.</p>
+      <p class="hero-tagline">Rewriting bioinformatics tools with AI. Responsibly.</p>
       <div class="hero-intro">
         <p>
           AI coding assistants have made it possible to rewrite established
@@ -32,6 +32,10 @@
     position: relative;
   }
 
+  .hero :global(.container) {
+    max-width: none;
+  }
+
   .hero-content {
     text-align: center;
     padding: var(--space-2xl) 0;
@@ -48,14 +52,15 @@
 
   .hero-title {
     font-family: var(--font-mono);
-    font-size: clamp(4rem, 12vw, 9rem);
+    font-size: clamp(2.4rem, 8vw, 6.5rem);
     font-weight: 700;
     line-height: 1;
     margin-bottom: var(--space-lg);
     letter-spacing: -0.02em;
+    white-space: nowrap;
   }
 
-  .hero-riir {
+  .hero-rewrites {
     color: var(--text-primary);
   }
 

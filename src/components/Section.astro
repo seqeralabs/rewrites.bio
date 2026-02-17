@@ -38,31 +38,7 @@ const { id, number, title } = Astro.props;
     padding: var(--space-md) 0;
   }
 
-  /* Sticky headers on mobile only (navbar shows section on desktop) */
-  @media (max-width: 768px) {
-    .section-header-wrap {
-      position: sticky;
-      top: 56px;
-      z-index: 50;
-      background: rgba(10, 10, 10, 0.92);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      margin-left: calc(-1 * var(--space-lg));
-      margin-right: calc(-1 * var(--space-lg));
-      padding-left: var(--space-lg);
-      padding-right: var(--space-lg);
-      margin-bottom: var(--space-md);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-    }
 
-    .section-header {
-      padding: var(--space-sm) 0;
-    }
-
-    .section-title {
-      font-size: 1.2rem;
-    }
-  }
 
   .section-header-inner {
     display: flex;
