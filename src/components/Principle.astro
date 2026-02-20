@@ -1,19 +1,22 @@
 ---
 interface Props {
+  id: string;
   number: string;
   title: string;
   description: string;
 }
 
-const { number, title, description } = Astro.props;
+const { id, number, title, description } = Astro.props;
 ---
 
-<article class="principle reveal">
+<article class="principle reveal" id={id}>
   <div class="principle-number-col">
-    <span class="principle-number">{number}</span>
+    <a class="principle-number" href={`#${id}`}>{number}</a>
   </div>
-  <div class="principle-body">
-    <h3 class="principle-title">{title}</h3>
+  <div class="principle-content">
+    <a class="principle-heading" href={`#${id}`}>
+      <h3 class="principle-title">{title}</h3><span class="anchor-link">#</span>
+    </a>
     <p class="principle-desc" set:html={description} />
   </div>
 </article>
@@ -21,9 +24,10 @@ const { number, title, description } = Astro.props;
 <style>
   .principle {
     display: flex;
-    gap: var(--space-lg);
+    gap: var(--space-md);
     padding: var(--space-lg) 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    scroll-margin-top: 80px;
   }
 
   .principle:last-child {
@@ -42,6 +46,29 @@ const { number, title, description } = Astro.props;
     font-weight: 500;
     color: var(--rust-500);
     opacity: 0.7;
+    text-decoration: none;
+  }
+
+  .principle-number:hover {
+    opacity: 1;
+  }
+
+  .principle-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .principle-heading {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.4em;
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .principle-heading:hover .anchor-link {
+    opacity: 1;
+    color: var(--rust-400);
   }
 
   .principle-title {
@@ -49,7 +76,6 @@ const { number, title, description } = Astro.props;
     font-size: 1.05rem;
     font-weight: 600;
     color: var(--text-primary);
-    margin-bottom: var(--space-xs);
     line-height: 1.4;
   }
 
@@ -57,15 +83,21 @@ const { number, title, description } = Astro.props;
     font-size: 0.95rem;
     line-height: 1.7;
     color: var(--text-secondary);
+    margin-top: var(--space-xs);
+  }
+
+  .anchor-link {
+    color: var(--rust-600);
+    font-weight: 400;
+    opacity: 0.4;
+    transition: opacity 0.15s ease, color 0.15s ease;
+    font-size: 0.85em;
   }
 
   @media (max-width: 480px) {
     .principle {
       flex-direction: column;
-      gap: var(--space-sm);
-    }
-    .principle-number-col {
-      width: auto;
+      gap: var(--space-xs);
     }
   }
 </style>

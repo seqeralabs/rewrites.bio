@@ -53,7 +53,7 @@ const ogImage = `${siteUrl}/og-image.png`;
       <a href="/" class="nav-brand">
         <span class="nav-rewrites">rewrites</span><span class="nav-dot">.</span><span class="nav-bio">bio</span>
       </a>
-      <button class="nav-section-indicator" id="nav-section-indicator" aria-hidden="true" aria-expanded="false">
+      <button class="nav-section-indicator" id="nav-section-indicator" aria-expanded="false">
         <span class="nav-section-text"></span>
         <svg class="nav-section-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
@@ -119,11 +119,31 @@ const ogImage = `${siteUrl}/og-image.png`;
         const dropdown = document.getElementById('nav-section-dropdown');
         if (!indicator || !textEl || !dropdown) return;
 
+        const preamble = document.getElementById('introduction');
         const sections = document.querySelectorAll('.manifesto-section');
         if (!sections.length) return;
 
+        // All trackable elements: introduction + numbered sections
+        const allSections = [...(preamble ? [preamble] : []), ...sections];
+
         // Build the dropdown ToC from the sections on the page
         dropdown.innerHTML = '';
+
+        // Add Introduction as the first item
+        if (preamble) {
+          const introItem = document.createElement('a');
+          introItem.className = 'nav-dropdown-item';
+          introItem.href = '#introduction';
+          introItem.dataset.sectionId = 'introduction';
+          introItem.innerHTML = `Introduction`;
+          introItem.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeDropdown();
+            preamble.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          });
+          dropdown.appendChild(introItem);
+        }
+
         sections.forEach((section) => {
           const number = section.querySelector('.section-number');
           const title = section.querySelector('.section-title');
@@ -131,7 +151,8 @@ const ogImage = `${siteUrl}/og-image.png`;
           const item = document.createElement('a');
           item.className = 'nav-dropdown-item';
           item.href = `#${section.id}`;
-          item.innerHTML = `<span class="nav-dropdown-number">${number.textContent}</span> ${title.textContent}`;
+          item.dataset.sectionId = section.id;
+          item.innerHTML = `<span class="nav-dropdown-number">${number.textContent?.replace('#', '').trim()}</span> ${title.textContent?.replace('#', '').trim()}`;
           item.addEventListener('click', (e) => {
             e.preventDefault();
             closeDropdown();
@@ -147,13 +168,18 @@ const ogImage = `${siteUrl}/og-image.png`;
           indicator.setAttribute('aria-expanded', 'true');
           indicator.classList.add('dropdown-open');
           // Mark active item
-          sections.forEach((section, i) => {
-            const items = dropdown.querySelectorAll('.nav-dropdown-item');
-            const rect = section.getBoundingClientRect();
-            if (rect.top < 200 && rect.bottom > 56) {
-              items[i]?.classList.add('active');
-            } else {
-              items[i]?.classList.remove('active');
+          const items = dropdown.querySelectorAll('.nav-dropdown-item');
+          const navHeight = 56;
+          items.forEach((item) => {
+            const targetId = item.dataset.sectionId;
+            const target = targetId ? document.getElementById(targetId) : null;
+            if (target) {
+              const rect = target.getBoundingClientRect();
+              if (rect.top < 200 && rect.bottom > navHeight) {
+                item.classList.add('active');
+              } else {
+                item.classList.remove('active');
+              }
             }
           });
         }
@@ -192,6 +218,11 @@ const ogImage = `${siteUrl}/og-image.png`;
         let ticking = false;
         let _timer = null;
 
+        // The indicator is always visible — show "Contents" by default,
+        // or the current section title when scrolled into a section.
+        indicator.classList.add('visible');
+        textEl.textContent = 'Contents';
+
         function updateIndicator() {
           const navHeight = 56;
           let active = '';
@@ -199,19 +230,27 @@ const ogImage = `${siteUrl}/og-image.png`;
           const probeY = navHeight + 100;
           let best = null;
 
-          for (const section of sections) {
-            const rect = section.getBoundingClientRect();
+          for (const el of allSections) {
+            const rect = el.getBoundingClientRect();
             if (rect.top < probeY && rect.bottom > navHeight) {
-              best = section;
+              best = el;
             }
           }
 
           if (best) {
-            const title = best.querySelector('.section-title');
-            const number = best.querySelector('.section-number');
-            if (title && number) {
-              active = `${number.textContent} ${title.textContent}`;
+            if (best.id === 'introduction') {
+              active = 'Introduction';
+            } else {
+              const title = best.querySelector('.section-title');
+              const number = best.querySelector('.section-number');
+              if (title && number) {
+                active = `${number.textContent?.replace('#', '').trim()} ${title.textContent?.replace('#', '').trim()}`;
+              }
             }
+          }
+
+          if (!active) {
+            active = 'Contents';
           }
 
           if (active !== currentSection) {
@@ -220,17 +259,11 @@ const ogImage = `${siteUrl}/og-image.png`;
               _timer = null;
             }
 
-            if (active && !currentSection) {
+            if (!currentSection || currentSection === 'Contents') {
+              // First update or coming from generic — no crossfade needed
               textEl.textContent = active;
               indicator.classList.remove('fading');
               indicator.classList.add('visible');
-            } else if (!active) {
-              textEl.textContent = '';
-              indicator.style.transition = 'none';
-              indicator.classList.remove('fading', 'visible', 'dropdown-open');
-              dropdown.classList.remove('open');
-              indicator.offsetHeight; /* force reflow */
-              indicator.style.transition = '';
             } else {
               indicator.classList.add('fading');
               _timer = setTimeout(() => {

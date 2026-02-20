@@ -26,7 +26,7 @@ const callout = await marked.parseInline(manifesto.callout.trim());
   <Hero />
 
   <main class="manifesto">
-    <div class="preamble container reveal-stagger">
+    <div class="preamble container reveal-stagger" id="introduction">
       {manifesto.preamble.map((paragraph: string) => (
         <p class="reveal">{paragraph.trim()}</p>
       ))}
@@ -39,7 +39,7 @@ const callout = await marked.parseInline(manifesto.callout.trim());
     {manifesto.sections.map((section: any, si: number) => (
       <Section id={section.title.toLowerCase().replace(/\s+/g, '-')} number={romanNumerals[si]} title={section.title}>
         {section.principles.map((p: any, pi: number) => (
-          <Principle number={`${si + 1}.${pi + 1}`} title={p.title} description={p.description} />
+          <Principle id={`principle-${si + 1}-${pi + 1}`} number={`${si + 1}.${pi + 1}`} title={p.title} description={p.description} />
         ))}
       </Section>
     ))}
@@ -71,6 +71,7 @@ const callout = await marked.parseInline(manifesto.callout.trim());
     padding-bottom: var(--space-2xl);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     margin-bottom: var(--space-2xl);
+    scroll-margin-top: 72px;
   }
 
   .preamble p {

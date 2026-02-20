@@ -12,10 +12,10 @@ const { id, number, title } = Astro.props;
   <div class="container">
     <div class="section-header-wrap">
       <div class="section-header reveal">
-        <div class="section-header-inner">
+        <a class="section-header-inner" href={`#${id}`}>
           <span class="section-number">{number}</span>
-          <h2 class="section-title">{title}</h2>
-        </div>
+          <h2 class="section-title">{title}<span class="anchor-link">#</span></h2>
+        </a>
         <div class="section-line"></div>
       </div>
     </div>
@@ -28,6 +28,7 @@ const { id, number, title } = Astro.props;
 <style>
   .manifesto-section {
     padding: var(--space-2xl) 0 var(--space-xl);
+    scroll-margin-top: 60px;
   }
 
   .section-header-wrap {
@@ -44,6 +45,17 @@ const { id, number, title } = Astro.props;
     display: flex;
     align-items: baseline;
     gap: var(--space-md);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .section-header-inner:hover .section-title {
+    color: var(--text-primary);
+  }
+
+  .section-header-inner:hover .anchor-link {
+    opacity: 1;
+    color: var(--rust-400);
   }
 
   .section-number {
@@ -62,6 +74,15 @@ const { id, number, title } = Astro.props;
     font-weight: 700;
     color: var(--text-primary);
     line-height: 1.2;
+  }
+
+  .anchor-link {
+    color: var(--rust-600);
+    font-weight: 400;
+    margin-left: 0.3em;
+    opacity: 0.4;
+    transition: opacity 0.15s ease, color 0.15s ease;
+    font-size: 0.7em;
   }
 
   .section-line {
