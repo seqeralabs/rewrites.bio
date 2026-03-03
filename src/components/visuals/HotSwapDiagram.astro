@@ -1,0 +1,237 @@
+---
+// 4.2 — Preserve compatibility: hot-swap pipeline diagram
+// Uses featureCounts → RustQC as a real example
+---
+
+<div class="hotswap-wrap">
+  <div class="hotswap-label">HOT-SWAP COMPATIBILITY</div>
+
+  <div class="pipeline-scenario">
+    <div class="hs-scenario-label">Today — using original tool</div>
+    <div class="hs-pipeline">
+      <div class="hs-box hs-upstream">STAR<br />align</div>
+      <div class="hs-arrow">→</div>
+      <div class="hs-box hs-active hs-original">
+        <div class="hs-tool-name">featureCounts</div>
+        <div class="hs-tool-ver">Rsubread v2.x</div>
+      </div>
+      <div class="hs-arrow">→</div>
+      <div class="hs-box hs-downstream">MultiQC<br />report</div>
+      <div class="hs-arrow">→</div>
+      <div class="hs-box hs-downstream">DESeq2<br />analysis</div>
+    </div>
+  </div>
+
+  <div class="hs-swap-indicator">
+    <div class="hs-swap-line"></div>
+    <div class="hs-swap-text">swap one line in your config</div>
+    <div class="hs-swap-line"></div>
+  </div>
+
+  <div class="pipeline-scenario">
+    <div class="hs-scenario-label hs-label-new">Tomorrow — using RustQC</div>
+    <div class="hs-pipeline">
+      <div class="hs-box hs-upstream">STAR<br />align</div>
+      <div class="hs-arrow">→</div>
+      <div class="hs-box hs-active hs-rewrite">
+        <div class="hs-tool-name">RustQC</div>
+        <div class="hs-tool-ver">includes featureCounts</div>
+        <div class="hs-tool-badge">~25× faster</div>
+      </div>
+      <div class="hs-arrow">→</div>
+      <div class="hs-box hs-downstream">MultiQC<br />report</div>
+      <div class="hs-arrow">→</div>
+      <div class="hs-box hs-downstream">DESeq2<br />analysis</div>
+    </div>
+    <div class="hs-unchanged">
+      <span class="hs-unchanged-icon">✓</span>
+      Identical gene counts · same file format · same MultiQC module · 63,086 genes, 100% match
+    </div>
+  </div>
+
+  <div class="hs-revert">
+    Not happy? Swap back. No results change. No downstream scripts break.
+    <span class="hs-revert-tag">fully reversible</span>
+  </div>
+
+  <div class="hs-source">
+    Source: <a href="https://rustqc.netlify.app" target="_blank" rel="noopener">rustqc.netlify.app</a>
+  </div>
+</div>
+
+<style>
+  .hotswap-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .hotswap-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+
+  .pipeline-scenario {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .hs-scenario-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+  }
+
+  .hs-label-new {
+    color: rgba(74, 222, 128, 0.7);
+  }
+
+  .hs-pipeline {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+
+  .hs-box {
+    background: var(--bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: var(--space-xs) var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    text-align: center;
+    line-height: 1.5;
+  }
+
+  .hs-upstream,
+  .hs-downstream {
+    opacity: 0.6;
+  }
+
+  .hs-active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    padding: var(--space-sm);
+    min-width: 140px;
+  }
+
+  .hs-original {
+    border-color: rgba(249, 115, 22, 0.3);
+    background: rgba(249, 115, 22, 0.05);
+  }
+
+  .hs-rewrite {
+    border-color: rgba(74, 222, 128, 0.3);
+    background: rgba(74, 222, 128, 0.05);
+  }
+
+  .hs-tool-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .hs-tool-ver {
+    font-size: 0.63rem;
+    color: var(--text-tertiary);
+  }
+
+  .hs-tool-badge {
+    font-size: 0.62rem;
+    padding: 1px 6px;
+    border-radius: 3px;
+    background: rgba(74, 222, 128, 0.1);
+    color: rgba(74, 222, 128, 0.8);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    margin-top: 2px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .hs-arrow {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.2);
+    padding: 0 2px;
+  }
+
+  .hs-swap-indicator {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .hs-swap-line {
+    flex: 1;
+    border-top: 1px dashed rgba(255, 255, 255, 0.12);
+  }
+
+  .hs-swap-text {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .hs-unchanged {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: rgba(74, 222, 128, 0.6);
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    flex-wrap: wrap;
+  }
+
+  .hs-unchanged-icon {
+    color: rgba(74, 222, 128, 0.9);
+    font-weight: bold;
+  }
+
+  .hs-revert {
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: var(--space-sm);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .hs-revert-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: rgba(74, 222, 128, 0.08);
+    color: rgba(74, 222, 128, 0.7);
+    border: 1px solid rgba(74, 222, 128, 0.15);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .hs-source {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+  }
+
+  .hs-source a {
+    color: var(--rust-400);
+    font-family: var(--font-mono);
+  }
+</style>

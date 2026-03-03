@@ -1,0 +1,205 @@
+---
+// 4.3 — Respect upstream licenses
+// Two-path visual: check early vs discover late
+---
+
+<div class="license-wrap">
+
+  <div class="path path-good">
+    <div class="path-label path-label-good">Check before you start</div>
+    <div class="path-steps">
+      <div class="step">
+        <div class="step-dot step-dot-good"></div>
+        <div class="step-content">
+          <div class="step-title">Read the licenses</div>
+          <div class="step-detail">All upstream tools. All dependencies.</div>
+        </div>
+      </div>
+      <div class="step-connector step-connector-good"></div>
+      <div class="step">
+        <div class="step-dot step-dot-good"></div>
+        <div class="step-content">
+          <div class="step-title">Confirm your license is compatible</div>
+          <div class="step-detail">Pick a rewrite license at least as permissive as the most restrictive original.</div>
+        </div>
+      </div>
+      <div class="step-connector step-connector-good"></div>
+      <div class="step">
+        <div class="step-dot step-dot-good"></div>
+        <div class="step-content">
+          <div class="step-title">Build and release</div>
+          <div class="step-detail">No surprises. Community can adopt freely.</div>
+        </div>
+      </div>
+    </div>
+    <div class="path-outcome path-outcome-good">
+      <span class="outcome-icon">✓</span>
+      Released cleanly. Adoption is straightforward.
+    </div>
+  </div>
+
+  <div class="path-divider">vs</div>
+
+  <div class="path path-bad">
+    <div class="path-label path-label-bad">Discover after release</div>
+    <div class="path-steps">
+      <div class="step">
+        <div class="step-dot step-dot-neutral"></div>
+        <div class="step-content">
+          <div class="step-title">Build the rewrite</div>
+          <div class="step-detail">Months of work. Released as MIT.</div>
+        </div>
+      </div>
+      <div class="step-connector step-connector-bad"></div>
+      <div class="step">
+        <div class="step-dot step-dot-bad"></div>
+        <div class="step-content">
+          <div class="step-title">Someone notices a GPL dependency</div>
+          <div class="step-detail">One upstream tool was GPL-2. Your MIT release was incompatible from day one.</div>
+        </div>
+      </div>
+      <div class="step-connector step-connector-bad"></div>
+      <div class="step">
+        <div class="step-dot step-dot-bad"></div>
+        <div class="step-content">
+          <div class="step-title">Relicense, remove, or retract</div>
+          <div class="step-detail">Painful. Embarrassing. Potentially retroactive for anyone who already adopted it.</div>
+        </div>
+      </div>
+    </div>
+    <div class="path-outcome path-outcome-bad">
+      <span class="outcome-icon">✗</span>
+      Retroactive licensing issue. Trust damaged.
+    </div>
+  </div>
+
+</div>
+
+<style>
+  .license-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .path {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .path-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 4px;
+  }
+
+  .path-label-good { color: rgba(74, 222, 128, 0.7); }
+  .path-label-bad  { color: rgba(248, 113, 113, 0.7); }
+
+  .path-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding-left: var(--space-sm);
+    border-left: 2px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .step {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    position: relative;
+  }
+
+  .step-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin-top: 3px;
+    position: relative;
+    left: calc(-1 * var(--space-sm) - 6px);
+    margin-right: calc(-10px + var(--space-xs));
+  }
+
+  .step-dot-good    { background: rgba(74, 222, 128, 0.7); }
+  .step-dot-bad     { background: rgba(248, 113, 113, 0.7); }
+  .step-dot-neutral { background: rgba(255, 255, 255, 0.2); }
+
+  .step-connector {
+    height: 12px;
+    width: 2px;
+    margin-left: -1px;
+    position: relative;
+    left: -1px;
+  }
+
+  .step-connector-good { background: rgba(74, 222, 128, 0.2); }
+  .step-connector-bad  { background: rgba(248, 113, 113, 0.15); }
+
+  .step-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding-bottom: var(--space-xs);
+  }
+
+  .step-title {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.4;
+  }
+
+  .step-detail {
+    font-size: 0.78rem;
+    color: var(--text-tertiary);
+    line-height: 1.5;
+  }
+
+  .path-outcome {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    padding: var(--space-xs) var(--space-sm);
+    border-radius: 4px;
+    margin-top: var(--space-xs);
+  }
+
+  .path-outcome-good {
+    background: rgba(74, 222, 128, 0.06);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    color: rgba(74, 222, 128, 0.85);
+  }
+
+  .path-outcome-bad {
+    background: rgba(248, 113, 113, 0.06);
+    border: 1px solid rgba(248, 113, 113, 0.2);
+    color: rgba(248, 113, 113, 0.85);
+  }
+
+  .outcome-icon {
+    font-size: 0.85rem;
+    flex-shrink: 0;
+  }
+
+  .path-divider {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    padding: var(--space-xs) 0;
+  }
+</style>

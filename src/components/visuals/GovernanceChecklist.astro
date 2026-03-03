@@ -1,0 +1,137 @@
+---
+// 4.1 — Maintain and govern: community health checklist
+---
+
+<div class="gov-wrap">
+  <div class="gov-label">REPOSITORY HEALTH</div>
+  <div class="gov-grid">
+    <div class="gov-item gov-ok">
+      <div class="gov-icon">✓</div>
+      <div class="gov-content">
+        <div class="gov-name">CONTRIBUTING.md</div>
+        <div class="gov-sub">How to submit issues &amp; PRs</div>
+      </div>
+    </div>
+    <div class="gov-item gov-ok">
+      <div class="gov-icon">✓</div>
+      <div class="gov-content">
+        <div class="gov-name">CODE_OF_CONDUCT.md</div>
+        <div class="gov-sub">Community standards</div>
+      </div>
+    </div>
+    <div class="gov-item gov-ok">
+      <div class="gov-icon">✓</div>
+      <div class="gov-content">
+        <div class="gov-name">Release process</div>
+        <div class="gov-sub">Versioned, tagged, changelogs</div>
+      </div>
+    </div>
+    <div class="gov-item gov-ok">
+      <div class="gov-icon">✓</div>
+      <div class="gov-content">
+        <div class="gov-name">Issue response SLA</div>
+        <div class="gov-sub">Acknowledge within 7 days</div>
+      </div>
+    </div>
+    <div class="gov-item gov-warn">
+      <div class="gov-icon">!</div>
+      <div class="gov-content">
+        <div class="gov-name">Maintainer succession</div>
+        <div class="gov-sub">Who takes over if you move on?</div>
+      </div>
+    </div>
+    <div class="gov-item gov-warn">
+      <div class="gov-icon">!</div>
+      <div class="gov-content">
+        <div class="gov-name">Deprecation policy</div>
+        <div class="gov-sub">What happens if project ends?</div>
+      </div>
+    </div>
+  </div>
+  <div class="gov-note">
+    An unmaintained rewrite is worse than no rewrite — it creates a false sense of security while bugs go unfixed.
+  </div>
+</div>
+
+<style>
+  .gov-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-lg);
+  }
+
+  .gov-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--space-md);
+  }
+
+  .gov-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  @media (max-width: 560px) {
+    .gov-grid { grid-template-columns: 1fr; }
+  }
+
+  .gov-item {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    background: var(--bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 6px;
+    padding: var(--space-sm) var(--space-md);
+  }
+
+  .gov-ok   { border-color: rgba(74, 222, 128, 0.15); }
+  .gov-warn { border-color: rgba(251, 191, 36, 0.2); }
+
+  .gov-icon {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+    width: 16px;
+    text-align: center;
+  }
+
+  .gov-ok .gov-icon   { color: rgba(74, 222, 128, 0.8); }
+  .gov-warn .gov-icon { color: rgba(251, 191, 36, 0.8); }
+
+  .gov-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .gov-name {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-primary);
+    font-weight: 500;
+  }
+
+  .gov-sub {
+    font-family: var(--font-mono);
+    font-size: 0.67rem;
+    color: var(--text-tertiary);
+  }
+
+  .gov-note {
+    font-size: 0.83rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: var(--space-sm);
+    line-height: 1.6;
+    font-style: italic;
+  }
+</style>

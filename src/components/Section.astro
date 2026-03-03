@@ -3,9 +3,10 @@ interface Props {
   id: string;
   number: string;
   title: string;
+  intro?: string;
 }
 
-const { id, number, title } = Astro.props;
+const { id, number, title, intro } = Astro.props;
 ---
 
 <section class="manifesto-section" id={id}>
@@ -18,8 +19,9 @@ const { id, number, title } = Astro.props;
         </a>
         <div class="section-line"></div>
       </div>
+      {intro && <p class="section-intro reveal">{intro}</p>}
     </div>
-    <div class="section-content reveal-stagger">
+    <div class="section-content">
       <slot />
     </div>
   </div>
@@ -38,8 +40,6 @@ const { id, number, title } = Astro.props;
   .section-header {
     padding: var(--space-md) 0;
   }
-
-
 
   .section-header-inner {
     display: flex;
@@ -90,6 +90,14 @@ const { id, number, title } = Astro.props;
     height: 2px;
     background: linear-gradient(90deg, var(--rust-500), transparent);
     margin-top: var(--space-sm);
+  }
+
+  .section-intro {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--text-secondary);
+    margin-top: var(--space-lg);
+    max-width: 640px;
   }
 
   .section-content {

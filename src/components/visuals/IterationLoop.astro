@@ -1,0 +1,116 @@
+---
+// 2.2 — Work small: iteration loop diagram
+---
+
+<div class="loop-wrap">
+  <div class="loop-label">THE VALIDATION LOOP</div>
+  <div class="loop-diagram">
+    <div class="loop-step step-1">
+      <div class="step-num">01</div>
+      <div class="step-text">Pick one tool<br />or function</div>
+    </div>
+    <div class="loop-connector">→</div>
+    <div class="loop-step step-2">
+      <div class="step-num">02</div>
+      <div class="step-text">Write the<br />rewrite</div>
+    </div>
+    <div class="loop-connector">→</div>
+    <div class="loop-step step-3">
+      <div class="step-num">03</div>
+      <div class="step-text">Compare output<br />vs original</div>
+    </div>
+    <div class="loop-connector loop-connector-back">↙ adjust &amp; repeat</div>
+    <div class="loop-step step-4 step-pass">
+      <div class="step-num">✓</div>
+      <div class="step-text">Outputs<br />match</div>
+    </div>
+    <div class="loop-connector loop-connector-next">→ next component</div>
+  </div>
+  <div class="loop-note">
+    Never move on until the current step is validated. Compound complexity will bury you.
+  </div>
+</div>
+
+<style>
+  .loop-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-lg);
+  }
+
+  .loop-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--space-md);
+  }
+
+  .loop-diagram {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-md);
+  }
+
+  .loop-step {
+    background: var(--bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: var(--space-sm) var(--space-md);
+    text-align: center;
+    min-width: 80px;
+  }
+
+  .step-pass {
+    border-color: rgba(74, 222, 128, 0.4);
+    background: rgba(74, 222, 128, 0.06);
+  }
+
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--rust-500);
+    margin-bottom: 4px;
+  }
+
+  .step-pass .step-num {
+    color: rgba(74, 222, 128, 0.9);
+    font-size: 1rem;
+  }
+
+  .step-text {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .loop-connector {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+  }
+
+  .loop-connector-back {
+    color: rgba(248, 113, 113, 0.6);
+  }
+
+  .loop-connector-next {
+    color: rgba(74, 222, 128, 0.6);
+  }
+
+  .loop-note {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: var(--space-sm);
+    font-style: italic;
+  }
+</style>

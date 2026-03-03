@@ -1,0 +1,254 @@
+---
+// 2.1 — Think big: pipeline I/O before/after
+// Uses RustQC as a real example (https://rustqc.netlify.app)
+---
+
+<div class="pipeline-wrap">
+  <div class="pipeline-scenario">
+    <div class="scenario-label scenario-before">BEFORE — 15+ separate tools, each reading the BAM independently</div>
+    <div class="pipeline-row">
+      <div class="tool-box">
+        <div class="tool-name">featureCounts</div>
+        <div class="tool-sub">quantify</div>
+      </div>
+      <div class="io-sep">
+        <div class="disk-icon">💾</div>
+      </div>
+      <div class="tool-box">
+        <div class="tool-name">dupRadar</div>
+        <div class="tool-sub">duplication</div>
+      </div>
+      <div class="io-sep">
+        <div class="disk-icon">💾</div>
+      </div>
+      <div class="tool-box">
+        <div class="tool-name">RSeQC</div>
+        <div class="tool-sub">QC metrics</div>
+      </div>
+      <div class="io-sep">
+        <div class="disk-icon">💾</div>
+      </div>
+      <div class="tool-box tool-box-etc">
+        <div class="tool-name">+12 more…</div>
+        <div class="tool-sub">each reads BAM</div>
+      </div>
+    </div>
+    <div class="cost-row">
+      <span class="cost-item cost-bad">15+ BAM reads</span>
+      <span class="cost-item cost-bad">~2h 05m total</span>
+    </div>
+  </div>
+
+  <div class="pipeline-divider">↓ rethink the architecture</div>
+
+  <div class="pipeline-scenario">
+    <div class="scenario-label scenario-after">AFTER — RustQC: single pass over the BAM</div>
+    <div class="pipeline-row pipeline-row-after">
+      <div class="tool-box tool-box-bam">
+        <div class="tool-name">sample.bam</div>
+        <div class="tool-sub">read once</div>
+      </div>
+      <div class="io-arrow-clean">
+        <div class="arrow-line"></div>
+      </div>
+      <div class="tool-box tool-box-combined">
+        <div class="tool-name">RustQC</div>
+        <div class="tool-sub">all metrics, one pass</div>
+        <div class="tool-badge">~5 min</div>
+      </div>
+      <div class="io-arrow-clean">
+        <div class="arrow-line"></div>
+      </div>
+      <div class="tool-box">
+        <div class="tool-name">MultiQC</div>
+        <div class="tool-sub">report</div>
+      </div>
+    </div>
+    <div class="cost-row">
+      <span class="cost-item cost-good">1× BAM read</span>
+      <span class="cost-item cost-good">~25× faster</span>
+      <span class="cost-item cost-good">820,118 values, zero mismatches</span>
+    </div>
+  </div>
+
+  <div class="pipeline-source">
+    Source: <a href="https://rustqc.netlify.app" target="_blank" rel="noopener">rustqc.netlify.app</a>
+  </div>
+</div>
+
+<style>
+  .pipeline-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .pipeline-scenario {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .scenario-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+
+  .scenario-before { color: rgba(248, 113, 113, 0.7); }
+  .scenario-after  { color: rgba(74, 222, 128, 0.7); }
+
+  .pipeline-row {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    flex-wrap: wrap;
+    row-gap: var(--space-sm);
+  }
+
+  .tool-box {
+    background: var(--bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: var(--space-xs) var(--space-sm);
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .tool-box-etc {
+    opacity: 0.5;
+  }
+
+  .tool-box-bam {
+    opacity: 0.7;
+  }
+
+  .tool-box-combined {
+    border-color: rgba(74, 222, 128, 0.3);
+    background: rgba(74, 222, 128, 0.04);
+    min-width: 140px;
+  }
+
+  .tool-name {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .tool-sub {
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    color: var(--text-tertiary);
+    margin-top: 2px;
+  }
+
+  .tool-badge {
+    font-family: var(--font-mono);
+    font-size: 0.6rem;
+    color: rgba(74, 222, 128, 0.8);
+    background: rgba(74, 222, 128, 0.1);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+    border-radius: 3px;
+    padding: 1px 6px;
+    margin-top: 4px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .io-sep {
+    font-size: 0.85rem;
+    color: rgba(248, 113, 113, 0.5);
+    padding: 0 2px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .disk-icon {
+    font-size: 0.85rem;
+    line-height: 1;
+  }
+
+  .io-arrow-clean {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    min-width: 24px;
+  }
+
+  .arrow-line {
+    height: 2px;
+    background: rgba(74, 222, 128, 0.3);
+    width: 100%;
+    position: relative;
+  }
+
+  .arrow-line::after {
+    content: '';
+    position: absolute;
+    right: -1px;
+    top: -4px;
+    width: 0;
+    height: 0;
+    border-left: 6px solid rgba(74, 222, 128, 0.4);
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+  }
+
+  .cost-row {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .cost-item {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+
+  .cost-bad {
+    background: rgba(248, 113, 113, 0.1);
+    color: rgba(248, 113, 113, 0.8);
+    border: 1px solid rgba(248, 113, 113, 0.2);
+  }
+
+  .cost-good {
+    background: rgba(74, 222, 128, 0.08);
+    color: rgba(74, 222, 128, 0.8);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+  }
+
+  .pipeline-divider {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    padding: var(--space-xs) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .pipeline-source {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: var(--space-sm);
+  }
+
+  .pipeline-source a {
+    color: var(--rust-400);
+    font-family: var(--font-mono);
+  }
+</style>

@@ -1,62 +1,535 @@
 ---
-import { readFileSync } from 'node:fs';
-import { parse } from 'yaml';
-import { marked } from 'marked';
-import Layout from '../layouts/Layout.astro';
-import Hero from '../components/Hero.astro';
-import Section from '../components/Section.astro';
-import Principle from '../components/Principle.astro';
-import Footer from '../components/Footer.astro';
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+import Section from "../components/Section.astro";
+import Principle from "../components/Principle.astro";
+import Footer from "../components/Footer.astro";
 
-const manifesto = parse(readFileSync('src/data/manifesto.yaml', 'utf-8'));
-const romanNumerals = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
-
-// Parse all principle descriptions as inline markdown
-for (const section of manifesto.sections) {
-  for (const p of section.principles) {
-    p.description = await marked.parseInline(p.description.trim());
-  }
-}
-
-// Parse callout as inline markdown (for emphasis)
-const callout = await marked.parseInline(manifesto.callout.trim());
+import ScaleCostChart from "../components/visuals/ScaleCostChart.astro";
+import CitationCard from "../components/visuals/CitationCard.astro";
+import OutputDiff from "../components/visuals/OutputDiff.astro";
+import AIBadge from "../components/visuals/AIBadge.astro";
+import PipelineIO from "../components/visuals/PipelineIO.astro";
+import IterationLoop from "../components/visuals/IterationLoop.astro";
+import UpstreamComms from "../components/visuals/UpstreamComms.astro";
+import RealDataGrid from "../components/visuals/RealDataGrid.astro";
+import BenchmarkComparison from "../components/visuals/BenchmarkComparison.astro";
+import ErrorMessages from "../components/visuals/ErrorMessages.astro";
+import FeatureChecklist from "../components/visuals/FeatureChecklist.astro";
+import VersionPin from "../components/visuals/VersionPin.astro";
+import GovernanceChecklist from "../components/visuals/GovernanceChecklist.astro";
+import HotSwapDiagram from "../components/visuals/HotSwapDiagram.astro";
+import LicenseCheck from "../components/visuals/LicenseCheck.astro";
+import OpenSourceFlywheel from "../components/visuals/OpenSourceFlywheel.astro";
+import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.astro";
 ---
 
-<Layout title="rewrites.bio - Rewrite it, for bioinformatics">
+<Layout title="rewrites.bio — A manifesto for bioinformatics">
   <Hero />
 
   <main class="manifesto">
-    <div class="preamble container reveal-stagger" id="introduction">
-      {manifesto.preamble.map((paragraph: string) => (
-        <p class="reveal">{paragraph.trim()}</p>
-      ))}
-      <p class="preamble-callout reveal" set:html={callout} />
-      <p class="reveal">
-        {manifesto.preamble_closing.trim()}
-      </p>
+    <div class="preamble" id="introduction">
+      <div class="container">
+        <div class="preamble-layout">
+          <div class="preamble-text reveal-stagger">
+            <p class="reveal">
+              Most bioinformatics tools were written for a world that no longer exists. They were
+              built by brilliant scientists solving hard problems, and they work. But they were built
+              when datasets were smaller, compute was slower, and a single lab could run everything
+              on a desktop. Today, a typical RNA-seq study processes thousands of samples. The
+              computational cost of slow, memory-hungry tools has compounded from a nuisance into a
+              real scientific and environmental problem.
+            </p>
+            <p class="reveal">
+              The scale problem is concrete. A pipeline like nf-core/rnaseq is run by thousands of
+              researchers. If one step wastes ten minutes of CPU per sample and the pipeline runs on
+              a million samples a year, that is nearly two decades of wasted compute, every year.
+              The tools are correct, and that correctness is hard-won. But correctness and efficiency
+              are not in conflict. We can have both.
+            </p>
+            <p class="reveal">
+              Wasted CPU-hours have a physical cost: kilowatt-hours, kilograms of CO2. A widely-used
+              pipeline running more efficiently is not just faster science, it is more responsible
+              science. Rewrites of key bioinformatics tools that run 10-50x faster can save hundreds
+              of tonnes of CO2-equivalent per year across the pipelines that use them. Efficiency is
+              no longer a nice-to-have.
+            </p>
+            <p class="reveal">
+              What has changed is the cost of solving this. AI coding assistants have shifted the
+              equation. A domain expert who understands a tool's inputs, outputs, and edge cases can
+              now produce a working reimplementation in days rather than years. The slow part was
+              never understanding what the tool does; it was writing performant code to do it.
+              That barrier has largely gone. Fast code is now cheap. Scientific insight, validation,
+              and trust are not.
+            </p>
+            <blockquote class="preamble-callout reveal">
+              A wave of AI-assisted rewrites is coming.<br />
+              The question is not <strong>whether</strong> it will happen,<br />
+              but whether it will happen <strong>well</strong>.
+            </blockquote>
+            <p class="preamble-closing reveal">These are the principles we follow.</p>
+          </div>
+          <div class="preamble-visual reveal">
+            <ScaleCostChart />
+          </div>
+        </div>
+      </div>
     </div>
 
-    {manifesto.sections.map((section: any, si: number) => (
-      <Section id={section.title.toLowerCase().replace(/\s+/g, '-')} number={romanNumerals[si]} title={section.title}>
-        {section.principles.map((p: any, pi: number) => (
-          <Principle id={`principle-${si + 1}-${pi + 1}`} number={`${si + 1}.${pi + 1}`} title={p.title} description={p.description} />
-        ))}
-      </Section>
-    ))}
+    <Section
+      id="philosophy"
+      number="I"
+      title="Philosophy"
+      intro="Before writing any code, three commitments shape everything else. These are not procedural rules. They are a statement of values."
+    >
+      <Principle id="credit-authors" number="1.1" title="Credit the original authors">
+        <div slot="description">
+          <p>
+            Behind every bioinformatics tool is years of work: algorithm design, edge-case hunting,
+            user feedback, and ongoing maintenance, often by people who were underpaid or
+            unpaid for it. A rewrite stands entirely on that foundation. Without the original tool's
+            existence, test cases, and accumulated community knowledge, a rewrite cannot even be
+            built correctly, let alone validated.
+          </p>
+          <p>
+            Credit belongs everywhere: the README, the docs, any paper or preprint, and in
+            downstream reports that use results from the rewrite. A dedicated credits page with
+            full citations, DOIs, author lists, and version numbers is the minimum. When users
+            cite your rewrite, they should know to also cite the original.
+          </p>
+          <p>
+            This is how the scientific community tracks provenance and assigns credit to work that
+            enables everything downstream. Obscuring the lineage of a tool undermines the incentive
+            structures that motivated the original work.
+          </p>
+        </div>
+        <CitationCard slot="visual" />
+      </Principle>
 
-    <section class="closing container">
-      <div class="reveal">
+      <Principle id="emulate-exactly" number="1.2" title="Emulate exactly">
+        <div slot="description">
+          <p>
+            The goal is not to build a better version of the tool. It is to build a faster version
+            that produces the same results. A rewrite that changes outputs, even in ways that look
+            like improvements, is a different tool. It cannot inherit the original's validation
+            history. It cannot be quietly substituted into existing pipelines without forcing
+            users to re-validate their analyses.
+          </p>
+          <p>
+            Emulate exactly means bit-identical or numerically-identical outputs wherever possible.
+            For deterministic tools, that means byte-for-byte matching files. For tools with
+            floating-point arithmetic, it means results within acceptable numerical precision,
+            where "acceptable" is defined by domain scientists, not implementation convenience.
+            Header formats, column ordering, file naming, and summary statistics all count.
+          </p>
+          <p>
+            If you find what looks like a bug in the original tool, do not fix it silently.
+            Document the discrepancy, report it upstream (see 4.5), and let the maintainers
+            decide. Your rewrite's job is to replicate the behaviour users already depend on,
+            including quirks they have built downstream analyses around.
+          </p>
+        </div>
+        <OutputDiff slot="visual" />
+      </Principle>
+
+      <Principle id="transparent-ai" number="1.3" title="Be transparent about AI">
+        <div slot="description">
+          <p>
+            When an AI coding agent writes the implementation, that is a material fact about the
+            software. It affects how the code should be trusted, reviewed, and audited. It does
+            not mean the software is untrustworthy; correctness is determined by output comparison,
+            not by who or what wrote the code. But users and contributors deserve to know how it
+            was built.
+          </p>
+          <p>
+            Document clearly in the README and any accompanying paper: which AI tools were used,
+            what role they played, and how correctness was verified. "Validated by output
+            comparison against mytool v1.0 on a suite of real sequencing datasets" is far more
+            useful than leaving provenance implicit. Do not obscure AI involvement to make the
+            project seem more traditionally engineered than it is.
+          </p>
+          <p>
+            Output comparison catches what you tested. It does not catch edge cases you have not
+            encountered yet. Being transparent also means committing to ongoing validation as new
+            datasets and use cases emerge, and being honest about where coverage is thin.
+          </p>
+        </div>
+        <AIBadge slot="visual" />
+      </Principle>
+    </Section>
+
+    <Section
+      id="planning"
+      number="II"
+      title="Planning"
+      intro="The decisions made before you write the first function determine most of the outcome. Scope, validation strategy, and architecture all matter more than the choice of language."
+    >
+      <Principle id="think-big" number="2.1" title="Think big">
+        <div slot="description">
+          <p>
+            The biggest performance wins rarely come from writing faster implementations of
+            existing tools. They come from rethinking the architecture. Modern bioinformatics
+            pipelines chain many discrete tools, each reading from disk, doing work, and writing
+            back to disk. Every one of those I/O operations is an opportunity to waste time.
+            A straight port to a faster language captures only a fraction of what is available.
+          </p>
+          <p>
+            Think about what a single integrated process could do without materialising intermediate
+            files. Trimming, alignment, and quantification can share data in memory rather than
+            writing gigabytes of temporary BAM files between steps. Eliminating redundant I/O is
+            often worth more than any algorithmic improvement. Ask: what preprocessing does this
+            tool assume has already happened? Can that be folded in? What immediately consumes
+            this tool's output? Can that be folded in too?
+          </p>
+          <p>
+            This is not a licence to build an unvalidatable monolith. It is permission to think
+            beyond one-to-one replacement and ask what a pipeline designed from scratch, with what
+            we now know about where the bottlenecks are, would actually look like.
+          </p>
+        </div>
+        <PipelineIO slot="visual" />
+      </Principle>
+
+      <Principle id="work-small" number="2.2" title="Work small">
+        <div slot="description">
+          <p>
+            Thinking big about architecture does not mean building big in one go. The implementation
+            strategy should be the opposite: small, tight iteration loops, each step validated
+            against the original before moving on. Start with the simplest function that produces
+            testable output. Validate it. Then extend.
+          </p>
+          <p>
+            When you implement several components before validating any of them, a discrepancy in
+            the final output could come from anywhere. You have created a debugging problem that
+            requires mentally decomposing what you just built. Work small, and when something is
+            wrong, you already know where to look.
+          </p>
+          <p>
+            AI coding agents are good at generating plausible implementations quickly. They are
+            unreliable for correctness, especially in domain-specific numerical behaviour. The
+            right response is not to distrust them but to validate continuously. An agent told
+            "this step's output doesn't match on paired-end data with adapter sequences" can
+            iterate productively. An agent asked to implement an entire pipeline in one prompt
+            is much harder to correct.
+          </p>
+        </div>
+        <IterationLoop slot="visual" />
+      </Principle>
+
+      <Principle id="engage-upstream" number="2.3" title="Engage upstream">
+        <div slot="description">
+          <p>
+            The maintainers of the tool you are rewriting know its intended behaviour, its
+            undocumented edge cases, and the design decisions that never made it into any paper.
+            Engaging early is not just courtesy, it is useful. They may know about a tricky
+            normalisation step described only in a footnote. They may have an upcoming refactor
+            that would make your approach obsolete. They may want to collaborate.
+          </p>
+          <p>
+            Open an issue or send an email before you start. Something like: "We're planning an
+            AI-assisted performance rewrite. We'd like to validate against your test suite and
+            would welcome guidance on the correctness criteria that matter most." Most open-source
+            maintainers are not threatened by rewrites that credit their work. They are threatened
+            by ones that replace them silently.
+          </p>
+          <p>
+            At a minimum, give maintainers a heads-up before your public release. Being surprised
+            to learn a popular rewrite of your tool exists, and having heard nothing about it,
+            damages trust. The bioinformatics community is small. Burn relationships here and
+            you feel it everywhere.
+          </p>
+        </div>
+        <UpstreamComms slot="visual" />
+      </Principle>
+    </Section>
+
+    <Section
+      id="building"
+      number="III"
+      title="Building"
+      intro="Good intentions don't ship correct software. The building phase is where principles meet reality: data that behaves unexpectedly, performance that doesn't match theory, users who need the tool to work before they will trust it."
+    >
+      <Principle id="test-real-data" number="3.1" title="Test relentlessly with real data">
+        <div slot="description">
+          <p>
+            Synthetic data is useful for quick iteration. It is not sufficient for validating a
+            bioinformatics rewrite. Real sequencing data has properties synthetic generators do
+            not replicate: instrument-specific error patterns, real adapter contamination, quality
+            score profiles that differ between chemistry versions, reads spanning difficult genomic
+            regions, and samples with genuine biological variation.
+          </p>
+          <p>
+            Test on multiple organisms, platforms, experimental designs, and library prep protocols.
+            Test on old data too. Instruments have changed, and a tool that handles modern short
+            reads correctly may fail on data from earlier chemistries that are still common in
+            public archives. Test edge cases: empty files, single-read files, files where all
+            reads fail quality filters, very large files that stress memory handling.
+          </p>
+          <p>
+            Every test case that passes is a commitment. Maintain those cases in the repository.
+            When a user reports a failure on a dataset type you haven't tested, add it to the
+            suite. A well-maintained rewrite should eventually have broader test coverage than
+            the original, because it is forced to be explicit about what it has verified.
+          </p>
+        </div>
+        <RealDataGrid slot="visual" />
+      </Principle>
+
+      <Principle id="benchmark" number="3.2" title="Benchmark rigorously">
+        <div slot="description">
+          <p>
+            Performance claims require evidence. "Our rewrite is 10x faster" is a marketing
+            statement unless it comes with a reproducible benchmark: the hardware, the dataset,
+            the exact command lines for both tools, and an output comparison confirming the results
+            match. Without those details, the number cannot be verified by anyone else.
+          </p>
+          <p>
+            Commit reference inputs and expected outputs to the repository alongside the benchmark
+            scripts. Anyone who clones the repo should be able to reproduce your numbers. Benchmark
+            on hardware representative of what your users have. A result on a 96-core server is
+            not the same as a result on the 8-core nodes that most academic clusters provide.
+            Measure wall-clock time and peak memory separately. Both matter.
+          </p>
+          <p>
+            Benchmark honestly. If your rewrite is faster on some data types but not others, say
+            so. If the original is still better in some cases, document them. A rewrite that
+            claims uniform superiority and then fails for certain users will lose trust fast.
+            Numbers without context mislead. Numbers without reproducibility are anecdotes.
+          </p>
+        </div>
+        <BenchmarkComparison slot="visual" />
+      </Principle>
+
+      <Principle id="build-for-users" number="3.3" title="Build for users">
+        <div slot="description">
+          <p>
+            A tool that is 20x faster but crashes with an unhelpful error message will not get
+            adopted. Users trust tools that behave predictably, communicate clearly when something
+            goes wrong, and do not require reading source code to use. Performance is necessary
+            but not sufficient.
+          </p>
+          <p>
+            Error messages should say what went wrong, where, and what the user can do about it.
+            "Segmentation fault" tells nobody anything useful. "Input index not found for
+            sample.bam, run samtools index first, or pass --no-index to proceed without one"
+            gives them a path forward in under a minute. The difference determines whether
+            they try again or abandon the tool.
+          </p>
+          <p>
+            Defaults should be sensible. The command run without reading any documentation should
+            produce a useful result in the common case. Document not just what each flag does but
+            when you would want to use it. Think about the user integrating your tool into a
+            pipeline they did not write; they need to understand failure modes, not just the
+            happy path. A fast tool that frustrates users will not displace a slow one they trust.
+          </p>
+        </div>
+        <ErrorMessages slot="visual" />
+      </Principle>
+
+      <Principle id="build-what-you-need" number="3.4" title="Build only what you need">
+        <div slot="description">
+          <p>
+            Feature completeness is not the goal. Output correctness on the features that matter
+            is. Most bioinformatics tools have accumulated a long tail of flags and edge cases
+            over years of user requests. Not all of those are used in the pipeline you are
+            targeting. Reimplementing everything at once greatly increases the validation surface
+            and the chance of shipping something broken in a less-tested path.
+          </p>
+          <p>
+            Identify exactly which capabilities your target pipeline uses. Reimplement those, and
+            reimplement them exactly. For features you have not implemented, fail with a clear
+            message explaining what is not supported and pointing to the original tool for those
+            cases. Do not silently ignore unsupported flags or produce wrong output for partially
+            implemented features.
+          </p>
+          <p>
+            A focused rewrite that does four things correctly is more valuable, and more adoptable,
+            than one that claims to do fifteen and does twelve of them right. Scope can expand as
+            the project matures and the validation suite grows. It cannot easily contract once
+            users depend on it.
+          </p>
+        </div>
+        <FeatureChecklist slot="visual" />
+      </Principle>
+
+      <Principle id="pin-versions" number="3.5" title="Pin versions and document">
+        <div slot="description">
+          <p>
+            Every claim your rewrite makes about output equivalence is implicitly a claim about a
+            specific version of the original tool. "Compatible with mytool" is meaningless.
+            "Produces bit-identical output to mytool v1.0, validated on the dataset described in
+            benchmarks/" is a testable assertion. The difference matters when a user hits an
+            unexpected discrepancy six months after your release.
+          </p>
+          <p>
+            Pin the exact version of every original tool you have validated against. Document not
+            just the version number but the command line used for comparison, the dataset, the
+            comparison methodology, and the date. This lives in the repository, not in a blog post
+            or your memory, so contributors and users can find it without asking.
+          </p>
+          <p>
+            When the original tool releases a new version, you need a process for deciding whether
+            to update your validation target. Major version bumps often change output formats.
+            Patch releases often fix bugs that may or may not affect your outputs. Document your
+            policy and communicate it to users.
+          </p>
+        </div>
+        <VersionPin slot="visual" />
+      </Principle>
+    </Section>
+
+    <Section
+      id="stewardship"
+      number="IV"
+      title="Stewardship"
+      intro="A rewrite is not a one-time act. Once other researchers build pipelines on your tool, you have made a commitment. Stewardship means honouring it: maintaining correctness as upstream tools evolve, governing transparently, and giving back to the ecosystem that made the rewrite possible."
+    >
+      <Principle id="maintain" number="4.1" title="Maintain and govern">
+        <div slot="description">
+          <p>
+            The hard part of releasing a bioinformatics tool is not the initial implementation.
+            It is the years of maintenance that follow. Users will find edge cases you didn't test.
+            The original tool will update and require re-validation. New sequencing chemistries
+            will produce data your test suite doesn't cover. PRs will need reviewing. Someone needs
+            to be responsible for all of this, and that needs to be visible before you ship.
+          </p>
+          <p>
+            Put governance in place before release: a CONTRIBUTING.md, a CODE_OF_CONDUCT.md, a
+            defined release process with versioned tags and changelogs, and a commitment to
+            acknowledge issues within a reasonable time. These are signals to potential contributors
+            and users that the project takes itself seriously.
+          </p>
+          <p>
+            Think about succession. Who takes over if you move on? Is the project structured so
+            others could realistically maintain it without you? An unmaintained rewrite sitting in
+            a broken state is worse than no rewrite. It gives users false confidence, blocks better
+            alternatives, and poisons the well for future rewrite efforts in the same space.
+          </p>
+        </div>
+        <GovernanceChecklist slot="visual" />
+      </Principle>
+
+      <Principle id="preserve-compatibility" number="4.2" title="Preserve compatibility">
+        <div slot="description">
+          <p>
+            The strongest argument for adopting a rewrite is zero migration cost. If your rewrite
+            produces identical output files, same names, same formats, same column headers, same
+            summary statistics, then swapping it into an existing pipeline is a one-line config
+            change. Every MultiQC module that parses the original's output will parse yours.
+            Every downstream script that reads the original's results will read yours.
+          </p>
+          <p>
+            This reversibility is what makes adoption risk-free, and risk-free adoption is what
+            makes widespread adoption possible. Researchers running production pipelines cannot
+            re-validate their entire analysis history every time they update a tool. But they
+            will try a rewrite they can test on one run, confirm matches, and roll back if needed.
+          </p>
+          <p>
+            Compatibility extends to the CLI. If the original takes <code>--threads N</code>,
+            yours should too. If it takes input as a positional argument, do not require a flag.
+            Users have wrapper scripts, Nextflow modules, Snakemake rules, and documented
+            procedures tied to specific interfaces. Breaking any of these, even in small ways,
+            imposes real costs on real people.
+          </p>
+        </div>
+        <HotSwapDiagram slot="visual" />
+      </Principle>
+
+      <Principle id="license" number="4.3" title="Respect upstream licenses">
+        <div slot="description">
+          <p>
+            Open-source licenses are legal agreements. Before writing a line of code, read the
+            license of the original tool and every library or algorithm it depends on. Permissive
+            licenses (MIT, Apache-2.0, BSD) let you release your rewrite under any license you
+            choose. Copyleft licenses (GPL and variants) require compatible licensing on any
+            software derived from them.
+          </p>
+          <p>
+            Whether a reimplementation constitutes a "derived work" legally depends on
+            jurisdiction and the specific facts, and this is not legal advice. What we can say
+            is: erring on the side of caution and choosing a license at least as permissive as
+            the most restrictive original is both legally safer and better for the community.
+            When in doubt, consult a lawyer or choose a more restrictive license.
+          </p>
+          <p>
+            Check every license before you start, not after. Retrofitting licensing constraints
+            onto a project that already has contributors, pipeline integrations, and public
+            visibility is painful. License archaeology is far easier before you ship.
+          </p>
+        </div>
+        <LicenseCheck slot="visual" />
+      </Principle>
+
+      <Principle id="open-source" number="4.4" title="Release as open source">
+        <div slot="description">
+          <p>
+            The tools you are rewriting were built by the open-source scientific community,
+            validated against publicly funded datasets, and distributed freely so science could
+            move faster. A rewrite that takes all of that as its foundation and releases as
+            closed source is extracting value from a commons without contributing back. It also
+            makes the rewrite unavailable to the labs that need it most and cannot afford
+            commercial licensing.
+          </p>
+          <p>
+            Open source is also practically better for adoption. Researchers need to inspect
+            source code to understand what a tool does to their data. They need to run it on
+            HPC clusters where commercial software is often unavailable. They need to be able
+            to fork it if the project is abandoned. A permissive license removes barriers at
+            every stage.
+          </p>
+          <p>
+            Choose MIT, Apache-2.0, or BSD unless the original tool's licensing requires
+            otherwise. Copyleft licenses like GPL, while open source, create friction for
+            pipelines mixing tools with different licenses. Lowering adoption barriers is the
+            point.
+          </p>
+        </div>
+        <OpenSourceFlywheel slot="visual" />
+      </Principle>
+
+      <Principle id="contribute-upstream" number="4.5" title="Contribute upstream responsibly">
+        <div slot="description">
+          <p>
+            Building a rewrite puts you in an unusual position: you have studied the original
+            tool closely, tested it on diverse data, and found its edge cases. If you find a
+            genuine bug you can reproduce in the original tool with a minimal, clean test case,
+            report it. That is a real contribution to the scientific community.
+          </p>
+          <p>
+            But be careful before filing bug reports. AI coding agents are fluent and confident,
+            and they are wrong in subtle ways that are easy to miss. An agent may convince you
+            the original tool is handling a particular input incorrectly when what is actually
+            happening is that your reimplementation is wrong, or the input is malformed, or you
+            are misreading the spec. Before reporting upstream, verify manually with the original
+            tool on clean, well-understood data, not with an AI-generated test case.
+          </p>
+          <p>
+            Do not automate bug reports. Open-source maintainers are often volunteers. A
+            firehose of machine-generated issues, even polite ones, burns out people whose
+            continued work benefits everyone. The bar for filing upstream should be: you are
+            confident this is a real bug, you can reproduce it cleanly, and you have considered
+            whether you can also contribute a fix.
+          </p>
+        </div>
+        <BugReportDecisionTree slot="visual" />
+      </Principle>
+    </Section>
+
+    <div class="closing">
+      <div class="container">
         <div class="closing-line"></div>
-        <p class="closing-text">
-          The wave is coming.<br />
-          Let us make sure it lifts all boats.
+        <p class="closing-text">These principles are a starting point, not a checklist.</p>
+        <p class="closing-body">
+          Every rewrite is different. Some principles will be easier to honour than others in
+          your context. What matters is that the intent behind each one shapes the decisions you
+          make when the easy path and the right path diverge. The wave is coming. Let's make
+          sure it lifts all boats.
         </p>
         <p class="closing-attribution">
-          {/* Read the paper: <em>The Bioinformatics Rewrite</em> (preprint coming soon)<br /> */}
-          Plain text version: <a href="/manifesto.md"><code>rewrites.bio/manifesto.md</code></a>
+          Discuss and contribute at <a href="https://github.com/seqeralabs/rewrites.bio">github.com/seqeralabs/rewrites.bio</a>
         </p>
       </div>
-    </section>
+    </div>
   </main>
 
   <Footer />
@@ -67,36 +540,66 @@ const callout = await marked.parseInline(manifesto.callout.trim());
     padding-top: var(--space-xl);
   }
 
+  /* ── Preamble ── */
   .preamble {
     padding-bottom: var(--space-2xl);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    margin-bottom: var(--space-2xl);
+    margin-bottom: var(--space-xl);
     scroll-margin-top: 72px;
   }
 
+  .preamble-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
+  .preamble-visual {
+    position: sticky;
+    top: calc(52px + var(--space-lg));
+  }
+
+  @media (max-width: 900px) {
+    .preamble-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .preamble-visual {
+      position: static;
+    }
+  }
+
   .preamble p {
-    font-size: 1.15rem;
-    line-height: 1.75;
+    font-size: 1.1rem;
+    line-height: 1.8;
     color: var(--text-secondary);
-    margin-bottom: var(--space-lg);
-    max-width: 65ch;
+    margin-bottom: var(--space-md);
   }
 
   .preamble-callout {
     font-family: var(--font-mono);
-    font-size: 1.05rem !important;
-    color: var(--rust-400) !important;
-    border-left: 2px solid var(--rust-600);
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--rust-400);
+    border-left: 3px solid var(--rust-600);
     padding-left: var(--space-lg);
-    margin: var(--space-xl) 0 !important;
-    line-height: 1.8 !important;
+    margin: var(--space-xl) 0;
+    font-style: normal;
   }
 
-  .preamble-callout em {
-    font-style: italic;
+  .preamble-callout strong {
     color: var(--rust-300);
   }
 
+  .preamble-closing {
+    font-family: var(--font-mono);
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    color: var(--text-primary);
+    margin-top: var(--space-xl);
+  }
+
+  /* ── Closing ── */
   .closing {
     padding: var(--space-2xl) 0;
     text-align: center;
@@ -111,30 +614,26 @@ const callout = await marked.parseInline(manifesto.callout.trim());
 
   .closing-text {
     font-family: var(--font-mono);
-    font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
     color: var(--text-primary);
-    line-height: 1.6;
-    margin-bottom: var(--space-xl);
+    margin-bottom: var(--space-md);
   }
 
-  .closing-text a {
-    color: inherit;
-  }
-  .closing-text a:hover {
-    color: var(--rust-400);
+  .closing-body {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+    max-width: 560px;
+    margin: 0 auto var(--space-lg);
   }
 
   .closing-attribution {
-    font-size: 0.9rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
     color: var(--text-tertiary);
-    line-height: 1.8;
   }
 
   .closing-attribution a {
-    color: inherit;
-  }
-  .closing-attribution a:hover {
     color: var(--rust-400);
   }
-
 </style>

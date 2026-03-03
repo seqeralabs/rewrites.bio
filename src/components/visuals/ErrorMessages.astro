@@ -1,0 +1,184 @@
+---
+// 3.3 — Build for users: error message comparison
+---
+
+<div class="errors-wrap">
+  <div class="errors-label">ERROR MESSAGE COMPARISON</div>
+  <div class="errors-grid">
+    <div class="error-panel error-bad">
+      <div class="ep-head">
+        <span class="ep-badge ep-badge-bad">Bad</span>
+        <span class="ep-tool">mytool sort</span>
+      </div>
+      <div class="ep-terminal">
+        <div class="ep-output">[bam_sort_core] merging from 0 files and 4 in-memory arrays...</div>
+        <div class="ep-output">Segmentation fault (core dumped)</div>
+        <div class="ep-exit">exit code: 139</div>
+      </div>
+      <div class="ep-problems">
+        <div class="ep-problem">No indication of what went wrong</div>
+        <div class="ep-problem">No actionable next step</div>
+        <div class="ep-problem">User must search for "exit code 139"</div>
+      </div>
+    </div>
+
+    <div class="error-panel error-good">
+      <div class="ep-head">
+        <span class="ep-badge ep-badge-good">Good</span>
+        <span class="ep-tool">mytool-rs sort</span>
+      </div>
+      <div class="ep-terminal">
+        <div class="ep-output ep-output-good">Error: Input file index not found.</div>
+        <div class="ep-output ep-output-dim">  File: /data/sample.bam</div>
+        <div class="ep-output ep-output-dim">  Expected: /data/sample.bam.bai</div>
+        <div class="ep-output ep-output-hint">Hint: Run 'samtools index /data/sample.bam' first,</div>
+        <div class="ep-output ep-output-hint">      or use --no-index to skip (slower).</div>
+      </div>
+      <div class="ep-goods">
+        <div class="ep-good">Explains what is missing and where</div>
+        <div class="ep-good">Provides the exact command to fix it</div>
+        <div class="ep-good">Offers an alternative path</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .errors-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-lg);
+  }
+
+  .errors-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--space-md);
+  }
+
+  .errors-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-md);
+  }
+
+  @media (max-width: 640px) {
+    .errors-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .error-panel {
+    background: var(--bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .error-bad  { border-color: rgba(248, 113, 113, 0.2); }
+  .error-good { border-color: rgba(74, 222, 128, 0.2); }
+
+  .ep-head {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .ep-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 3px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .ep-badge-bad {
+    background: rgba(248, 113, 113, 0.15);
+    color: #f87171;
+    border: 1px solid rgba(248, 113, 113, 0.3);
+  }
+
+  .ep-badge-good {
+    background: rgba(74, 222, 128, 0.1);
+    color: #4ade80;
+    border: 1px solid rgba(74, 222, 128, 0.25);
+  }
+
+  .ep-tool {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+  }
+
+  .ep-terminal {
+    padding: var(--space-sm) var(--space-md);
+    background: #0d0d0d;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-height: 80px;
+  }
+
+  .ep-output {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+
+  .ep-output-good { color: #f87171; }
+  .ep-output-dim  { color: var(--text-tertiary); }
+  .ep-output-hint { color: rgba(74, 222, 128, 0.8); }
+
+  .ep-exit {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: rgba(248, 113, 113, 0.6);
+    margin-top: 4px;
+  }
+
+  .ep-problems,
+  .ep-goods {
+    padding: var(--space-sm) var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .ep-problem,
+  .ep-good {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    padding-left: 1em;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .ep-problem {
+    color: rgba(248, 113, 113, 0.7);
+  }
+
+  .ep-problem::before {
+    content: '✗';
+    position: absolute;
+    left: 0;
+  }
+
+  .ep-good {
+    color: rgba(74, 222, 128, 0.8);
+  }
+
+  .ep-good::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+  }
+</style>

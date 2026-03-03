@@ -1,0 +1,168 @@
+---
+// Preamble: scale/cost — horizontal bar chart for right-column layout
+// Each group: label + two bars (legacy vs rewrite) side by side vertically
+---
+
+<div class="chart-wrap">
+  <div class="chart-title">CPU-hours consumed per year (illustrative)</div>
+
+  <div class="chart-groups">
+
+    <div class="group">
+      <div class="group-label">1k runs/yr</div>
+      <div class="group-bars">
+        <div class="bar-row">
+          <div class="bar-name">Legacy</div>
+          <div class="bar-track"><div class="bar bar-old" style="width: 15%"></div></div>
+          <span class="bar-val">18h</span>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">Rewrite</div>
+          <div class="bar-track"><div class="bar bar-new" style="width: 2.5%"></div></div>
+          <span class="bar-val">0.8h</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-label">10k runs/yr</div>
+      <div class="group-bars">
+        <div class="bar-row">
+          <div class="bar-name">Legacy</div>
+          <div class="bar-track"><div class="bar bar-old" style="width: 45%"></div></div>
+          <span class="bar-val">52h</span>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">Rewrite</div>
+          <div class="bar-track"><div class="bar bar-new" style="width: 7%"></div></div>
+          <span class="bar-val">8h</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="group">
+      <div class="group-label">100k runs/yr</div>
+      <div class="group-bars">
+        <div class="bar-row">
+          <div class="bar-name">Legacy</div>
+          <div class="bar-track"><div class="bar bar-old" style="width: 95%"></div></div>
+          <span class="bar-val">520h</span>
+        </div>
+        <div class="bar-row">
+          <div class="bar-name">Rewrite</div>
+          <div class="bar-track"><div class="bar bar-new" style="width: 13%"></div></div>
+          <span class="bar-val">80h</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="chart-annotation">
+    At scale, the gap compounds to <strong>hundreds of tonnes of CO₂e per year</strong> for widely-used pipelines.
+  </div>
+</div>
+
+<style>
+  .chart-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-lg);
+  }
+
+  .chart-title {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-lg);
+  }
+
+  .chart-groups {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .group-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+  }
+
+  .group-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .bar-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .bar-name {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    width: 46px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .bar-track {
+    flex: 1;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 2px;
+    position: relative;
+  }
+
+  .bar {
+    height: 100%;
+    border-radius: 2px;
+    min-width: 3px;
+  }
+
+  .bar-old {
+    background: rgba(249, 115, 22, 0.5);
+    border: 1px solid rgba(249, 115, 22, 0.7);
+  }
+
+  .bar-new {
+    background: rgba(74, 222, 128, 0.3);
+    border: 1px solid rgba(74, 222, 128, 0.6);
+  }
+
+  .bar-val {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    width: 32px;
+    flex-shrink: 0;
+    text-align: left;
+  }
+
+  .chart-annotation {
+    margin-top: var(--space-lg);
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: var(--space-sm);
+    line-height: 1.6;
+  }
+
+  .chart-annotation strong {
+    color: var(--rust-400);
+  }
+</style>

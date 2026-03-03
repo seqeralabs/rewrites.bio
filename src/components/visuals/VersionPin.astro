@@ -1,0 +1,138 @@
+---
+// 3.5 — Pin versions and document: lock file snippet
+// Uses obviously generic tool names to avoid implying real version compatibility claims
+---
+
+<div class="pin-wrap">
+  <div class="pin-label">VALIDATION.md — VERSION PINNING</div>
+  <div class="pin-file">
+    <div class="pf-header">
+      <div class="pf-filename">versions.lock</div>
+    </div>
+    <div class="pf-body">
+      <div class="pf-comment"># Tools emulated and validated against</div>
+      <div class="pf-blank"></div>
+      <div class="pf-section">[tools]</div>
+      <div class="pf-entry">
+        <span class="pf-key">tool-a</span>
+        <span class="pf-eq"> = </span>
+        <span class="pf-val">"1.0.0"</span>
+        <span class="pf-comment-inline">  # validated: 2024-11-03</span>
+      </div>
+      <div class="pf-entry">
+        <span class="pf-key">tool-b</span>
+        <span class="pf-eq"> = </span>
+        <span class="pf-val">"2.3.1"</span>
+        <span class="pf-comment-inline">  # validated: 2024-11-07</span>
+      </div>
+      <div class="pf-entry">
+        <span class="pf-key">tool-c</span>
+        <span class="pf-eq"> = </span>
+        <span class="pf-val">"0.9.4"</span>
+        <span class="pf-comment-inline">  # validated: 2024-11-09</span>
+      </div>
+      <div class="pf-blank"></div>
+      <div class="pf-section">[validation]</div>
+      <div class="pf-entry">
+        <span class="pf-key">methodology</span>
+        <span class="pf-eq"> = </span>
+        <span class="pf-val">"VALIDATION.md"</span>
+      </div>
+      <div class="pf-entry">
+        <span class="pf-key">test_data</span>
+        <span class="pf-eq"> = </span>
+        <span class="pf-val">"benchmarks/data/README.md"</span>
+      </div>
+      <div class="pf-entry">
+        <span class="pf-key">reference_outputs</span>
+        <span class="pf-eq"> = </span>
+        <span class="pf-val">"benchmarks/expected/"</span>
+      </div>
+    </div>
+  </div>
+  <div class="pin-note">
+    Future maintainers — and your future self — need to know exactly what was validated against what. Ambiguity erodes trust.
+  </div>
+</div>
+
+<style>
+  .pin-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-lg);
+  }
+
+  .pin-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--space-md);
+  }
+
+  .pin-file {
+    background: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+  }
+
+  .pf-header {
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    padding: 6px var(--space-md);
+  }
+
+  .pf-filename {
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+  }
+
+  .pf-body {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    line-height: 1.7;
+  }
+
+  .pf-comment {
+    color: rgba(255, 255, 255, 0.25);
+  }
+
+  .pf-blank {
+    height: 6px;
+  }
+
+  .pf-section {
+    color: var(--rust-400);
+    font-weight: 600;
+    margin-top: 2px;
+  }
+
+  .pf-entry {
+    padding-left: var(--space-md);
+  }
+
+  .pf-key   { color: var(--text-secondary); }
+  .pf-eq    { color: var(--text-tertiary); }
+  .pf-val   { color: rgba(74, 222, 128, 0.85); }
+
+  .pf-comment-inline {
+    color: rgba(255, 255, 255, 0.2);
+  }
+
+  .pin-note {
+    font-size: 0.83rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: var(--space-sm);
+    line-height: 1.6;
+    font-style: italic;
+  }
+</style>

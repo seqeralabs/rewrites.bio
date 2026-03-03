@@ -1,0 +1,110 @@
+---
+// 4.4 — Release as open source: flywheel diagram
+---
+
+<div class="flywheel-wrap">
+  <div class="flywheel-label">THE OPEN-SOURCE FLYWHEEL</div>
+  <div class="flywheel-diagram">
+    <div class="fw-step fw-step-1">
+      <div class="fw-num">01</div>
+      <div class="fw-text">Community builds<br />original tool</div>
+    </div>
+    <div class="fw-connector fw-connector-right">→</div>
+    <div class="fw-step fw-step-2">
+      <div class="fw-num">02</div>
+      <div class="fw-text">AI-assisted<br />rewrite created</div>
+    </div>
+    <div class="fw-connector fw-connector-down">↓</div>
+    <div class="fw-step fw-step-4">
+      <div class="fw-num">04</div>
+      <div class="fw-text">Insights feed back<br />to original tool</div>
+    </div>
+    <div class="fw-connector fw-connector-left">←</div>
+    <div class="fw-step fw-step-3">
+      <div class="fw-num">03</div>
+      <div class="fw-text">Community benefits,<br />contributes, improves</div>
+    </div>
+  </div>
+  <div class="flywheel-note">
+    Closed-source rewrites break this loop. They extract value from the community without returning it.
+  </div>
+</div>
+
+<style>
+  .flywheel-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-lg);
+  }
+
+  .flywheel-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--space-md);
+  }
+
+  .flywheel-diagram {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    grid-template-rows: auto auto auto;
+    align-items: center;
+    justify-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .fw-step {
+    background: var(--bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: var(--space-sm) var(--space-md);
+    text-align: center;
+    width: 100%;
+  }
+
+  .fw-step-1 { grid-column: 1; grid-row: 1; border-color: rgba(249, 115, 22, 0.2); }
+  .fw-step-2 { grid-column: 3; grid-row: 1; border-color: rgba(74, 222, 128, 0.2); }
+  .fw-step-3 { grid-column: 3; grid-row: 3; border-color: rgba(74, 222, 128, 0.15); }
+  .fw-step-4 { grid-column: 1; grid-row: 3; border-color: rgba(249, 115, 22, 0.15); }
+
+  .fw-connector {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .fw-connector-right { grid-column: 2; grid-row: 1; }
+  .fw-connector-down  { grid-column: 3; grid-row: 2; }
+  .fw-connector-left  { grid-column: 2; grid-row: 3; }
+
+  .fw-num {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--rust-500);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .fw-text {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .flywheel-note {
+    font-size: 0.83rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: var(--space-sm);
+    line-height: 1.6;
+    font-style: italic;
+  }
+</style>

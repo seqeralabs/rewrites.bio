@@ -1,0 +1,142 @@
+---
+// 1.3 — Be transparent about AI: README provenance mockup
+---
+
+<div class="badge-wrap">
+  <div class="badge-label">README.md — PROVENANCE SECTION</div>
+  <div class="readme-block">
+    <div class="readme-heading">## AI Assistance Disclosure</div>
+    <div class="readme-body">
+      <p>This tool was written with the assistance of AI coding agents (Claude, GitHub Copilot).</p>
+      <p>Correctness is validated by comparing output against <code>mytool v1.0</code> on a suite of real sequencing datasets — not by manual code review alone. The AI generated the implementation; humans defined the validation criteria and verified the results.</p>
+    </div>
+    <div class="readme-badge-row">
+      <div class="readme-badge">
+        <span class="rb-icon">🤖</span>
+        <span class="rb-text">AI-assisted</span>
+      </div>
+      <div class="readme-badge rb-validated">
+        <span class="rb-icon">✓</span>
+        <span class="rb-text">Validated vs mytool v1.0</span>
+      </div>
+    </div>
+    <div class="readme-note">
+      <span class="note-key">Validation methodology:</span>
+      <a href="#" class="note-link">VALIDATION.md</a>
+      <span class="note-sep">·</span>
+      <span class="note-key">Test datasets:</span>
+      <a href="#" class="note-link">benchmarks/</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .badge-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-md) var(--space-lg);
+  }
+
+  .badge-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--space-sm);
+  }
+
+  .readme-block {
+    background: var(--bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: var(--space-md);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .readme-heading {
+    color: var(--rust-400);
+    font-weight: 600;
+  }
+
+  .readme-body {
+    color: var(--text-secondary);
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .readme-body p {
+    margin: 0;
+  }
+
+  .readme-body code {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--text-primary);
+  }
+
+  .readme-badge-row {
+    display: flex;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+
+  .readme-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  .rb-validated {
+    background: rgba(74, 222, 128, 0.08);
+    border-color: rgba(74, 222, 128, 0.2);
+    color: rgba(74, 222, 128, 0.9);
+  }
+
+  .rb-icon {
+    font-size: 0.9em;
+  }
+
+  .readme-note {
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: var(--space-sm);
+  }
+
+  .note-key {
+    color: var(--text-tertiary);
+  }
+
+  .note-link {
+    color: var(--rust-400);
+    text-decoration: none;
+  }
+
+  .note-sep {
+    color: rgba(255, 255, 255, 0.2);
+  }
+</style>

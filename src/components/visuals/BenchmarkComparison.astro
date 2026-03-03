@@ -1,0 +1,235 @@
+---
+// 3.2 — Benchmark rigorously
+// Real numbers from RustQC (https://rustqc.netlify.app)
+// Input: GM12878 REP1, 10 GB paired-end BAM, GRCh38, 10-core Apple M3 Max
+---
+
+<div class="bench-wrap">
+  <div class="bench-label">REAL BENCHMARK — RustQC · GM12878 REP1 · 10 GB BAM · 10-core Apple M3 Max</div>
+  <div class="terminal">
+    <div class="term-bar">
+      <div class="term-dots">
+        <span class="dot dot-red"></span>
+        <span class="dot dot-yellow"></span>
+        <span class="dot dot-green"></span>
+      </div>
+      <div class="term-title">benchmark.sh</div>
+    </div>
+    <div class="term-body">
+      <div class="term-section-head"># Traditional workflow — 15+ separate tool invocations, each reading BAM</div>
+      <div class="term-row">
+        <span class="term-tool">featureCounts</span>
+        <span class="term-spacer"></span>
+        <span class="term-stat">time: <span class="stat-val stat-old">3m 39s</span></span>
+      </div>
+      <div class="term-row">
+        <span class="term-tool">dupRadar</span>
+        <span class="term-spacer"></span>
+        <span class="term-stat">time: <span class="stat-val stat-old">27m 21s</span></span>
+      </div>
+      <div class="term-row">
+        <span class="term-tool">RSeQC read_duplication</span>
+        <span class="term-spacer"></span>
+        <span class="term-stat">time: <span class="stat-val stat-old">29m 43s</span></span>
+      </div>
+      <div class="term-row">
+        <span class="term-tool">RSeQC bam_stat</span>
+        <span class="term-spacer"></span>
+        <span class="term-stat">time: <span class="stat-val stat-old">6m 07s</span></span>
+      </div>
+      <div class="term-row">
+        <span class="term-tool">+ 11 more tools …</span>
+        <span class="term-spacer"></span>
+        <span class="term-stat">time: <span class="stat-val stat-old">~58m</span></span>
+      </div>
+      <div class="term-row term-row-total">
+        <span class="term-tool">total</span>
+        <span class="term-spacer"></span>
+        <span class="term-stat">time: <span class="stat-val stat-old">~2h 05m</span></span>
+      </div>
+
+      <div class="term-divider"></div>
+
+      <div class="term-section-head"># RustQC — single pass over the BAM</div>
+      <div class="term-row">
+        <span class="term-tool">rustqc</span>
+        <span class="term-spacer"></span>
+        <span class="term-stat">time: <span class="stat-val stat-new">~5m</span></span>
+      </div>
+      <div class="term-row term-row-total">
+        <span class="term-tool">total</span>
+        <span class="term-spacer"></span>
+        <span class="term-stat">time: <span class="stat-val stat-new">~5m</span></span>
+      </div>
+
+      <div class="term-divider"></div>
+
+      <div class="term-result">
+        <span class="result-label">speedup</span>
+        <span class="result-val">~25×</span>
+        <span class="result-label">output equivalence</span>
+        <span class="result-match">✓ 820,118 values, zero mismatches</span>
+      </div>
+    </div>
+  </div>
+  <div class="bench-source">
+    Source: <a href="https://rustqc.netlify.app/benchmarks/combined/" target="_blank" rel="noopener">rustqc.netlify.app/benchmarks/combined/</a>
+  </div>
+</div>
+
+<style>
+  .bench-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-lg);
+  }
+
+  .bench-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-md);
+    line-height: 1.5;
+  }
+
+  .terminal {
+    background: #0d0d0d;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: var(--space-sm);
+  }
+
+  .term-bar {
+    background: rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 8px var(--space-md);
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .term-dots {
+    display: flex;
+    gap: 6px;
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+
+  .dot-red    { background: rgba(255, 95, 86, 0.7); }
+  .dot-yellow { background: rgba(255, 189, 46, 0.7); }
+  .dot-green  { background: rgba(39, 201, 63, 0.7); }
+
+  .term-title {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+  }
+
+  .term-body {
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .term-section-head {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    margin-top: 4px;
+    margin-bottom: 2px;
+    line-height: 1.5;
+  }
+
+  .term-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    flex-wrap: wrap;
+  }
+
+  .term-row-total {
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 4px;
+    margin-top: 2px;
+  }
+
+  .term-tool {
+    color: var(--text-secondary);
+    min-width: 200px;
+  }
+
+  .term-spacer {
+    flex: 1;
+    min-width: 8px;
+  }
+
+  .term-stat {
+    color: var(--text-tertiary);
+    font-size: 0.78rem;
+    white-space: nowrap;
+  }
+
+  .stat-val {
+    font-weight: 600;
+  }
+
+  .stat-old { color: rgba(248, 113, 113, 0.9); }
+  .stat-new { color: rgba(74, 222, 128, 0.9); }
+
+  .term-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+    margin: var(--space-xs) 0;
+  }
+
+  .term-result {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    flex-wrap: wrap;
+    padding-top: 4px;
+  }
+
+  .result-label {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+  }
+
+  .result-val {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: rgba(74, 222, 128, 0.9);
+    margin-right: var(--space-sm);
+  }
+
+  .result-match {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: rgba(74, 222, 128, 0.9);
+    font-weight: 600;
+  }
+
+  .bench-source {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-tertiary);
+    margin-top: var(--space-xs);
+  }
+
+  .bench-source a {
+    color: var(--rust-400);
+    font-family: var(--font-mono);
+  }
+</style>

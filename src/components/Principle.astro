@@ -3,10 +3,9 @@ interface Props {
   id: string;
   number: string;
   title: string;
-  description: string;
 }
 
-const { id, number, title, description } = Astro.props;
+const { id, number, title } = Astro.props;
 ---
 
 <article class="principle reveal" id={id}>
@@ -17,7 +16,14 @@ const { id, number, title, description } = Astro.props;
     <a class="principle-heading" href={`#${id}`}>
       <h3 class="principle-title">{title}</h3><span class="anchor-link">#</span>
     </a>
-    <p class="principle-desc" set:html={description} />
+    <div class="principle-body">
+      <div class="principle-desc">
+        <slot name="description" />
+      </div>
+      <div class="principle-visual">
+        <slot name="visual" />
+      </div>
+    </div>
   </div>
 </article>
 
@@ -25,8 +31,8 @@ const { id, number, title, description } = Astro.props;
   .principle {
     display: flex;
     gap: var(--space-md);
-    padding: var(--space-lg) 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    padding: var(--space-xl) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     scroll-margin-top: 80px;
   }
 
@@ -64,6 +70,7 @@ const { id, number, title, description } = Astro.props;
     gap: 0.4em;
     text-decoration: none;
     color: inherit;
+    margin-bottom: var(--space-md);
   }
 
   .principle-heading:hover .anchor-link {
@@ -73,17 +80,59 @@ const { id, number, title, description } = Astro.props;
 
   .principle-title {
     font-family: var(--font-mono);
-    font-size: 1.05rem;
+    font-size: 1.15rem;
     font-weight: 600;
     color: var(--text-primary);
     line-height: 1.4;
   }
 
+  /* Two-column layout: text left, visual right */
+  .principle-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+    align-items: start;
+  }
+
   .principle-desc {
-    font-size: 0.95rem;
-    line-height: 1.7;
+    font-size: 1rem;
+    line-height: 1.8;
     color: var(--text-secondary);
-    margin-top: var(--space-xs);
+  }
+
+  .principle-desc :global(p) {
+    margin-bottom: var(--space-sm);
+  }
+
+  .principle-desc :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .principle-desc :global(a) {
+    color: var(--rust-400);
+  }
+
+  .principle-desc :global(strong) {
+    color: var(--text-primary);
+    font-weight: 600;
+  }
+
+  .principle-desc :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 1px 5px;
+    border-radius: 3px;
+    color: var(--text-primary);
+  }
+
+  .principle-visual:empty {
+    display: none;
+  }
+
+  /* When there is no visual, let text span full width */
+  .principle-body:has(.principle-visual:empty) {
+    grid-template-columns: 1fr;
   }
 
   .anchor-link {
@@ -92,6 +141,14 @@ const { id, number, title, description } = Astro.props;
     opacity: 0.4;
     transition: opacity 0.15s ease, color 0.15s ease;
     font-size: 0.85em;
+  }
+
+  /* Collapse to single column on narrower screens */
+  @media (max-width: 900px) {
+    .principle-body {
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
   }
 
   @media (max-width: 480px) {

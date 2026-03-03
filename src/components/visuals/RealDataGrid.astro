@@ -1,0 +1,107 @@
+---
+// 3.1 — Test with real data: data type coverage grid
+---
+
+<div class="datagrid-wrap">
+  <div class="datagrid-label">TEST DATASET COVERAGE</div>
+  <div class="datagrid">
+    <div class="data-tile tile-ok">
+      <div class="tile-icon">🧬</div>
+      <div class="tile-name">Paired-end<br />short-read</div>
+    </div>
+    <div class="data-tile tile-ok">
+      <div class="tile-icon">🔬</div>
+      <div class="tile-name">Single-end<br />short-read</div>
+    </div>
+    <div class="data-tile tile-ok">
+      <div class="tile-icon">📏</div>
+      <div class="tile-name">Long-read<br />(ONT / PacBio)</div>
+    </div>
+    <div class="data-tile tile-ok">
+      <div class="tile-icon">🗜️</div>
+      <div class="tile-name">Gzipped<br />FASTQ</div>
+    </div>
+    <div class="data-tile tile-ok">
+      <div class="tile-icon">📊</div>
+      <div class="tile-name">Large files<br />&gt;100 GB</div>
+    </div>
+    <div class="data-tile tile-ok">
+      <div class="tile-icon">🔹</div>
+      <div class="tile-name">Small / sparse<br />files</div>
+    </div>
+    <div class="data-tile tile-ok">
+      <div class="tile-icon">⚠️</div>
+      <div class="tile-name">Edge cases<br />&amp; malformed</div>
+    </div>
+    <div class="data-tile tile-ok">
+      <div class="tile-icon">🏥</div>
+      <div class="tile-name">Multi-sample<br />cohorts</div>
+    </div>
+  </div>
+  <div class="datagrid-note">
+    Synthetic data cannot replicate the quirks of real sequencers. Always test on real data from real experiments.
+  </div>
+</div>
+
+<style>
+  .datagrid-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-lg);
+  }
+
+  .datagrid-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--space-md);
+  }
+
+  .datagrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: var(--space-sm);
+    margin-bottom: var(--space-md);
+  }
+
+  .data-tile {
+    background: var(--bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: var(--space-sm);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tile-ok {
+    border-color: rgba(74, 222, 128, 0.15);
+    background: rgba(74, 222, 128, 0.03);
+  }
+
+  .tile-icon {
+    font-size: 1.2rem;
+    line-height: 1;
+  }
+
+  .tile-name {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  .datagrid-note {
+    font-size: 0.83rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: var(--space-sm);
+    line-height: 1.6;
+    font-style: italic;
+  }
+</style>
