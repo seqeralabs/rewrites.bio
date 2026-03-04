@@ -1,12 +1,20 @@
+---
+import SeqeraLogo from "./visuals/seqera-logo.svg";
+---
+
 <footer class="site-footer">
   <div class="container">
     <p>
-      <a href="https://github.com/ewels/rewrites.bio">Source on GitHub</a>
+      <a href="https://github.com/seqeralabs/rewrites.bio">Source on GitHub</a>
       &middot;
-      Started by <a href="https://github.com/ewels">Phil Ewels</a>
+      Built with love by <a href="https://seqera.io">Seqera</a>
       &middot;
-      Contributions welcome
+      <a href="https://github.com/seqeralabs/rewrites.bio">Contributions welcome</a>
     </p>
+    <p>
+      <a href="https://seqera.io" class="seqera-link"><SeqeraLogo /></a>
+    </p>
+
   </div>
 </footer>
 
@@ -27,5 +35,22 @@
 
   .site-footer a:hover {
     color: var(--rust-400);
+  }
+
+  .seqera-link {
+    opacity: 0.2;
+    transition: opacity 0.2s ease;
+    display: inline-block;
+    margin-top: 1em;
+  }
+
+  .seqera-link:hover {
+    opacity: 0.6;
+  }
+
+  .seqera-link :global(svg) {
+    height: 4em;
+    width: auto;
+    vertical-align: middle;
   }
 </style>
