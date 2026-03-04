@@ -5,29 +5,35 @@
 <div class="loop-wrap">
   <div class="loop-label">THE VALIDATION LOOP</div>
   <div class="loop-diagram">
-    <div class="loop-step step-1">
-      <div class="step-num">01</div>
-      <div class="step-text">Pick one tool<br />or function</div>
+    <div class="loop-row-main">
+      <div class="loop-step">
+        <div class="step-num">01</div>
+        <div class="step-text">Pick one<br />function</div>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="step-num">02</div>
+        <div class="step-text">Write<br />rewrite</div>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="step-num">03</div>
+        <div class="step-text">Compare<br />outputs</div>
+      </div>
     </div>
-    <div class="loop-connector">→</div>
-    <div class="loop-step step-2">
-      <div class="step-num">02</div>
-      <div class="step-text">Write the<br />rewrite</div>
+    <div class="loop-row-outcomes">
+      <div class="loop-outcome loop-outcome-fail">
+        <span class="outcome-icon">✗</span>
+        <span class="outcome-text">Mismatch? Fix &amp; repeat step 2</span>
+      </div>
+      <div class="loop-outcome loop-outcome-pass">
+        <span class="outcome-icon">✓</span>
+        <span class="outcome-text">Match? Move to next function</span>
+      </div>
     </div>
-    <div class="loop-connector">→</div>
-    <div class="loop-step step-3">
-      <div class="step-num">03</div>
-      <div class="step-text">Compare output<br />vs original</div>
-    </div>
-    <div class="loop-connector loop-connector-back">↙ adjust &amp; repeat</div>
-    <div class="loop-step step-4 step-pass">
-      <div class="step-num">✓</div>
-      <div class="step-text">Outputs<br />match</div>
-    </div>
-    <div class="loop-connector loop-connector-next">→ next component</div>
   </div>
   <div class="loop-note">
-    Never move on until the current step is validated. Compound complexity will bury you.
+    Never move on until the current step validates. Compound errors will bury you.
   </div>
 </div>
 
@@ -50,10 +56,15 @@
 
   .loop-diagram {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: var(--space-xs);
+    flex-direction: column;
+    gap: var(--space-md);
     margin-bottom: var(--space-md);
+  }
+
+  .loop-row-main {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
   }
 
   .loop-step {
@@ -62,12 +73,7 @@
     border-radius: 6px;
     padding: var(--space-sm) var(--space-md);
     text-align: center;
-    min-width: 80px;
-  }
-
-  .step-pass {
-    border-color: rgba(74, 222, 128, 0.4);
-    background: rgba(74, 222, 128, 0.06);
+    flex: 1;
   }
 
   .step-num {
@@ -78,31 +84,67 @@
     margin-bottom: 4px;
   }
 
-  .step-pass .step-num {
-    color: rgba(74, 222, 128, 0.9);
-    font-size: 1rem;
-  }
-
   .step-text {
     font-family: var(--font-mono);
     font-size: 0.72rem;
     color: var(--text-secondary);
-    line-height: 1.5;
+    line-height: 1.4;
   }
 
-  .loop-connector {
+  .loop-arrow {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.85rem;
     color: var(--text-tertiary);
     flex-shrink: 0;
   }
 
-  .loop-connector-back {
-    color: rgba(248, 113, 113, 0.6);
+  .loop-row-outcomes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
   }
 
-  .loop-connector-next {
-    color: rgba(74, 222, 128, 0.6);
+  @media (max-width: 560px) {
+    .loop-row-outcomes {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .loop-outcome {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+  }
+
+  .loop-outcome-fail {
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.2);
+  }
+
+  .loop-outcome-fail .outcome-icon {
+    color: rgba(248, 113, 113, 0.9);
+  }
+
+  .loop-outcome-pass {
+    background: rgba(74, 222, 128, 0.08);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+  }
+
+  .loop-outcome-pass .outcome-icon {
+    color: rgba(74, 222, 128, 0.9);
+  }
+
+  .outcome-icon {
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .outcome-text {
+    color: var(--text-secondary);
   }
 
   .loop-note {
