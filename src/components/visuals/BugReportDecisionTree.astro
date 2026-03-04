@@ -32,9 +32,30 @@
                   <div class="tree-edge-label">Yes</div>
                   <div class="tree-edge-line"></div>
                 </div>
-                <div class="tree-node tree-node-ok">
-                  <div class="tn-icon">✓</div>
-                  <div class="tn-text">Report the bug — politely, with a minimal reproducible example</div>
+                <div class="tree-node">
+                  <div class="tn-text">Can you explain the bug in your own words - why it happens, not just that it happens?</div>
+                </div>
+                <div class="tree-branch">
+                  <div class="tree-branch-inner">
+                    <div class="tree-edge tree-edge-yes">
+                      <div class="tree-edge-label">Yes</div>
+                      <div class="tree-edge-line"></div>
+                    </div>
+                    <div class="tree-node tree-node-ok">
+                      <div class="tn-icon">✓</div>
+                      <div class="tn-text">Report it - politely, with a minimal reproducible example</div>
+                    </div>
+                  </div>
+                  <div class="tree-branch-inner">
+                    <div class="tree-edge tree-edge-no">
+                      <div class="tree-edge-label">No</div>
+                      <div class="tree-edge-line"></div>
+                    </div>
+                    <div class="tree-node tree-node-wait">
+                      <div class="tn-icon">⏸</div>
+                      <div class="tn-text">Understand it first. Don't parrot AI output to maintainers.</div>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="tree-branch-inner">
@@ -64,7 +85,7 @@
     </div>
   </div>
   <div class="tree-note">
-    Maintainers of open-source tools are often volunteers. A false bug report wastes their time and strains the relationship you want to build.
+    Maintainers of open-source tools are usually volunteers. A false bug report wastes their time and strains the relationship you want to build.
   </div>
 </div>
 

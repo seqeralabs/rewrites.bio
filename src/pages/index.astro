@@ -32,24 +32,18 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
           <div class="preamble-layout">
             <div class="preamble-text reveal-stagger">
               <p class="reveal">
-                Most bioinformatics tools were written for a world that no longer exists -when datasets
-                were smaller, compute was slower, and a single lab could run everything on a desktop.
-                Today, a typical RNA-seq study processes tens, hundreds, or even thousands of samples. The computational cost
-                of slow tools has compounded from a nuisance into a real scientific and environmental
-                problem.
+                Bioinformatics datasets have grown faster than the tools that process them. Slow
+                tools cost real money, real carbon, and real scientific progress.
               </p>
+              <ul class="preamble-list reveal">
+                <li><strong>Scale:</strong> A pipeline like nf-core/rnaseq runs on millions of samples per year. Ten wasted minutes per sample is decades of compute, annually.</li>
+                <li><strong>Environment:</strong> Wasted CPU-hours mean kilowatt-hours and CO2. Rewrites running 10-50× faster can save hundreds of tonnes of emissions.</li>
+                <li><strong>Science:</strong> Hours waiting for results are hours not spent testing hypotheses or exploring new directions.</li>
+              </ul>
               <p class="reveal">
-                The scale is concrete. A pipeline like nf-core/rnaseq is run by tens of thousands of researchers.
-                If one step wastes ten minutes of CPU per sample and the pipeline runs on a million
-                samples a year, that is nearly two decades of wasted compute, every year. Wasted
-                CPU-hours mean kilowatt-hours and kilograms of CO2. Rewrites that run 10–50× faster
-                can save hundreds of tonnes of CO2-equivalent annually.
-              </p>
-              <p class="reveal">
-                What has changed is the cost of solving this. AI coding assistants have shifted the
-                equation. A domain expert who understands a tool's inputs, outputs, and edge cases can
-                now produce a working reimplementation in days rather than years. Fast code is now
-                cheap. Scientific insight, validation, and trust are not.
+                What has changed is the cost of solving this. AI coding assistants let a domain
+                expert produce a working reimplementation in days rather than years. Fast code is
+                now cheap. Scientific insight, validation, and trust are not.
               </p>
             </div>
             <div class="preamble-visual reveal">
@@ -63,19 +57,17 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
           <div class="preamble-text-full reveal-stagger">
             <p class="reveal">
               Cheap code is not the same as correct code. AI-generated implementations are fluent
-              and fast, but they are also confidently wrong in ways that are easy to miss. A rewrite
-              that silently produces different results poisons every analysis built on it. A rewrite
-              that ignores the original authors' contributions damages the incentive structures that
-              produced the tool in the first place.
+              and fast, but confidently wrong in ways that are easy to miss.
             </p>
+            <ul class="preamble-list reveal">
+              <li><strong>Correctness:</strong> A rewrite that silently produces different results poisons every analysis built on it.</li>
+              <li><strong>Attribution:</strong> Ignoring the original authors' contributions damages the incentive structures that made the tool possible.</li>
+              <li><strong>Fragmentation:</strong> Competing rewrites with different behaviour leave users unsure which to trust. Abandoned projects block better alternatives.</li>
+            </ul>
             <p class="reveal">
-              Poorly executed rewrites also fragment the community. Three competing rewrites of the
-              same tool, each with slightly different behaviour and incomplete documentation, leave
-              users unsure which to trust. Abandoned projects litter the landscape, blocking better
-              alternatives and confusing newcomers. The existing tools are correct, and that
-              correctness is hard-won. Rewrites inherit a responsibility: to match outputs exactly,
-              to credit the work they stand on, and to be honest about what they have and have not
-              validated.
+              The existing tools are correct, and that correctness is hard-won. Rewrites inherit
+              a responsibility: to match outputs exactly, to credit the work they stand on, and
+              to be honest about what they have and have not validated.
             </p>
           </div>
         </div>
@@ -101,21 +93,20 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
         <div slot="description">
           <p>
             Behind every bioinformatics tool is years of work: algorithm design, edge-case hunting,
-            user feedback, and ongoing maintenance, often by people who were underpaid or
-            unpaid for it. A rewrite stands entirely on that foundation. Without the original tool's
-            existence, test cases, and accumulated community knowledge, a rewrite cannot even be
-            built correctly, let alone validated.
+            user feedback, and maintenance - often unpaid. A rewrite stands entirely on that
+            foundation. Without the original, a rewrite cannot even be validated.
           </p>
+          <p>Credit belongs everywhere:</p>
+          <ul>
+            <li><strong>README</strong> and documentation</li>
+            <li><strong>Papers</strong> and preprints</li>
+            <li><strong>Downstream reports</strong> using the rewrite's results</li>
+            <li><strong>Credits page</strong> with citations, DOIs, author lists, and versions</li>
+          </ul>
           <p>
-            Credit belongs everywhere: the README, the docs, any paper or preprint, and in
-            downstream reports that use results from the rewrite. A dedicated credits page with
-            full citations, DOIs, author lists, and version numbers is the minimum. When users
-            cite your rewrite, they should know to also cite the original.
-          </p>
-          <p>
-            This is how the scientific community tracks provenance and assigns credit to work that
-            enables everything downstream. Obscuring the lineage of a tool undermines the incentive
-            structures that motivated the original work.
+            When users cite your rewrite, they should know to cite the original too. This is how
+            science tracks provenance. Obscuring lineage undermines the incentives that produced
+            the original work.
           </p>
         </div>
         <CitationCard slot="visual" />
@@ -124,19 +115,16 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       <Principle id="emulate-exactly" number="1.2" title="Emulate exactly">
         <div slot="description">
           <p>
-            The goal is not to build a better version of the tool. It is to build a faster version
-            that produces the same results. A rewrite that changes outputs, even in ways that look
-            like improvements, is a different tool. It cannot inherit the original's validation
-            history. It cannot be quietly substituted into existing pipelines without forcing
-            users to re-validate their analyses.
+            The goal is not a better tool - it's a faster one that produces the same results.
+            A rewrite that changes outputs, even as "improvements", is a different tool. It
+            cannot inherit the original's validation or be substituted without re-validation.
           </p>
-          <p>
-            Emulate exactly means bit-identical or numerically-identical outputs wherever possible.
-            For deterministic tools, that means byte-for-byte matching files. For tools with
-            floating-point arithmetic, it means results within acceptable numerical precision,
-            where "acceptable" is defined by domain scientists, not implementation convenience.
-            Header formats, column ordering, file naming, and summary statistics all count.
-          </p>
+          <p>Emulate exactly means:</p>
+          <ul>
+            <li><strong>Deterministic tools:</strong> byte-for-byte identical output files</li>
+            <li><strong>Floating-point tools:</strong> results within acceptable numerical precision (defined by scientists, not convenience)</li>
+            <li><strong>Everything counts:</strong> header formats, column ordering, file naming, summary statistics</li>
+          </ul>
         </div>
         <OutputDiff slot="visual" />
       </Principle>
@@ -144,23 +132,19 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       <Principle id="transparent-ai" number="1.3" title="Be transparent about AI">
         <div slot="description">
           <p>
-            When an AI coding agent writes the implementation, that is a material fact about the
-            software. It affects how the code should be trusted, reviewed, and audited. It does
-            not mean the software is untrustworthy; correctness is determined by output comparison,
-            not by who or what wrote the code. But users and contributors deserve to know how it
-            was built.
+            When an AI writes the implementation, that is a material fact. It does not mean the
+            software is untrustworthy - correctness is determined by output comparison, not by
+            who wrote the code. But users deserve to know how it was built.
           </p>
+          <p>Document clearly in the README and any paper:</p>
+          <ul>
+            <li><strong>AI tools:</strong> which were used and what role they played</li>
+            <li><strong>Verification:</strong> how correctness was validated (e.g., "against mytool v1.0 on real sequencing data")</li>
+            <li><strong>Gaps:</strong> where validation coverage is thin or incomplete</li>
+          </ul>
           <p>
-            Document clearly in the README and any accompanying paper: which AI tools were used,
-            what role they played, and how correctness was verified. "Validated by output
-            comparison against mytool v1.0 on a suite of real sequencing datasets" is far more
-            useful than leaving provenance implicit. Do not obscure AI involvement to make the
-            project seem more traditionally engineered than it is.
-          </p>
-          <p>
-            Output comparison catches what you tested. It does not catch edge cases you have not
-            encountered yet. Being transparent also means committing to ongoing validation as new
-            datasets and use cases emerge, and being honest about where coverage is thin.
+            Output comparison catches what you tested, not edge cases you haven't encountered.
+            Being transparent means committing to ongoing validation as new use cases emerge.
           </p>
         </div>
         <AIBadge slot="visual" />
@@ -176,23 +160,19 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       <Principle id="think-big" number="2.1" title="Think big">
         <div slot="description">
           <p>
-            Some of the biggest performance wins come not just from faster implementations,
-            but from rethinking the architecture. Modern bioinformatics
-            pipelines chain many discrete tools, each reading from disk, doing work, and writing
-            back to disk. Every one of those I/O operations is an opportunity to waste time.
-            A straight port to a faster language captures only a fraction of what is available.
+            The biggest performance wins come from rethinking architecture, not just porting code.
+            Modern pipelines chain discrete tools, each doing I/O. A straight port to a faster
+            language captures only a fraction of what is available.
           </p>
+          <p>Questions to ask:</p>
+          <ul>
+            <li><strong>Upstream:</strong> what preprocessing does this tool assume? Can that be folded in?</li>
+            <li><strong>Downstream:</strong> what immediately consumes the output? Can that be folded in too?</li>
+            <li><strong>Intermediate files:</strong> can steps share data in memory instead of writing gigabytes of temporary BAM files?</li>
+          </ul>
           <p>
-            A single integrated process can avoid materialising intermediate files entirely. Trimming, alignment, and quantification can share data in memory rather than
-            writing gigabytes of temporary BAM files between steps. Eliminating redundant I/O is
-            often worth more than any algorithmic improvement. Ask: what preprocessing does this
-            tool assume has already happened? Can that be folded in? What immediately consumes
-            this tool's output? Can that be folded in too?
-          </p>
-          <p>
-            The goal is not to build an unvalidatable monolith. But it is worth thinking beyond
-            one-to-one replacement and considering what a pipeline designed from scratch, with what
-            we now know about where the bottlenecks are, would actually look like.
+            The goal is not an unvalidatable monolith. But consider what a pipeline designed from
+            scratch - knowing where the bottlenecks are - would actually look like.
           </p>
         </div>
         <PipelineIO slot="visual" />
@@ -203,22 +183,16 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
           <p>
             Thinking big about architecture does not mean building big in one go. The implementation
             strategy should be the opposite: small, tight iteration loops, each step validated
-            against the original before moving on. Start with the simplest function that produces
-            testable output. Validate it. Then extend.
+            against the original before moving on.
           </p>
+          <p>Why this matters:</p>
+          <ul>
+            <li><strong>Localised debugging:</strong> when something is wrong, you already know where to look</li>
+            <li><strong>Continuous validation:</strong> AI agents are unreliable for correctness - validate every step</li>
+            <li><strong>Productive iteration:</strong> "output doesn't match on paired-end data" is actionable; "implement the whole pipeline" is not</li>
+          </ul>
           <p>
-            When you implement several components before validating any of them, a discrepancy in
-            the final output could come from anywhere. You have created a debugging problem that
-            requires mentally decomposing what you just built. Work small, and when something is
-            wrong, you already know where to look.
-          </p>
-          <p>
-            AI coding agents are good at generating plausible implementations quickly. They are
-            unreliable for correctness, especially in domain-specific numerical behaviour. The
-            right response is not to distrust them but to validate continuously. An agent told
-            "this step's output doesn't match on paired-end data with adapter sequences" can
-            iterate productively. An agent asked to implement an entire pipeline in one prompt
-            is much harder to correct.
+            Start with the simplest function that produces testable output. Validate it. Then extend.
           </p>
         </div>
         <IterationLoop slot="visual" />
@@ -235,22 +209,18 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
         <div slot="description">
           <p>
             Synthetic data is useful for quick iteration but insufficient for validation. Real
-            sequencing data has instrument-specific error patterns, adapter contamination, and
-            chemistry-dependent quality profiles that generators don't replicate. Test on multiple
-            organisms, platforms, and library preps. Test edge cases: empty files, single-read
-            files, very large files.
+            sequencing data has error patterns and quality profiles that generators don't replicate.
           </p>
+          <p>Test comprehensively:</p>
+          <ul>
+            <li><strong>Diversity:</strong> multiple organisms, platforms, and library preps</li>
+            <li><strong>Edge cases:</strong> empty files, single-read files, very large files</li>
+            <li><strong>Benchmarks:</strong> document hardware, dataset, exact commands, and output comparison</li>
+          </ul>
           <p>
-            Performance claims require the same rigour. "10× faster" is marketing unless it comes
-            with reproducible benchmarks: the hardware, the dataset, exact command lines, and
-            output comparison. Commit reference inputs and expected outputs to the repository.
-            Anyone who clones the repo should be able to reproduce your numbers.
-          </p>
-          <p>
-            Benchmark honestly. If your rewrite is faster on some data types but not others, say
-            so. Numbers without context mislead; numbers without reproducibility are anecdotes.
-            Every passing test is a commitment -maintain them, and add new ones when users report
-            failures.
+            "10× faster" is marketing unless anyone can clone the repo and reproduce your numbers.
+            Benchmark honestly - if your rewrite is faster on some data but not others, say so.
+            Numbers without reproducibility are anecdotes.
           </p>
         </div>
         <BenchmarkComparison slot="visual" />
@@ -261,18 +231,18 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
           <p>
             Feature completeness is not the goal - output correctness on the features that matter
             is. Most tools have accumulated flags and edge cases over years; not all are used in
-            your target pipeline. Reimplementing everything increases the validation surface and
-            the chance of shipping something broken.
+            your target pipeline.
           </p>
+          <p>A focused approach:</p>
+          <ul>
+            <li><strong>Audit usage:</strong> identify exactly which capabilities your pipeline uses</li>
+            <li><strong>Fail loudly:</strong> for unsupported features, error with a clear message pointing to the original</li>
+            <li><strong>Never ignore:</strong> silently dropping flags or producing wrong output breaks trust</li>
+          </ul>
           <p>
-            Identify exactly which capabilities your pipeline uses. Reimplement those exactly.
-            For unsupported features, fail with a clear message pointing to the original tool.
-            Never silently ignore flags or produce wrong output for partial implementations.
-          </p>
-          <p>
-            A focused rewrite that does four things correctly is more valuable than one that
-            claims fifteen and does twelve right. Scope can expand as the project matures; it
-            cannot easily contract once users depend on it.
+            A rewrite that does four things correctly is more valuable than one that claims fifteen
+            and does twelve right. Scope can expand as the project matures; it cannot easily
+            contract once users depend on it.
           </p>
         </div>
         <FeatureChecklist slot="visual" />
@@ -281,23 +251,20 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       <Principle id="pin-versions" number="3.3" title="Pin versions and document">
         <div slot="description">
           <p>
-            Every claim your rewrite makes about output equivalence is implicitly a claim about a
-            specific version of the original tool. <em>"Compatible with mytool"</em> is meaningless.
-            <em>"Produces bit-identical output to mytool v1.0, validated on the dataset described in
-            benchmarks/"</em> is a testable assertion. The difference matters when a user hits an
-            unexpected discrepancy six months after your release.
+            Every equivalence claim is implicitly about a specific version. <em>"Compatible with
+            mytool"</em> is meaningless. <em>"Bit-identical output to mytool v1.0, validated on
+            the dataset in benchmarks/"</em> is testable.
           </p>
+          <p>Document in the repository (not a blog post):</p>
+          <ul>
+            <li><strong>Versions:</strong> exact version of every original tool validated against</li>
+            <li><strong>Commands:</strong> exact command lines used for comparison</li>
+            <li><strong>Data:</strong> datasets, methodology, and date</li>
+            <li><strong>Policy:</strong> how you handle upstream version updates</li>
+          </ul>
           <p>
-            Pin the exact version of every original tool you have validated against. Document not
-            just the version number but the command line used for comparison, the dataset, the
-            comparison methodology, and the date. This lives in the repository, not in a blog post
-            or your memory, so contributors and users can find it without asking.
-          </p>
-          <p>
-            When the original tool releases a new version, you need a process for deciding whether
-            to update your validation target. Major version bumps often change output formats.
-            Patch releases often fix bugs that may or may not affect your outputs. Document your
-            policy and communicate it to users.
+            When the original releases a new version, you need a process: major bumps often change
+            formats, patches may fix bugs affecting your outputs. Communicate your policy to users.
           </p>
         </div>
         <VersionPin slot="visual" />
@@ -313,15 +280,19 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       <Principle id="maintain" number="4.1" title="Maintain and govern">
         <div slot="description">
           <p>
-            The hard part is not the initial implementation. It is the years of maintenance that
-            follow: edge cases users find, re-validation when the original tool updates, new
-            sequencing chemistries your test suite doesn't cover, PRs that need reviewing.
-            Someone needs to be responsible, and that needs to be visible before you ship.
+            Shipping is just the beginning. Someone needs to be responsible for what comes next,
+            and that needs to be visible before you release.
           </p>
+          <p>Plan for the long term:</p>
+          <ul>
+            <li><strong>Triage issues</strong> as users find edge cases your test suite missed</li>
+            <li><strong>Re-validate</strong> when the original tool releases updates</li>
+            <li><strong>Expand benchmarks</strong> as new data types and edge cases surface</li>
+            <li><strong>Review PRs</strong> and grow a contributor community</li>
+          </ul>
           <p>
             Put governance in place before release: CONTRIBUTING.md, CODE_OF_CONDUCT.md, versioned
-            tags and changelogs, and a commitment to acknowledge issues. These signal to users
-            and contributors that the project takes itself seriously.
+            tags, changelogs, and a commitment to acknowledge issues.
           </p>
         </div>
         <GovernanceChecklist slot="visual" />
@@ -330,17 +301,19 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       <Principle id="preserve-compatibility" number="4.2" title="Preserve compatibility">
         <div slot="description">
           <p>
-            The strongest argument for adopting a rewrite is zero migration cost. If your rewrite
-            produces identical output files, same names, same formats, same column headers, same
-            summary statistics, then swapping it into an existing pipeline is a one-line config
-            change. Every MultiQC module that parses the original's output will parse yours.
-            Every downstream script that reads the original's results will read yours.
+            The strongest argument for adopting a rewrite is zero migration cost. Identical outputs
+            mean swapping into an existing pipeline is a one-line config change.
           </p>
+          <p>What identical means:</p>
+          <ul>
+            <li><strong>File names:</strong> same output naming conventions</li>
+            <li><strong>Formats:</strong> same column headers, same ordering, same summary statistics</li>
+            <li><strong>Parsing:</strong> every MultiQC module and downstream script works unchanged</li>
+          </ul>
           <p>
-            This reversibility is what makes adoption risk-free, and risk-free adoption is what
-            makes widespread adoption possible. Researchers running production pipelines cannot
-            re-validate their entire analysis history every time they update a tool. But they
-            will try a rewrite they can test on one run, confirm matches, and roll back if needed.
+            This reversibility makes adoption risk-free. Researchers running production pipelines
+            cannot re-validate their entire analysis history every time they update a tool - but
+            they will try a rewrite they can test on one run, confirm matches, and roll back if needed.
           </p>
         </div>
         <HotSwapDiagram slot="visual" />
@@ -350,18 +323,22 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
         <div slot="description">
           <p>
             The tools you are rewriting were built by the open-source community, validated
-            against publicly funded data, and distributed freely. A rewrite that takes this
-            foundation and closes the source extracts value without contributing back. Open
-            source is also better for adoption: researchers need to inspect code to understand
-            what it does to their data, run it on HPC clusters where commercial software is
-            often unavailable, and fork it if the project is abandoned.
+            against publicly funded data, and distributed freely. A rewrite that closes the
+            source extracts value without contributing back.
+          </p>
+          <p>Open source matters for adoption:</p>
+          <ul>
+            <li><strong>Transparency:</strong> researchers need to inspect code to understand what it does to their data</li>
+            <li><strong>Accessibility:</strong> HPC clusters often don't have commercial software available</li>
+            <li><strong>Continuity:</strong> users can fork if the project is abandoned</li>
+          </ul>
+          <p>
+            Check licenses before you start. Permissive licenses (MIT, Apache-2.0, BSD) let you
+            release under any license; copyleft (GPL) requires compatible licensing. Whether a
+            reimplementation is a "derived work" depends on jurisdiction - err on the side of caution.
           </p>
           <p>
-            Check licenses before you start. Permissive licenses (MIT, Apache-2.0, BSD) let
-            you release under any license; copyleft (GPL) requires compatible licensing.
-            Whether a reimplementation is a "derived work" depends on jurisdiction - err on
-            the side of caution. Choose MIT, Apache-2.0, or BSD unless the original requires
-            otherwise. License archaeology is far easier before you ship than after.
+            License archaeology is far easier before you ship than after.
           </p>
         </div>
         <OpenSourceFlywheel slot="visual" />
@@ -370,24 +347,23 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       <Principle id="contribute-upstream" number="4.4" title="Contribute upstream responsibly">
         <div slot="description">
           <p>
-            Building a rewrite puts you in an unusual position: you have studied the original
-            tool closely, tested it on diverse data, and found its edge cases. If you find a
-            genuine bug you can reproduce in the original tool with a minimal, clean test case,
-            report it. That is a real contribution to the scientific community.
+            Building a rewrite puts you in an unusual position: you've studied the original
+            closely and found its edge cases. A reproducible bug report is a real contribution
+            to science. But be careful - AI agents are confidently wrong in subtle ways.
+          </p>
+          <p>Before filing upstream:</p>
+          <ul>
+            <li><strong>Verify manually</strong> with the original tool on clean, well-understood data</li>
+            <li><strong>Rule out</strong> your reimplementation, malformed input, or a misread spec</li>
+            <li><strong>Never use</strong> AI-generated test cases as evidence</li>
+          </ul>
+          <p>
+            Do not automate bug reports. Open-source maintainers are usually volunteers - a firehose
+            of issues burns out people whose work benefits everyone.
           </p>
           <p>
-            But be careful before filing bug reports. AI coding agents are fluent and confident,
-            and they are wrong in subtle ways that are easy to miss. An agent may convince you
-            the original tool is handling a particular input incorrectly when what is actually
-            happening is that your reimplementation is wrong, or the input is malformed, or you
-            are misreading the spec. Before reporting upstream, verify manually with the original
-            tool on clean, well-understood data, not with an AI-generated test case.
-          </p>
-          <p>
-            Do not automate bug reports. Open-source maintainers are often volunteers. A
-            firehose of machine-generated issues, even polite ones, burns out people whose
-            continued work benefits everyone. The bar for filing upstream should be: you are
-            confident this is a real bug, you can reproduce it cleanly, and you have considered
+            The bar for filing: you fully understand the problem yourself, you can create a minimal
+            reproducible example using the upstream tool that demonstrates it, and you've considered
             whether you can also contribute a fix.
           </p>
         </div>
@@ -469,6 +445,28 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
     line-height: 1.8;
     color: var(--text-secondary);
     margin-bottom: var(--space-md);
+  }
+
+  .preamble-list {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-md) 0;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .preamble-list li {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    padding-left: var(--space-md);
+    border-left: 2px solid var(--rust-600);
+  }
+
+  .preamble-list strong {
+    color: var(--text-primary);
+    font-weight: 600;
   }
 
   .preamble-text-full {
