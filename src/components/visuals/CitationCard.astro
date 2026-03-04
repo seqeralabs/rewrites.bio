@@ -1,0 +1,150 @@
+---
+// 1.1 — Credit the original authors
+// Uses featureCounts (real) and RustQC (real) as the example pair
+---
+
+<div class="citation-wrap">
+  <div class="citation-label">CREDITS</div>
+  <div class="citation-card">
+    <div class="citation-tool">featureCounts</div>
+    <div class="citation-meta">
+      <span class="citation-tag">original tool</span>
+    </div>
+    <div class="citation-authors">Liao Y, Smyth GK, Shi W.</div>
+    <div class="citation-ref">
+      featureCounts: an efficient general purpose program for assigning sequence reads to genomic features.<br />
+      <em>Bioinformatics</em> 30(7):923–930 (2014)
+    </div>
+    <div class="citation-doi">
+      <span class="doi-label">DOI</span>
+      <span class="doi-value">10.1093/bioinformatics/btt656</span>
+    </div>
+  </div>
+  <div class="citation-card">
+    <div class="citation-tool">RustQC</div>
+    <div class="citation-meta">
+      <span class="citation-tag citation-tag-rewrite">rewrite</span>
+    </div>
+    <div class="citation-note">
+      AI-assisted rewrite in Rust. Includes featureCounts, dupRadar, and RSeQC in a single pass.<br />
+      Validated against Rsubread featureCounts on GM12878 REP1: 63,086 genes, 100% exact match.
+    </div>
+    <div class="citation-credits-line">
+      Built on the scientific contribution of Liao, Smyth &amp; Shi (2014) and the Rsubread team.
+    </div>
+  </div>
+</div>
+
+<style>
+  .citation-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-md) var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .citation-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--space-xs);
+  }
+
+  .citation-card {
+    background: var(--bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: var(--space-md);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .citation-tool {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .citation-meta {
+    display: flex;
+    gap: var(--space-xs);
+    margin-bottom: 4px;
+  }
+
+  .citation-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: rgba(249, 115, 22, 0.15);
+    color: var(--rust-400);
+    border: 1px solid rgba(249, 115, 22, 0.25);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .citation-tag-rewrite {
+    background: rgba(74, 222, 128, 0.1);
+    color: #4ade80;
+    border-color: rgba(74, 222, 128, 0.25);
+  }
+
+  .citation-authors {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 500;
+  }
+
+  .citation-ref {
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+  }
+
+  .citation-ref em {
+    color: var(--text-secondary);
+  }
+
+  .citation-doi {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-top: 4px;
+  }
+
+  .doi-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .doi-value {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--rust-400);
+  }
+
+  .citation-note {
+    font-size: 0.82rem;
+    color: var(--text-tertiary);
+    line-height: 1.6;
+  }
+
+  .citation-credits-line {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: 8px;
+    margin-top: 4px;
+    font-style: italic;
+  }
+</style>

@@ -1,0 +1,215 @@
+---
+// 4.5 — Contribute upstream responsibly: decision tree
+---
+
+<div class="tree-wrap">
+  <div class="tree-label">BEFORE REPORTING A BUG UPSTREAM</div>
+  <div class="tree">
+    <div class="tree-node tree-start">
+      <div class="tn-text">Found unexpected behaviour in the original tool?</div>
+    </div>
+    <div class="tree-branch">
+      <div class="tree-branch-inner">
+        <div class="tree-edge tree-edge-yes">
+          <div class="tree-edge-label">Yes</div>
+          <div class="tree-edge-line"></div>
+        </div>
+        <div class="tree-node">
+          <div class="tn-text">Can you reproduce it with the original tool alone — no rewrite involved?</div>
+        </div>
+        <div class="tree-branch">
+          <div class="tree-branch-inner">
+            <div class="tree-edge tree-edge-yes">
+              <div class="tree-edge-label">Yes</div>
+              <div class="tree-edge-line"></div>
+            </div>
+            <div class="tree-node">
+              <div class="tn-text">Have you verified with real data (not AI-generated test cases)?</div>
+            </div>
+            <div class="tree-branch">
+              <div class="tree-branch-inner">
+                <div class="tree-edge tree-edge-yes">
+                  <div class="tree-edge-label">Yes</div>
+                  <div class="tree-edge-line"></div>
+                </div>
+                <div class="tree-node">
+                  <div class="tn-text">Can you explain the bug in your own words - why it happens, not just that it happens?</div>
+                </div>
+                <div class="tree-branch">
+                  <div class="tree-branch-inner">
+                    <div class="tree-edge tree-edge-yes">
+                      <div class="tree-edge-label">Yes</div>
+                      <div class="tree-edge-line"></div>
+                    </div>
+                    <div class="tree-node tree-node-ok">
+                      <div class="tn-icon">✓</div>
+                      <div class="tn-text">Report it - politely, with a minimal reproducible example</div>
+                    </div>
+                  </div>
+                  <div class="tree-branch-inner">
+                    <div class="tree-edge tree-edge-no">
+                      <div class="tree-edge-label">No</div>
+                      <div class="tree-edge-line"></div>
+                    </div>
+                    <div class="tree-node tree-node-wait">
+                      <div class="tn-icon">⏸</div>
+                      <div class="tn-text">Understand it first. Don't parrot AI output to maintainers.</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="tree-branch-inner">
+                <div class="tree-edge tree-edge-no">
+                  <div class="tree-edge-label">No</div>
+                  <div class="tree-edge-line"></div>
+                </div>
+                <div class="tree-node tree-node-wait">
+                  <div class="tn-icon">⏸</div>
+                  <div class="tn-text">Verify with real data first. AI agents can be confidently wrong.</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="tree-branch-inner">
+            <div class="tree-edge tree-edge-no">
+              <div class="tree-edge-label">No</div>
+              <div class="tree-edge-line"></div>
+            </div>
+            <div class="tree-node tree-node-stop">
+              <div class="tn-icon">✗</div>
+              <div class="tn-text">It's in your rewrite. Fix it there — don't file upstream.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tree-note">
+    Maintainers of open-source tools are usually volunteers. A false bug report wastes their time and strains the relationship you want to build.
+  </div>
+</div>
+
+<style>
+  .tree-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-lg);
+  }
+
+  .tree-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--space-md);
+  }
+
+  .tree {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .tree-node {
+    background: var(--bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    padding: var(--space-sm) var(--space-md);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-xs);
+  }
+
+  .tree-start {
+    border-color: rgba(249, 115, 22, 0.25);
+    font-weight: 600;
+  }
+
+  .tree-node-ok {
+    border-color: rgba(74, 222, 128, 0.3);
+    background: rgba(74, 222, 128, 0.04);
+  }
+
+  .tree-node-wait {
+    border-color: rgba(251, 191, 36, 0.3);
+    background: rgba(251, 191, 36, 0.03);
+  }
+
+  .tree-node-stop {
+    border-color: rgba(248, 113, 113, 0.3);
+    background: rgba(248, 113, 113, 0.04);
+  }
+
+  .tn-icon {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .tree-node-ok   .tn-icon { color: rgba(74, 222, 128, 0.9); }
+  .tree-node-wait .tn-icon { color: rgba(251, 191, 36, 0.9); }
+  .tree-node-stop .tn-icon { color: rgba(248, 113, 113, 0.9); }
+
+  .tn-text {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
+
+  .tree-branch {
+    display: flex;
+    gap: var(--space-md);
+    padding-left: var(--space-lg);
+    border-left: 2px solid rgba(255, 255, 255, 0.07);
+    margin-left: var(--space-md);
+    padding-top: var(--space-xs);
+    flex-wrap: wrap;
+  }
+
+  .tree-branch-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    flex: 1;
+    min-width: 200px;
+  }
+
+  .tree-edge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 0;
+  }
+
+  .tree-edge-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    flex-shrink: 0;
+  }
+
+  .tree-edge-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  .tree-edge-yes .tree-edge-label { color: rgba(74, 222, 128, 0.7); }
+  .tree-edge-no  .tree-edge-label { color: rgba(248, 113, 113, 0.7); }
+
+  .tree-note {
+    font-size: 0.83rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: var(--space-sm);
+    margin-top: var(--space-md);
+    line-height: 1.6;
+    font-style: italic;
+  }
+</style>

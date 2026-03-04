@@ -1,0 +1,158 @@
+---
+// 2.2 — Work small: iteration loop diagram
+---
+
+<div class="loop-wrap">
+  <div class="loop-label">THE VALIDATION LOOP</div>
+  <div class="loop-diagram">
+    <div class="loop-row-main">
+      <div class="loop-step">
+        <div class="step-num">01</div>
+        <div class="step-text">Pick one<br />function</div>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="step-num">02</div>
+        <div class="step-text">Write<br />rewrite</div>
+      </div>
+      <div class="loop-arrow">→</div>
+      <div class="loop-step">
+        <div class="step-num">03</div>
+        <div class="step-text">Compare<br />outputs</div>
+      </div>
+    </div>
+    <div class="loop-row-outcomes">
+      <div class="loop-outcome loop-outcome-fail">
+        <span class="outcome-icon">✗</span>
+        <span class="outcome-text">Mismatch? Fix &amp; repeat step 2</span>
+      </div>
+      <div class="loop-outcome loop-outcome-pass">
+        <span class="outcome-icon">✓</span>
+        <span class="outcome-text">Match? Move to next function</span>
+      </div>
+    </div>
+  </div>
+  <div class="loop-note">
+    Never move on until the current step validates. Compound errors will bury you.
+  </div>
+</div>
+
+<style>
+  .loop-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-lg);
+  }
+
+  .loop-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: var(--space-md);
+  }
+
+  .loop-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+    margin-bottom: var(--space-md);
+  }
+
+  .loop-row-main {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+  }
+
+  .loop-step {
+    background: var(--bg-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 6px;
+    padding: var(--space-sm) var(--space-md);
+    text-align: center;
+    flex: 1;
+  }
+
+  .step-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--rust-500);
+    margin-bottom: 4px;
+  }
+
+  .step-text {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-secondary);
+    line-height: 1.4;
+  }
+
+  .loop-arrow {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+  }
+
+  .loop-row-outcomes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-sm);
+  }
+
+  @media (max-width: 560px) {
+    .loop-row-outcomes {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .loop-outcome {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-sm) var(--space-md);
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+  }
+
+  .loop-outcome-fail {
+    background: rgba(248, 113, 113, 0.08);
+    border: 1px solid rgba(248, 113, 113, 0.2);
+  }
+
+  .loop-outcome-fail .outcome-icon {
+    color: rgba(248, 113, 113, 0.9);
+  }
+
+  .loop-outcome-pass {
+    background: rgba(74, 222, 128, 0.08);
+    border: 1px solid rgba(74, 222, 128, 0.2);
+  }
+
+  .loop-outcome-pass .outcome-icon {
+    color: rgba(74, 222, 128, 0.9);
+  }
+
+  .outcome-icon {
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .outcome-text {
+    color: var(--text-secondary);
+  }
+
+  .loop-note {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    padding-top: var(--space-sm);
+    font-style: italic;
+  }
+</style>

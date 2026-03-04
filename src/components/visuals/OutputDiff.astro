@@ -1,0 +1,181 @@
+---
+// 1.2 — Emulate exactly: output comparison
+// Original tool: featureCounts (Rsubread). Real column names, real-ish counts.
+// "Bad rewrite" discrepancies are intentionally obvious to illustrate the point.
+---
+
+<div class="diff-wrap">
+  <div class="diff-label">OUTPUT COMPARISON — featureCounts (63,086 genes, GM12878 REP1)</div>
+  <div class="diff-table">
+    <div class="diff-header">
+      <div class="diff-col-head col-field">metric</div>
+      <div class="diff-col-head col-original">featureCounts</div>
+      <div class="diff-col-head col-good">good rewrite</div>
+      <div class="diff-col-head col-bad">bad rewrite</div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-field">Assigned reads</div>
+      <div class="diff-val">14,654,579</div>
+      <div class="diff-val match"><span class="badge ok">✓</span> 14,654,579</div>
+      <div class="diff-val match"><span class="badge ok">✓</span> 14,654,579</div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-field">Unassigned_NoFeatures</div>
+      <div class="diff-val">3,599,832</div>
+      <div class="diff-val match"><span class="badge ok">✓</span> 3,599,832</div>
+      <div class="diff-val mismatch"><span class="badge fail">✗</span> 3,541,209</div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-field">Unassigned_Ambiguous</div>
+      <div class="diff-val">1,203,447</div>
+      <div class="diff-val match"><span class="badge ok">✓</span> 1,203,447</div>
+      <div class="diff-val mismatch"><span class="badge fail">✗</span> 1,261,070</div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-field">ENSG00000187634 count</div>
+      <div class="diff-val">847</div>
+      <div class="diff-val match"><span class="badge ok">✓</span> 847</div>
+      <div class="diff-val mismatch"><span class="badge fail">✗</span> 851</div>
+    </div>
+    <div class="diff-row">
+      <div class="diff-field">genes with count = 0</div>
+      <div class="diff-val">22,341</div>
+      <div class="diff-val match"><span class="badge ok">✓</span> 22,341</div>
+      <div class="diff-val mismatch"><span class="badge fail">✗</span> 22,318</div>
+    </div>
+  </div>
+  <div class="diff-verdict">
+    <div class="verdict-good">
+      <span class="verdict-badge">PASS</span>
+      100% match across 63,086 genes
+    </div>
+    <div class="verdict-bad">
+      <span class="verdict-badge fail">FAIL</span>
+      Discrepancies invalidate downstream DESeq2 results
+    </div>
+  </div>
+  <div class="diff-note">
+    Column names, assignment categories, and count values are real featureCounts output format.
+  </div>
+</div>
+
+<style>
+  .diff-wrap {
+    background: var(--bg-surface);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: var(--space-md) var(--space-lg);
+    overflow-x: auto;
+  }
+
+  .diff-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: var(--space-sm);
+    line-height: 1.5;
+  }
+
+  .diff-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    min-width: 480px;
+  }
+
+  .diff-header,
+  .diff-row {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1.1fr 1.1fr;
+    gap: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .diff-header {
+    padding-bottom: var(--space-xs);
+    margin-bottom: 2px;
+  }
+
+  .diff-col-head {
+    font-family: var(--font-mono);
+    font-size: 0.63rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 6px 8px;
+    color: var(--text-tertiary);
+  }
+
+  .col-original { color: var(--text-secondary); }
+  .col-good     { color: rgba(74, 222, 128, 0.8); }
+  .col-bad      { color: rgba(248, 113, 113, 0.8); }
+
+  .diff-field,
+  .diff-val {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    padding: 7px 8px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .diff-field {
+    color: var(--text-tertiary);
+    font-size: 0.74rem;
+  }
+
+  .diff-val.match   { color: rgba(74, 222, 128, 0.9); }
+  .diff-val.mismatch { color: rgba(248, 113, 113, 0.9); }
+
+  .badge { font-size: 0.7rem; flex-shrink: 0; }
+  .badge.ok   { color: rgba(74, 222, 128, 0.9); }
+  .badge.fail { color: rgba(248, 113, 113, 0.9); }
+
+  .diff-verdict {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-sm);
+    padding-top: var(--space-sm);
+    flex-wrap: wrap;
+  }
+
+  .verdict-good,
+  .verdict-bad {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xs);
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+  }
+
+  .verdict-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    padding: 2px 8px;
+    border-radius: 3px;
+    background: rgba(74, 222, 128, 0.15);
+    color: #4ade80;
+    border: 1px solid rgba(74, 222, 128, 0.3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .verdict-badge.fail {
+    background: rgba(248, 113, 113, 0.15);
+    color: #f87171;
+    border-color: rgba(248, 113, 113, 0.3);
+  }
+
+  .diff-note {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding-top: var(--space-sm);
+    margin-top: var(--space-sm);
+    font-style: italic;
+  }
+</style>

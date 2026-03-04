@@ -49,7 +49,7 @@
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Sizing */
-  --max-width: 720px;
+  --max-width: 1200px;
 
   /* Transitions */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
