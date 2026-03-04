@@ -1,57 +1,60 @@
 ---
 // Preamble: scale/cost — horizontal bar chart for right-column layout
-// Each group: label + two bars (legacy vs rewrite) side by side vertically
+// Real data from RustQC benchmarks on a 10GB BAM file:
+// - Traditional tools: 4h 06m (246 min)
+// - RustQC: 7m 10s (7.17 min)
+// ~34× speedup
 ---
 
 <div class="chart-wrap">
-  <div class="chart-title">CPU-hours consumed per year (illustrative)</div>
+  <div class="chart-title">CPU-hours per year · QC on 10GB BAM files (RustQC data)</div>
 
   <div class="chart-groups">
 
     <div class="group">
-      <div class="group-label">1k runs/yr</div>
+      <div class="group-label">1k samples/yr</div>
       <div class="group-bars">
         <div class="bar-row">
           <div class="bar-name">Legacy</div>
-          <div class="bar-track"><div class="bar bar-old" style="width: 15%"></div></div>
-          <span class="bar-val">18h</span>
+          <div class="bar-track"><div class="bar bar-old" style="width: 10%"></div></div>
+          <span class="bar-val">4,100h</span>
         </div>
         <div class="bar-row">
-          <div class="bar-name">Rewrite</div>
-          <div class="bar-track"><div class="bar bar-new" style="width: 2.5%"></div></div>
-          <span class="bar-val">0.8h</span>
+          <div class="bar-name">RustQC</div>
+          <div class="bar-track"><div class="bar bar-new" style="width: 0.3%"></div></div>
+          <span class="bar-val">120h</span>
         </div>
       </div>
     </div>
 
     <div class="group">
-      <div class="group-label">10k runs/yr</div>
+      <div class="group-label">10k samples/yr</div>
       <div class="group-bars">
         <div class="bar-row">
           <div class="bar-name">Legacy</div>
-          <div class="bar-track"><div class="bar bar-old" style="width: 45%"></div></div>
-          <span class="bar-val">52h</span>
+          <div class="bar-track"><div class="bar bar-old" style="width: 50%"></div></div>
+          <span class="bar-val">41,000h</span>
         </div>
         <div class="bar-row">
-          <div class="bar-name">Rewrite</div>
-          <div class="bar-track"><div class="bar bar-new" style="width: 7%"></div></div>
-          <span class="bar-val">8h</span>
+          <div class="bar-name">RustQC</div>
+          <div class="bar-track"><div class="bar bar-new" style="width: 1.5%"></div></div>
+          <span class="bar-val">1,200h</span>
         </div>
       </div>
     </div>
 
     <div class="group">
-      <div class="group-label">100k runs/yr</div>
+      <div class="group-label">100k samples/yr</div>
       <div class="group-bars">
         <div class="bar-row">
           <div class="bar-name">Legacy</div>
-          <div class="bar-track"><div class="bar bar-old" style="width: 95%"></div></div>
-          <span class="bar-val">520h</span>
+          <div class="bar-track"><div class="bar bar-old" style="width: 100%"></div></div>
+          <span class="bar-val">410,000h</span>
         </div>
         <div class="bar-row">
-          <div class="bar-name">Rewrite</div>
-          <div class="bar-track"><div class="bar bar-new" style="width: 13%"></div></div>
-          <span class="bar-val">80h</span>
+          <div class="bar-name">RustQC</div>
+          <div class="bar-track"><div class="bar bar-new" style="width: 3%"></div></div>
+          <span class="bar-val">12,000h</span>
         </div>
       </div>
     </div>
@@ -59,7 +62,7 @@
   </div>
 
   <div class="chart-annotation">
-    At scale, the gap compounds to <strong>hundreds of tonnes of CO₂e per year</strong> for widely-used pipelines.
+    <strong>34× faster</strong> · Saving ~400,000 CPU-hours/year at scale is <strong>~40 tonnes CO₂e</strong> avoided.
   </div>
 </div>
 
