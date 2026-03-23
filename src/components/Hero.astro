@@ -1,4 +1,5 @@
 ---
+import SeqeraLogo from "./visuals/seqera-logo.svg";
 ---
 
 <section class="hero">
@@ -16,6 +17,7 @@
           is coming to bioinformatics. These are the principles for doing it right.
         </p>
       </div>
+      <a href="https://seqera.io" class="hero-seqera-link"><SeqeraLogo /></a>
       <div class="hero-scroll">
         <span class="hero-scroll-line"></span>
       </div>
@@ -90,6 +92,22 @@
     font-size: 1.05rem;
     line-height: 1.8;
     color: var(--text-secondary);
+  }
+
+  .hero-seqera-link {
+    display: inline-block;
+    margin-top: var(--space-lg);
+    opacity: 0.3;
+    transition: opacity 0.2s ease;
+  }
+
+  .hero-seqera-link:hover {
+    opacity: 0.7;
+  }
+
+  .hero-seqera-link :global(svg) {
+    height: 2.5em;
+    width: auto;
   }
 
   .hero-scroll {

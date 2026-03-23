@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SeqeraLogo from '../components/visuals/seqera-logo.svg';
 
 interface Props {
   title: string;
@@ -58,7 +59,7 @@ const ogImage = `${siteUrl}/og-image.png`;
         <svg class="nav-section-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
       </button>
       <div class="nav-section-dropdown" id="nav-section-dropdown" aria-hidden="true"></div>
-
+      <a href="https://seqera.io" class="nav-seqera-link"><SeqeraLogo /></a>
     </nav>
 
     <slot />
@@ -462,6 +463,29 @@ const ogImage = `${siteUrl}/og-image.png`;
   :global(.nav-dropdown-number) {
     color: var(--rust-500);
     margin-right: 4px;
+  }
+
+  .nav-seqera-link {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    opacity: 0.3;
+    transition: opacity 0.2s ease;
+  }
+
+  .nav-seqera-link:hover {
+    opacity: 0.7;
+  }
+
+  .nav-seqera-link :global(svg) {
+    height: 1.8em;
+    width: auto;
+  }
+
+  @media (max-width: 768px) {
+    .nav-seqera-link {
+      display: none;
+    }
   }
 
   @media (max-width: 768px) {
