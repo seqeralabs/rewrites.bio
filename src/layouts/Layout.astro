@@ -64,6 +64,62 @@ const ogImage = `${siteUrl}/og-image.png`;
 
     <slot />
 
+    <!-- TL;DR Modal -->
+    <div class="tldr-overlay" id="tldr-overlay" role="dialog" aria-modal="true" aria-labelledby="tldr-title" aria-hidden="true">
+      <div class="tldr-modal">
+        <button class="tldr-close" id="tldr-close-btn" aria-label="Close">&#x2715;</button>
+        <p class="tldr-eyebrow">TL;DR</p>
+        <h2 class="tldr-title" id="tldr-title">The principles</h2>
+        <p class="tldr-intro">A wave of AI-assisted rewrites is coming — these are the rules for doing it right.</p>
+        <div class="tldr-sections">
+          <div class="tldr-section">
+            <span class="tldr-number">I</span>
+            <div>
+              <h3 class="tldr-section-title">Philosophy</h3>
+              <ol class="tldr-list">
+                <li>Credit the original authors</li>
+                <li>Emulate exactly</li>
+                <li>Be transparent about AI</li>
+              </ol>
+            </div>
+          </div>
+          <div class="tldr-section">
+            <span class="tldr-number">II</span>
+            <div>
+              <h3 class="tldr-section-title">Planning</h3>
+              <ol class="tldr-list">
+                <li>Think big - combine tools, I/O, architecture</li>
+                <li>Work small - tight iteration loops with validation</li>
+              </ol>
+            </div>
+          </div>
+          <div class="tldr-section">
+            <span class="tldr-number">III</span>
+            <div>
+              <h3 class="tldr-section-title">Building</h3>
+              <ol class="tldr-list">
+                <li>Test and benchmark with real data</li>
+                <li>Build only what you need</li>
+                <li>Pin versions and document</li>
+              </ol>
+            </div>
+          </div>
+          <div class="tldr-section">
+            <span class="tldr-number">IV</span>
+            <div>
+              <h3 class="tldr-section-title">Stewardship</h3>
+              <ol class="tldr-list">
+                <li>Maintain and govern</li>
+                <li>Preserve compatibility</li>
+                <li>Release as open source</li>
+                <li>Contribute upstream responsibly</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
       // Intersection Observer for reveal animations
       function initReveals() {
@@ -314,13 +370,48 @@ const ogImage = `${siteUrl}/og-image.png`;
         update();
       }
 
+      // TL;DR modal
+      function initTldr() {
+        const overlay = document.getElementById('tldr-overlay');
+        const openBtn = document.getElementById('tldr-open-btn');
+        const closeBtn = document.getElementById('tldr-close-btn');
+        if (!overlay || !openBtn || !closeBtn) return;
+
+        function openModal() {
+          overlay.setAttribute('aria-hidden', 'false');
+          overlay.classList.add('open');
+          document.body.style.overflow = 'hidden';
+          closeBtn.focus();
+        }
+
+        function closeModal() {
+          overlay.setAttribute('aria-hidden', 'true');
+          overlay.classList.remove('open');
+          document.body.style.overflow = '';
+          openBtn.focus();
+        }
+
+        openBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) closeModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+        });
+      }
+
       initReveals();
       initSectionTracker();
       initProgressBar();
+      initTldr();
       document.addEventListener('astro:after-swap', () => {
         initReveals();
         initSectionTracker();
         initProgressBar();
+        initTldr();
       });
     </script>
   </body>
@@ -480,6 +571,160 @@ const ogImage = `${siteUrl}/og-image.png`;
   .nav-seqera-link :global(svg) {
     height: 1.8em;
     width: auto;
+  }
+
+  /* TL;DR Modal */
+  .tldr-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.75);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+    padding: var(--space-lg);
+  }
+
+  .tldr-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .tldr-modal {
+    position: relative;
+    background: var(--bg-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: var(--space-xl) var(--space-xl);
+    max-width: 560px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    transform: translateY(16px) scale(0.98);
+    transition: transform 0.25s var(--ease-out);
+  }
+
+  .tldr-overlay.open .tldr-modal {
+    transform: translateY(0) scale(1);
+  }
+
+  .tldr-close {
+    all: unset;
+    position: absolute;
+    top: var(--space-md);
+    right: var(--space-md);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    color: var(--text-tertiary);
+    cursor: pointer;
+    border-radius: 4px;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+
+  .tldr-close:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .tldr-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--rust-500);
+    margin-bottom: var(--space-xs);
+  }
+
+  .tldr-title {
+    font-family: var(--font-mono);
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .tldr-intro {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-lg);
+    padding-bottom: var(--space-lg);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .tldr-sections {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-lg);
+  }
+
+  .tldr-section {
+    display: flex;
+    gap: var(--space-md);
+    align-items: flex-start;
+  }
+
+  .tldr-number {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    color: var(--rust-500);
+    text-transform: uppercase;
+    min-width: 24px;
+    padding-top: 0.2em;
+  }
+
+  .tldr-section-title {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .tldr-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    counter-reset: tldr-item;
+  }
+
+  .tldr-list li {
+    counter-increment: tldr-item;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    padding-left: 1.8em;
+    position: relative;
+  }
+
+  .tldr-list li::before {
+    content: counter(tldr-item, decimal) ".";
+    position: absolute;
+    left: 0;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--rust-600);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 600px) {
+    .tldr-modal {
+      padding: var(--space-lg);
+    }
   }
 
   @media (max-width: 768px) {
