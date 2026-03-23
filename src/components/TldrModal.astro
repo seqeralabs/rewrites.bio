@@ -1,6 +1,3 @@
----
----
-
 <div class="tldr-overlay" id="tldr-overlay" role="dialog" aria-modal="true" aria-labelledby="tldr-title" aria-hidden="true">
   <div class="tldr-modal">
     <button class="tldr-close" id="tldr-close-btn" aria-label="Close">&#x2715;</button>
@@ -83,17 +80,11 @@
     background: var(--bg-secondary);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 12px;
-    padding: var(--space-xl) var(--space-xl);
+    padding: var(--space-xl);
     max-width: 560px;
     width: 100%;
     max-height: 90vh;
     overflow-y: auto;
-    transform: translateY(16px) scale(0.98);
-    transition: transform 0.25s var(--ease-out);
-  }
-
-  .tldr-overlay.open .tldr-modal {
-    transform: translateY(0) scale(1);
   }
 
   .tldr-close {
@@ -162,7 +153,6 @@
     font-weight: 700;
     letter-spacing: 0.15em;
     color: var(--rust-500);
-    text-transform: uppercase;
     min-width: 24px;
     padding-top: 0.2em;
   }
@@ -176,32 +166,23 @@
   }
 
   .tldr-list {
-    list-style: none;
-    padding: 0;
+    padding-left: 1.6em;
     margin: 0;
     display: flex;
     flex-direction: column;
     gap: 4px;
-    counter-reset: tldr-item;
   }
 
   .tldr-list li {
-    counter-increment: tldr-item;
     font-size: 0.9rem;
     color: var(--text-secondary);
     line-height: 1.5;
-    padding-left: 1.8em;
-    position: relative;
   }
 
-  .tldr-list li::before {
-    content: counter(tldr-item, decimal) ".";
-    position: absolute;
-    left: 0;
+  .tldr-list li::marker {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     color: var(--rust-600);
-    line-height: 1.6;
   }
 
   @media (max-width: 600px) {
