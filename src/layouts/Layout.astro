@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import SeqeraLogo from '../components/visuals/seqera-logo.svg';
+import TldrModal from '../components/TldrModal.astro';
 
 interface Props {
   title: string;
@@ -63,6 +64,8 @@ const ogImage = `${siteUrl}/og-image.png`;
     </nav>
 
     <slot />
+
+    <TldrModal />
 
     <script>
       // Intersection Observer for reveal animations
@@ -314,13 +317,53 @@ const ogImage = `${siteUrl}/og-image.png`;
         update();
       }
 
+      // TL;DR modal
+      let tldrAbort;
+      function initTldr() {
+        if (tldrAbort) tldrAbort.abort();
+        tldrAbort = new AbortController();
+        const { signal } = tldrAbort;
+
+        const overlay = document.getElementById('tldr-overlay');
+        const openBtn = document.getElementById('tldr-open-btn');
+        const closeBtn = document.getElementById('tldr-close-btn');
+        if (!overlay || !openBtn || !closeBtn) return;
+
+        function openModal() {
+          overlay.setAttribute('aria-hidden', 'false');
+          overlay.classList.add('open');
+          document.body.style.overflow = 'hidden';
+          closeBtn.focus();
+        }
+
+        function closeModal() {
+          overlay.setAttribute('aria-hidden', 'true');
+          overlay.classList.remove('open');
+          document.body.style.overflow = '';
+          openBtn.focus();
+        }
+
+        openBtn.addEventListener('click', openModal, { signal });
+        closeBtn.addEventListener('click', closeModal, { signal });
+
+        overlay.addEventListener('click', (e) => {
+          if (e.target === overlay) closeModal();
+        }, { signal });
+
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
+        }, { signal });
+      }
+
       initReveals();
       initSectionTracker();
       initProgressBar();
+      initTldr();
       document.addEventListener('astro:after-swap', () => {
         initReveals();
         initSectionTracker();
         initProgressBar();
+        initTldr();
       });
     </script>
   </body>
