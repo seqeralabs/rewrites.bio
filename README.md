@@ -19,19 +19,13 @@ npm run build     # Build to ./dist/
 npm run preview   # Preview production build
 ```
 
-<!--
 ## Content
 
-All manifesto principles and project listings are defined in YAML:
+All manifesto content lives in the Astro source files (`src/pages/index.astro` and components). At build time, a post-build script converts the rendered HTML to clean markdown for LLM consumption:
 
-- **`src/data/manifesto.yaml`** — Manifesto sections and principles
-- **`src/data/projects.yaml`** — Rewrite projects and libraries
-
-Edit these files to update the site content. Section numbering (I, II, 1.1, 1.2, etc.) is generated automatically. Principle descriptions are parsed as markdown, so you can use links and formatting.
-
-Plain-text `.md` versions of each page are generated at build time from the YAML data (via `scripts/generate-markdown.mjs`). These are served at `/manifesto.md` and `/projects.md`. A Netlify Edge Function also serves them automatically when a client sends `Accept: text/markdown` or `Accept: text/plain`.
-
--->
+- **`/manifesto.md`** — Full manifesto in markdown
+- **`/llms.txt`** — LLM-friendly site index
+- **`/.well-known/agent.md`** — AI agent discovery
 
 ## Deployment
 

@@ -17,10 +17,6 @@ pnpm-debug.log*
 .env
 .env.production
 
-# generated markdown (built from YAML data)
-public/*.md
-public/.well-known/
-
 # macOS-specific files
 .DS_Store
 

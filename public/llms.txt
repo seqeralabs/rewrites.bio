@@ -2,8 +2,8 @@
 
 > Principles for rewriting bioinformatics tools with AI. Responsibly.
 
-rewrites.bio is a manifesto and set of guiding principles for the responsible AI-assisted rewriting of established bioinformatics tools in faster, compiled languages. It covers 15 principles across 4 sections: Philosophy, Planning, Building, and Stewardship.
+rewrites.bio is a manifesto and set of guiding principles for the responsible AI-assisted rewriting of established bioinformatics tools in faster, compiled languages. It covers 12 principles across 4 sections: Philosophy, Planning, Building, and Stewardship.
 
 ## Docs
 
-- [The Manifesto](https://rewrites.bio/manifesto.md): The full set of 15 principles for responsible AI-assisted bioinformatics rewrites
+- [The Manifesto](https://rewrites.bio/manifesto.md): The full set of 12 principles for responsible AI-assisted bioinformatics rewrites

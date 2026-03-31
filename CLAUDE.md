@@ -6,53 +6,42 @@ Guidance for AI coding agents working in this repository.
 
 A static website for the "Rewrite it: Bioinformatics edition" manifesto, built with **Astro** and deployed on **Netlify**. Content-driven site with no client-side framework — just vanilla JS for scroll animations and navbar tracking.
 
-**Tech stack:** Astro 5, TypeScript (strict), plain CSS, YAML for content, Marked for inline markdown parsing. Hosted on Netlify with a Deno-based Edge Function for content negotiation.
+**Tech stack:** Astro 5, TypeScript (strict), plain CSS. Hosted on Netlify.
 
 ## Build / Dev / Preview Commands
 
 ```sh
 npm install            # Install dependencies
 npm run dev            # Start dev server at localhost:4321
-npm run build          # Production build to ./dist/
+npm run build          # Production build to ./dist/ (includes markdown generation)
 npm run preview        # Preview production build locally
 ```
 
-All three commands first run `node scripts/generate-markdown.mjs` to generate markdown files from YAML before invoking Astro.
+The `build` command runs `astro build` then `node scripts/generate-markdown.mjs` to generate markdown files from the built HTML.
 
 There is **no test framework**, no linter, and no formatter configured. No `npm test` script exists.
 
 ## Content Architecture (CRITICAL)
 
-All manifesto content is defined in **`src/data/manifesto.yaml`** — this is the single source of truth.
+All manifesto content is defined in **`src/pages/index.astro`** and its Astro components — this is the single source of truth.
 
-At build time, `scripts/generate-markdown.mjs` auto-generates plain-text markdown files:
-- `public/index.md`
-- `public/manifesto.md`
-- `public/.well-known/agent.md`
+At build time, `scripts/generate-markdown.mjs` reads `dist/index.html`, strips visuals and navigation, and converts the content to clean markdown. Output files:
+- `dist/index.md`
+- `dist/manifesto.md` (copy of index.md)
+- `dist/.well-known/agent.md` (short summary for AI agent discovery)
 
-**These generated `.md` files are git-ignored. NEVER edit them directly.** All content changes must go through the YAML source file. The markdown files are regenerated on every build/dev/preview.
-
-The YAML structure:
-```yaml
-preamble:        # Array of paragraph strings
-callout:         # Block scalar string
-preamble_closing: # Folded scalar string
-sections:        # Array of {title, principles: [{title, description}]}
-```
-
-Principle descriptions support inline markdown (links, emphasis). Section numbering (I, II, 1.1, 1.2, etc.) is generated automatically by the components — do not hardcode numbers.
+**These generated `.md` files live in `dist/` only.** All content changes go through the Astro source files. Markdown is regenerated on every production build.
 
 ## Project Structure
 
 ```
 src/
-  components/    # Astro components (Hero, Section, Principle, Footer)
-  data/          # manifesto.yaml — the content source
+  components/    # Astro components (Hero, Section, Principle, Footer, TableOfContents)
+  components/visuals/  # SVG-based visual illustrations for each principle
   layouts/       # Layout.astro — main HTML shell, nav, client JS
   pages/         # index.astro, og-image.astro
   styles/        # global.css — custom properties, resets, utilities
-scripts/         # generate-markdown.mjs — build-time markdown generator
-netlify/         # Edge function for markdown content negotiation
+scripts/         # generate-markdown.mjs — post-build HTML→markdown converter
 public/          # Static assets (favicon, og-image, robots.txt, llms.txt)
 ```
 
@@ -80,14 +69,12 @@ public/          # Static assets (favicon, og-image, robots.txt, llms.txt)
   const { id, title, description = "default" } = Astro.props;
   ---
   ```
-- The edge function (`netlify/edge-functions/markdown.ts`) uses explicit return types on functions.
-- Use `any` sparingly — it appears in `.map()` callbacks over YAML-parsed data but should be avoided where possible.
+- Use `any` sparingly — avoid where possible.
 
 ### Astro Components
 
 - Frontmatter (between `---` fences) contains imports, type definitions, and data logic.
 - Use `<slot />` for component children.
-- Use `set:html` directive for pre-rendered HTML content (e.g., parsed markdown).
 - Each component has a scoped `<style>` block at the bottom of the file.
 - Components with no logic or props can have an empty or absent frontmatter section.
 
@@ -95,10 +82,10 @@ public/          # Static assets (favicon, og-image, robots.txt, llms.txt)
 
 - **No preprocessor, no Tailwind** — plain CSS with custom properties.
 - CSS custom properties are defined in `:root` in `src/styles/global.css`:
-  - Colors: `--bg-primary`, `--rust-*`, `--copper`, `--text-primary/secondary/tertiary`
+  - Colors: `--bg-primary`, `--accent-rust`, `--accent-blue`, `--accent-gold`, `--accent-sage`, `--text-primary/secondary/tertiary`
   - Spacing scale: `--space-xs` through `--space-2xl`
-  - Fonts: `--font-sans` (Inter), `--font-mono` (JetBrains Mono)
-  - Layout: `--max-width: 720px`
+  - Fonts: `--font-sans` (Plus Jakarta Sans), `--font-serif` (Newsreader), `--font-mono` (JetBrains Mono)
+  - Layout: `--max-width: 1100px`, `--text-width: 680px`
 - Use **BEM-like class naming**: `hero`, `hero-content`, `hero-title`, `section-header`, etc.
 - Scoped styles in components. Use `:global()` only for dynamically created elements.
 - Responsive breakpoints via `@media` queries. Respect `prefers-reduced-motion`.
@@ -109,18 +96,11 @@ public/          # Static assets (favicon, og-image, robots.txt, llms.txt)
 - Vanilla JS only (IntersectionObserver for reveal animations, section tracking, progress bar).
 - Hooks into `astro:after-swap` for Astro view transitions compatibility.
 
-### YAML
-
-- 2-space indentation.
-- Use block scalars (`|`) for multi-line strings that preserve newlines.
-- Use folded scalars (`>`) for multi-line strings that should be joined.
-- Inline markdown in principle descriptions (links, bold, emphasis).
-
 ## Naming Conventions
 
 - **Files:** kebab-case for scripts and styles (`generate-markdown.mjs`, `global.css`). PascalCase for Astro components (`Hero.astro`, `Section.astro`).
 - **CSS classes:** BEM-like kebab-case (`hero-content`, `section-header`, `principle-description`).
-- **JS/TS functions:** camelCase (`initReveals`, `initProgressBar`, `preferredMarkdownType`).
+- **JS/TS functions:** camelCase (`initReveals`, `initProgressBar`).
 - **Interfaces:** PascalCase (`Props`).
 - **CSS custom properties:** kebab-case with semantic naming (`--bg-primary`, `--space-md`).
 
@@ -128,14 +108,12 @@ public/          # Static assets (favicon, og-image, robots.txt, llms.txt)
 
 - **Netlify** via Git integration — push to `main` triggers an automatic build.
 - Config in `netlify.toml`: builds with `npm run build`, publishes `dist/`.
-- Edge function (`netlify/edge-functions/markdown.ts`) provides content negotiation — serves markdown when `Accept: text/markdown` or `text/plain` is preferred over `text/html`.
 
 ## Dependencies
 
-Only three production dependencies (no devDependencies):
+Two production dependencies (no devDependencies):
 - `astro` — static site framework
-- `marked` — markdown parsing for principle descriptions
-- `yaml` — YAML parsing for content data
+- `turndown` — HTML-to-markdown conversion for post-build markdown generation
 
 Keep dependencies minimal. This is a simple static site — avoid adding frameworks or heavy libraries.
 
@@ -144,5 +122,5 @@ Keep dependencies minimal. This is a simple static site — avoid adding framewo
 The site is designed for AI discoverability:
 - `public/llms.txt` — LLM-friendly site index
 - `public/robots.txt` — includes `Llms-Txt` directive
-- `public/.well-known/agent.md` — auto-generated from YAML
-- Netlify Edge Function serves markdown via content negotiation
+- `dist/.well-known/agent.md` — auto-generated from HTML at build time
+- `dist/manifesto.md` — full manifesto in markdown, auto-generated at build time
