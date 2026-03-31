@@ -32,7 +32,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
     <main class="manifesto">
     <div class="preamble" id="introduction">
       <div class="container">
-        <div class="preamble-header reveal">
+        <div class="preamble-header" data-section-entrance>
           <a class="preamble-header-inner" href="#introduction">
             <span class="preamble-number">0</span>
             <h2 class="preamble-title">Introduction</h2>
@@ -513,6 +513,64 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
     margin-bottom: var(--space-xl);
     padding-left: var(--space-lg);
     border-left: 3px solid var(--accent-intro);
+  }
+
+  /* Cinematic entrance for preamble header */
+  .preamble-header[data-section-entrance] {
+    border-left-color: transparent;
+    background-image: linear-gradient(var(--accent-intro), var(--accent-intro));
+    background-size: 3px 0%;
+    background-position: left top;
+    background-repeat: no-repeat;
+  }
+
+  .preamble-header[data-section-entrance].entered {
+    animation: drawBorderIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes drawBorderIntro {
+    from { background-size: 3px 0%; }
+    to { background-size: 3px 100%; }
+  }
+
+  .preamble-header[data-section-entrance] .preamble-number {
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .preamble-header[data-section-entrance].entered .preamble-number {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.15s;
+  }
+
+  .preamble-header[data-section-entrance] .preamble-title {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .preamble-header[data-section-entrance].entered .preamble-title {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .preamble-header[data-section-entrance] {
+      border-left-color: var(--accent-intro);
+      background-image: none;
+    }
+    .preamble-header[data-section-entrance] .preamble-number,
+    .preamble-header[data-section-entrance] .preamble-title {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .preamble-header[data-section-entrance].entered {
+      animation: none;
+    }
   }
 
   .preamble-header-inner {

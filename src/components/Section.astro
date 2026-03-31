@@ -23,14 +23,14 @@ const sectionColor = sectionColorMap[number] || 'var(--accent-rust)';
   style={`--section-color: ${sectionColor}`}
 >
   <div class="container">
-    <div class="section-header-wrap">
-      <div class="section-header reveal">
+    <div class="section-header-wrap" data-section-entrance>
+      <div class="section-header">
         <a class="section-header-inner" href={`#${id}`}>
           <span class="section-number">{number}</span>
           <h2 class="section-title">{title}<span class="anchor-link">#</span></h2>
         </a>
       </div>
-      {intro && <p class="section-intro reveal">{intro}</p>}
+      {intro && <p class="section-intro">{intro}</p>}
     </div>
     <div class="section-content">
       <slot />
@@ -48,6 +48,77 @@ const sectionColor = sectionColorMap[number] || 'var(--accent-rust)';
     margin-bottom: var(--space-xl);
     padding-left: var(--space-lg);
     border-left: 3px solid var(--section-color);
+  }
+
+  /* Cinematic entrance: border draws, elements reveal */
+  .section-header-wrap[data-section-entrance] {
+    border-left-color: transparent;
+    --border-progress: 0;
+    background-image: linear-gradient(var(--section-color), var(--section-color));
+    background-size: 3px calc(var(--border-progress) * 100%);
+    background-position: left top;
+    background-repeat: no-repeat;
+  }
+
+  .section-header-wrap[data-section-entrance].entered {
+    border-left-color: transparent;
+    animation: drawBorder 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes drawBorder {
+    from { background-size: 3px 0%; }
+    to { background-size: 3px 100%; }
+  }
+
+  .section-header-wrap[data-section-entrance] .section-number {
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .section-header-wrap[data-section-entrance].entered .section-number {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.15s;
+  }
+
+  .section-header-wrap[data-section-entrance] .section-title {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .section-header-wrap[data-section-entrance].entered .section-title {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+  }
+
+  .section-header-wrap[data-section-entrance] .section-intro {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .section-header-wrap[data-section-entrance].entered .section-intro {
+    opacity: 1;
+    transition-delay: 0.45s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section-header-wrap[data-section-entrance] {
+      border-left-color: var(--section-color);
+      background-image: none;
+    }
+    .section-header-wrap[data-section-entrance] .section-number,
+    .section-header-wrap[data-section-entrance] .section-title,
+    .section-header-wrap[data-section-entrance] .section-intro {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .section-header-wrap[data-section-entrance].entered {
+      animation: none;
+    }
   }
 
   .section-header {

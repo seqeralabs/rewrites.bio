@@ -49,7 +49,7 @@ const ogImage = `${siteUrl}/og-image.png`;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
-    <div class="progress-bar" id="progress-bar"></div>
+    <div class="doc-map" id="doc-map" aria-hidden="true"></div>
     <nav class="site-nav">
       <a href="/" class="nav-brand">
         <span class="nav-rewrites">rewrites</span><span class="nav-dot">.</span><span class="nav-bio">bio</span>
@@ -220,17 +220,283 @@ const ogImage = `${siteUrl}/og-image.png`;
         });
       }
 
-      // Horizontal progress bar at top of page
-      function initProgressBar() {
-        const bar = document.getElementById('progress-bar');
-        if (!bar) return;
+      // Section-colored document map
+      function initDocMap() {
+        const map = document.getElementById('doc-map');
+        if (!map) return;
 
-        let ticking = false;
-        function update() {
+        const sections = [
+          { id: 'introduction', label: '0 Introduction', color: 'var(--accent-intro)' },
+          { id: 'philosophy', label: '1 Philosophy', color: 'var(--accent-rust)' },
+          { id: 'planning', label: '2 Planning', color: 'var(--accent-blue)' },
+          { id: 'building', label: '3 Building', color: 'var(--accent-gold)' },
+          { id: 'stewardship', label: '4 Stewardship', color: 'var(--accent-sage)' },
+        ];
+
+        // Measure section positions and build segments
+        function buildMap() {
+          const docHeight = document.documentElement.scrollHeight;
+          map.innerHTML = '';
+
+          const measured = sections.map((s) => {
+            const el = document.getElementById(s.id);
+            if (!el) return null;
+            const top = el.offsetTop;
+            // Find the next section's start or use document end
+            return { ...s, top, el };
+          }).filter(Boolean);
+
+          // Calculate each section's proportional height
+          for (let i = 0; i < measured.length; i++) {
+            const start = measured[i].top;
+            const end = i < measured.length - 1 ? measured[i + 1].top : docHeight;
+            const pct = ((end - start) / docHeight) * 100;
+
+            const seg = document.createElement('div');
+            seg.className = 'doc-map-seg';
+            seg.style.width = `${pct}%`;
+            seg.style.setProperty('--seg-color', measured[i].color);
+            seg.dataset.sectionId = measured[i].id;
+            seg.setAttribute('title', measured[i].label);
+
+            seg.addEventListener('click', () => {
+              measured[i].el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+
+            map.appendChild(seg);
+          }
+
+          // Add the reading position indicator
+          let indicator = map.querySelector('.doc-map-indicator');
+          if (!indicator) {
+            indicator = document.createElement('div');
+            indicator.className = 'doc-map-indicator';
+            map.appendChild(indicator);
+          }
+        }
+
+        function updatePosition() {
+          const indicator = map.querySelector('.doc-map-indicator');
+          if (!indicator) return;
           const scrollTop = window.scrollY;
           const docHeight = document.documentElement.scrollHeight - window.innerHeight;
           const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0;
-          bar.style.transform = `scaleX(${progress})`;
+          indicator.style.left = `${progress * 100}%`;
+        }
+
+        buildMap();
+        updatePosition();
+
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+          if (!ticking) {
+            requestAnimationFrame(() => {
+              updatePosition();
+              ticking = false;
+            });
+            ticking = true;
+          }
+        }, { passive: true });
+
+        // Rebuild on resize (section heights change)
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+          clearTimeout(resizeTimer);
+          resizeTimer = setTimeout(buildMap, 200);
+        });
+      }
+
+      // Animate visual components on scroll into view
+      function initVisualAnimations() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+        const animated = new WeakSet();
+
+        // Bar chart growth animation
+        function animateBars(wrap) {
+          const bars = wrap.querySelectorAll('.bar');
+          bars.forEach((bar) => {
+            const targetWidth = bar.style.width;
+            bar.style.width = '0%';
+            bar.animate(
+              [{ width: '0%' }, { width: targetWidth }],
+              { duration: 800, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards', delay: 100 }
+            );
+          });
+          // Animate bar values fading in
+          const vals = wrap.querySelectorAll('.bar-val');
+          vals.forEach((val, i) => {
+            val.style.opacity = '0';
+            val.animate(
+              [{ opacity: 0 }, { opacity: 1 }],
+              { duration: 400, fill: 'forwards', delay: 400 + i * 60 }
+            );
+          });
+        }
+
+        // Diff table row reveal
+        function animateDiffRows(wrap) {
+          const rows = wrap.querySelectorAll('.diff-row');
+          rows.forEach((row, i) => {
+            row.style.opacity = '0';
+            row.animate(
+              [{ opacity: 0, transform: 'translateX(-8px)' }, { opacity: 1, transform: 'translateX(0)' }],
+              { duration: 350, easing: 'ease-out', fill: 'forwards', delay: 150 + i * 80 }
+            );
+          });
+          // Pop in badges
+          const badges = wrap.querySelectorAll('.badge');
+          badges.forEach((badge, i) => {
+            badge.style.opacity = '0';
+            badge.animate(
+              [{ opacity: 0, transform: 'scale(0.5)' }, { opacity: 1, transform: 'scale(1)' }],
+              { duration: 250, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)', fill: 'forwards', delay: 500 + i * 60 }
+            );
+          });
+          // Pop in verdict badges
+          const verdicts = wrap.querySelectorAll('.verdict-badge');
+          verdicts.forEach((v, i) => {
+            v.style.opacity = '0';
+            v.animate(
+              [{ opacity: 0, transform: 'scale(0.8)' }, { opacity: 1, transform: 'scale(1)' }],
+              { duration: 300, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)', fill: 'forwards', delay: 800 + i * 120 }
+            );
+          });
+        }
+
+        // Step-by-step reveal for loop/flow diagrams
+        function animateSteps(wrap) {
+          const steps = wrap.querySelectorAll('.loop-step, .step-box, .tool-box');
+          steps.forEach((step, i) => {
+            step.style.opacity = '0';
+            step.animate(
+              [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0)' }],
+              { duration: 400, easing: 'ease-out', fill: 'forwards', delay: i * 120 }
+            );
+          });
+          const arrows = wrap.querySelectorAll('.loop-arrow, .arrow');
+          arrows.forEach((a, i) => {
+            a.style.opacity = '0';
+            a.animate(
+              [{ opacity: 0 }, { opacity: 1 }],
+              { duration: 200, fill: 'forwards', delay: 200 + i * 120 }
+            );
+          });
+        }
+
+        // Checklist items appearing
+        function animateChecklist(wrap) {
+          const items = wrap.querySelectorAll('.check-item, .gov-item, .flywheel-item');
+          items.forEach((item, i) => {
+            item.style.opacity = '0';
+            item.animate(
+              [{ opacity: 0, transform: 'translateX(-6px)' }, { opacity: 1, transform: 'translateX(0)' }],
+              { duration: 350, easing: 'ease-out', fill: 'forwards', delay: i * 80 }
+            );
+          });
+        }
+
+        // Generic panel entrance
+        function animatePanel(wrap) {
+          wrap.animate(
+            [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }],
+            { duration: 500, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards' }
+          );
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting || animated.has(entry.target)) return;
+            animated.add(entry.target);
+
+            const el = entry.target;
+            // Determine which animation to run based on content
+            if (el.querySelector('.bar-track')) {
+              animateBars(el);
+            } else if (el.querySelector('.diff-row')) {
+              animateDiffRows(el);
+            } else if (el.querySelector('.loop-step') || el.querySelector('.step-box') || el.querySelector('.tool-box')) {
+              animateSteps(el);
+            } else if (el.querySelector('.check-item') || el.querySelector('.gov-item') || el.querySelector('.flywheel-item')) {
+              animateChecklist(el);
+            } else {
+              animatePanel(el);
+            }
+          });
+        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+
+        // Observe all visual component wrappers
+        document.querySelectorAll('.principle-visual > *').forEach((el) => {
+          observer.observe(el);
+        });
+
+        // Also observe the preamble visual
+        document.querySelectorAll('.preamble-visual > *').forEach((el) => {
+          observer.observe(el);
+        });
+      }
+
+      // Cinematic section header entrances + active doc-map segment highlighting
+      function initSectionEntrances() {
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          // Mark all as entered immediately
+          document.querySelectorAll('[data-section-entrance]').forEach((el) => {
+            el.classList.add('entered');
+          });
+          return;
+        }
+
+        const entered = new WeakSet();
+        const entranceObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting && !entered.has(entry.target)) {
+              entered.add(entry.target);
+              entry.target.classList.add('entered');
+            }
+          });
+        }, { threshold: 0.2, rootMargin: '0px 0px -80px 0px' });
+
+        document.querySelectorAll('[data-section-entrance]').forEach((el) => {
+          entranceObserver.observe(el);
+        });
+
+        // Also observe the preamble header
+        const preambleHeader = document.querySelector('.preamble-header');
+        if (preambleHeader) {
+          preambleHeader.setAttribute('data-section-entrance', '');
+          entranceObserver.observe(preambleHeader);
+        }
+      }
+
+      // Highlight active doc-map segment
+      function initDocMapHighlight() {
+        const map = document.getElementById('doc-map');
+        if (!map) return;
+
+        const sectionIds = ['introduction', 'philosophy', 'planning', 'building', 'stewardship'];
+        let ticking = false;
+
+        function update() {
+          const navHeight = 64;
+          let activeId = null;
+
+          for (const id of sectionIds) {
+            const el = document.getElementById(id);
+            if (!el) continue;
+            const rect = el.getBoundingClientRect();
+            if (rect.top < navHeight + 200 && rect.bottom > navHeight) {
+              activeId = id;
+            }
+          }
+
+          const segs = map.querySelectorAll('.doc-map-seg');
+          segs.forEach((seg) => {
+            if (seg.dataset.sectionId === activeId) {
+              seg.style.opacity = '0.55';
+            } else {
+              seg.style.opacity = '';
+            }
+          });
           ticking = false;
         }
 
@@ -247,30 +513,65 @@ const ogImage = `${siteUrl}/og-image.png`;
       initReveals();
       initTocTracker();
       initTocToggle();
-      initProgressBar();
+      initDocMap();
+      initVisualAnimations();
+      initSectionEntrances();
+      initDocMapHighlight();
       document.addEventListener('astro:after-swap', () => {
         initReveals();
         initTocTracker();
         initTocToggle();
-        initProgressBar();
+        initDocMap();
+        initVisualAnimations();
+        initSectionEntrances();
+        initDocMapHighlight();
       });
     </script>
   </body>
 </html>
 
 <style>
-  .progress-bar {
+  .doc-map {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 2px;
-    background: var(--accent-rust);
-    transform-origin: left;
-    transform: scaleX(0);
+    height: 4px;
     z-index: 1000;
+    display: flex;
+    cursor: pointer;
+  }
+
+  :global(.doc-map-seg) {
+    height: 100%;
+    background: var(--seg-color);
+    opacity: 0.25;
+    transition: opacity 0.2s ease;
+    position: relative;
+  }
+
+  :global(.doc-map-seg:hover) {
+    opacity: 0.6;
+  }
+
+  :global(.doc-map-indicator) {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 100%;
+    background: var(--text-primary);
+    border-radius: 1px;
+    transform: translateX(-50%);
+    transition: left 0.1s ease-out;
+    box-shadow: 0 0 6px rgba(230, 225, 216, 0.4);
     pointer-events: none;
-    transition: transform 0.1s ease-out;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(.doc-map-indicator) {
+      transition: none;
+    }
   }
 
   .site-nav {
