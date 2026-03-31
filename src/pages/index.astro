@@ -39,7 +39,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
           </a>
         </div>
         <div class="preamble-section" id="introduction-opportunity">
-          <h3 class="preamble-heading reveal"><span class="preamble-sub-number">0.1</span>The opportunity</h3>
+          <a class="preamble-heading reveal" href="#introduction-opportunity"><span class="preamble-sub-number">0.1</span>The opportunity<span class="anchor-link">#</span></a>
           <div class="preamble-layout">
             <div class="preamble-text reveal-stagger">
               <p class="reveal">
@@ -64,7 +64,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
         </div>
 
         <div class="preamble-section preamble-risk" id="introduction-risk">
-          <h3 class="preamble-heading reveal"><span class="preamble-sub-number">0.2</span>The risk</h3>
+          <a class="preamble-heading reveal" href="#introduction-risk"><span class="preamble-sub-number">0.2</span>The risk<span class="anchor-link">#</span></a>
           <div class="preamble-text-full reveal-stagger">
             <p class="reveal">
               Cheap code is not the same as correct code. AI-generated implementations are fluent
@@ -301,7 +301,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
             <li><strong>Review PRs</strong> and grow a contributor community</li>
           </ul>
           <p>
-            Put governance in place before release: CONTRIBUTING.md, CODE_OF_CONDUCT.md, versioned
+            Put governance in place before release: CONTRIBUTING.md, CHANGELOG.md, versioned
             tags, changelogs, and a commitment to acknowledge issues.
           </p>
         </div>
@@ -608,6 +608,24 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
     display: flex;
     align-items: baseline;
     gap: var(--space-md);
+    text-decoration: none;
+  }
+
+  .preamble-heading:hover {
+    color: var(--text-primary);
+  }
+
+  .preamble-heading .anchor-link {
+    color: var(--accent-intro);
+    font-weight: 400;
+    margin-left: 0.3em;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    font-size: 0.85em;
+  }
+
+  .preamble-heading:hover .anchor-link {
+    opacity: 1;
   }
 
   .preamble-sub-number {

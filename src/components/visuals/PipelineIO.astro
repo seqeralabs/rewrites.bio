@@ -1,256 +1,178 @@
 ---
 // 2.1 — Think big: pipeline I/O before/after
-// Uses RustQC as a real example (https://seqeralabs.github.io/RustQC)
+// Animated: 12 tools each reading the file vs 1 tool reading it once
 ---
 
 <div class="pipeline-wrap">
-  <div class="pipeline-scenario">
-    <div class="scenario-label scenario-before">Before — 15+ separate tools, each reading the BAM independently</div>
-    <div class="pipeline-row">
-      <div class="tool-box">
-        <div class="tool-name">featureCounts</div>
-        <div class="tool-sub">quantify</div>
-      </div>
-      <div class="io-sep">
-        <div class="disk-icon">💾</div>
-      </div>
-      <div class="tool-box">
-        <div class="tool-name">dupRadar</div>
-        <div class="tool-sub">duplication</div>
-      </div>
-      <div class="io-sep">
-        <div class="disk-icon">💾</div>
-      </div>
-      <div class="tool-box">
-        <div class="tool-name">RSeQC</div>
-        <div class="tool-sub">QC metrics</div>
-      </div>
-      <div class="io-sep">
-        <div class="disk-icon">💾</div>
-      </div>
-      <div class="tool-box tool-box-etc">
-        <div class="tool-name">+12 more…</div>
-        <div class="tool-sub">each reads BAM</div>
-      </div>
-    </div>
-    <div class="cost-row">
-      <span class="cost-item cost-bad">15+ BAM reads</span>
-      <span class="cost-item cost-bad">~2h 05m total</span>
-    </div>
+  <div class="scenario">
+    <div class="scenario-label scenario-before">Before — each tool reads the file independently</div>
+    <svg class="pipeline-svg" viewBox="0 0 400 200" role="img" aria-label="12 separate tools each reading the same file sequentially" xmlns="http://www.w3.org/2000/svg">
+
+      <!-- Tool boxes: 6 top, 6 bottom -->
+      <rect x="8"   y="8"  width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
+      <rect x="70"  y="8"  width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
+      <rect x="132" y="8"  width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
+      <rect x="214" y="8"  width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
+      <rect x="276" y="8"  width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
+      <rect x="338" y="8"  width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
+      <rect x="8"   y="152" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
+      <rect x="70"  y="152" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
+      <rect x="132" y="152" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
+      <rect x="214" y="152" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
+      <rect x="276" y="152" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
+      <rect x="338" y="152" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
+
+      <!-- Connection lines -->
+      <line x1="200" y1="100" x2="35"  y2="48" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
+      <line x1="200" y1="100" x2="97"  y2="48" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
+      <line x1="200" y1="100" x2="159" y2="48" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
+      <line x1="200" y1="100" x2="241" y2="48" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
+      <line x1="200" y1="100" x2="303" y2="48" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
+      <line x1="200" y1="100" x2="365" y2="48" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
+      <line x1="200" y1="100" x2="35"  y2="152" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
+      <line x1="200" y1="100" x2="97"  y2="152" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
+      <line x1="200" y1="100" x2="159" y2="152" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
+      <line x1="200" y1="100" x2="241" y2="152" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
+      <line x1="200" y1="100" x2="303" y2="152" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
+      <line x1="200" y1="100" x2="365" y2="152" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
+
+      <!-- Animated pulse dots (2.4s cycle) -->
+      <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
+        <animate attributeName="opacity" values="0;1;0;0" dur="2.4s" keyTimes="0;0.01;0.083;1" repeatCount="indefinite" />
+        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.083;1" keyPoints="0;1;1" calcMode="linear" path="M200,100 L35,28" />
+      </circle>
+      <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
+        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.083;0.09;0.167;1" repeatCount="indefinite" />
+        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.083;0.167;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L97,28" />
+      </circle>
+      <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
+        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.167;0.174;0.25;1" repeatCount="indefinite" />
+        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.167;0.25;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L159,28" />
+      </circle>
+      <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
+        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.25;0.257;0.333;1" repeatCount="indefinite" />
+        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.25;0.333;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L241,28" />
+      </circle>
+      <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
+        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.333;0.34;0.417;1" repeatCount="indefinite" />
+        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.333;0.417;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L303,28" />
+      </circle>
+      <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
+        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.417;0.424;0.5;1" repeatCount="indefinite" />
+        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.417;0.5;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L365,28" />
+      </circle>
+      <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
+        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.5;0.507;0.583;1" repeatCount="indefinite" />
+        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.5;0.583;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L35,172" />
+      </circle>
+      <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
+        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.583;0.59;0.667;1" repeatCount="indefinite" />
+        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.583;0.667;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L97,172" />
+      </circle>
+      <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
+        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.667;0.674;0.75;1" repeatCount="indefinite" />
+        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.667;0.75;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L159,172" />
+      </circle>
+      <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
+        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.75;0.757;0.833;1" repeatCount="indefinite" />
+        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.75;0.833;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L241,172" />
+      </circle>
+      <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
+        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.833;0.84;0.917;1" repeatCount="indefinite" />
+        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.833;0.917;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L303,172" />
+      </circle>
+      <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
+        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.917;0.924;1" repeatCount="indefinite" />
+        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.917;1;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L365,172" />
+      </circle>
+
+      <!-- File in center (drawn last = on top) -->
+      <rect x="168" y="78" width="64" height="44" rx="5" fill="var(--bg-primary)" stroke="var(--text-tertiary)" stroke-width="1.5" />
+      <text x="200" y="104" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--text-secondary)">input</text>
+    </svg>
+    <div class="cost-label cost-bad">12 reads of the same file</div>
   </div>
 
   <div class="pipeline-divider">↓ rethink the architecture</div>
 
-  <div class="pipeline-scenario">
-    <div class="scenario-label scenario-after">After — RustQC: single pass over the BAM</div>
-    <div class="pipeline-row pipeline-row-after">
-      <div class="tool-box tool-box-bam">
-        <div class="tool-name">sample.bam</div>
-        <div class="tool-sub">read once</div>
-      </div>
-      <div class="io-arrow-clean">
-        <div class="arrow-line"></div>
-      </div>
-      <div class="tool-box tool-box-combined">
-        <div class="tool-name">RustQC</div>
-        <div class="tool-sub">all metrics, one pass</div>
-        <div class="tool-badge">~5 min</div>
-      </div>
-      <div class="io-arrow-clean">
-        <div class="arrow-line"></div>
-      </div>
-      <div class="tool-box">
-        <div class="tool-name">MultiQC</div>
-        <div class="tool-sub">report</div>
-      </div>
-    </div>
-    <div class="cost-row">
-      <span class="cost-item cost-good">1× BAM read</span>
-      <span class="cost-item cost-good">~25× faster</span>
-      <span class="cost-item cost-good">820,118 values, zero mismatches</span>
-    </div>
-  </div>
+  <div class="scenario">
+    <div class="scenario-label scenario-after">After — single pass</div>
+    <svg class="pipeline-svg" viewBox="0 0 400 80" role="img" aria-label="One combined tool reading the file once" xmlns="http://www.w3.org/2000/svg">
+      <!-- File -->
+      <rect x="168" y="18" width="64" height="44" rx="5" fill="var(--bg-primary)" stroke="var(--text-tertiary)" stroke-width="1.5" />
+      <text x="200" y="44" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--text-secondary)">input</text>
 
-  <div class="pipeline-source">
-    Source: <a href="https://seqeralabs.github.io/RustQC" target="_blank" rel="noopener">seqeralabs.github.io/RustQC</a>
+      <!-- Arrow -->
+      <line x1="232" y1="40" x2="268" y2="40" stroke="var(--color-pass)" stroke-width="1.5" />
+      <polygon points="268,35 278,40 268,45" fill="var(--color-pass)" />
+
+      <!-- Single combined tool (same size as the 12 small boxes) -->
+      <rect x="282" y="18" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="var(--color-pass)" stroke-width="1.5" />
+
+      <!-- Pulse dot — same speed as the individual ones above (0.2s travel) -->
+      <circle r="3.5" fill="var(--color-pass)" class="pulse-dot">
+        <animate attributeName="opacity" values="0;1;0;0" dur="2.4s" keyTimes="0;0.01;0.083;1" repeatCount="indefinite" />
+        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.083;1" keyPoints="0;1;1" calcMode="linear" path="M200,40 L282,40" />
+      </circle>
+    </svg>
+    <div class="cost-label cost-good">1 read</div>
   </div>
 </div>
 
 <style>
   .pipeline-wrap {
     background: var(--bg-secondary);
-    border-left: 3px solid var(--section-color, var(--accent-rust));
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
+    border-left: 3px solid var(--section-color, var(--accent-blue));
     padding: var(--space-lg);
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
   }
 
-  .pipeline-scenario {
+  .scenario {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
   }
 
   .scenario-label {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 0.7rem;
-    font-weight: 600;
-    margin-bottom: 4px;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 500;
     line-height: 1.5;
   }
 
-  .scenario-before { color: rgba(212, 86, 90, 0.7); }
-  .scenario-after  { color: rgba(93, 172, 114, 0.7); }
+  .scenario-before { color: var(--color-fail); }
+  .scenario-after  { color: var(--color-pass); }
 
-  .pipeline-row {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-    flex-wrap: wrap;
-    row-gap: var(--space-sm);
-  }
-
-  .tool-box {
-    background: var(--bg-primary);
-    border: 1px solid rgba(230, 225, 216, 0.1);
-    border-radius: 6px;
-    padding: var(--space-xs) var(--space-sm);
-    text-align: center;
-    flex-shrink: 0;
-  }
-
-  .tool-box-etc {
-    opacity: 0.5;
-  }
-
-  .tool-box-bam {
-    opacity: 0.7;
-  }
-
-  .tool-box-combined {
-    border-color: rgba(93, 172, 114, 0.3);
-    background: rgba(93, 172, 114, 0.04);
-    min-width: 140px;
-  }
-
-  .tool-name {
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: var(--text-primary);
-  }
-
-  .tool-sub {
-    font-family: var(--font-sans);
-    font-size: 0.65rem;
-    color: var(--text-tertiary);
-    margin-top: 2px;
-  }
-
-  .tool-badge {
-    font-family: var(--font-sans);
-    font-size: 0.62rem;
-    font-weight: 600;
-    color: rgba(93, 172, 114, 0.8);
-    background: rgba(93, 172, 114, 0.1);
-    border: 1px solid rgba(93, 172, 114, 0.2);
-    border-radius: 3px;
-    padding: 1px 6px;
-    margin-top: 4px;
-    display: inline-block;
-  }
-
-  .io-sep {
-    font-size: 0.85rem;
-    color: rgba(212, 86, 90, 0.5);
-    padding: 0 2px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .disk-icon {
-    font-size: 0.85rem;
-    line-height: 1;
-  }
-
-  .io-arrow-clean {
-    display: flex;
-    align-items: center;
-    flex: 1;
-    min-width: 24px;
-  }
-
-  .arrow-line {
-    height: 2px;
-    background: rgba(93, 172, 114, 0.3);
+  .pipeline-svg {
     width: 100%;
-    position: relative;
+    height: auto;
+    display: block;
   }
 
-  .arrow-line::after {
-    content: '';
-    position: absolute;
-    right: -1px;
-    top: -4px;
-    width: 0;
-    height: 0;
-    border-left: 6px solid rgba(93, 172, 114, 0.4);
-    border-top: 5px solid transparent;
-    border-bottom: 5px solid transparent;
-  }
-
-  .cost-row {
-    display: flex;
-    gap: var(--space-sm);
-    flex-wrap: wrap;
-  }
-
-  .cost-item {
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
+  .cost-label {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
     font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 3px;
   }
 
-  .cost-bad {
-    background: rgba(212, 86, 90, 0.1);
-    color: rgba(212, 86, 90, 0.8);
-    border: 1px solid rgba(212, 86, 90, 0.2);
-  }
-
-  .cost-good {
-    background: rgba(93, 172, 114, 0.08);
-    color: rgba(93, 172, 114, 0.8);
-    border: 1px solid rgba(93, 172, 114, 0.2);
-  }
+  .cost-bad { color: var(--color-fail); }
+  .cost-good { color: var(--color-pass); }
 
   .pipeline-divider {
     text-align: center;
     font-family: var(--font-sans);
-    font-size: 0.75rem;
+    font-size: var(--text-sm);
     color: var(--text-tertiary);
     padding: var(--space-xs) 0;
     border-top: 1px solid rgba(230, 225, 216, 0.06);
     border-bottom: 1px solid rgba(230, 225, 216, 0.06);
   }
 
-  .pipeline-source {
-    font-family: var(--font-serif);
-    font-size: 0.7rem;
-    color: var(--text-tertiary);
-    border-top: 1px solid rgba(230, 225, 216, 0.06);
-    padding-top: var(--space-sm);
-  }
-
-  .pipeline-source a {
-    color: var(--color-link);
-    font-family: var(--font-mono);
+  @media (prefers-reduced-motion: reduce) {
+    .pulse-dot {
+      display: none;
+    }
   }
 </style>

@@ -1,157 +1,107 @@
 ---
-// 2.2 — Work small: iteration loop diagram
+// 2.2 — Work small: iteration loop diagram (SVG)
 ---
 
 <div class="loop-wrap">
   <div class="loop-label">The Validation Loop</div>
-  <div class="loop-diagram">
-    <div class="loop-row-main">
-      <div class="loop-step">
-        <div class="step-num">01</div>
-        <div class="step-text">Pick one<br />function</div>
-      </div>
-      <div class="loop-arrow">→</div>
-      <div class="loop-step">
-        <div class="step-num">02</div>
-        <div class="step-text">Write<br />rewrite</div>
-      </div>
-      <div class="loop-arrow">→</div>
-      <div class="loop-step">
-        <div class="step-num">03</div>
-        <div class="step-text">Compare<br />outputs</div>
-      </div>
-    </div>
-    <div class="loop-row-outcomes">
-      <div class="loop-outcome loop-outcome-fail">
-        <span class="outcome-icon">✗</span>
-        <span class="outcome-text">Mismatch? Fix &amp; repeat step 2</span>
-      </div>
-      <div class="loop-outcome loop-outcome-pass">
-        <span class="outcome-icon">✓</span>
-        <span class="outcome-text">Match? Move to next function</span>
-      </div>
-    </div>
-  </div>
+  <svg
+    class="loop-svg"
+    viewBox="0 0 280 360"
+    role="img"
+    aria-label="Validation loop: pick one function, write rewrite, compare outputs. Mismatch loops back to step 2, match proceeds to next function."
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <marker id="arrow-blue" viewBox="0 0 10 8" refX="9" refY="4"
+        markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0,0 L10,4 L0,8 Z" fill="var(--section-color, var(--accent-blue))" />
+      </marker>
+      <marker id="arrow-fail" viewBox="0 0 10 8" refX="9" refY="4"
+        markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0,0 L10,4 L0,8 Z" fill="var(--color-fail)" />
+      </marker>
+      <marker id="arrow-pass" viewBox="0 0 10 8" refX="9" refY="4"
+        markerWidth="8" markerHeight="6" orient="auto-start-reverse">
+        <path d="M0,0 L10,4 L0,8 Z" fill="var(--color-pass)" />
+      </marker>
+    </defs>
+
+    <!-- Down arrows between nodes -->
+    <line x1="140" y1="60" x2="140" y2="88"
+      stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" marker-end="url(#arrow-blue)" />
+    <line x1="140" y1="150" x2="140" y2="178"
+      stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" marker-end="url(#arrow-blue)" />
+
+    <!-- Node 1: Pick one function -->
+    <rect x="40" y="10" width="200" height="50" rx="6"
+      fill="var(--bg-primary)" stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" />
+    <text x="140" y="32" text-anchor="middle"
+      font-family="var(--font-mono)" font-size="10" fill="var(--section-color, var(--accent-blue))">01</text>
+    <text x="140" y="48" text-anchor="middle"
+      font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">Pick one function</text>
+
+    <!-- Node 2: Write rewrite -->
+    <rect x="40" y="98" width="200" height="50" rx="6"
+      fill="var(--bg-primary)" stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" />
+    <text x="140" y="120" text-anchor="middle"
+      font-family="var(--font-mono)" font-size="10" fill="var(--section-color, var(--accent-blue))">02</text>
+    <text x="140" y="136" text-anchor="middle"
+      font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">Write rewrite</text>
+
+    <!-- Node 3: Compare outputs -->
+    <rect x="40" y="188" width="200" height="50" rx="6"
+      fill="var(--bg-primary)" stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" />
+    <text x="140" y="210" text-anchor="middle"
+      font-family="var(--font-mono)" font-size="10" fill="var(--section-color, var(--accent-blue))">03</text>
+    <text x="140" y="226" text-anchor="middle"
+      font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">Compare outputs</text>
+
+    <!-- Mismatch: loops back up from node 3 to node 2, curving to the right -->
+    <path d="M240,208 C270,208 270,123 240,123"
+      fill="none" stroke="var(--color-fail)" stroke-width="1.5"
+      stroke-dasharray="5,3"
+      marker-end="url(#arrow-fail)" />
+    <text x="268" y="170" text-anchor="middle"
+      font-family="var(--font-sans)" font-size="10" font-weight="600" fill="var(--color-fail)"
+      transform="rotate(90, 268, 170)">Mismatch</text>
+
+    <!-- Match: exits down from node 3 -->
+    <line x1="140" y1="238" x2="140" y2="280"
+      stroke="var(--color-pass)" stroke-width="1.5" marker-end="url(#arrow-pass)" />
+    <text x="140" y="300" text-anchor="middle"
+      font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--color-pass)">Match → next function</text>
+  </svg>
   <div class="loop-note">
-    Never move on until the current step validates. Compound errors will bury you.
+    Never move on until the current step validates.
   </div>
 </div>
 
 <style>
   .loop-wrap {
     background: var(--bg-secondary);
-    border-left: 3px solid var(--section-color, var(--accent-rust));
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
+    border-left: 3px solid var(--section-color, var(--accent-blue));
     padding: var(--space-lg);
   }
 
   .loop-label {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 500;
     color: var(--text-tertiary);
     margin-bottom: var(--space-md);
   }
 
-  .loop-diagram {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
-    margin-bottom: var(--space-md);
-  }
-
-  .loop-row-main {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-  }
-
-  .loop-step {
-    background: var(--bg-primary);
-    border: 1px solid rgba(230, 225, 216, 0.1);
-    border-radius: 6px;
-    padding: var(--space-sm) var(--space-md);
-    text-align: center;
-    flex: 1;
-  }
-
-  .step-num {
-    font-family: var(--font-sans);
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: var(--accent-rust);
-    margin-bottom: 4px;
-  }
-
-  .step-text {
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    color: var(--text-secondary);
-    line-height: 1.4;
-  }
-
-  .loop-arrow {
-    font-family: var(--font-sans);
-    font-size: 0.85rem;
-    color: var(--text-tertiary);
-    flex-shrink: 0;
-  }
-
-  .loop-row-outcomes {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-sm);
-  }
-
-  @media (max-width: 560px) {
-    .loop-row-outcomes {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .loop-outcome {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    padding: var(--space-sm) var(--space-md);
-    border-radius: 4px;
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
-  }
-
-  .loop-outcome-fail {
-    background: rgba(212, 86, 90, 0.08);
-    border: 1px solid rgba(212, 86, 90, 0.2);
-  }
-
-  .loop-outcome-fail .outcome-icon {
-    color: rgba(212, 86, 90, 0.9);
-  }
-
-  .loop-outcome-pass {
-    background: rgba(93, 172, 114, 0.08);
-    border: 1px solid rgba(93, 172, 114, 0.2);
-  }
-
-  .loop-outcome-pass .outcome-icon {
-    color: rgba(93, 172, 114, 0.9);
-  }
-
-  .outcome-icon {
-    font-weight: 700;
-    flex-shrink: 0;
-  }
-
-  .outcome-text {
-    color: var(--text-secondary);
+  .loop-svg {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    display: block;
+    margin: 0 auto var(--space-md);
   }
 
   .loop-note {
     font-family: var(--font-serif);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--text-tertiary);
     border-top: 1px solid rgba(230, 225, 216, 0.06);
     padding-top: var(--space-sm);

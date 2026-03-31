@@ -1,249 +1,137 @@
 ---
-// 3.2 — Benchmark rigorously
-// Real numbers from RustQC (https://seqeralabs.github.io/RustQC)
-// Input: GM12878 REP1, 10 GB paired-end BAM, GRCh38, 10-core Apple M3 Max
+// 3.1 — Test and benchmark with real data: Reproducibility blueprint
 ---
 
-<div class="bench-wrap">
-  <div class="bench-label">Real Benchmark — RustQC · GM12878 REP1 · 10 GB BAM · 10-core Apple M3 Max</div>
-  <div class="bench-table">
-    <div class="bench-section">
-      <div class="bench-section-head">Traditional workflow — 15+ separate tool invocations, each reading BAM</div>
-      <div class="bench-grid">
-        <div class="bench-grid-header">
-          <span class="bench-col-tool">Tool</span>
-          <span class="bench-col-time">Time</span>
-        </div>
-        <div class="bench-row">
-          <span class="bench-tool">featureCounts</span>
-          <span class="bench-time bench-time-old">3m 39s</span>
-        </div>
-        <div class="bench-row">
-          <span class="bench-tool">dupRadar</span>
-          <span class="bench-time bench-time-old">27m 21s</span>
-        </div>
-        <div class="bench-row">
-          <span class="bench-tool">RSeQC read_duplication</span>
-          <span class="bench-time bench-time-old">29m 43s</span>
-        </div>
-        <div class="bench-row">
-          <span class="bench-tool">RSeQC bam_stat</span>
-          <span class="bench-time bench-time-old">6m 07s</span>
-        </div>
-        <div class="bench-row bench-row-dim">
-          <span class="bench-tool">+ 11 more tools …</span>
-          <span class="bench-time bench-time-old">~58m</span>
-        </div>
-        <div class="bench-row bench-row-total">
-          <span class="bench-tool">Total</span>
-          <span class="bench-time bench-time-old">~2h 05m</span>
-        </div>
-      </div>
+<div class="blueprint-wrap">
+  <div class="blueprint-layout">
+    <div class="blueprint-header">
+      <div class="blueprint-main-label">Benchmark</div>
+      <div class="blueprint-main-sub">All four required for reproducibility</div>
     </div>
+    <div class="blueprint-items">
+      <div class="blueprint-item">
 
-    <div class="bench-divider"></div>
-
-    <div class="bench-section">
-      <div class="bench-section-head bench-section-head-new">RustQC — single pass over the BAM</div>
-      <div class="bench-grid">
-        <div class="bench-row">
-          <span class="bench-tool">rustqc</span>
-          <span class="bench-time bench-time-new">~5m</span>
-        </div>
-        <div class="bench-row bench-row-total">
-          <span class="bench-tool">Total</span>
-          <span class="bench-time bench-time-new">~5m</span>
+        <div class="blueprint-box">
+          <div class="blueprint-item-name">Hardware</div>
+          <div class="blueprint-item-detail">10-core M3 Max</div>
         </div>
       </div>
-    </div>
+      <div class="blueprint-item">
 
-    <div class="bench-divider"></div>
-
-    <div class="bench-result">
-      <div class="bench-result-item">
-        <span class="bench-result-label">Speedup</span>
-        <span class="bench-result-val">~25×</span>
+        <div class="blueprint-box">
+          <div class="blueprint-item-name">Dataset</div>
+          <div class="blueprint-item-detail">GM12878 REP1, 10 GB</div>
+        </div>
       </div>
-      <div class="bench-result-item">
-        <span class="bench-result-label">Output equivalence</span>
-        <span class="bench-result-match">✓ 820,118 values, zero mismatches</span>
+      <div class="blueprint-item">
+
+        <div class="blueprint-box">
+          <div class="blueprint-item-name">Commands</div>
+          <div class="blueprint-item-detail">exact CLI invocations</div>
+        </div>
+      </div>
+      <div class="blueprint-item">
+
+        <div class="blueprint-box">
+          <div class="blueprint-item-name">Expected outputs</div>
+          <div class="blueprint-item-detail">benchmarks/expected/</div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="bench-source">
-    Source: <a href="https://seqeralabs.github.io/RustQC/rna/benchmark-details/" target="_blank" rel="noopener">seqeralabs.github.io/RustQC/rna/benchmark-details/</a>
+  <div class="blueprint-note">
+    Numbers without reproducibility are anecdotes.
+  </div>
+  <div class="blueprint-source">
+    Source: <a href="https://seqeralabs.github.io/RustQC/rna/benchmark-details/" target="_blank" rel="noopener">seqeralabs.github.io/RustQC</a>
   </div>
 </div>
 
 <style>
-  .bench-wrap {
+  .blueprint-wrap {
     background: var(--bg-secondary);
-    border-left: 3px solid var(--section-color, var(--accent-rust));
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
+    border-left: 3px solid var(--section-color, var(--accent-gold));
     padding: var(--space-lg);
   }
 
-  .bench-label {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: var(--text-tertiary);
+  .blueprint-layout {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
     margin-bottom: var(--space-md);
-    line-height: 1.5;
   }
 
-  .bench-table {
-    background: var(--bg-primary);
-    border: 1px solid rgba(230, 225, 216, 0.08);
-    border-radius: 6px;
-    padding: var(--space-md);
+  .blueprint-header {
+    padding-bottom: var(--space-sm);
+    border-bottom: 2px solid var(--section-color, var(--accent-gold));
+  }
+
+  .blueprint-main-label {
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+
+  .blueprint-main-sub {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--section-color, var(--accent-gold));
+  }
+
+  .blueprint-items {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    margin-bottom: var(--space-sm);
-  }
-
-  .bench-section {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .bench-section-head {
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
-    color: var(--text-tertiary);
-    margin-bottom: 2px;
-    line-height: 1.5;
-  }
-
-  .bench-section-head-new {
-    color: rgba(93, 172, 114, 0.7);
-  }
-
-  .bench-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .bench-grid-header {
-    display: flex;
-    align-items: center;
-    padding: 4px 0;
-    border-bottom: 1px solid rgba(230, 225, 216, 0.06);
-    margin-bottom: 2px;
-  }
-
-  .bench-col-tool,
-  .bench-col-time {
-    font-family: var(--font-sans);
-    font-size: 0.65rem;
-    font-weight: 600;
-    color: var(--text-tertiary);
-  }
-
-  .bench-col-tool {
     flex: 1;
-    min-width: 0;
   }
 
-  .bench-col-time {
-    white-space: nowrap;
-  }
-
-  .bench-row {
+  .blueprint-item {
     display: flex;
     align-items: center;
-    padding: 5px 0;
-    border-bottom: 1px solid rgba(230, 225, 216, 0.04);
   }
 
-  .bench-row-dim {
-    opacity: 0.6;
-  }
-
-  .bench-row-total {
-    border-top: 1px solid rgba(230, 225, 216, 0.08);
-    border-bottom: none;
-    padding-top: 6px;
-    margin-top: 2px;
-  }
-
-  .bench-tool {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--text-secondary);
+  .blueprint-box {
+    background: var(--bg-elevated);
+    border: 1px solid rgba(230, 225, 216, 0.06);
+    border-radius: 4px;
+    padding: 6px 10px;
     flex: 1;
-    min-width: 0;
   }
 
-  .bench-row-total .bench-tool {
+  .blueprint-item-name {
     font-family: var(--font-sans);
+    font-size: 0.85rem;
     font-weight: 600;
+    color: var(--text-primary);
   }
 
-  .bench-time {
+  .blueprint-item-detail {
     font-family: var(--font-mono);
-    font-size: 0.78rem;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  .bench-time-old { color: var(--color-fail); }
-  .bench-time-new { color: var(--color-pass); }
-
-  .bench-divider {
-    border-top: 1px solid rgba(230, 225, 216, 0.07);
-    margin: var(--space-xs) 0;
-  }
-
-  .bench-result {
-    display: flex;
-    align-items: center;
-    gap: var(--space-lg);
-    flex-wrap: wrap;
-    padding-top: 4px;
-  }
-
-  .bench-result-item {
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-  }
-
-  .bench-result-label {
-    font-family: var(--font-sans);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     color: var(--text-tertiary);
   }
 
-  .bench-result-val {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--color-pass);
+  .blueprint-note {
+    font-family: var(--font-serif);
+    font-size: 0.83rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
+    padding-top: var(--space-sm);
+    line-height: 1.6;
+    font-style: italic;
   }
 
-  .bench-result-match {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: var(--color-pass);
-    font-weight: 600;
-  }
-
-  .bench-source {
+  .blueprint-source {
     font-family: var(--font-serif);
     font-size: 0.7rem;
     color: var(--text-tertiary);
     margin-top: var(--space-xs);
   }
 
-  .bench-source a {
+  .blueprint-source a {
     color: var(--color-link);
     font-family: var(--font-mono);
+    text-decoration: none;
   }
 </style>

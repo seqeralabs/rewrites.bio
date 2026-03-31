@@ -1,239 +1,114 @@
 ---
-// 4.2 — Preserve compatibility: hot-swap pipeline diagram
-// Uses featureCounts → RustQC as a real example
+// 4.2 — Preserve compatibility: swap one piece in a pipeline
+// A row of connected puzzle pieces; the middle one can be swapped (same shape, different colour)
 ---
 
-<div class="hotswap-wrap">
-  <div class="hotswap-label">Hot-Swap Compatibility</div>
-
-  <div class="pipeline-scenario">
-    <div class="hs-scenario-label">Today — using original tool</div>
-    <div class="hs-pipeline">
-      <div class="hs-box hs-upstream">STAR<br />align</div>
-      <div class="hs-arrow">→</div>
-      <div class="hs-box hs-active hs-original">
-        <div class="hs-tool-name">featureCounts</div>
-        <div class="hs-tool-ver">Rsubread v2.x</div>
-      </div>
-      <div class="hs-arrow">→</div>
-      <div class="hs-box hs-downstream">MultiQC<br />report</div>
-      <div class="hs-arrow">→</div>
-      <div class="hs-box hs-downstream">DESeq2<br />analysis</div>
+<div class="swap-wrap">
+  <div class="swap-pipeline">
+    <div class="swap-piece swap-piece-dim">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M192 104.8c0-9.2-5.8-17.3-13.2-22.8c-11.6-8.7-18.8-20.7-18.8-34c0-26.5 28.7-48 64-48s64 21.5 64 48c0 13.3-7.2 25.3-18.8 34c-7.4 5.5-13.2 13.6-13.2 22.8c0 12.8 10.4 23.2 23.2 23.2H336c26.5 0 48 21.5 48 48v56.8c0 12.8 10.4 23.2 23.2 23.2c9.2 0 17.3-5.8 22.8-13.2c8.7-11.6 20.7-18.8 34-18.8c26.5 0 48 28.7 48 64s-21.5 64-48 64c-13.3 0-25.3-7.2-34-18.8c-5.5-7.4-13.6-13.2-22.8-13.2c-12.8 0-23.2 10.4-23.2 23.2V464c0 26.5-21.5 48-48 48h-56.8c-12.8 0-23.2-10.4-23.2-23.2c0-9.2 5.8-17.3 13.2-22.8c11.6-8.7 18.8-20.7 18.8-34c0-26.5-28.7-48-64-48s-64 21.5-64 48c0 13.3 7.2 25.3 18.8 34c7.4 5.5 13.2 13.6 13.2 22.8c0 12.8-10.4 23.2-23.2 23.2H48c-26.5 0-48-21.5-48-48V343.2C0 330.4 10.4 320 23.2 320c9.2 0 17.3 5.8 22.8 13.2c8.7 11.6 20.7 18.8 34 18.8c26.5 0 48-28.7 48-64s-21.5-64-48-64c-13.3 0-25.3 7.2-34 18.8c-5.5 7.4-13.6 13.2-22.8 13.2C10.4 256 0 245.6 0 232.8V176c0-26.5 21.5-48 48-48h120.8c12.8 0 23.2-10.4 23.2-23.2"/></svg>
+    </div>
+    <div class="swap-piece swap-piece-active swap-piece-original">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M192 104.8c0-9.2-5.8-17.3-13.2-22.8c-11.6-8.7-18.8-20.7-18.8-34c0-26.5 28.7-48 64-48s64 21.5 64 48c0 13.3-7.2 25.3-18.8 34c-7.4 5.5-13.2 13.6-13.2 22.8c0 12.8 10.4 23.2 23.2 23.2H336c26.5 0 48 21.5 48 48v56.8c0 12.8 10.4 23.2 23.2 23.2c9.2 0 17.3-5.8 22.8-13.2c8.7-11.6 20.7-18.8 34-18.8c26.5 0 48 28.7 48 64s-21.5 64-48 64c-13.3 0-25.3-7.2-34-18.8c-5.5-7.4-13.6-13.2-22.8-13.2c-12.8 0-23.2 10.4-23.2 23.2V464c0 26.5-21.5 48-48 48h-56.8c-12.8 0-23.2-10.4-23.2-23.2c0-9.2 5.8-17.3 13.2-22.8c11.6-8.7 18.8-20.7 18.8-34c0-26.5-28.7-48-64-48s-64 21.5-64 48c0 13.3 7.2 25.3 18.8 34c7.4 5.5 13.2 13.6 13.2 22.8c0 12.8-10.4 23.2-23.2 23.2H48c-26.5 0-48-21.5-48-48V343.2C0 330.4 10.4 320 23.2 320c9.2 0 17.3 5.8 22.8 13.2c8.7 11.6 20.7 18.8 34 18.8c26.5 0 48-28.7 48-64s-21.5-64-48-64c-13.3 0-25.3 7.2-34 18.8c-5.5 7.4-13.6 13.2-22.8 13.2C10.4 256 0 245.6 0 232.8V176c0-26.5 21.5-48 48-48h120.8c12.8 0 23.2-10.4 23.2-23.2"/></svg>
+      <span class="swap-piece-label">original</span>
+    </div>
+    <div class="swap-piece swap-piece-dim">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M192 104.8c0-9.2-5.8-17.3-13.2-22.8c-11.6-8.7-18.8-20.7-18.8-34c0-26.5 28.7-48 64-48s64 21.5 64 48c0 13.3-7.2 25.3-18.8 34c-7.4 5.5-13.2 13.6-13.2 22.8c0 12.8 10.4 23.2 23.2 23.2H336c26.5 0 48 21.5 48 48v56.8c0 12.8 10.4 23.2 23.2 23.2c9.2 0 17.3-5.8 22.8-13.2c8.7-11.6 20.7-18.8 34-18.8c26.5 0 48 28.7 48 64s-21.5 64-48 64c-13.3 0-25.3-7.2-34-18.8c-5.5-7.4-13.6-13.2-22.8-13.2c-12.8 0-23.2 10.4-23.2 23.2V464c0 26.5-21.5 48-48 48h-56.8c-12.8 0-23.2-10.4-23.2-23.2c0-9.2 5.8-17.3 13.2-22.8c11.6-8.7 18.8-20.7 18.8-34c0-26.5-28.7-48-64-48s-64 21.5-64 48c0 13.3 7.2 25.3 18.8 34c7.4 5.5 13.2 13.6 13.2 22.8c0 12.8-10.4 23.2-23.2 23.2H48c-26.5 0-48-21.5-48-48V343.2C0 330.4 10.4 320 23.2 320c9.2 0 17.3 5.8 22.8 13.2c8.7 11.6 20.7 18.8 34 18.8c26.5 0 48-28.7 48-64s-21.5-64-48-64c-13.3 0-25.3 7.2-34 18.8c-5.5 7.4-13.6 13.2-22.8 13.2C10.4 256 0 245.6 0 232.8V176c0-26.5 21.5-48 48-48h120.8c12.8 0 23.2-10.4 23.2-23.2"/></svg>
     </div>
   </div>
 
-  <div class="hs-swap-indicator">
-    <div class="hs-swap-line"></div>
-    <div class="hs-swap-text">swap one line in your config</div>
-    <div class="hs-swap-line"></div>
-  </div>
+  <div class="swap-arrow">↕ swap</div>
 
-  <div class="pipeline-scenario">
-    <div class="hs-scenario-label hs-label-new">Tomorrow — using RustQC</div>
-    <div class="hs-pipeline">
-      <div class="hs-box hs-upstream">STAR<br />align</div>
-      <div class="hs-arrow">→</div>
-      <div class="hs-box hs-active hs-rewrite">
-        <div class="hs-tool-name">RustQC</div>
-        <div class="hs-tool-ver">includes featureCounts</div>
-        <div class="hs-tool-badge">~25× faster</div>
-      </div>
-      <div class="hs-arrow">→</div>
-      <div class="hs-box hs-downstream">MultiQC<br />report</div>
-      <div class="hs-arrow">→</div>
-      <div class="hs-box hs-downstream">DESeq2<br />analysis</div>
-    </div>
-    <div class="hs-unchanged">
-      <span class="hs-unchanged-icon">✓</span>
-      Identical gene counts · same file format · same MultiQC module · 63,086 genes, 100% match
+  <div class="swap-replacement">
+    <div class="swap-piece swap-piece-active swap-piece-rewrite">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M192 104.8c0-9.2-5.8-17.3-13.2-22.8c-11.6-8.7-18.8-20.7-18.8-34c0-26.5 28.7-48 64-48s64 21.5 64 48c0 13.3-7.2 25.3-18.8 34c-7.4 5.5-13.2 13.6-13.2 22.8c0 12.8 10.4 23.2 23.2 23.2H336c26.5 0 48 21.5 48 48v56.8c0 12.8 10.4 23.2 23.2 23.2c9.2 0 17.3-5.8 22.8-13.2c8.7-11.6 20.7-18.8 34-18.8c26.5 0 48 28.7 48 64s-21.5 64-48 64c-13.3 0-25.3-7.2-34-18.8c-5.5-7.4-13.6-13.2-22.8-13.2c-12.8 0-23.2 10.4-23.2 23.2V464c0 26.5-21.5 48-48 48h-56.8c-12.8 0-23.2-10.4-23.2-23.2c0-9.2 5.8-17.3 13.2-22.8c11.6-8.7 18.8-20.7 18.8-34c0-26.5-28.7-48-64-48s-64 21.5-64 48c0 13.3 7.2 25.3 18.8 34c7.4 5.5 13.2 13.6 13.2 22.8c0 12.8-10.4 23.2-23.2 23.2H48c-26.5 0-48-21.5-48-48V343.2C0 330.4 10.4 320 23.2 320c9.2 0 17.3 5.8 22.8 13.2c8.7 11.6 20.7 18.8 34 18.8c26.5 0 48-28.7 48-64s-21.5-64-48-64c-13.3 0-25.3 7.2-34 18.8c-5.5 7.4-13.6 13.2-22.8 13.2C10.4 256 0 245.6 0 232.8V176c0-26.5 21.5-48 48-48h120.8c12.8 0 23.2-10.4 23.2-23.2"/></svg>
+      <span class="swap-piece-label">rewrite</span>
     </div>
   </div>
 
-  <div class="hs-revert">
-    Not happy? Swap back. No results change. No downstream scripts break.
-    <span class="hs-revert-tag">fully reversible</span>
-  </div>
-
-  <div class="hs-source">
-    Source: <a href="https://seqeralabs.github.io/RustQC" target="_blank" rel="noopener">seqeralabs.github.io/RustQC</a>
+  <div class="swap-note">
+    Same shape, different colour. Swap one piece without touching the rest. Fully reversible.
   </div>
 </div>
 
 <style>
-  .hotswap-wrap {
+  .swap-wrap {
     background: var(--bg-secondary);
-    border-left: 3px solid var(--section-color, var(--accent-rust));
-    border-top: none;
-    border-right: none;
-    border-bottom: none;
+    border-left: 3px solid var(--section-color, var(--accent-sage));
     padding: var(--space-lg);
     display: flex;
     flex-direction: column;
-    gap: var(--space-md);
-  }
-
-  .hotswap-label {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 0.7rem;
-    font-weight: 600;
-    color: var(--text-tertiary);
-  }
-
-  .pipeline-scenario {
-    display: flex;
-    flex-direction: column;
     gap: var(--space-sm);
   }
 
-  .hs-scenario-label {
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
-    color: var(--text-tertiary);
-  }
-
-  .hs-label-new {
-    color: rgba(93, 172, 114, 0.7);
-  }
-
-  .hs-pipeline {
+  .swap-pipeline {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
+    justify-content: center;
     gap: 4px;
   }
 
-  .hs-box {
-    background: var(--bg-primary);
-    border: 1px solid rgba(230, 225, 216, 0.1);
-    border-radius: 6px;
-    padding: var(--space-xs) var(--space-sm);
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--text-secondary);
-    text-align: center;
-    line-height: 1.5;
+  .swap-piece {
+    position: relative;
   }
 
-  .hs-upstream,
-  .hs-downstream {
-    opacity: 0.6;
+  .swap-piece :global(svg) {
+    width: 48px;
+    height: 48px;
+    display: block;
   }
 
-  .hs-active {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-    padding: var(--space-sm);
-    min-width: 140px;
-  }
-
-  .hs-original {
-    border-color: rgba(194, 81, 46, 0.3);
-    background: rgba(194, 81, 46, 0.05);
-  }
-
-  .hs-rewrite {
-    border-color: rgba(93, 172, 114, 0.3);
-    background: rgba(93, 172, 114, 0.05);
-  }
-
-  .hs-tool-name {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-primary);
-  }
-
-  .hs-tool-ver {
-    font-family: var(--font-sans);
-    font-size: 0.63rem;
+  .swap-piece-dim :global(svg) {
     color: var(--text-tertiary);
+    opacity: 0.25;
   }
 
-  .hs-tool-badge {
-    font-family: var(--font-sans);
-    font-size: 0.62rem;
-    font-weight: 600;
-    padding: 1px 6px;
-    border-radius: 3px;
-    background: rgba(93, 172, 114, 0.1);
-    color: rgba(93, 172, 114, 0.8);
-    border: 1px solid rgba(93, 172, 114, 0.2);
-    margin-top: 2px;
+  .swap-piece-active :global(svg) {
+    width: 56px;
+    height: 56px;
   }
 
-  .hs-arrow {
-    font-size: 0.9rem;
-    color: rgba(230, 225, 216, 0.2);
-    padding: 0 2px;
+  .swap-piece-original :global(svg) {
+    color: var(--accent-rust);
   }
 
-  .hs-swap-indicator {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
+  .swap-piece-rewrite :global(svg) {
+    color: var(--section-color, var(--accent-sage));
   }
 
-  .hs-swap-line {
-    flex: 1;
-    border-top: 1px dashed rgba(230, 225, 216, 0.12);
-  }
-
-  .hs-swap-text {
-    font-family: var(--font-sans);
-    font-size: 0.68rem;
-    color: var(--text-tertiary);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  .hs-unchanged {
-    font-family: var(--font-sans);
-    font-size: 0.7rem;
-    color: rgba(93, 172, 114, 0.6);
-    display: flex;
-    align-items: center;
-    gap: var(--space-xs);
-    flex-wrap: wrap;
-  }
-
-  .hs-unchanged-icon {
-    color: rgba(93, 172, 114, 0.9);
-    font-weight: bold;
-  }
-
-  .hs-revert {
-    font-family: var(--font-sans);
-    font-size: 0.82rem;
-    color: var(--text-tertiary);
-    border-top: 1px solid rgba(230, 225, 216, 0.06);
-    padding-top: var(--space-sm);
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    flex-wrap: wrap;
-  }
-
-  .hs-revert-tag {
+  .swap-piece-label {
+    position: absolute;
+    bottom: -16px;
+    left: 50%;
+    transform: translateX(-50%);
     font-family: var(--font-sans);
     font-size: 0.65rem;
     font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 3px;
-    background: rgba(93, 172, 114, 0.08);
-    color: rgba(93, 172, 114, 0.7);
-    border: 1px solid rgba(93, 172, 114, 0.15);
-  }
-
-  .hs-source {
-    font-family: var(--font-serif);
-    font-size: 0.7rem;
     color: var(--text-tertiary);
+    white-space: nowrap;
   }
 
-  .hs-source a {
-    color: var(--color-link);
-    font-family: var(--font-mono);
+  .swap-arrow {
+    text-align: center;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+    padding: var(--space-sm) 0;
+  }
+
+  .swap-replacement {
+    display: flex;
+    justify-content: center;
+    padding-bottom: var(--space-sm);
+  }
+
+  .swap-note {
+    font-family: var(--font-serif);
+    font-size: 0.83rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
+    padding-top: var(--space-sm);
+    line-height: 1.6;
+    font-style: italic;
   }
 </style>
