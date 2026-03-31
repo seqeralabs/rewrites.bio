@@ -27,3 +27,5 @@ public/.well-known/
 # jetbrains setting folder
 .idea/
 .vscode/
+
+.impeccable.md

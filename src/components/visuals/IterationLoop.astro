@@ -3,7 +3,7 @@
 ---
 
 <div class="loop-wrap">
-  <div class="loop-label">THE VALIDATION LOOP</div>
+  <div class="loop-label">The Validation Loop</div>
   <div class="loop-diagram">
     <div class="loop-row-main">
       <div class="loop-step">
@@ -39,18 +39,20 @@
 
 <style>
   .loop-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-rust));
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
     padding: var(--space-lg);
   }
 
   .loop-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.7rem;
+    font-weight: 600;
     color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
     margin-bottom: var(--space-md);
   }
 
@@ -69,7 +71,7 @@
 
   .loop-step {
     background: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(230, 225, 216, 0.1);
     border-radius: 6px;
     padding: var(--space-sm) var(--space-md);
     text-align: center;
@@ -77,22 +79,22 @@
   }
 
   .step-num {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.75rem;
     font-weight: 700;
-    color: var(--rust-500);
+    color: var(--accent-rust);
     margin-bottom: 4px;
   }
 
   .step-text {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.72rem;
     color: var(--text-secondary);
     line-height: 1.4;
   }
 
   .loop-arrow {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.85rem;
     color: var(--text-tertiary);
     flex-shrink: 0;
@@ -116,26 +118,26 @@
     gap: var(--space-sm);
     padding: var(--space-sm) var(--space-md);
     border-radius: 4px;
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.7rem;
   }
 
   .loop-outcome-fail {
-    background: rgba(248, 113, 113, 0.08);
-    border: 1px solid rgba(248, 113, 113, 0.2);
+    background: rgba(212, 86, 90, 0.08);
+    border: 1px solid rgba(212, 86, 90, 0.2);
   }
 
   .loop-outcome-fail .outcome-icon {
-    color: rgba(248, 113, 113, 0.9);
+    color: rgba(212, 86, 90, 0.9);
   }
 
   .loop-outcome-pass {
-    background: rgba(74, 222, 128, 0.08);
-    border: 1px solid rgba(74, 222, 128, 0.2);
+    background: rgba(93, 172, 114, 0.08);
+    border: 1px solid rgba(93, 172, 114, 0.2);
   }
 
   .loop-outcome-pass .outcome-icon {
-    color: rgba(74, 222, 128, 0.9);
+    color: rgba(93, 172, 114, 0.9);
   }
 
   .outcome-icon {
@@ -148,10 +150,10 @@
   }
 
   .loop-note {
-    font-family: var(--font-mono);
+    font-family: var(--font-serif);
     font-size: 0.75rem;
     color: var(--text-tertiary);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
     padding-top: var(--space-sm);
     font-style: italic;
   }

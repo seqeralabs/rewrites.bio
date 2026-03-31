@@ -3,7 +3,7 @@
 ---
 
 <div class="flywheel-wrap">
-  <div class="flywheel-label">THE OPEN-SOURCE FLYWHEEL</div>
+  <div class="flywheel-label">The Open-Source Flywheel</div>
   <div class="flywheel-diagram">
     <div class="fw-step fw-step-1">
       <div class="fw-num">01</div>
@@ -32,18 +32,20 @@
 
 <style>
   .flywheel-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-rust));
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
     padding: var(--space-lg);
   }
 
   .flywheel-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.7rem;
+    font-weight: 600;
     color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
     margin-bottom: var(--space-md);
   }
 
@@ -59,22 +61,21 @@
 
   .fw-step {
     background: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(230, 225, 216, 0.1);
     border-radius: 6px;
     padding: var(--space-sm) var(--space-md);
     text-align: center;
     width: 100%;
   }
 
-  .fw-step-1 { grid-column: 1; grid-row: 1; border-color: rgba(249, 115, 22, 0.2); }
-  .fw-step-2 { grid-column: 3; grid-row: 1; border-color: rgba(74, 222, 128, 0.2); }
-  .fw-step-3 { grid-column: 3; grid-row: 3; border-color: rgba(74, 222, 128, 0.15); }
-  .fw-step-4 { grid-column: 1; grid-row: 3; border-color: rgba(249, 115, 22, 0.15); }
+  .fw-step-1 { grid-column: 1; grid-row: 1; border-color: rgba(194, 81, 46, 0.2); }
+  .fw-step-2 { grid-column: 3; grid-row: 1; border-color: rgba(93, 172, 114, 0.2); }
+  .fw-step-3 { grid-column: 3; grid-row: 3; border-color: rgba(93, 172, 114, 0.15); }
+  .fw-step-4 { grid-column: 1; grid-row: 3; border-color: rgba(194, 81, 46, 0.15); }
 
   .fw-connector {
-    font-family: var(--font-mono);
     font-size: 1rem;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(230, 225, 216, 0.2);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -85,24 +86,25 @@
   .fw-connector-left  { grid-column: 2; grid-row: 3; }
 
   .fw-num {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.65rem;
-    color: var(--rust-500);
     font-weight: 700;
+    color: var(--accent-rust);
     margin-bottom: 4px;
   }
 
   .fw-text {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.72rem;
     color: var(--text-secondary);
     line-height: 1.5;
   }
 
   .flywheel-note {
+    font-family: var(--font-serif);
     font-size: 0.83rem;
     color: var(--text-tertiary);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
     padding-top: var(--space-sm);
     line-height: 1.6;
     font-style: italic;

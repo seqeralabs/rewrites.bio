@@ -3,7 +3,7 @@
 ---
 
 <div class="gov-wrap">
-  <div class="gov-label">REPOSITORY HEALTH</div>
+  <div class="gov-label">Repository Health</div>
   <div class="gov-grid">
     <div class="gov-item gov-ok">
       <div class="gov-icon">✓</div>
@@ -41,18 +41,20 @@
 
 <style>
   .gov-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-rust));
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
     padding: var(--space-lg);
   }
 
   .gov-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.7rem;
+    font-weight: 600;
     color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
     margin-bottom: var(--space-md);
   }
 
@@ -72,16 +74,15 @@
     align-items: flex-start;
     gap: var(--space-sm);
     background: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(230, 225, 216, 0.06);
     border-radius: 6px;
     padding: var(--space-sm) var(--space-md);
   }
 
-  .gov-ok   { border-color: rgba(74, 222, 128, 0.15); }
-  .gov-warn { border-color: rgba(251, 191, 36, 0.2); }
+  .gov-ok   { border-color: rgba(93, 172, 114, 0.15); }
+  .gov-warn { border-color: rgba(201, 168, 76, 0.2); }
 
   .gov-icon {
-    font-family: var(--font-mono);
     font-size: 0.85rem;
     font-weight: 700;
     flex-shrink: 0;
@@ -90,8 +91,8 @@
     text-align: center;
   }
 
-  .gov-ok .gov-icon   { color: rgba(74, 222, 128, 0.8); }
-  .gov-warn .gov-icon { color: rgba(251, 191, 36, 0.8); }
+  .gov-ok .gov-icon   { color: rgba(93, 172, 114, 0.8); }
+  .gov-warn .gov-icon { color: rgba(201, 168, 76, 0.8); }
 
   .gov-content {
     display: flex;
@@ -107,15 +108,16 @@
   }
 
   .gov-sub {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.67rem;
     color: var(--text-tertiary);
   }
 
   .gov-note {
+    font-family: var(--font-serif);
     font-size: 0.83rem;
     color: var(--text-tertiary);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
     padding-top: var(--space-sm);
     line-height: 1.6;
     font-style: italic;

@@ -5,7 +5,7 @@
 ---
 
 <div class="diff-wrap">
-  <div class="diff-label">OUTPUT COMPARISON — featureCounts (63,086 genes, GM12878 REP1)</div>
+  <div class="diff-label">Output Comparison — featureCounts (63,086 genes, GM12878 REP1)</div>
   <div class="diff-table">
     <div class="diff-header">
       <div class="diff-col-head col-field">metric</div>
@@ -61,19 +61,21 @@
 
 <style>
   .diff-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-rust));
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
     padding: var(--space-md) var(--space-lg);
     overflow-x: auto;
   }
 
   .diff-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.7rem;
+    font-weight: 600;
     color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
     margin-bottom: var(--space-sm);
     line-height: 1.5;
   }
@@ -90,7 +92,7 @@
     display: grid;
     grid-template-columns: 1.6fr 1fr 1.1fr 1.1fr;
     gap: 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-bottom: 1px solid rgba(230, 225, 216, 0.06);
   }
 
   .diff-header {
@@ -99,17 +101,16 @@
   }
 
   .diff-col-head {
-    font-family: var(--font-mono);
-    font-size: 0.63rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    font-weight: 600;
     padding: 6px 8px;
     color: var(--text-tertiary);
   }
 
   .col-original { color: var(--text-secondary); }
-  .col-good     { color: rgba(74, 222, 128, 0.8); }
-  .col-bad      { color: rgba(248, 113, 113, 0.8); }
+  .col-good     { color: rgba(93, 172, 114, 0.8); }
+  .col-bad      { color: rgba(212, 86, 90, 0.8); }
 
   .diff-field,
   .diff-val {
@@ -127,12 +128,12 @@
     font-size: 0.74rem;
   }
 
-  .diff-val.match   { color: rgba(74, 222, 128, 0.9); }
-  .diff-val.mismatch { color: rgba(248, 113, 113, 0.9); }
+  .diff-val.match   { color: rgba(93, 172, 114, 0.9); }
+  .diff-val.mismatch { color: rgba(212, 86, 90, 0.9); }
 
   .badge { font-size: 0.7rem; flex-shrink: 0; }
-  .badge.ok   { color: rgba(74, 222, 128, 0.9); }
-  .badge.fail { color: rgba(248, 113, 113, 0.9); }
+  .badge.ok   { color: rgba(93, 172, 114, 0.9); }
+  .badge.fail { color: rgba(212, 86, 90, 0.9); }
 
   .diff-verdict {
     display: flex;
@@ -152,28 +153,27 @@
   }
 
   .verdict-badge {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.65rem;
+    font-weight: 600;
     padding: 2px 8px;
     border-radius: 3px;
-    background: rgba(74, 222, 128, 0.15);
-    color: #4ade80;
-    border: 1px solid rgba(74, 222, 128, 0.3);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    background: rgba(93, 172, 114, 0.15);
+    color: var(--color-pass);
+    border: 1px solid rgba(93, 172, 114, 0.3);
   }
 
   .verdict-badge.fail {
-    background: rgba(248, 113, 113, 0.15);
-    color: #f87171;
-    border-color: rgba(248, 113, 113, 0.3);
+    background: rgba(212, 86, 90, 0.15);
+    color: var(--color-fail);
+    border-color: rgba(212, 86, 90, 0.3);
   }
 
   .diff-note {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
+    font-family: var(--font-serif);
+    font-size: 0.72rem;
     color: var(--text-tertiary);
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-top: 1px solid rgba(230, 225, 216, 0.05);
     padding-top: var(--space-sm);
     margin-top: var(--space-sm);
     font-style: italic;

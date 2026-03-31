@@ -5,7 +5,7 @@
 
 <div class="pipeline-wrap">
   <div class="pipeline-scenario">
-    <div class="scenario-label scenario-before">BEFORE — 15+ separate tools, each reading the BAM independently</div>
+    <div class="scenario-label scenario-before">Before — 15+ separate tools, each reading the BAM independently</div>
     <div class="pipeline-row">
       <div class="tool-box">
         <div class="tool-name">featureCounts</div>
@@ -42,7 +42,7 @@
   <div class="pipeline-divider">↓ rethink the architecture</div>
 
   <div class="pipeline-scenario">
-    <div class="scenario-label scenario-after">AFTER — RustQC: single pass over the BAM</div>
+    <div class="scenario-label scenario-after">After — RustQC: single pass over the BAM</div>
     <div class="pipeline-row pipeline-row-after">
       <div class="tool-box tool-box-bam">
         <div class="tool-name">sample.bam</div>
@@ -78,9 +78,11 @@
 
 <style>
   .pipeline-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-rust));
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
     padding: var(--space-lg);
     display: flex;
     flex-direction: column;
@@ -94,16 +96,16 @@
   }
 
   .scenario-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.7rem;
+    font-weight: 600;
     margin-bottom: 4px;
     line-height: 1.5;
   }
 
-  .scenario-before { color: rgba(248, 113, 113, 0.7); }
-  .scenario-after  { color: rgba(74, 222, 128, 0.7); }
+  .scenario-before { color: rgba(212, 86, 90, 0.7); }
+  .scenario-after  { color: rgba(93, 172, 114, 0.7); }
 
   .pipeline-row {
     display: flex;
@@ -115,7 +117,7 @@
 
   .tool-box {
     background: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(230, 225, 216, 0.1);
     border-radius: 6px;
     padding: var(--space-xs) var(--space-sm);
     text-align: center;
@@ -131,8 +133,8 @@
   }
 
   .tool-box-combined {
-    border-color: rgba(74, 222, 128, 0.3);
-    background: rgba(74, 222, 128, 0.04);
+    border-color: rgba(93, 172, 114, 0.3);
+    background: rgba(93, 172, 114, 0.04);
     min-width: 140px;
   }
 
@@ -144,29 +146,28 @@
   }
 
   .tool-sub {
-    font-family: var(--font-mono);
-    font-size: 0.63rem;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
     color: var(--text-tertiary);
     margin-top: 2px;
   }
 
   .tool-badge {
-    font-family: var(--font-mono);
-    font-size: 0.6rem;
-    color: rgba(74, 222, 128, 0.8);
-    background: rgba(74, 222, 128, 0.1);
-    border: 1px solid rgba(74, 222, 128, 0.2);
+    font-family: var(--font-sans);
+    font-size: 0.62rem;
+    font-weight: 600;
+    color: rgba(93, 172, 114, 0.8);
+    background: rgba(93, 172, 114, 0.1);
+    border: 1px solid rgba(93, 172, 114, 0.2);
     border-radius: 3px;
     padding: 1px 6px;
     margin-top: 4px;
     display: inline-block;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
   }
 
   .io-sep {
     font-size: 0.85rem;
-    color: rgba(248, 113, 113, 0.5);
+    color: rgba(212, 86, 90, 0.5);
     padding: 0 2px;
     display: flex;
     flex-direction: column;
@@ -187,7 +188,7 @@
 
   .arrow-line {
     height: 2px;
-    background: rgba(74, 222, 128, 0.3);
+    background: rgba(93, 172, 114, 0.3);
     width: 100%;
     position: relative;
   }
@@ -199,7 +200,7 @@
     top: -4px;
     width: 0;
     height: 0;
-    border-left: 6px solid rgba(74, 222, 128, 0.4);
+    border-left: 6px solid rgba(93, 172, 114, 0.4);
     border-top: 5px solid transparent;
     border-bottom: 5px solid transparent;
   }
@@ -211,44 +212,45 @@
   }
 
   .cost-item {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.7rem;
+    font-weight: 600;
     padding: 2px 8px;
     border-radius: 3px;
   }
 
   .cost-bad {
-    background: rgba(248, 113, 113, 0.1);
-    color: rgba(248, 113, 113, 0.8);
-    border: 1px solid rgba(248, 113, 113, 0.2);
+    background: rgba(212, 86, 90, 0.1);
+    color: rgba(212, 86, 90, 0.8);
+    border: 1px solid rgba(212, 86, 90, 0.2);
   }
 
   .cost-good {
-    background: rgba(74, 222, 128, 0.08);
-    color: rgba(74, 222, 128, 0.8);
-    border: 1px solid rgba(74, 222, 128, 0.2);
+    background: rgba(93, 172, 114, 0.08);
+    color: rgba(93, 172, 114, 0.8);
+    border: 1px solid rgba(93, 172, 114, 0.2);
   }
 
   .pipeline-divider {
     text-align: center;
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.75rem;
     color: var(--text-tertiary);
     padding: var(--space-xs) 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
+    border-bottom: 1px solid rgba(230, 225, 216, 0.06);
   }
 
   .pipeline-source {
-    font-family: var(--font-mono);
+    font-family: var(--font-serif);
     font-size: 0.7rem;
     color: var(--text-tertiary);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
     padding-top: var(--space-sm);
   }
 
   .pipeline-source a {
-    color: var(--rust-400);
+    color: var(--color-link);
     font-family: var(--font-mono);
   }
 </style>

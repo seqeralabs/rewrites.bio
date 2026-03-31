@@ -4,7 +4,7 @@
 ---
 
 <div class="hotswap-wrap">
-  <div class="hotswap-label">HOT-SWAP COMPATIBILITY</div>
+  <div class="hotswap-label">Hot-Swap Compatibility</div>
 
   <div class="pipeline-scenario">
     <div class="hs-scenario-label">Today — using original tool</div>
@@ -61,9 +61,11 @@
 
 <style>
   .hotswap-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-rust));
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
     padding: var(--space-lg);
     display: flex;
     flex-direction: column;
@@ -71,11 +73,11 @@
   }
 
   .hotswap-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.7rem;
+    font-weight: 600;
     color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
   }
 
   .pipeline-scenario {
@@ -85,13 +87,13 @@
   }
 
   .hs-scenario-label {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.7rem;
     color: var(--text-tertiary);
   }
 
   .hs-label-new {
-    color: rgba(74, 222, 128, 0.7);
+    color: rgba(93, 172, 114, 0.7);
   }
 
   .hs-pipeline {
@@ -103,7 +105,7 @@
 
   .hs-box {
     background: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(230, 225, 216, 0.1);
     border-radius: 6px;
     padding: var(--space-xs) var(--space-sm);
     font-family: var(--font-mono);
@@ -128,13 +130,13 @@
   }
 
   .hs-original {
-    border-color: rgba(249, 115, 22, 0.3);
-    background: rgba(249, 115, 22, 0.05);
+    border-color: rgba(194, 81, 46, 0.3);
+    background: rgba(194, 81, 46, 0.05);
   }
 
   .hs-rewrite {
-    border-color: rgba(74, 222, 128, 0.3);
-    background: rgba(74, 222, 128, 0.05);
+    border-color: rgba(93, 172, 114, 0.3);
+    background: rgba(93, 172, 114, 0.05);
   }
 
   .hs-tool-name {
@@ -144,26 +146,26 @@
   }
 
   .hs-tool-ver {
+    font-family: var(--font-sans);
     font-size: 0.63rem;
     color: var(--text-tertiary);
   }
 
   .hs-tool-badge {
+    font-family: var(--font-sans);
     font-size: 0.62rem;
+    font-weight: 600;
     padding: 1px 6px;
     border-radius: 3px;
-    background: rgba(74, 222, 128, 0.1);
-    color: rgba(74, 222, 128, 0.8);
-    border: 1px solid rgba(74, 222, 128, 0.2);
+    background: rgba(93, 172, 114, 0.1);
+    color: rgba(93, 172, 114, 0.8);
+    border: 1px solid rgba(93, 172, 114, 0.2);
     margin-top: 2px;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
   }
 
   .hs-arrow {
-    font-family: var(--font-mono);
     font-size: 0.9rem;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(230, 225, 216, 0.2);
     padding: 0 2px;
   }
 
@@ -175,11 +177,11 @@
 
   .hs-swap-line {
     flex: 1;
-    border-top: 1px dashed rgba(255, 255, 255, 0.12);
+    border-top: 1px dashed rgba(230, 225, 216, 0.12);
   }
 
   .hs-swap-text {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.68rem;
     color: var(--text-tertiary);
     white-space: nowrap;
@@ -187,9 +189,9 @@
   }
 
   .hs-unchanged {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.7rem;
-    color: rgba(74, 222, 128, 0.6);
+    color: rgba(93, 172, 114, 0.6);
     display: flex;
     align-items: center;
     gap: var(--space-xs);
@@ -197,14 +199,15 @@
   }
 
   .hs-unchanged-icon {
-    color: rgba(74, 222, 128, 0.9);
+    color: rgba(93, 172, 114, 0.9);
     font-weight: bold;
   }
 
   .hs-revert {
+    font-family: var(--font-sans);
     font-size: 0.82rem;
     color: var(--text-tertiary);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
     padding-top: var(--space-sm);
     display: flex;
     align-items: center;
@@ -213,25 +216,24 @@
   }
 
   .hs-revert-tag {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.65rem;
+    font-weight: 600;
     padding: 2px 8px;
     border-radius: 3px;
-    background: rgba(74, 222, 128, 0.08);
-    color: rgba(74, 222, 128, 0.7);
-    border: 1px solid rgba(74, 222, 128, 0.15);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+    background: rgba(93, 172, 114, 0.08);
+    color: rgba(93, 172, 114, 0.7);
+    border: 1px solid rgba(93, 172, 114, 0.15);
   }
 
   .hs-source {
-    font-family: var(--font-mono);
+    font-family: var(--font-serif);
     font-size: 0.7rem;
     color: var(--text-tertiary);
   }
 
   .hs-source a {
-    color: var(--rust-400);
+    color: var(--color-link);
     font-family: var(--font-mono);
   }
 </style>

@@ -1,40 +1,44 @@
 /* ============================================
    rewrites.bio — Global Styles
+   New editorial design system
    ============================================ */
 
 /* --- Google Fonts --- */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,300;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
 
 /* --- CSS Custom Properties --- */
 :root {
-  /* Background & Surface */
-  --bg-primary: #0a0a0a;
-  --bg-secondary: #111111;
-  --bg-surface: #1a1a1a;
-  --bg-surface-hover: #222222;
+  /* Background & Surface — deep ink, not pure black */
+  --bg-primary: #0d1117;
+  --bg-secondary: #131920;
+  --bg-surface: #161b22;
+  --bg-elevated: #1c2129;
+  --bg-surface-hover: #252c35;
 
-  /* Rust / Orange palette */
-  --rust-50: #fff7ed;
-  --rust-100: #ffedd5;
-  --rust-200: #fed7aa;
-  --rust-300: #fdba74;
-  --rust-400: #fb923c;
-  --rust-500: #f97316;
-  --rust-600: #ea580c;
-  --rust-700: #c2410c;
-  --rust-800: #9a3412;
-  --rust-900: #7c2d12;
+  /* Text — warm off-white, not clinical */
+  --text-primary: #e6e1d8;
+  --text-secondary: #8b919a;
+  --text-tertiary: #5a6270;
 
-  /* Accent: copper / warm */
-  --copper: #b87333;
-  --copper-light: #d4956b;
-  --copper-400: #c4a46a;
+  /* Section accent system */
+  --accent-intro: #8a7e9b;
+  --accent-rust: #c2512e;
+  --accent-blue: #5b8fa8;
+  --accent-gold: #c9a84c;
+  --accent-sage: #6b917a;
 
-  /* Text */
-  --text-primary: #f5f5f5;
-  --text-secondary: #a3a3a3;
-  --text-tertiary: #737373;
-  --text-accent: var(--rust-400);
+  /* Functional colors */
+  --color-pass: #5dac72;
+  --color-fail: #d4565a;
+  --color-link: #8dbdd2;
+
+  /* Backward-compatible aliases for visual components */
+  --rust-300: #d4785a;
+  --rust-400: #c2512e;
+  --rust-500: #b04528;
+  --rust-600: #8f3820;
+  --rust-700: #6f2c18;
+  --text-accent: var(--accent-rust);
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -42,17 +46,22 @@
   --space-md: 1rem;
   --space-lg: 2rem;
   --space-xl: 4rem;
-  --space-2xl: 8rem;
+  --space-2xl: 6rem;
 
   /* Typography */
-  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
 
   /* Sizing */
-  --max-width: 1200px;
+  --max-width: 1100px;
+  --text-width: 680px;
 
   /* Transitions */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Section color — overridden by each section */
+  --section-color: var(--accent-rust);
 }
 
 /* --- Reset --- */
@@ -72,66 +81,60 @@ html {
 
 body {
   font-family: var(--font-sans);
-  font-size: 18px;
+  font-size: 17px;
   line-height: 1.7;
   color: var(--text-primary);
   background-color: var(--bg-primary);
   overflow-x: hidden;
 }
 
-/* --- Dot Grid Background --- */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: radial-gradient(circle, var(--text-tertiary) 0.5px, transparent 0.5px);
-  background-size: 32px 32px;
-  opacity: 0.08;
-  pointer-events: none;
-  z-index: 0;
-}
-
 /* --- Selection --- */
 ::selection {
-  background: var(--rust-600);
+  background: var(--accent-rust);
   color: var(--text-primary);
 }
 
 /* --- Links --- */
 a {
-  color: var(--rust-400);
+  color: var(--color-link);
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 a:hover {
-  color: var(--rust-300);
+  color: var(--text-primary);
+}
+
+/* Underline on hover for body text links only */
+.principle-desc a:hover,
+.preamble a:hover,
+.closing a:hover {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
 }
 
 /* --- Scroll-triggered reveal animation --- */
 .reveal {
   opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.45s var(--ease-out), transform 0.45s var(--ease-out);
+  transition: opacity 0.6s ease;
 }
 
 .reveal.visible {
   opacity: 1;
-  transform: translateY(0);
 }
 
-/* Stagger children */
+/* Stagger children — subtle delays */
 .reveal-stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
-.reveal-stagger > .reveal:nth-child(2) { transition-delay: 50ms; }
-.reveal-stagger > .reveal:nth-child(3) { transition-delay: 100ms; }
-.reveal-stagger > .reveal:nth-child(4) { transition-delay: 150ms; }
-.reveal-stagger > .reveal:nth-child(5) { transition-delay: 200ms; }
+.reveal-stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
+.reveal-stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
+.reveal-stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
+.reveal-stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
 
 /* Disable reveal animations on mobile and for users who prefer reduced motion */
 @media (max-width: 768px), (prefers-reduced-motion: reduce) {
   .reveal {
     opacity: 1;
-    transform: none;
     transition: none;
   }
   .reveal-stagger > .reveal {

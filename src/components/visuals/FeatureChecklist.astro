@@ -3,7 +3,7 @@
 ---
 
 <div class="checklist-wrap">
-  <div class="checklist-label">SCOPE DEFINITION — samtools rewrite (example)</div>
+  <div class="checklist-label">Scope Definition — samtools rewrite (example)</div>
   <div class="checklist-cols">
     <div class="checklist-col">
       <div class="col-head col-head-in">In scope — required for pipeline</div>
@@ -77,18 +77,20 @@
 
 <style>
   .checklist-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-rust));
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
     padding: var(--space-lg);
   }
 
   .checklist-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.7rem;
+    font-weight: 600;
     color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
     margin-bottom: var(--space-md);
   }
 
@@ -111,23 +113,22 @@
   }
 
   .col-head {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.68rem;
+    font-weight: 600;
     padding: 4px 0;
     border-bottom: 2px solid;
     margin-bottom: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
   }
 
   .col-head-in {
-    color: rgba(74, 222, 128, 0.8);
-    border-color: rgba(74, 222, 128, 0.3);
+    color: rgba(93, 172, 114, 0.8);
+    border-color: rgba(93, 172, 114, 0.3);
   }
 
   .col-head-out {
     color: var(--text-tertiary);
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(230, 225, 216, 0.1);
   }
 
   .check-items {
@@ -143,12 +144,12 @@
     padding: 6px 8px;
     border-radius: 4px;
     background: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(230, 225, 216, 0.05);
   }
 
   .check-done {
-    border-color: rgba(74, 222, 128, 0.12);
-    background: rgba(74, 222, 128, 0.03);
+    border-color: rgba(93, 172, 114, 0.12);
+    background: rgba(93, 172, 114, 0.03);
   }
 
   .check-later {
@@ -156,13 +157,12 @@
   }
 
   .ci-icon {
-    font-family: var(--font-mono);
     font-size: 0.8rem;
     flex-shrink: 0;
     margin-top: 1px;
   }
 
-  .check-done .ci-icon { color: rgba(74, 222, 128, 0.8); }
+  .check-done .ci-icon { color: rgba(93, 172, 114, 0.8); }
   .check-later .ci-icon { color: var(--text-tertiary); }
 
   .ci-content {
@@ -179,7 +179,7 @@
   }
 
   .ci-note {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.66rem;
     color: var(--text-tertiary);
   }

@@ -3,7 +3,7 @@
 ---
 
 <div class="tree-wrap">
-  <div class="tree-label">BEFORE REPORTING A BUG UPSTREAM</div>
+  <div class="tree-label">Before Reporting a Bug Upstream</div>
   <div class="tree">
     <div class="tree-node tree-start">
       <div class="tn-text">Found unexpected behaviour in the original tool?</div>
@@ -91,18 +91,20 @@
 
 <style>
   .tree-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-rust));
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
     padding: var(--space-lg);
   }
 
   .tree-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.7rem;
+    font-weight: 600;
     color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
     margin-bottom: var(--space-md);
   }
 
@@ -114,7 +116,7 @@
 
   .tree-node {
     background: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(230, 225, 216, 0.08);
     border-radius: 6px;
     padding: var(--space-sm) var(--space-md);
     display: flex;
@@ -123,38 +125,37 @@
   }
 
   .tree-start {
-    border-color: rgba(249, 115, 22, 0.25);
+    border-color: rgba(194, 81, 46, 0.25);
     font-weight: 600;
   }
 
   .tree-node-ok {
-    border-color: rgba(74, 222, 128, 0.3);
-    background: rgba(74, 222, 128, 0.04);
+    border-color: rgba(93, 172, 114, 0.3);
+    background: rgba(93, 172, 114, 0.04);
   }
 
   .tree-node-wait {
-    border-color: rgba(251, 191, 36, 0.3);
-    background: rgba(251, 191, 36, 0.03);
+    border-color: rgba(201, 168, 76, 0.3);
+    background: rgba(201, 168, 76, 0.03);
   }
 
   .tree-node-stop {
-    border-color: rgba(248, 113, 113, 0.3);
-    background: rgba(248, 113, 113, 0.04);
+    border-color: rgba(212, 86, 90, 0.3);
+    background: rgba(212, 86, 90, 0.04);
   }
 
   .tn-icon {
-    font-family: var(--font-mono);
     font-size: 0.9rem;
     flex-shrink: 0;
     margin-top: 1px;
   }
 
-  .tree-node-ok   .tn-icon { color: rgba(74, 222, 128, 0.9); }
-  .tree-node-wait .tn-icon { color: rgba(251, 191, 36, 0.9); }
-  .tree-node-stop .tn-icon { color: rgba(248, 113, 113, 0.9); }
+  .tree-node-ok   .tn-icon { color: rgba(93, 172, 114, 0.9); }
+  .tree-node-wait .tn-icon { color: rgba(201, 168, 76, 0.9); }
+  .tree-node-stop .tn-icon { color: rgba(212, 86, 90, 0.9); }
 
   .tn-text {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.78rem;
     color: var(--text-secondary);
     line-height: 1.5;
@@ -164,7 +165,7 @@
     display: flex;
     gap: var(--space-md);
     padding-left: var(--space-lg);
-    border-left: 2px solid rgba(255, 255, 255, 0.07);
+    border-left: 2px solid rgba(230, 225, 216, 0.07);
     margin-left: var(--space-md);
     padding-top: var(--space-xs);
     flex-wrap: wrap;
@@ -186,27 +187,26 @@
   }
 
   .tree-edge-label {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.65rem;
     font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
     flex-shrink: 0;
   }
 
   .tree-edge-line {
     flex: 1;
     height: 1px;
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(230, 225, 216, 0.08);
   }
 
-  .tree-edge-yes .tree-edge-label { color: rgba(74, 222, 128, 0.7); }
-  .tree-edge-no  .tree-edge-label { color: rgba(248, 113, 113, 0.7); }
+  .tree-edge-yes .tree-edge-label { color: rgba(93, 172, 114, 0.7); }
+  .tree-edge-no  .tree-edge-label { color: rgba(212, 86, 90, 0.7); }
 
   .tree-note {
+    font-family: var(--font-serif);
     font-size: 0.83rem;
     color: var(--text-tertiary);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
     padding-top: var(--space-sm);
     margin-top: var(--space-md);
     line-height: 1.6;

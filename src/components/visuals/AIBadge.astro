@@ -3,7 +3,7 @@
 ---
 
 <div class="badge-wrap">
-  <div class="badge-label">README.md — PROVENANCE SECTION</div>
+  <div class="badge-label">README.md — Provenance Section</div>
   <div class="readme-block">
     <div class="readme-heading">## AI Assistance Disclosure</div>
     <div class="readme-body">
@@ -29,24 +29,26 @@
 
 <style>
   .badge-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-rust));
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
     padding: var(--space-md) var(--space-lg);
   }
 
   .badge-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.7rem;
+    font-weight: 600;
     color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
     margin-bottom: var(--space-sm);
   }
 
   .readme-block {
     background: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(230, 225, 216, 0.08);
     border-radius: 6px;
     padding: var(--space-md);
     font-family: var(--font-mono);
@@ -57,7 +59,7 @@
   }
 
   .readme-heading {
-    color: var(--rust-400);
+    color: var(--accent-rust);
     font-weight: 600;
   }
 
@@ -78,7 +80,7 @@
   .readme-body code {
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    background: rgba(255, 255, 255, 0.06);
+    background: rgba(230, 225, 216, 0.06);
     padding: 1px 5px;
     border-radius: 3px;
     color: var(--text-primary);
@@ -97,16 +99,17 @@
     gap: 6px;
     padding: 4px 10px;
     border-radius: 4px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(230, 225, 216, 0.05);
+    border: 1px solid rgba(230, 225, 216, 0.1);
+    font-family: var(--font-sans);
     font-size: 0.75rem;
     color: var(--text-secondary);
   }
 
   .rb-validated {
-    background: rgba(74, 222, 128, 0.08);
-    border-color: rgba(74, 222, 128, 0.2);
-    color: rgba(74, 222, 128, 0.9);
+    background: rgba(93, 172, 114, 0.08);
+    border-color: rgba(93, 172, 114, 0.2);
+    color: rgba(93, 172, 114, 0.9);
   }
 
   .rb-icon {
@@ -120,20 +123,23 @@
     align-items: center;
     gap: 6px;
     flex-wrap: wrap;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
     padding-top: var(--space-sm);
   }
 
   .note-key {
+    font-family: var(--font-serif);
     color: var(--text-tertiary);
   }
 
   .note-link {
-    color: var(--rust-400);
+    color: var(--color-link);
     text-decoration: none;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
   }
 
   .note-sep {
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(230, 225, 216, 0.2);
   }
 </style>

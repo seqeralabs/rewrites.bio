@@ -4,7 +4,7 @@
 ---
 
 <div class="citation-wrap">
-  <div class="citation-label">CREDITS</div>
+  <div class="citation-label">Credits</div>
   <div class="citation-card">
     <div class="citation-tool">featureCounts</div>
     <div class="citation-meta">
@@ -37,9 +37,11 @@
 
 <style>
   .citation-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-rust));
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
     padding: var(--space-md) var(--space-lg);
     display: flex;
     flex-direction: column;
@@ -47,18 +49,18 @@
   }
 
   .citation-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.75rem;
+    font-weight: 600;
     color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
     margin-bottom: var(--space-xs);
   }
 
   .citation-card {
     background: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 6px;
+    border: 1px solid rgba(230, 225, 216, 0.06);
+    border-radius: 4px;
     padding: var(--space-md);
     display: flex;
     flex-direction: column;
@@ -68,7 +70,7 @@
   .citation-tool {
     font-family: var(--font-mono);
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
     color: var(--text-primary);
   }
 
@@ -79,21 +81,22 @@
   }
 
   .citation-tag {
-    font-family: var(--font-mono);
+    font-family: var(--font-sans);
     font-size: 0.65rem;
+    font-weight: 600;
     padding: 2px 8px;
     border-radius: 3px;
-    background: rgba(249, 115, 22, 0.15);
-    color: var(--rust-400);
-    border: 1px solid rgba(249, 115, 22, 0.25);
+    background: rgba(194, 81, 46, 0.12);
+    color: var(--accent-rust);
+    border: 1px solid rgba(194, 81, 46, 0.2);
     text-transform: uppercase;
-    letter-spacing: 0.08em;
+    letter-spacing: 0.04em;
   }
 
   .citation-tag-rewrite {
-    background: rgba(74, 222, 128, 0.1);
-    color: #4ade80;
-    border-color: rgba(74, 222, 128, 0.25);
+    background: rgba(93, 172, 114, 0.1);
+    color: var(--color-pass);
+    border-color: rgba(93, 172, 114, 0.2);
   }
 
   .citation-authors {
@@ -123,14 +126,13 @@
     font-family: var(--font-mono);
     font-size: 0.65rem;
     color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
   }
 
   .doi-value {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--rust-400);
+    color: var(--color-link);
   }
 
   .citation-note {
@@ -140,9 +142,10 @@
   }
 
   .citation-credits-line {
+    font-family: var(--font-serif);
     font-size: 0.8rem;
     color: var(--text-tertiary);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
     padding-top: 8px;
     margin-top: 4px;
     font-style: italic;

@@ -1,7 +1,6 @@
 ---
 import '../styles/global.css';
 import SeqeraLogo from '../components/visuals/seqera-logo.svg';
-import TldrModal from '../components/TldrModal.astro';
 
 interface Props {
   title: string;
@@ -55,17 +54,18 @@ const ogImage = `${siteUrl}/og-image.png`;
       <a href="/" class="nav-brand">
         <span class="nav-rewrites">rewrites</span><span class="nav-dot">.</span><span class="nav-bio">bio</span>
       </a>
-      <button class="nav-section-indicator" id="nav-section-indicator" aria-expanded="false">
-        <span class="nav-section-text"></span>
-        <svg class="nav-section-chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <button class="nav-toc-toggle" id="nav-toc-toggle" aria-expanded="false" aria-controls="toc-sidebar">
+        <svg class="nav-toc-icon" width="16" height="14" viewBox="0 0 16 14" fill="none">
+          <line x1="0" y1="1" x2="16" y2="1" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="3" y1="7" x2="16" y2="7" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="3" y1="13" x2="16" y2="13" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <span class="nav-toc-label">Contents</span>
       </button>
-      <div class="nav-section-dropdown" id="nav-section-dropdown" aria-hidden="true"></div>
       <a href="https://seqera.io" class="nav-seqera-link"><SeqeraLogo /></a>
     </nav>
 
     <slot />
-
-    <TldrModal />
 
     <script>
       // Intersection Observer for reveal animations
@@ -73,26 +73,19 @@ const ogImage = `${siteUrl}/og-image.png`;
         const reveals = document.querySelectorAll('.reveal');
         let initialLoad = true;
 
-        // Use setTimeout(0) to guarantee a paint cycle has occurred -
-        // rAF alone can still batch with the initial render on fast machines.
         setTimeout(() => {
           const observer = new IntersectionObserver(
             (entries) => {
               if (initialLoad) {
-                // On first observation, stagger all above-the-fold elements
-                // so they cascade in page order rather than appearing at once.
                 const visible = entries
                   .filter((e) => e.isIntersecting)
                   .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
 
                 visible.forEach((entry, i) => {
                   const el = entry.target;
-                  // Add incremental delay: existing transition-delay from
-                  // reveal-stagger is preserved via CSS; this adds on top.
                   const baseDelay = parseFloat(getComputedStyle(el).transitionDelay) * 1000 || 0;
                   el.style.transitionDelay = `${baseDelay + i * 60}ms`;
                   el.classList.add('visible');
-                  // Clean up inline delay after animation completes
                   el.addEventListener('transitionend', () => {
                     el.style.transitionDelay = '';
                   }, { once: true });
@@ -102,7 +95,6 @@ const ogImage = `${siteUrl}/og-image.png`;
                 return;
               }
 
-              // Normal scroll-triggered reveals
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                   entry.target.classList.add('visible');
@@ -116,168 +108,54 @@ const ogImage = `${siteUrl}/og-image.png`;
         }, 0);
       }
 
-      // Track current section in navbar + dropdown ToC
-      function initSectionTracker() {
-        const indicator = document.getElementById('nav-section-indicator');
-        const textEl = indicator?.querySelector('.nav-section-text');
-        const dropdown = document.getElementById('nav-section-dropdown');
-        if (!indicator || !textEl || !dropdown) return;
+      // Track active section/principle in the table of contents
+      function initTocTracker() {
+        const tocItems = document.querySelectorAll('[data-toc]');
+        if (!tocItems.length) return;
 
-        const preamble = document.getElementById('introduction');
-        const sections = document.querySelectorAll('.manifesto-section');
-        if (!sections.length) return;
-
-        // All trackable elements: introduction + numbered sections
-        const allSections = [...(preamble ? [preamble] : []), ...sections];
-
-        // Build the dropdown ToC from the sections on the page
-        dropdown.innerHTML = '';
-
-        // Add Introduction as the first item
-        if (preamble) {
-          const introItem = document.createElement('a');
-          introItem.className = 'nav-dropdown-item';
-          introItem.href = '#introduction';
-          introItem.dataset.sectionId = 'introduction';
-          introItem.innerHTML = `Introduction`;
-          introItem.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeDropdown();
-            preamble.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          });
-          dropdown.appendChild(introItem);
-        }
-
-        sections.forEach((section) => {
-          const number = section.querySelector('.section-number');
-          const title = section.querySelector('.section-title');
-          if (!number || !title) return;
-          const item = document.createElement('a');
-          item.className = 'nav-dropdown-item';
-          item.href = `#${section.id}`;
-          item.dataset.sectionId = section.id;
-          item.innerHTML = `<span class="nav-dropdown-number">${number.textContent?.replace('#', '').trim()}</span> ${title.textContent?.replace('#', '').trim()}`;
-          item.addEventListener('click', (e) => {
-            e.preventDefault();
-            closeDropdown();
-            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          });
-          dropdown.appendChild(item);
-        });
-
-        // Toggle dropdown
-        function openDropdown() {
-          dropdown.classList.add('open');
-          dropdown.setAttribute('aria-hidden', 'false');
-          indicator.setAttribute('aria-expanded', 'true');
-          indicator.classList.add('dropdown-open');
-          // Mark active item
-          const items = dropdown.querySelectorAll('.nav-dropdown-item');
-          const navHeight = 56;
-          items.forEach((item) => {
-            const targetId = item.dataset.sectionId;
-            const target = targetId ? document.getElementById(targetId) : null;
-            if (target) {
-              const rect = target.getBoundingClientRect();
-              if (rect.top < 200 && rect.bottom > navHeight) {
-                item.classList.add('active');
-              } else {
-                item.classList.remove('active');
-              }
-            }
-          });
-        }
-
-        function closeDropdown() {
-          dropdown.classList.remove('open');
-          dropdown.setAttribute('aria-hidden', 'true');
-          indicator.setAttribute('aria-expanded', 'false');
-          indicator.classList.remove('dropdown-open');
-        }
-
-        indicator.addEventListener('click', (e) => {
-          e.stopPropagation();
-          if (dropdown.classList.contains('open')) {
-            closeDropdown();
-          } else {
-            openDropdown();
+        // Collect all tracked elements
+        const tracked = [];
+        tocItems.forEach((item) => {
+          const targetId = item.getAttribute('data-toc');
+          const target = targetId ? document.getElementById(targetId) : null;
+          if (target) {
+            tracked.push({ item, target });
           }
         });
 
-        // Close on click outside
-        document.addEventListener('click', (e) => {
-          if (!dropdown.contains(e.target) && !indicator.contains(e.target)) {
-            closeDropdown();
-          }
-        });
-
-        // Close on scroll
-        window.addEventListener('scroll', () => {
-          if (dropdown.classList.contains('open')) {
-            closeDropdown();
-          }
-        }, { passive: true });
-
-        let currentSection = '';
         let ticking = false;
-        let _timer = null;
+        let lastActiveItem = null;
 
-        // The indicator is always visible — show "Contents" by default,
-        // or the current section title when scrolled into a section.
-        indicator.classList.add('visible');
-        textEl.textContent = 'Contents';
+        function updateActive() {
+          const navHeight = 64;
+          let activeItem = null;
 
-        function updateIndicator() {
-          const navHeight = 56;
-          let active = '';
-
-          const probeY = navHeight + 100;
-          let best = null;
-
-          for (const el of allSections) {
-            const rect = el.getBoundingClientRect();
-            if (rect.top < probeY && rect.bottom > navHeight) {
-              best = el;
+          // Find the lowest element whose top is above the probe point
+          for (const { item, target } of tracked) {
+            const rect = target.getBoundingClientRect();
+            if (rect.top < navHeight + 120 && rect.bottom > navHeight) {
+              activeItem = item;
             }
           }
 
-          if (best) {
-            if (best.id === 'introduction') {
-              active = 'Introduction';
-            } else {
-              const title = best.querySelector('.section-title');
-              const number = best.querySelector('.section-number');
-              if (title && number) {
-                active = `${number.textContent?.replace('#', '').trim()} ${title.textContent?.replace('#', '').trim()}`;
+          // Keep last active item during gaps between sections
+          if (!activeItem && lastActiveItem) {
+            activeItem = lastActiveItem;
+          }
+          lastActiveItem = activeItem;
+
+          tocItems.forEach((item) => item.classList.remove('active'));
+          if (activeItem) {
+            activeItem.classList.add('active');
+            // Scroll the ToC sidebar to keep active item visible
+            const sidebar = document.getElementById('toc-sidebar');
+            if (sidebar && window.innerWidth >= 1200) {
+              const itemRect = activeItem.getBoundingClientRect();
+              const sidebarRect = sidebar.getBoundingClientRect();
+              if (itemRect.bottom > sidebarRect.bottom || itemRect.top < sidebarRect.top) {
+                activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
               }
             }
-          }
-
-          if (!active) {
-            active = 'Contents';
-          }
-
-          if (active !== currentSection) {
-            if (_timer) {
-              clearTimeout(_timer);
-              _timer = null;
-            }
-
-            if (!currentSection || currentSection === 'Contents') {
-              // First update or coming from generic — no crossfade needed
-              textEl.textContent = active;
-              indicator.classList.remove('fading');
-              indicator.classList.add('visible');
-            } else {
-              indicator.classList.add('fading');
-              _timer = setTimeout(() => {
-                textEl.textContent = active;
-                indicator.classList.remove('fading');
-                indicator.classList.add('visible');
-                _timer = null;
-              }, 150);
-            }
-            currentSection = active;
           }
 
           ticking = false;
@@ -285,12 +163,61 @@ const ogImage = `${siteUrl}/og-image.png`;
 
         window.addEventListener('scroll', () => {
           if (!ticking) {
-            requestAnimationFrame(updateIndicator);
+            requestAnimationFrame(updateActive);
             ticking = true;
           }
         }, { passive: true });
 
-        updateIndicator();
+        updateActive();
+      }
+
+      // Mobile ToC toggle
+      function initTocToggle() {
+        const toggle = document.getElementById('nav-toc-toggle');
+        const sidebar = document.getElementById('toc-sidebar');
+        if (!toggle || !sidebar) return;
+
+        function openToc() {
+          sidebar.classList.add('open');
+          toggle.setAttribute('aria-expanded', 'true');
+          document.body.style.overflow = 'hidden';
+        }
+
+        function closeToc() {
+          sidebar.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          document.body.style.overflow = '';
+        }
+
+        toggle.addEventListener('click', (e) => {
+          e.stopPropagation();
+          if (sidebar.classList.contains('open')) {
+            closeToc();
+          } else {
+            openToc();
+          }
+        });
+
+        // Close when clicking a ToC link (mobile)
+        sidebar.addEventListener('click', (e) => {
+          if (e.target.closest('.toc-item') && window.innerWidth < 1200) {
+            closeToc();
+          }
+        });
+
+        // Close on click outside
+        document.addEventListener('click', (e) => {
+          if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
+            closeToc();
+          }
+        });
+
+        // Close on Escape
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+            closeToc();
+          }
+        });
       }
 
       // Horizontal progress bar at top of page
@@ -317,53 +244,15 @@ const ogImage = `${siteUrl}/og-image.png`;
         update();
       }
 
-      // TL;DR modal
-      let tldrAbort;
-      function initTldr() {
-        if (tldrAbort) tldrAbort.abort();
-        tldrAbort = new AbortController();
-        const { signal } = tldrAbort;
-
-        const overlay = document.getElementById('tldr-overlay');
-        const openBtn = document.getElementById('tldr-open-btn');
-        const closeBtn = document.getElementById('tldr-close-btn');
-        if (!overlay || !openBtn || !closeBtn) return;
-
-        function openModal() {
-          overlay.setAttribute('aria-hidden', 'false');
-          overlay.classList.add('open');
-          document.body.style.overflow = 'hidden';
-          closeBtn.focus();
-        }
-
-        function closeModal() {
-          overlay.setAttribute('aria-hidden', 'true');
-          overlay.classList.remove('open');
-          document.body.style.overflow = '';
-          openBtn.focus();
-        }
-
-        openBtn.addEventListener('click', openModal, { signal });
-        closeBtn.addEventListener('click', closeModal, { signal });
-
-        overlay.addEventListener('click', (e) => {
-          if (e.target === overlay) closeModal();
-        }, { signal });
-
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
-        }, { signal });
-      }
-
       initReveals();
-      initSectionTracker();
+      initTocTracker();
+      initTocToggle();
       initProgressBar();
-      initTldr();
       document.addEventListener('astro:after-swap', () => {
         initReveals();
-        initSectionTracker();
+        initTocTracker();
+        initTocToggle();
         initProgressBar();
-        initTldr();
       });
     </script>
   </body>
@@ -376,7 +265,7 @@ const ogImage = `${siteUrl}/og-image.png`;
     left: 0;
     width: 100%;
     height: 2px;
-    background: linear-gradient(90deg, var(--rust-500), var(--rust-400));
+    background: var(--accent-rust);
     transform-origin: left;
     transform: scaleX(0);
     z-index: 1000;
@@ -393,126 +282,59 @@ const ogImage = `${siteUrl}/og-image.png`;
     display: flex;
     align-items: center;
     padding: var(--space-md) var(--space-lg);
-    background: rgba(10, 10, 10, 0.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+    background: var(--bg-primary);
+    border-bottom: 1px solid rgba(230, 225, 216, 0.06);
   }
 
   .nav-brand {
-    font-family: var(--font-mono);
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-weight: 600;
     text-decoration: none;
+    letter-spacing: -0.01em;
   }
 
   .nav-rewrites { color: var(--text-primary); }
-  .nav-dot { color: var(--rust-500); }
-  .nav-bio { color: var(--rust-400); }
+  .nav-dot { color: var(--accent-rust); }
+  .nav-bio { color: var(--accent-rust); }
 
-  .nav-section-indicator {
+  /* Mobile ToC toggle — hidden on desktop where sidebar is visible */
+  .nav-toc-toggle {
     all: unset;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--text-tertiary);
-    letter-spacing: 0.05em;
-    margin-left: var(--space-md);
-    padding-left: var(--space-md);
-    border-left: 1px solid rgba(255, 255, 255, 0.08);
-    opacity: 0;
-    transform: translateY(-4px);
-    transition: opacity 0.3s ease, transform 0.3s ease, color 0.2s ease;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    max-width: 300px;
-    pointer-events: none;
     display: flex;
     align-items: center;
     gap: 6px;
-    cursor: pointer;
-  }
-
-  .nav-section-indicator.visible {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  .nav-section-indicator.visible:hover {
-    color: var(--text-secondary);
-  }
-
-  .nav-section-indicator.fading {
-    opacity: 0;
-    transform: translateY(4px);
-  }
-
-  .nav-section-chevron {
-    transition: transform 0.2s ease;
-    flex-shrink: 0;
-    opacity: 0.5;
-  }
-
-  .nav-section-indicator.dropdown-open .nav-section-chevron {
-    transform: rotate(180deg);
-  }
-
-  /* Dropdown */
-  .nav-section-dropdown {
-    position: fixed;
-    top: 52px;
-    left: 120px;
-    background: rgba(20, 20, 20, 0.95);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 8px;
-    padding: 6px 0;
-    min-width: 200px;
-    z-index: 1001;
-    opacity: 0;
-    transform: translateY(-8px);
-    pointer-events: none;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-
-  .nav-section-dropdown.open {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-
-  :global(.nav-dropdown-item) {
-    display: block;
-    padding: 8px 16px;
-    font-family: var(--font-mono);
+    margin-left: var(--space-md);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-family: var(--font-sans);
     font-size: 0.8rem;
+    font-weight: 500;
     color: var(--text-tertiary);
-    text-decoration: none;
-    letter-spacing: 0.03em;
+    cursor: pointer;
     transition: color 0.15s ease, background 0.15s ease;
   }
 
-  :global(.nav-dropdown-item:hover) {
-    color: var(--text-primary);
-    background: rgba(255, 255, 255, 0.04);
+  .nav-toc-toggle:hover {
+    color: var(--text-secondary);
+    background: rgba(230, 225, 216, 0.04);
   }
 
-  :global(.nav-dropdown-item.active) {
-    color: var(--rust-400);
+  .nav-toc-icon {
+    flex-shrink: 0;
   }
 
-  :global(.nav-dropdown-number) {
-    color: var(--rust-500);
-    margin-right: 4px;
+  @media (min-width: 1200px) {
+    .nav-toc-toggle {
+      display: none;
+    }
   }
 
   .nav-seqera-link {
     margin-left: auto;
     display: flex;
     align-items: center;
-    opacity: 0.3;
+    opacity: 0.35;
     transition: opacity 0.2s ease;
   }
 
@@ -529,16 +351,8 @@ const ogImage = `${siteUrl}/og-image.png`;
     .nav-seqera-link {
       display: none;
     }
-  }
-
-  @media (max-width: 768px) {
-    .nav-section-indicator {
-      max-width: 50vw;
-    }
-    .nav-section-dropdown {
-      left: var(--space-md);
-      right: var(--space-md);
-      min-width: auto;
+    .nav-toc-label {
+      display: none;
     }
   }
 </style>

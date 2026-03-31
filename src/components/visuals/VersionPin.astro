@@ -4,7 +4,7 @@
 ---
 
 <div class="pin-wrap">
-  <div class="pin-label">VALIDATION.md — VERSION PINNING</div>
+  <div class="pin-label">VALIDATION.md — Version Pinning</div>
   <div class="pin-file">
     <div class="pf-header">
       <div class="pf-filename">versions.lock</div>
@@ -57,24 +57,26 @@
 
 <style>
   .pin-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-rust));
+    border-top: none;
+    border-right: none;
+    border-bottom: none;
     padding: var(--space-lg);
   }
 
   .pin-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.7rem;
+    font-weight: 600;
     color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
     margin-bottom: var(--space-md);
   }
 
   .pin-file {
-    background: #0d0d0d;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: var(--bg-primary);
+    border: 1px solid rgba(230, 225, 216, 0.08);
     border-radius: 6px;
     overflow: hidden;
     margin-bottom: var(--space-md);
@@ -83,8 +85,8 @@
   }
 
   .pf-header {
-    background: rgba(255, 255, 255, 0.04);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    background: rgba(230, 225, 216, 0.04);
+    border-bottom: 1px solid rgba(230, 225, 216, 0.07);
     padding: 6px var(--space-md);
   }
 
@@ -102,7 +104,7 @@
   }
 
   .pf-comment {
-    color: rgba(255, 255, 255, 0.25);
+    color: rgba(230, 225, 216, 0.25);
   }
 
   .pf-blank {
@@ -110,7 +112,7 @@
   }
 
   .pf-section {
-    color: var(--rust-400);
+    color: var(--accent-rust);
     font-weight: 600;
     margin-top: 2px;
   }
@@ -121,16 +123,17 @@
 
   .pf-key   { color: var(--text-secondary); }
   .pf-eq    { color: var(--text-tertiary); }
-  .pf-val   { color: rgba(74, 222, 128, 0.85); }
+  .pf-val   { color: rgba(93, 172, 114, 0.85); }
 
   .pf-comment-inline {
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(230, 225, 216, 0.2);
   }
 
   .pin-note {
+    font-family: var(--font-serif);
     font-size: 0.83rem;
     color: var(--text-tertiary);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
     padding-top: var(--space-sm);
     line-height: 1.6;
     font-style: italic;

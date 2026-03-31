@@ -1,0 +1,162 @@
+---
+// Table of Contents — rendered once, CSS positions for desktop sidebar / mobile overlay
+---
+
+<nav class="toc" id="toc" aria-label="Table of contents">
+  <div class="toc-group toc-group-intro" style="--section-color: var(--accent-intro)">
+    <a href="#introduction" class="toc-item toc-section toc-intro" data-toc="introduction">
+      <span class="toc-num">0</span>Introduction
+    </a>
+    <a href="#introduction-opportunity" class="toc-item toc-principle toc-principle-intro" data-toc="introduction-opportunity">
+      <span class="toc-num">0.1</span>The opportunity
+    </a>
+    <a href="#introduction-risk" class="toc-item toc-principle toc-principle-intro" data-toc="introduction-risk">
+      <span class="toc-num">0.2</span>The risk
+    </a>
+  </div>
+
+  <div class="toc-group" style="--section-color: var(--accent-rust)">
+    <a href="#philosophy" class="toc-item toc-section" data-toc="philosophy">
+      <span class="toc-num">1</span>Philosophy
+    </a>
+    <a href="#credit-authors" class="toc-item toc-principle" data-toc="credit-authors">
+      <span class="toc-num">1.1</span>Credit the original authors
+    </a>
+    <a href="#emulate-exactly" class="toc-item toc-principle" data-toc="emulate-exactly">
+      <span class="toc-num">1.2</span>Emulate exactly
+    </a>
+    <a href="#transparent-ai" class="toc-item toc-principle" data-toc="transparent-ai">
+      <span class="toc-num">1.3</span>Be transparent about AI
+    </a>
+  </div>
+
+  <div class="toc-group" style="--section-color: var(--accent-blue)">
+    <a href="#planning" class="toc-item toc-section" data-toc="planning">
+      <span class="toc-num">2</span>Planning
+    </a>
+    <a href="#think-big" class="toc-item toc-principle" data-toc="think-big">
+      <span class="toc-num">2.1</span>Think big
+    </a>
+    <a href="#work-small" class="toc-item toc-principle" data-toc="work-small">
+      <span class="toc-num">2.2</span>Work small
+    </a>
+  </div>
+
+  <div class="toc-group" style="--section-color: var(--accent-gold)">
+    <a href="#building" class="toc-item toc-section" data-toc="building">
+      <span class="toc-num">3</span>Building
+    </a>
+    <a href="#test-and-benchmark" class="toc-item toc-principle" data-toc="test-and-benchmark">
+      <span class="toc-num">3.1</span>Test and benchmark
+    </a>
+    <a href="#build-what-you-need" class="toc-item toc-principle" data-toc="build-what-you-need">
+      <span class="toc-num">3.2</span>Build only what you need
+    </a>
+    <a href="#pin-versions" class="toc-item toc-principle" data-toc="pin-versions">
+      <span class="toc-num">3.3</span>Pin versions and document
+    </a>
+  </div>
+
+  <div class="toc-group" style="--section-color: var(--accent-sage)">
+    <a href="#stewardship" class="toc-item toc-section" data-toc="stewardship">
+      <span class="toc-num">4</span>Stewardship
+    </a>
+    <a href="#maintain" class="toc-item toc-principle" data-toc="maintain">
+      <span class="toc-num">4.1</span>Maintain and govern
+    </a>
+    <a href="#preserve-compatibility" class="toc-item toc-principle" data-toc="preserve-compatibility">
+      <span class="toc-num">4.2</span>Preserve compatibility
+    </a>
+    <a href="#open-source" class="toc-item toc-principle" data-toc="open-source">
+      <span class="toc-num">4.3</span>Release as open source
+    </a>
+    <a href="#contribute-upstream" class="toc-item toc-principle" data-toc="contribute-upstream">
+      <span class="toc-num">4.4</span>Contribute upstream
+    </a>
+  </div>
+</nav>
+
+<style>
+  .toc {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+  }
+
+  .toc-group {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: var(--space-sm);
+  }
+
+  .toc-item {
+    display: flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 4px 10px;
+    border-radius: 3px;
+    color: var(--text-tertiary);
+    text-decoration: none;
+    line-height: 1.4;
+    transition: color 0.15s ease, background 0.15s ease;
+    border-left: 2px solid transparent;
+  }
+
+  .toc-item:hover {
+    color: var(--text-secondary);
+    background: rgba(230, 225, 216, 0.03);
+  }
+
+  .toc-intro {
+    font-weight: 500;
+    color: var(--text-secondary);
+  }
+
+  .toc-section {
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin-top: 2px;
+  }
+
+  .toc-principle {
+    padding-left: 18px;
+    font-size: 0.76rem;
+  }
+
+  .toc-num {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: var(--text-tertiary);
+    flex-shrink: 0;
+    min-width: 20px;
+  }
+
+  .toc-section .toc-num {
+    color: var(--section-color);
+  }
+
+  /* Active states */
+  :global(.toc-item.active) {
+    color: var(--text-primary);
+    border-left-color: var(--section-color);
+    background: rgba(230, 225, 216, 0.04);
+  }
+
+  :global(.toc-item.active .toc-num) {
+    color: var(--section-color);
+  }
+
+  :global(.toc-intro.active),
+  :global(.toc-principle-intro.active) {
+    border-left-color: var(--accent-intro);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .toc-item {
+      transition: none;
+    }
+  }
+</style>
