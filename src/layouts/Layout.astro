@@ -49,7 +49,6 @@ const ogImage = `${siteUrl}/og-image.png`;
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
   <body>
-    <div class="doc-map" id="doc-map" aria-hidden="true"></div>
     <nav class="site-nav">
       <a href="/" class="nav-brand">
         <span class="nav-rewrites">rewrites</span><span class="nav-dot">.</span><span class="nav-bio">bio</span>
@@ -220,92 +219,6 @@ const ogImage = `${siteUrl}/og-image.png`;
         });
       }
 
-      // Section-colored document map
-      function initDocMap() {
-        const map = document.getElementById('doc-map');
-        if (!map) return;
-
-        const sections = [
-          { id: 'introduction', label: '0 Introduction', color: 'var(--accent-intro)' },
-          { id: 'philosophy', label: '1 Philosophy', color: 'var(--accent-rust)' },
-          { id: 'planning', label: '2 Planning', color: 'var(--accent-blue)' },
-          { id: 'building', label: '3 Building', color: 'var(--accent-gold)' },
-          { id: 'stewardship', label: '4 Stewardship', color: 'var(--accent-sage)' },
-        ];
-
-        // Measure section positions and build segments
-        function buildMap() {
-          const docHeight = document.documentElement.scrollHeight;
-          map.innerHTML = '';
-
-          const measured = sections.map((s) => {
-            const el = document.getElementById(s.id);
-            if (!el) return null;
-            const top = el.offsetTop;
-            // Find the next section's start or use document end
-            return { ...s, top, el };
-          }).filter(Boolean);
-
-          // Calculate each section's proportional height
-          for (let i = 0; i < measured.length; i++) {
-            const start = measured[i].top;
-            const end = i < measured.length - 1 ? measured[i + 1].top : docHeight;
-            const pct = ((end - start) / docHeight) * 100;
-
-            const seg = document.createElement('div');
-            seg.className = 'doc-map-seg';
-            seg.style.width = `${pct}%`;
-            seg.style.setProperty('--seg-color', measured[i].color);
-            seg.dataset.sectionId = measured[i].id;
-            seg.setAttribute('title', measured[i].label);
-
-            seg.addEventListener('click', () => {
-              measured[i].el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
-
-            map.appendChild(seg);
-          }
-
-          // Add the reading position indicator
-          let indicator = map.querySelector('.doc-map-indicator');
-          if (!indicator) {
-            indicator = document.createElement('div');
-            indicator.className = 'doc-map-indicator';
-            map.appendChild(indicator);
-          }
-        }
-
-        function updatePosition() {
-          const indicator = map.querySelector('.doc-map-indicator');
-          if (!indicator) return;
-          const scrollTop = window.scrollY;
-          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-          const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0;
-          indicator.style.left = `${progress * 100}%`;
-        }
-
-        buildMap();
-        updatePosition();
-
-        let ticking = false;
-        window.addEventListener('scroll', () => {
-          if (!ticking) {
-            requestAnimationFrame(() => {
-              updatePosition();
-              ticking = false;
-            });
-            ticking = true;
-          }
-        }, { passive: true });
-
-        // Rebuild on resize (section heights change)
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-          clearTimeout(resizeTimer);
-          resizeTimer = setTimeout(buildMap, 200);
-        });
-      }
-
       // Animate visual components on scroll into view
       function initVisualAnimations() {
         if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -468,112 +381,27 @@ const ogImage = `${siteUrl}/og-image.png`;
         }
       }
 
-      // Highlight active doc-map segment
-      function initDocMapHighlight() {
-        const map = document.getElementById('doc-map');
-        if (!map) return;
-
-        const sectionIds = ['introduction', 'philosophy', 'planning', 'building', 'stewardship'];
-        let ticking = false;
-
-        function update() {
-          const navHeight = 64;
-          let activeId = null;
-
-          for (const id of sectionIds) {
-            const el = document.getElementById(id);
-            if (!el) continue;
-            const rect = el.getBoundingClientRect();
-            if (rect.top < navHeight + 200 && rect.bottom > navHeight) {
-              activeId = id;
-            }
-          }
-
-          const segs = map.querySelectorAll('.doc-map-seg');
-          segs.forEach((seg) => {
-            if (seg.dataset.sectionId === activeId) {
-              seg.style.opacity = '0.55';
-            } else {
-              seg.style.opacity = '';
-            }
-          });
-          ticking = false;
-        }
-
-        window.addEventListener('scroll', () => {
-          if (!ticking) {
-            requestAnimationFrame(update);
-            ticking = true;
-          }
-        }, { passive: true });
-
-        update();
-      }
-
       initReveals();
       initTocTracker();
       initTocToggle();
-      initDocMap();
+
       initVisualAnimations();
       initSectionEntrances();
-      initDocMapHighlight();
+
       document.addEventListener('astro:after-swap', () => {
         initReveals();
         initTocTracker();
         initTocToggle();
-        initDocMap();
+  
         initVisualAnimations();
         initSectionEntrances();
-        initDocMapHighlight();
+  
       });
     </script>
   </body>
 </html>
 
 <style>
-  .doc-map {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    z-index: 1000;
-    display: flex;
-    cursor: pointer;
-  }
-
-  :global(.doc-map-seg) {
-    height: 100%;
-    background: var(--seg-color);
-    opacity: 0.25;
-    transition: opacity 0.2s ease;
-    position: relative;
-  }
-
-  :global(.doc-map-seg:hover) {
-    opacity: 0.6;
-  }
-
-  :global(.doc-map-indicator) {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 3px;
-    height: 100%;
-    background: var(--text-primary);
-    border-radius: 1px;
-    transform: translateX(-50%);
-    transition: left 0.1s ease-out;
-    box-shadow: 0 0 6px rgba(230, 225, 216, 0.4);
-    pointer-events: none;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    :global(.doc-map-indicator) {
-      transition: none;
-    }
-  }
-
   .site-nav {
     position: fixed;
     top: 0;
@@ -648,10 +476,16 @@ const ogImage = `${siteUrl}/og-image.png`;
     width: auto;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 1199px) {
     .nav-seqera-link {
       display: none;
     }
+    .nav-toc-toggle {
+      margin-left: auto;
+    }
+  }
+
+  @media (max-width: 768px) {
     .nav-toc-label {
       display: none;
     }
