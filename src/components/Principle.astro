@@ -45,12 +45,11 @@ const { id, number, title } = Astro.props;
 
   .principle-number {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: var(--text-sm);
     font-weight: 500;
     color: var(--section-color);
     text-decoration: none;
     flex-shrink: 0;
-    opacity: 0.8;
     transition: opacity 0.15s ease;
   }
 
@@ -72,11 +71,11 @@ const { id, number, title } = Astro.props;
 
   .principle-title {
     font-family: var(--font-serif);
-    font-size: 1.3rem;
-    font-weight: 600;
+    font-size: var(--text-xl);
+    font-weight: 700;
     color: var(--text-primary);
-    line-height: 1.3;
-    letter-spacing: -0.01em;
+    line-height: 1.25;
+    letter-spacing: -0.015em;
   }
 
   .anchor-link {
