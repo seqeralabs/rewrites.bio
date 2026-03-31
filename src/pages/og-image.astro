@@ -6,14 +6,14 @@
 <head>
   <meta charset="utf-8" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Inter:wght@400;500&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       width: 1200px;
       height: 630px;
-      background: #0a0a0a;
+      background: #0d1117;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -22,23 +22,18 @@
       overflow: hidden;
     }
 
-    /* Subtle dot grid */
-    body::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 24px 24px;
-    }
-
-    /* Top accent line */
-    .accent-line {
+    /* Section-colored accent bar at top */
+    .accent-bar {
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       height: 4px;
-      background: linear-gradient(90deg, #CE412B, #f97316, #CE412B);
+      display: flex;
+    }
+
+    .accent-bar span {
+      flex: 1;
     }
 
     .content {
@@ -48,85 +43,86 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 24px;
+      gap: 20px;
     }
 
     .pre-text {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 14px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: rgba(255, 255, 255, 0.4);
+      letter-spacing: 0.08em;
+      color: #5a6270;
     }
 
     .title {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 120px;
+      font-family: 'Newsreader', Georgia, serif;
+      font-size: 128px;
       font-weight: 700;
-      color: #ffffff;
+      color: #e6e1d8;
       line-height: 1;
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
     }
 
     .title .dot {
-      color: #f97316;
+      color: #c2512e;
     }
 
     .title .bio {
-      color: #fb923c;
-    }
-
-    .tagline {
-      font-family: 'Inter', sans-serif;
-      font-size: 28px;
-      font-style: italic;
-      color: rgba(255, 255, 255, 0.5);
-      margin-top: 8px;
+      color: #c2512e;
     }
 
     .divider {
-      width: 48px;
+      width: 64px;
       height: 3px;
-      background: linear-gradient(90deg, #CE412B, #f97316);
-      border-radius: 2px;
-      margin-top: 16px;
+      background: #c2512e;
+      margin-top: 8px;
+    }
+
+    .tagline {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 26px;
+      font-weight: 400;
+      color: #a0a5ad;
+      letter-spacing: 0.01em;
     }
 
     .subtitle {
-      font-family: 'Inter', sans-serif;
-      font-size: 20px;
-      color: rgba(255, 255, 255, 0.35);
-      max-width: 700px;
-      line-height: 1.5;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 18px;
+      color: #5a6270;
+      max-width: 640px;
+      line-height: 1.6;
     }
 
-    /* Corner accents */
-    .corner {
+    /* Subtle left border accent */
+    .side-accent {
       position: absolute;
-      width: 40px;
-      height: 40px;
-      border-color: rgba(206, 65, 43, 0.3);
-      border-style: solid;
+      left: 40px;
+      top: 180px;
+      bottom: 180px;
+      width: 3px;
+      background: #c2512e;
+      opacity: 0.3;
     }
-    .corner-tl { top: 24px; left: 24px; border-width: 2px 0 0 2px; }
-    .corner-tr { top: 24px; right: 24px; border-width: 2px 2px 0 0; }
-    .corner-bl { bottom: 24px; left: 24px; border-width: 0 0 2px 2px; }
-    .corner-br { bottom: 24px; right: 24px; border-width: 0 2px 2px 0; }
   </style>
 </head>
 <body>
-  <div class="accent-line"></div>
-  <div class="corner corner-tl"></div>
-  <div class="corner corner-tr"></div>
-  <div class="corner corner-bl"></div>
-  <div class="corner corner-br"></div>
+  <div class="accent-bar">
+    <span style="background: #8a7e9b;"></span>
+    <span style="background: #c2512e;"></span>
+    <span style="background: #5b8fa8;"></span>
+    <span style="background: #c9a84c;"></span>
+    <span style="background: #6b917a;"></span>
+  </div>
+  <div class="side-accent"></div>
 
   <div class="content">
     <div class="pre-text">A manifesto for bioinformatics</div>
     <div class="title">rewrites<span class="dot">.</span><span class="bio">bio</span></div>
-    <div class="tagline">Rewriting bioinformatics tools with AI. Responsibly.</div>
     <div class="divider"></div>
-    <div class="subtitle">Principles for AI-assisted modernisation of scientific software</div>
+    <div class="tagline">Rewriting bioinformatics tools with AI. Responsibly.</div>
+    <div class="subtitle">Principles for responsible AI-assisted rewriting of scientific software</div>
   </div>
 
 </body>

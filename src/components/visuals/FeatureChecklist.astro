@@ -1,186 +1,186 @@
 ---
-// 3.4 — Build only what you need: feature scope checklist
+// 3.2 — Build only what you need: scope checklist with boundary styling
 ---
 
-<div class="checklist-wrap">
-  <div class="checklist-label">SCOPE DEFINITION — samtools rewrite (example)</div>
-  <div class="checklist-cols">
-    <div class="checklist-col">
-      <div class="col-head col-head-in">In scope — required for pipeline</div>
-      <div class="check-items">
-        <div class="check-item check-done">
-          <span class="ci-icon">✓</span>
-          <div class="ci-content">
-            <div class="ci-name">samtools sort</div>
-            <div class="ci-note">coordinate &amp; name sort</div>
-          </div>
+<div class="scope-wrap">
+  <div class="scope-label">Scope Definition — samtools rewrite (example)</div>
+  <div class="scope-columns">
+    <div class="scope-col scope-in">
+      <div class="scope-col-header">In scope</div>
+      <div class="scope-item">
+        <span class="scope-icon scope-icon-pass">✓</span>
+        <div>
+          <span class="scope-name">sort</span>
+          <span class="scope-detail">coordinate &amp; name sort</span>
         </div>
-        <div class="check-item check-done">
-          <span class="ci-icon">✓</span>
-          <div class="ci-content">
-            <div class="ci-name">samtools index</div>
-            <div class="ci-note">BAI format</div>
-          </div>
+      </div>
+      <div class="scope-item">
+        <span class="scope-icon scope-icon-pass">✓</span>
+        <div>
+          <span class="scope-name">index</span>
+          <span class="scope-detail">BAI generation</span>
         </div>
-        <div class="check-item check-done">
-          <span class="ci-icon">✓</span>
-          <div class="ci-content">
-            <div class="ci-name">samtools flagstat</div>
-            <div class="ci-note">all flags, identical output format</div>
-          </div>
+      </div>
+      <div class="scope-item">
+        <span class="scope-icon scope-icon-pass">✓</span>
+        <div>
+          <span class="scope-name">flagstat</span>
+          <span class="scope-detail">alignment statistics</span>
         </div>
-        <div class="check-item check-done">
-          <span class="ci-icon">✓</span>
-          <div class="ci-content">
-            <div class="ci-name">samtools view</div>
-            <div class="ci-note">filter, convert SAM↔BAM↔CRAM</div>
-          </div>
+      </div>
+      <div class="scope-item">
+        <span class="scope-icon scope-icon-pass">✓</span>
+        <div>
+          <span class="scope-name">view</span>
+          <span class="scope-detail">format conversion</span>
         </div>
       </div>
     </div>
-
-    <div class="checklist-col">
-      <div class="col-head col-head-out">Out of scope — for now</div>
-      <div class="check-items">
-        <div class="check-item check-later">
-          <span class="ci-icon">○</span>
-          <div class="ci-content">
-            <div class="ci-name">samtools mpileup</div>
-            <div class="ci-note">not used in target pipeline</div>
-          </div>
+    <div class="scope-col scope-out">
+      <div class="scope-col-header">Out of scope</div>
+      <div class="scope-item">
+        <span class="scope-icon scope-icon-skip">○</span>
+        <div>
+          <span class="scope-name">mpileup</span>
+          <span class="scope-detail">not used in pipeline</span>
         </div>
-        <div class="check-item check-later">
-          <span class="ci-icon">○</span>
-          <div class="ci-content">
-            <div class="ci-name">samtools merge</div>
-            <div class="ci-note">handled upstream by nextflow</div>
-          </div>
+      </div>
+      <div class="scope-item">
+        <span class="scope-icon scope-icon-skip">○</span>
+        <div>
+          <span class="scope-name">merge</span>
+          <span class="scope-detail">handled upstream</span>
         </div>
-        <div class="check-item check-later">
-          <span class="ci-icon">○</span>
-          <div class="ci-content">
-            <div class="ci-name">samtools fasta/fastq</div>
-            <div class="ci-note">low priority, add later</div>
-          </div>
+      </div>
+      <div class="scope-item">
+        <span class="scope-icon scope-icon-skip">○</span>
+        <div>
+          <span class="scope-name">fasta/fastq</span>
+          <span class="scope-detail">not in critical path</span>
         </div>
-        <div class="check-item check-later">
-          <span class="ci-icon">○</span>
-          <div class="ci-content">
-            <div class="ci-name">samtools depth</div>
-            <div class="ci-note">separate tool handles this</div>
-          </div>
+      </div>
+      <div class="scope-item">
+        <span class="scope-icon scope-icon-skip">○</span>
+        <div>
+          <span class="scope-name">depth</span>
+          <span class="scope-detail">deferred to v2</span>
         </div>
       </div>
     </div>
   </div>
+  <div class="scope-note">
+    A rewrite that does four things correctly is more valuable than one that claims fifteen.
+  </div>
 </div>
 
 <style>
-  .checklist-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+  .scope-wrap {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-gold));
     padding: var(--space-lg);
   }
 
-  .checklist-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+  .scope-label {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 500;
     color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
     margin-bottom: var(--space-md);
   }
 
-  .checklist-cols {
+  .scope-columns {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: var(--space-md);
+    margin-bottom: var(--space-md);
   }
 
-  @media (max-width: 560px) {
-    .checklist-cols {
-      grid-template-columns: 1fr;
-    }
-  }
-
-  .checklist-col {
+  .scope-col {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
   }
 
-  .col-head {
-    font-family: var(--font-mono);
-    font-size: 0.68rem;
-    padding: 4px 0;
-    border-bottom: 2px solid;
-    margin-bottom: 4px;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
+  .scope-in {
+    padding: var(--space-sm);
+    border: 1.5px dashed var(--section-color, var(--accent-gold));
+    border-radius: 6px;
   }
 
-  .col-head-in {
-    color: rgba(74, 222, 128, 0.8);
-    border-color: rgba(74, 222, 128, 0.3);
+  .scope-out {
+    padding: var(--space-sm);
   }
 
-  .col-head-out {
+  .scope-col-header {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: var(--space-xs);
+  }
+
+  .scope-in .scope-col-header {
+    color: var(--section-color, var(--accent-gold));
+  }
+
+  .scope-out .scope-col-header {
     color: var(--text-tertiary);
-    border-color: rgba(255, 255, 255, 0.1);
   }
 
-  .check-items {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .check-item {
+  .scope-item {
     display: flex;
     align-items: flex-start;
     gap: var(--space-sm);
-    padding: 6px 8px;
-    border-radius: 4px;
-    background: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  .check-done {
-    border-color: rgba(74, 222, 128, 0.12);
-    background: rgba(74, 222, 128, 0.03);
-  }
-
-  .check-later {
-    opacity: 0.55;
-  }
-
-  .ci-icon {
-    font-family: var(--font-mono);
+  .scope-icon {
     font-size: 0.8rem;
     flex-shrink: 0;
-    margin-top: 1px;
+    line-height: 1.4;
   }
 
-  .check-done .ci-icon { color: rgba(74, 222, 128, 0.8); }
-  .check-later .ci-icon { color: var(--text-tertiary); }
-
-  .ci-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+  .scope-icon-pass {
+    color: var(--color-pass);
   }
 
-  .ci-name {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--text-primary);
-    font-weight: 500;
-  }
-
-  .ci-note {
-    font-family: var(--font-mono);
-    font-size: 0.66rem;
+  .scope-icon-skip {
     color: var(--text-tertiary);
+    opacity: 0.5;
+  }
+
+  .scope-name {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    display: block;
+  }
+
+  .scope-in .scope-name {
+    color: var(--text-primary);
+  }
+
+  .scope-out .scope-name {
+    color: var(--text-tertiary);
+  }
+
+  .scope-detail {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    display: block;
+    line-height: 1.3;
+  }
+
+  .scope-note {
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
+    padding-top: var(--space-sm);
+    font-style: italic;
+  }
+
+  @media (max-width: 400px) {
+    .scope-columns {
+      grid-template-columns: 1fr;
+    }
   }
 </style>

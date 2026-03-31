@@ -7,19 +7,30 @@ interface Props {
 }
 
 const { id, number, title, intro } = Astro.props;
+
+const sectionColorMap: Record<string, string> = {
+  '1': 'var(--accent-rust)',
+  '2': 'var(--accent-blue)',
+  '3': 'var(--accent-gold)',
+  '4': 'var(--accent-sage)',
+};
+const sectionColor = sectionColorMap[number] || 'var(--accent-rust)';
 ---
 
-<section class="manifesto-section" id={id}>
+<section
+  class="manifesto-section"
+  id={id}
+  style={`--section-color: ${sectionColor}`}
+>
   <div class="container">
-    <div class="section-header-wrap">
-      <div class="section-header reveal">
+    <div class="section-header-wrap" data-section-entrance>
+      <div class="section-header">
         <a class="section-header-inner" href={`#${id}`}>
           <span class="section-number">{number}</span>
           <h2 class="section-title">{title}<span class="anchor-link">#</span></h2>
         </a>
-        <div class="section-line"></div>
       </div>
-      {intro && <p class="section-intro reveal">{intro}</p>}
+      {intro && <p class="section-intro">{intro}</p>}
     </div>
     <div class="section-content">
       <slot />
@@ -35,10 +46,83 @@ const { id, number, title, intro } = Astro.props;
 
   .section-header-wrap {
     margin-bottom: var(--space-xl);
+    padding-left: var(--space-lg);
+    border-left: 3px solid var(--section-color);
+  }
+
+  /* Cinematic entrance: border draws, elements reveal */
+  .section-header-wrap[data-section-entrance] {
+    border-left-color: transparent;
+    --border-progress: 0;
+    background-image: linear-gradient(var(--section-color), var(--section-color));
+    background-size: 3px calc(var(--border-progress) * 100%);
+    background-position: left top;
+    background-repeat: no-repeat;
+  }
+
+  .section-header-wrap[data-section-entrance].entered {
+    border-left-color: transparent;
+    animation: drawBorder 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes drawBorder {
+    from { background-size: 3px 0%; }
+    to { background-size: 3px 100%; }
+  }
+
+  .section-header-wrap[data-section-entrance] .section-number {
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .section-header-wrap[data-section-entrance].entered .section-number {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.15s;
+  }
+
+  .section-header-wrap[data-section-entrance] .section-title {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .section-header-wrap[data-section-entrance].entered .section-title {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+  }
+
+  .section-header-wrap[data-section-entrance] .section-intro {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+
+  .section-header-wrap[data-section-entrance].entered .section-intro {
+    opacity: 1;
+    transition-delay: 0.45s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .section-header-wrap[data-section-entrance] {
+      border-left-color: var(--section-color);
+      background-image: none;
+    }
+    .section-header-wrap[data-section-entrance] .section-number,
+    .section-header-wrap[data-section-entrance] .section-title,
+    .section-header-wrap[data-section-entrance] .section-intro {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .section-header-wrap[data-section-entrance].entered {
+      animation: none;
+    }
   }
 
   .section-header {
-    padding: var(--space-md) 0;
+    padding: 0;
   }
 
   .section-header-inner {
@@ -55,49 +139,42 @@ const { id, number, title, intro } = Astro.props;
 
   .section-header-inner:hover .anchor-link {
     opacity: 1;
-    color: var(--rust-400);
   }
 
   .section-number {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: var(--text-sm);
     font-weight: 500;
-    color: var(--rust-500);
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
+    color: var(--section-color);
+    letter-spacing: 0.05em;
     flex-shrink: 0;
   }
 
   .section-title {
-    font-family: var(--font-mono);
-    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 3rem);
     font-weight: 700;
     color: var(--text-primary);
-    line-height: 1.2;
+    line-height: 1.15;
+    letter-spacing: -0.025em;
   }
 
   .anchor-link {
-    color: var(--rust-600);
+    color: var(--section-color);
     font-weight: 400;
     margin-left: 0.3em;
-    opacity: 0.4;
-    transition: opacity 0.15s ease, color 0.15s ease;
-    font-size: 0.7em;
-  }
-
-  .section-line {
-    width: 48px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--rust-500), transparent);
-    margin-top: var(--space-sm);
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    font-size: 0.6em;
   }
 
   .section-intro {
-    font-size: 1.1rem;
-    line-height: 1.75;
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
+    line-height: 1.7;
     color: var(--text-secondary);
-    margin-top: var(--space-lg);
-    max-width: 800px;
+    margin-top: var(--space-md);
+    max-width: var(--text-width);
   }
 
   .section-content {

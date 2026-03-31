@@ -1,110 +1,139 @@
 ---
-// 4.4 — Release as open source: flywheel diagram
+// 4.3 — Release as open source
+// Open source icon at top, benefits radiating below
 ---
 
-<div class="flywheel-wrap">
-  <div class="flywheel-label">THE OPEN-SOURCE FLYWHEEL</div>
-  <div class="flywheel-diagram">
-    <div class="fw-step fw-step-1">
-      <div class="fw-num">01</div>
-      <div class="fw-text">Community builds<br />original tool</div>
+<div class="oss-wrap">
+  <div class="oss-header">
+    <svg class="oss-logo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M7 11V7a5 5 0 0 1 9.9-1"/><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+    </svg>
+    <div class="oss-title">Open source</div>
+  </div>
+
+  <div class="oss-benefits">
+    <div class="oss-benefit">
+      <svg class="oss-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="m21 21l-4.34-4.34"/><circle cx="11" cy="11" r="8"/>
+      </svg>
+      <div>
+        <div class="oss-benefit-name">Transparency</div>
+        <div class="oss-benefit-desc">Researchers can inspect what the code does to their data</div>
+      </div>
     </div>
-    <div class="fw-connector fw-connector-right">→</div>
-    <div class="fw-step fw-step-2">
-      <div class="fw-num">02</div>
-      <div class="fw-text">AI-assisted<br />rewrite created</div>
+
+    <div class="oss-benefit">
+      <svg class="oss-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><circle cx="18" cy="6" r="3"/><path d="M18 9v2c0 .6-.4 1-1 1H7c-.6 0-1-.4-1-1V9m6 3v3"/>
+      </svg>
+      <div>
+        <div class="oss-benefit-name">Continuity</div>
+        <div class="oss-benefit-desc">Users can fork if the project is abandoned</div>
+      </div>
     </div>
-    <div class="fw-connector fw-connector-down">↓</div>
-    <div class="fw-step fw-step-4">
-      <div class="fw-num">04</div>
-      <div class="fw-text">Insights feed back<br />to original tool</div>
+
+    <div class="oss-benefit">
+      <svg class="oss-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <rect width="20" height="8" x="2" y="2" rx="2" ry="2"/><rect width="20" height="8" x="2" y="14" rx="2" ry="2"/><path d="M6 6h.01M6 18h.01"/>
+      </svg>
+      <div>
+        <div class="oss-benefit-name">Accessibility</div>
+        <div class="oss-benefit-desc">HPC clusters often can't run commercial software</div>
+      </div>
     </div>
-    <div class="fw-connector fw-connector-left">←</div>
-    <div class="fw-step fw-step-3">
-      <div class="fw-num">03</div>
-      <div class="fw-text">Community benefits,<br />contributes, improves</div>
+
+    <div class="oss-benefit">
+      <svg class="oss-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M2.062 12.348a1 1 0 0 1 0-.696a10.75 10.75 0 0 1 19.876 0a1 1 0 0 1 0 .696a10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/>
+      </svg>
+      <div>
+        <div class="oss-benefit-name">Reproducibility</div>
+        <div class="oss-benefit-desc">Pinned versions require access to the source</div>
+      </div>
     </div>
   </div>
-  <div class="flywheel-note">
-    Closed-source rewrites break this loop. They extract value from the community without returning it.
+
+  <div class="oss-note">
+    The tools you are rewriting were built by the open-source community. A rewrite that closes the source extracts value without contributing back.
   </div>
 </div>
 
 <style>
-  .flywheel-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+  .oss-wrap {
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-sage));
     padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
   }
 
-  .flywheel-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: var(--space-md);
-  }
-
-  .flywheel-diagram {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    grid-template-rows: auto auto auto;
-    align-items: center;
-    justify-items: center;
-    gap: var(--space-sm);
-    margin-bottom: var(--space-md);
-  }
-
-  .fw-step {
-    background: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    padding: var(--space-sm) var(--space-md);
-    text-align: center;
-    width: 100%;
-  }
-
-  .fw-step-1 { grid-column: 1; grid-row: 1; border-color: rgba(249, 115, 22, 0.2); }
-  .fw-step-2 { grid-column: 3; grid-row: 1; border-color: rgba(74, 222, 128, 0.2); }
-  .fw-step-3 { grid-column: 3; grid-row: 3; border-color: rgba(74, 222, 128, 0.15); }
-  .fw-step-4 { grid-column: 1; grid-row: 3; border-color: rgba(249, 115, 22, 0.15); }
-
-  .fw-connector {
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.2);
+  .oss-header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: var(--space-sm);
+    padding-bottom: var(--space-sm);
+    border-bottom: 1px solid rgba(230, 225, 216, 0.06);
   }
 
-  .fw-connector-right { grid-column: 2; grid-row: 1; }
-  .fw-connector-down  { grid-column: 3; grid-row: 2; }
-  .fw-connector-left  { grid-column: 2; grid-row: 3; }
+  .oss-logo {
+    width: 28px;
+    height: 28px;
+    color: var(--section-color, var(--accent-sage));
+  }
 
-  .fw-num {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--rust-500);
+  .oss-title {
+    font-family: var(--font-sans);
+    font-size: var(--text-lg);
     font-weight: 700;
-    margin-bottom: 4px;
+    color: var(--text-primary);
   }
 
-  .fw-text {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--text-secondary);
-    line-height: 1.5;
+  .oss-benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
-  .flywheel-note {
-    font-size: 0.83rem;
+  .oss-benefit {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    padding: 8px;
+    border-radius: 4px;
+    background: rgba(107, 145, 122, 0.04);
+  }
+
+  .oss-icon {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--section-color, var(--accent-sage));
+    margin-top: 1px;
+  }
+
+  .oss-benefit-name {
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .oss-benefit-desc {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
     color: var(--text-tertiary);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    line-height: 1.4;
+  }
+
+  .oss-note {
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
     padding-top: var(--space-sm);
-    line-height: 1.6;
     font-style: italic;
+    line-height: 1.6;
   }
 </style>

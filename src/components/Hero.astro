@@ -9,6 +9,7 @@ import SeqeraLogo from "./visuals/seqera-logo.svg";
       <h1 class="hero-title">
         <span class="hero-rewrites">rewrites</span><span class="hero-dot">.</span><span class="hero-bio">bio</span>
       </h1>
+      <div class="hero-rule"></div>
       <p class="hero-tagline">Rewriting bioinformatics tools with AI. Responsibly.</p>
       <div class="hero-intro">
         <p>
@@ -17,20 +18,13 @@ import SeqeraLogo from "./visuals/seqera-logo.svg";
           is coming to bioinformatics. These are the principles for doing it right.
         </p>
       </div>
-      <button class="hero-tldr-btn" id="tldr-open-btn" aria-haspopup="dialog">
-        Give me the TL;DR version
-      </button>
       <a href="https://seqera.io" class="hero-seqera-link"><SeqeraLogo /></a>
-      <div class="hero-scroll">
-        <span class="hero-scroll-line"></span>
-      </div>
     </div>
   </div>
 </section>
 
 <style>
   .hero {
-    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -47,21 +41,22 @@ import SeqeraLogo from "./visuals/seqera-logo.svg";
   }
 
   .hero-pre {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.2em;
+    font-family: var(--font-sans);
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--text-tertiary);
     margin-bottom: var(--space-lg);
   }
 
   .hero-title {
-    font-family: var(--font-mono);
-    font-size: clamp(2.4rem, 8vw, 6.5rem);
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 10vw, 7rem);
     font-weight: 700;
     line-height: 1;
-    margin-bottom: var(--space-lg);
-    letter-spacing: -0.02em;
+    margin-bottom: var(--space-md);
+    letter-spacing: -0.03em;
     white-space: nowrap;
   }
 
@@ -70,20 +65,27 @@ import SeqeraLogo from "./visuals/seqera-logo.svg";
   }
 
   .hero-dot {
-    color: var(--rust-500);
+    color: var(--accent-rust);
   }
 
   .hero-bio {
-    color: var(--rust-400);
+    color: var(--accent-rust);
+  }
+
+  .hero-rule {
+    width: 64px;
+    height: 3px;
+    background: var(--accent-rust);
+    margin: var(--space-lg) auto;
   }
 
   .hero-tagline {
     font-family: var(--font-sans);
-    font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-    font-weight: 300;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    font-weight: 400;
     color: var(--text-secondary);
     margin-bottom: var(--space-xl);
-    font-style: italic;
+    letter-spacing: 0.01em;
   }
 
   .hero-intro {
@@ -92,37 +94,15 @@ import SeqeraLogo from "./visuals/seqera-logo.svg";
   }
 
   .hero-intro p {
-    font-size: 1.05rem;
-    line-height: 1.8;
+    font-size: var(--text-lg);
+    line-height: 1.75;
     color: var(--text-secondary);
-  }
-
-  .hero-tldr-btn {
-    display: block;
-    margin: var(--space-lg) auto 0;
-    padding: 0.5em 1.2em;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--rust-400);
-    background: transparent;
-    border: 1px solid rgba(249, 115, 22, 0.3);
-    border-radius: 4px;
-    cursor: pointer;
-    transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
-  }
-
-  .hero-tldr-btn:hover {
-    color: var(--rust-300);
-    border-color: rgba(249, 115, 22, 0.6);
-    background: rgba(249, 115, 22, 0.06);
   }
 
   .hero-seqera-link {
     display: inline-block;
     margin-top: var(--space-lg);
-    opacity: 0.3;
+    opacity: 0.35;
     transition: opacity 0.2s ease;
   }
 
@@ -135,22 +115,4 @@ import SeqeraLogo from "./visuals/seqera-logo.svg";
     width: auto;
   }
 
-  .hero-scroll {
-    margin-top: var(--space-2xl);
-    display: flex;
-    justify-content: center;
-  }
-
-  .hero-scroll-line {
-    display: block;
-    width: 1px;
-    height: 48px;
-    background: linear-gradient(to bottom, var(--rust-500), transparent);
-    animation: scroll-pulse 2s ease-in-out infinite;
-  }
-
-  @keyframes scroll-pulse {
-    0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
-    50% { opacity: 1; transform: scaleY(1); }
-  }
 </style>

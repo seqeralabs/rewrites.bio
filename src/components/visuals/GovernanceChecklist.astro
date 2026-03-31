@@ -1,123 +1,193 @@
 ---
-// 4.1 — Maintain and govern: community health checklist
+// 4.1 — Maintain and govern
+// Two-part visual: "Before release" governance files + "Ongoing" maintenance tasks
 ---
 
 <div class="gov-wrap">
-  <div class="gov-label">REPOSITORY HEALTH</div>
-  <div class="gov-grid">
-    <div class="gov-item gov-ok">
-      <div class="gov-icon">✓</div>
-      <div class="gov-content">
-        <div class="gov-name">CONTRIBUTING.md</div>
-        <div class="gov-sub">How to submit issues &amp; PRs</div>
+  <div class="gov-phase">
+    <div class="gov-phase-header">Before release</div>
+    <div class="gov-items">
+      <div class="gov-item">
+        <svg class="gov-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z"/><path d="M14 2v5a1 1 0 0 0 1 1h5M10 9H8m8 4H8m8 4H8"/>
+        </svg>
+        <div>
+          <div class="gov-item-name">CONTRIBUTING.md</div>
+          <div class="gov-item-desc">How to submit issues &amp; PRs</div>
+        </div>
       </div>
-    </div>
-    <div class="gov-item gov-ok">
-      <div class="gov-icon">✓</div>
-      <div class="gov-content">
-        <div class="gov-name">CODE_OF_CONDUCT.md</div>
-        <div class="gov-sub">Community standards</div>
+      <div class="gov-item">
+        <svg class="gov-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M16 22h2a2 2 0 0 0 2-2V8a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 14 2H6a2 2 0 0 0-2 2v2.85"/><path d="M14 2v5a1 1 0 0 0 1 1h5M8 14v2.2l1.6 1"/><circle cx="8" cy="16" r="6"/>
+        </svg>
+        <div>
+          <div class="gov-item-name">CHANGELOG.md</div>
+          <div class="gov-item-desc">Document every release</div>
+        </div>
       </div>
-    </div>
-    <div class="gov-item gov-ok">
-      <div class="gov-icon">✓</div>
-      <div class="gov-content">
-        <div class="gov-name">Release process</div>
-        <div class="gov-sub">Versioned, tagged, changelogs</div>
-      </div>
-    </div>
-    <div class="gov-item gov-ok">
-      <div class="gov-icon">✓</div>
-      <div class="gov-content">
-        <div class="gov-name">Issue response SLA</div>
-        <div class="gov-sub">Acknowledge within 7 days</div>
+      <div class="gov-item">
+        <svg class="gov-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12.586 2.586A2 2 0 0 0 11.172 2H4a2 2 0 0 0-2 2v7.172a2 2 0 0 0 .586 1.414l8.704 8.704a2.426 2.426 0 0 0 3.42 0l6.58-6.58a2.426 2.426 0 0 0 0-3.42z"/><circle cx="7.5" cy="7.5" r=".5" fill="currentColor"/>
+        </svg>
+        <div>
+          <div class="gov-item-name">Versioned tags</div>
+          <div class="gov-item-desc">Changelogs with every release</div>
+        </div>
       </div>
     </div>
   </div>
+
+  <div class="gov-divider">
+    <span class="gov-divider-line"></span>
+    <span class="gov-divider-text">ship it →</span>
+    <span class="gov-divider-line"></span>
+  </div>
+
+  <div class="gov-phase gov-phase-ongoing">
+    <div class="gov-phase-header gov-phase-header-ongoing">Ongoing</div>
+    <div class="gov-items">
+      <div class="gov-item">
+        <svg class="gov-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 20v-9m2-4a4 4 0 0 1 4 4v3a6 6 0 0 1-12 0v-3a4 4 0 0 1 4-4zm.12-3.12L16 2"/><path d="M21 21a4 4 0 0 0-3.81-4M21 5a4 4 0 0 1-3.55 3.97M22 13h-4M3 21a4 4 0 0 1 3.81-4M3 5a4 4 0 0 0 3.55 3.97M6 13H2M8 2l1.88 1.88M9 7.13V6a3 3 0 1 1 6 0v1.13"/>
+        </svg>
+        <div>
+          <div class="gov-item-name">Triage issues</div>
+          <div class="gov-item-desc">Users will find edge cases you missed</div>
+        </div>
+      </div>
+      <div class="gov-item">
+        <svg class="gov-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 12a9 9 0 0 1 9-9a9.75 9.75 0 0 1 6.74 2.74L21 8"/><path d="M21 3v5h-5m5 4a9 9 0 0 1-9 9a9.75 9.75 0 0 1-6.74-2.74L3 16"/><path d="M8 16H3v5"/>
+        </svg>
+        <div>
+          <div class="gov-item-name">Re-validate</div>
+          <div class="gov-item-desc">When upstream tools release updates</div>
+        </div>
+      </div>
+      <div class="gov-item">
+        <svg class="gov-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M3 3v18h18m-3-4V9m-5 8V5M8 17v-3"/>
+        </svg>
+        <div>
+          <div class="gov-item-name">Expand benchmarks</div>
+          <div class="gov-item-desc">New data types and edge cases</div>
+        </div>
+      </div>
+      <div class="gov-item">
+        <svg class="gov-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7M6 9v12"/>
+        </svg>
+        <div>
+          <div class="gov-item-name">Review PRs</div>
+          <div class="gov-item-desc">Grow a contributor community</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="gov-note">
-    These signal to users and contributors that the project takes itself seriously.
+    Shipping is just the beginning. These signal to users that the project takes itself seriously.
   </div>
 </div>
 
 <style>
   .gov-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-sage));
     padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
   }
 
-  .gov-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.12em;
-    margin-bottom: var(--space-md);
-  }
-
-  .gov-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .gov-phase {
+    display: flex;
+    flex-direction: column;
     gap: var(--space-sm);
-    margin-bottom: var(--space-md);
   }
 
-  @media (max-width: 560px) {
-    .gov-grid { grid-template-columns: 1fr; }
+  .gov-phase-header {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--text-tertiary);
+  }
+
+  .gov-phase-header-ongoing {
+    color: var(--section-color, var(--accent-sage));
+  }
+
+  .gov-items {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
   }
 
   .gov-item {
     display: flex;
     align-items: flex-start;
     gap: var(--space-sm);
-    background: var(--bg-primary);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 6px;
-    padding: var(--space-sm) var(--space-md);
+    padding: 6px 8px;
+    border-radius: 4px;
   }
 
-  .gov-ok   { border-color: rgba(74, 222, 128, 0.15); }
-  .gov-warn { border-color: rgba(251, 191, 36, 0.2); }
+  .gov-phase-ongoing .gov-item {
+    background: rgba(107, 145, 122, 0.04);
+  }
 
   .gov-icon {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 2px;
     width: 16px;
-    text-align: center;
-  }
-
-  .gov-ok .gov-icon   { color: rgba(74, 222, 128, 0.8); }
-  .gov-warn .gov-icon { color: rgba(251, 191, 36, 0.8); }
-
-  .gov-content {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-  }
-
-  .gov-name {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: var(--text-primary);
-    font-weight: 500;
-  }
-
-  .gov-sub {
-    font-family: var(--font-mono);
-    font-size: 0.67rem;
+    height: 16px;
+    flex-shrink: 0;
     color: var(--text-tertiary);
+    margin-top: 2px;
+  }
+
+  .gov-phase-ongoing .gov-icon {
+    color: var(--section-color, var(--accent-sage));
+  }
+
+  .gov-item-name {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--text-primary);
+    line-height: 1.3;
+  }
+
+  .gov-item-desc {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+    line-height: 1.3;
+  }
+
+  .gov-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--space-sm);
+    padding: var(--space-xs) 0;
+  }
+
+  .gov-divider-line {
+    flex: 1;
+    height: 1px;
+    background: rgba(230, 225, 216, 0.06);
+  }
+
+  .gov-divider-text {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    white-space: nowrap;
   }
 
   .gov-note {
-    font-size: 0.83rem;
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
     color: var(--text-tertiary);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
     padding-top: var(--space-sm);
-    line-height: 1.6;
     font-style: italic;
   }
 </style>

@@ -1,235 +1,178 @@
 ---
-// 3.2 — Benchmark rigorously
-// Real numbers from RustQC (https://seqeralabs.github.io/RustQC)
-// Input: GM12878 REP1, 10 GB paired-end BAM, GRCh38, 10-core Apple M3 Max
+// 3.1 — Test and benchmark with real data: test coverage grid
 ---
 
 <div class="bench-wrap">
-  <div class="bench-label">REAL BENCHMARK — RustQC · GM12878 REP1 · 10 GB BAM · 10-core Apple M3 Max</div>
-  <div class="terminal">
-    <div class="term-bar">
-      <div class="term-dots">
-        <span class="dot dot-red"></span>
-        <span class="dot dot-yellow"></span>
-        <span class="dot dot-green"></span>
+  <div class="bench-section">
+    <div class="bench-label">Validation coverage</div>
+    <div class="grid-figure">
+      <div class="grid-row">
+        <div class="grid-cat">Organisms</div>
+        <div class="grid-cells">
+          <div class="cell cell-pass" title="Human">Hs</div>
+          <div class="cell cell-pass" title="Mouse">Mm</div>
+          <div class="cell cell-pass" title="Drosophila">Dm</div>
+          <div class="cell cell-pass" title="Zebrafish">Dr</div>
+          <div class="cell cell-pass" title="Arabidopsis">At</div>
+          <div class="cell cell-empty" title="C. elegans">Ce</div>
+        </div>
       </div>
-      <div class="term-title">benchmark.sh</div>
+      <div class="grid-row">
+        <div class="grid-cat">Platforms</div>
+        <div class="grid-cells">
+          <div class="cell cell-pass">A</div>
+          <div class="cell cell-pass">B</div>
+          <div class="cell cell-pass">C</div>
+          <div class="cell cell-empty">D</div>
+          <div class="cell cell-empty">E</div>
+        </div>
+      </div>
+      <div class="grid-row">
+        <div class="grid-cat">Hardware</div>
+        <div class="grid-cells">
+          <div class="cell cell-pass">x86</div>
+          <div class="cell cell-pass">ARM</div>
+          <div class="cell cell-pass">HPC</div>
+          <div class="cell cell-empty">GPU</div>
+        </div>
+      </div>
+      <div class="grid-row">
+        <div class="grid-cat">Edge cases</div>
+        <div class="grid-cells">
+          <div class="cell cell-pass" title="Empty file">empty</div>
+          <div class="cell cell-pass" title="Single read">1 read</div>
+          <div class="cell cell-pass" title="Very large">50 GB</div>
+          <div class="cell cell-pass" title="Paired end">PE</div>
+          <div class="cell cell-pass" title="Single end">SE</div>
+          <div class="cell cell-empty" title="Malformed">bad</div>
+        </div>
+      </div>
     </div>
-    <div class="term-body">
-      <div class="term-section-head"># Traditional workflow — 15+ separate tool invocations, each reading BAM</div>
-      <div class="term-row">
-        <span class="term-tool">featureCounts</span>
-        <span class="term-spacer"></span>
-        <span class="term-stat">time: <span class="stat-val stat-old">3m 39s</span></span>
-      </div>
-      <div class="term-row">
-        <span class="term-tool">dupRadar</span>
-        <span class="term-spacer"></span>
-        <span class="term-stat">time: <span class="stat-val stat-old">27m 21s</span></span>
-      </div>
-      <div class="term-row">
-        <span class="term-tool">RSeQC read_duplication</span>
-        <span class="term-spacer"></span>
-        <span class="term-stat">time: <span class="stat-val stat-old">29m 43s</span></span>
-      </div>
-      <div class="term-row">
-        <span class="term-tool">RSeQC bam_stat</span>
-        <span class="term-spacer"></span>
-        <span class="term-stat">time: <span class="stat-val stat-old">6m 07s</span></span>
-      </div>
-      <div class="term-row">
-        <span class="term-tool">+ 11 more tools …</span>
-        <span class="term-spacer"></span>
-        <span class="term-stat">time: <span class="stat-val stat-old">~58m</span></span>
-      </div>
-      <div class="term-row term-row-total">
-        <span class="term-tool">total</span>
-        <span class="term-spacer"></span>
-        <span class="term-stat">time: <span class="stat-val stat-old">~2h 05m</span></span>
-      </div>
-
-      <div class="term-divider"></div>
-
-      <div class="term-section-head"># RustQC — single pass over the BAM</div>
-      <div class="term-row">
-        <span class="term-tool">rustqc</span>
-        <span class="term-spacer"></span>
-        <span class="term-stat">time: <span class="stat-val stat-new">~5m</span></span>
-      </div>
-      <div class="term-row term-row-total">
-        <span class="term-tool">total</span>
-        <span class="term-spacer"></span>
-        <span class="term-stat">time: <span class="stat-val stat-new">~5m</span></span>
-      </div>
-
-      <div class="term-divider"></div>
-
-      <div class="term-result">
-        <span class="result-label">speedup</span>
-        <span class="result-val">~25×</span>
-        <span class="result-label">output equivalence</span>
-        <span class="result-match">✓ 820,118 values, zero mismatches</span>
-      </div>
+    <div class="grid-legend">
+      <span class="legend-item"><span class="legend-dot legend-dot-pass"></span>tested</span>
+      <span class="legend-item"><span class="legend-dot legend-dot-empty"></span>not yet</span>
     </div>
   </div>
-  <div class="bench-source">
-    Source: <a href="https://seqeralabs.github.io/RustQC/rna/benchmark-details/" target="_blank" rel="noopener">seqeralabs.github.io/RustQC/rna/benchmark-details/</a>
+
+  <div class="bench-note">
+    Document benchmarks precisely and make them reproducible — ideally as a simple pipeline anyone can run.
   </div>
 </div>
 
 <style>
   .bench-wrap {
-    background: var(--bg-surface);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 8px;
+    background: var(--bg-secondary);
+    border-left: 3px solid var(--section-color, var(--accent-gold));
     padding: var(--space-lg);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .bench-section {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-sm);
   }
 
   .bench-label {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    color: var(--text-tertiary);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: var(--space-md);
-    line-height: 1.5;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--section-color, var(--accent-gold));
   }
 
-  .terminal {
-    background: #0d0d0d;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
-    overflow: hidden;
-    margin-bottom: var(--space-sm);
-  }
-
-  .term-bar {
-    background: rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 8px var(--space-md);
+  .grid-figure {
     display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-  }
-
-  .term-dots {
-    display: flex;
+    flex-direction: column;
     gap: 6px;
   }
 
-  .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-
-  .dot-red    { background: rgba(255, 95, 86, 0.7); }
-  .dot-yellow { background: rgba(255, 189, 46, 0.7); }
-  .dot-green  { background: rgba(39, 201, 63, 0.7); }
-
-  .term-title {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--text-tertiary);
-  }
-
-  .term-body {
-    padding: var(--space-md);
+  .grid-row {
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    gap: var(--space-sm);
+  }
+
+  .grid-cat {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    width: 80px;
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .grid-cells {
+    display: flex;
     gap: 4px;
-  }
-
-  .term-section-head {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: var(--text-tertiary);
-    margin-top: 4px;
-    margin-bottom: 2px;
-    line-height: 1.5;
-  }
-
-  .term-row {
-    display: flex;
-    align-items: center;
-    gap: var(--space-sm);
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
     flex-wrap: wrap;
   }
 
-  .term-row-total {
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
-    padding-top: 4px;
-    margin-top: 2px;
-  }
-
-  .term-tool {
-    color: var(--text-secondary);
-    min-width: 200px;
-  }
-
-  .term-spacer {
-    flex: 1;
-    min-width: 8px;
-  }
-
-  .term-stat {
-    color: var(--text-tertiary);
-    font-size: 0.78rem;
-    white-space: nowrap;
-  }
-
-  .stat-val {
-    font-weight: 600;
-  }
-
-  .stat-old { color: rgba(248, 113, 113, 0.9); }
-  .stat-new { color: rgba(74, 222, 128, 0.9); }
-
-  .term-divider {
-    border-top: 1px solid rgba(255, 255, 255, 0.07);
-    margin: var(--space-xs) 0;
-  }
-
-  .term-result {
+  .cell {
+    width: 40px;
+    height: 28px;
+    border-radius: 3px;
     display: flex;
     align-items: center;
-    gap: var(--space-sm);
-    flex-wrap: wrap;
-    padding-top: 4px;
+    justify-content: center;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 500;
   }
 
-  .result-label {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
+  .cell-pass {
+    background: rgba(93, 172, 114, 0.12);
+    border: 1px solid rgba(93, 172, 114, 0.25);
+    color: var(--color-pass);
+  }
+
+  .cell-empty {
+    background: none;
+    border: 1px dashed rgba(230, 225, 216, 0.12);
     color: var(--text-tertiary);
+    opacity: 0.5;
   }
 
-  .result-val {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: rgba(74, 222, 128, 0.9);
-    margin-right: var(--space-sm);
+  .grid-legend {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-xs);
+    padding-left: 92px;
   }
 
-  .result-match {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: rgba(74, 222, 128, 0.9);
-    font-weight: 600;
-  }
-
-  .bench-source {
-    font-family: var(--font-mono);
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-sans);
     font-size: 0.7rem;
     color: var(--text-tertiary);
-    margin-top: var(--space-xs);
   }
 
-  .bench-source a {
-    color: var(--rust-400);
-    font-family: var(--font-mono);
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+
+  .legend-dot-pass {
+    background: rgba(93, 172, 114, 0.3);
+    border: 1px solid rgba(93, 172, 114, 0.5);
+  }
+
+  .legend-dot-empty {
+    border: 1px dashed rgba(230, 225, 216, 0.2);
+  }
+
+  .bench-note {
+    font-family: var(--font-serif);
+    font-size: 0.83rem;
+    color: var(--text-tertiary);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
+    padding-top: var(--space-sm);
+    line-height: 1.6;
+    font-style: italic;
   }
 </style>

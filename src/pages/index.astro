@@ -4,6 +4,7 @@ import Hero from "../components/Hero.astro";
 import Section from "../components/Section.astro";
 import Principle from "../components/Principle.astro";
 import Footer from "../components/Footer.astro";
+import TableOfContents from "../components/TableOfContents.astro";
 
 import ScaleCostChart from "../components/visuals/ScaleCostChart.astro";
 import CitationCard from "../components/visuals/CitationCard.astro";
@@ -23,11 +24,22 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
 <Layout title="rewrites.bio  - A manifesto for bioinformatics">
   <Hero />
 
-  <main class="manifesto">
+  <div class="manifesto-with-toc">
+    <aside class="toc-sidebar" id="toc-sidebar">
+      <TableOfContents />
+    </aside>
+
+    <main class="manifesto">
     <div class="preamble" id="introduction">
       <div class="container">
-        <div class="preamble-section">
-          <h2 class="preamble-heading reveal">The opportunity</h2>
+        <div class="preamble-header" data-section-entrance>
+          <a class="preamble-header-inner" href="#introduction">
+            <span class="preamble-number">0</span>
+            <h2 class="preamble-title">Introduction</h2>
+          </a>
+        </div>
+        <div class="preamble-section" id="introduction-opportunity">
+          <a class="preamble-heading reveal" href="#introduction-opportunity"><span class="preamble-sub-number">0.1</span>The opportunity<span class="anchor-link">#</span></a>
           <div class="preamble-layout">
             <div class="preamble-text reveal-stagger">
               <p class="reveal">
@@ -51,8 +63,8 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
           </div>
         </div>
 
-        <div class="preamble-section preamble-risk">
-          <h2 class="preamble-heading reveal">The risk</h2>
+        <div class="preamble-section preamble-risk" id="introduction-risk">
+          <a class="preamble-heading reveal" href="#introduction-risk"><span class="preamble-sub-number">0.2</span>The risk<span class="anchor-link">#</span></a>
           <div class="preamble-text-full reveal-stagger">
             <p class="reveal">
               Cheap code is not the same as correct code. AI-generated implementations are fluent
@@ -69,22 +81,21 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
               to be honest about what they have and have not validated.
             </p>
           </div>
-        </div>
 
-        <div class="preamble-cta">
-          <blockquote class="preamble-callout reveal">
-            A wave of AI-assisted rewrites is coming.<br />
-            The question is not <strong>whether</strong> it will happen,<br />
-            but whether it will happen <strong>well</strong>.
-          </blockquote>
-          <p class="preamble-closing reveal">These are the principles we follow.</p>
+          <div class="preamble-cta">
+            <div class="preamble-callout reveal">
+              <p>A wave of AI-assisted rewrites is coming.</p>
+              <p>The question is not <strong>whether</strong> it will happen, but whether it will happen <strong>well</strong>.</p>
+            </div>
+            <p class="preamble-closing reveal">These are the principles we follow.</p>
+          </div>
         </div>
       </div>
     </div>
 
     <Section
       id="philosophy"
-      number="I"
+      number="1"
       title="Philosophy"
       intro="Before writing any code, three commitments shape everything else. These are not procedural rules. They are a statement of values."
     >
@@ -152,7 +163,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
 
     <Section
       id="planning"
-      number="II"
+      number="2"
       title="Planning"
       intro="The decisions made before you write the first function determine most of the outcome. Scope, validation strategy, and architecture all matter more than the choice of language."
     >
@@ -200,7 +211,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
 
     <Section
       id="building"
-      number="III"
+      number="3"
       title="Building"
       intro="Good intentions don't ship correct software. The building phase is where principles meet reality: data that behaves unexpectedly, performance that doesn't match theory, users who need the tool to work before they will trust it."
     >
@@ -217,9 +228,9 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
             <li><strong>Benchmarks:</strong> document hardware, dataset, exact commands, and output comparison</li>
           </ul>
           <p>
-            "10× faster" is marketing unless anyone can clone the repo and reproduce your numbers.
-            Benchmark honestly - if your rewrite is faster on some data but not others, say so.
-            Numbers without reproducibility are anecdotes.
+            Speed claims need evidence. Document your hardware, dataset, and exact commands so
+            anyone can reproduce the comparison. If performance varies across data types, show
+            that too — honest benchmarks build trust.
           </p>
         </div>
         <BenchmarkComparison slot="visual" />
@@ -272,7 +283,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
 
     <Section
       id="stewardship"
-      number="IV"
+      number="4"
       title="Stewardship"
       intro="A rewrite is not a one-time act. Once other researchers build pipelines on your tool, you have made a commitment. Stewardship means honouring it: maintaining correctness as upstream tools evolve, governing transparently, and giving back to the ecosystem that made the rewrite possible."
     >
@@ -290,7 +301,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
             <li><strong>Review PRs</strong> and grow a contributor community</li>
           </ul>
           <p>
-            Put governance in place before release: CONTRIBUTING.md, CODE_OF_CONDUCT.md, versioned
+            Put governance in place before release: CONTRIBUTING.md, CHANGELOG.md, versioned
             tags, changelogs, and a commitment to acknowledge issues.
           </p>
         </div>
@@ -370,36 +381,104 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       </Principle>
     </Section>
 
-    <div class="closing">
-      <div class="container">
-        <div class="closing-line"></div>
-        <p class="closing-text">These principles are a starting point, not a checklist.</p>
-        <p class="closing-body">
-          Every rewrite is different. Some principles will be easier to honour than others in
-          your context. What matters is that the intent behind each one shapes the decisions you
-          make when the easy path and the right path diverge. The wave is coming. Let's make
-          sure it lifts all boats.
-        </p>
-        <p class="closing-attribution">
-          Discuss and contribute at <a href="https://github.com/seqeralabs/rewrites.bio">github.com/seqeralabs/rewrites.bio</a>
-        </p>
-      </div>
-    </div>
   </main>
+  </div>
+
+  <div class="closing">
+    <div class="container">
+      <div class="closing-line"></div>
+      <p class="closing-text">These principles are a starting point, not a checklist.</p>
+      <p class="closing-body">
+        Every rewrite is different. Some principles will be easier to honour than others in
+        your context. What matters is that the intent behind each one shapes the decisions you
+        make when the easy path and the right path diverge. The wave is coming. Let's make
+        sure it lifts all boats.
+      </p>
+      <p class="closing-attribution">
+        Discuss and contribute at <a href="https://github.com/seqeralabs/rewrites.bio">github.com/seqeralabs/rewrites.bio</a>
+      </p>
+    </div>
+  </div>
 
   <Footer />
 </Layout>
 
 <style>
+  /* ── ToC layout ── */
+  .manifesto-with-toc {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: var(--space-lg);
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 var(--space-lg);
+  }
+
+  .toc-sidebar {
+    position: sticky;
+    top: 60px;
+    height: fit-content;
+    max-height: calc(100vh - 72px);
+    overflow-y: auto;
+    padding: var(--space-md) 0;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(230, 225, 216, 0.1) transparent;
+  }
+
+  .toc-sidebar::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .toc-sidebar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .toc-sidebar::-webkit-scrollbar-thumb {
+    background: rgba(230, 225, 216, 0.1);
+    border-radius: 2px;
+  }
+
+  /* Below breakpoint: hide sidebar, shown as mobile overlay via JS */
+  @media (max-width: 1199px) {
+    .manifesto-with-toc {
+      display: block;
+      max-width: none;
+      padding: 0;
+    }
+
+    .toc-sidebar {
+      position: fixed;
+      top: 52px;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      max-height: none;
+      height: auto;
+      background: var(--bg-elevated);
+      border-bottom: 1px solid rgba(230, 225, 216, 0.08);
+      z-index: 998;
+      padding: var(--space-lg);
+      overflow-y: auto;
+      transform: translateY(-10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .toc-sidebar.open {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+  }
+
   .manifesto {
     padding-top: var(--space-xl);
   }
 
   /* ── Preamble ── */
   .preamble {
-    padding-bottom: var(--space-2xl);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-    margin-bottom: var(--space-xl);
+    padding-bottom: 0;
     scroll-margin-top: 72px;
   }
 
@@ -427,21 +506,140 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
 
   .preamble-section {
     margin-bottom: var(--space-xl);
+    scroll-margin-top: 72px;
+  }
+
+  .preamble-header {
+    margin-bottom: var(--space-xl);
+    padding-left: var(--space-lg);
+    border-left: 3px solid var(--accent-intro);
+  }
+
+  /* Cinematic entrance for preamble header */
+  .preamble-header[data-section-entrance] {
+    border-left-color: transparent;
+    background-image: linear-gradient(var(--accent-intro), var(--accent-intro));
+    background-size: 3px 0%;
+    background-position: left top;
+    background-repeat: no-repeat;
+  }
+
+  .preamble-header[data-section-entrance].entered {
+    animation: drawBorderIntro 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes drawBorderIntro {
+    from { background-size: 3px 0%; }
+    to { background-size: 3px 100%; }
+  }
+
+  .preamble-header[data-section-entrance] .preamble-number {
+    opacity: 0;
+    transform: translateX(-12px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .preamble-header[data-section-entrance].entered .preamble-number {
+    opacity: 1;
+    transform: translateX(0);
+    transition-delay: 0.15s;
+  }
+
+  .preamble-header[data-section-entrance] .preamble-title {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .preamble-header[data-section-entrance].entered .preamble-title {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.2s;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .preamble-header[data-section-entrance] {
+      border-left-color: var(--accent-intro);
+      background-image: none;
+    }
+    .preamble-header[data-section-entrance] .preamble-number,
+    .preamble-header[data-section-entrance] .preamble-title {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .preamble-header[data-section-entrance].entered {
+      animation: none;
+    }
+  }
+
+  .preamble-header-inner {
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .preamble-number {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--accent-intro);
+    flex-shrink: 0;
+  }
+
+  .preamble-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.15;
+    letter-spacing: -0.025em;
   }
 
   .preamble-heading {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--rust-400);
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    font-weight: 700;
+    color: var(--text-primary);
     margin-bottom: var(--space-md);
+    letter-spacing: -0.015em;
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-md);
+    text-decoration: none;
+  }
+
+  .preamble-heading:hover {
+    color: var(--text-primary);
+  }
+
+  .preamble-heading .anchor-link {
+    color: var(--accent-intro);
+    font-weight: 400;
+    margin-left: 0.3em;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+    font-size: 0.85em;
+  }
+
+  .preamble-heading:hover .anchor-link {
+    opacity: 1;
+  }
+
+  .preamble-sub-number {
+    font-family: var(--font-mono);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--accent-intro);
+    flex-shrink: 0;
+    opacity: 0.8;
   }
 
   .preamble p {
-    font-size: 1.1rem;
-    line-height: 1.8;
+    font-size: var(--text-lg);
+    line-height: 1.75;
     color: var(--text-secondary);
     margin-bottom: var(--space-md);
   }
@@ -460,7 +658,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
     line-height: 1.7;
     color: var(--text-secondary);
     padding-left: var(--space-md);
-    border-left: 2px solid var(--rust-600);
+    border-left: 2px solid var(--accent-intro);
   }
 
   .preamble-list strong {
@@ -474,33 +672,38 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
 
   .preamble-risk {
     padding-top: var(--space-lg);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
   }
 
   .preamble-cta {
     padding-top: var(--space-lg);
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
     text-align: center;
   }
 
   .preamble-callout {
-    font-family: var(--font-mono);
-    font-size: 1.05rem;
-    line-height: 1.7;
-    color: var(--rust-400);
-    border-left: none;
-    padding-left: 0;
     margin: var(--space-lg) 0;
-    font-style: normal;
+  }
+
+  .preamble-callout p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-sm);
+  }
+
+  .preamble-callout p:last-child {
+    margin-bottom: 0;
   }
 
   .preamble-callout strong {
-    color: var(--rust-300);
+    color: var(--text-primary);
   }
 
   .preamble-closing {
-    font-family: var(--font-mono);
-    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    font-weight: 600;
     color: var(--text-primary);
     margin-top: var(--space-md);
   }
@@ -509,20 +712,24 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
   .closing {
     padding: var(--space-2xl) 0;
     text-align: center;
+    border-top: 1px solid rgba(230, 225, 216, 0.06);
+    margin-top: var(--space-xl);
   }
 
   .closing-line {
     width: 48px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--rust-600), var(--rust-400));
+    height: 3px;
+    background: var(--accent-rust);
     margin: 0 auto var(--space-xl);
   }
 
   .closing-text {
-    font-family: var(--font-mono);
-    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 700;
     color: var(--text-primary);
     margin-bottom: var(--space-md);
+    letter-spacing: -0.025em;
   }
 
   .closing-body {
@@ -534,12 +741,12 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
   }
 
   .closing-attribution {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
     color: var(--text-tertiary);
   }
 
   .closing-attribution a {
-    color: var(--rust-400);
+    color: var(--color-link);
   }
 </style>
