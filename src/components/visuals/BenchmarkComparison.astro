@@ -1,118 +1,172 @@
 ---
-// 3.1 — Test and benchmark with real data: Reproducibility blueprint
+// 3.1 — Test and benchmark with real data: test coverage grid
 ---
 
-<div class="blueprint-wrap">
-  <div class="blueprint-layout">
-    <div class="blueprint-header">
-      <div class="blueprint-main-label">Benchmark</div>
-      <div class="blueprint-main-sub">All four required for reproducibility</div>
+<div class="bench-wrap">
+  <div class="bench-section">
+    <div class="bench-label">Validation coverage</div>
+    <div class="grid-figure">
+      <div class="grid-row">
+        <div class="grid-cat">Organisms</div>
+        <div class="grid-cells">
+          <div class="cell cell-pass" title="Human">Hs</div>
+          <div class="cell cell-pass" title="Mouse">Mm</div>
+          <div class="cell cell-pass" title="Drosophila">Dm</div>
+          <div class="cell cell-pass" title="Zebrafish">Dr</div>
+          <div class="cell cell-pass" title="Arabidopsis">At</div>
+          <div class="cell cell-empty" title="C. elegans">Ce</div>
+        </div>
+      </div>
+      <div class="grid-row">
+        <div class="grid-cat">Platforms</div>
+        <div class="grid-cells">
+          <div class="cell cell-pass">A</div>
+          <div class="cell cell-pass">B</div>
+          <div class="cell cell-pass">C</div>
+          <div class="cell cell-empty">D</div>
+          <div class="cell cell-empty">E</div>
+        </div>
+      </div>
+      <div class="grid-row">
+        <div class="grid-cat">Hardware</div>
+        <div class="grid-cells">
+          <div class="cell cell-pass">x86</div>
+          <div class="cell cell-pass">ARM</div>
+          <div class="cell cell-pass">HPC</div>
+          <div class="cell cell-empty">GPU</div>
+        </div>
+      </div>
+      <div class="grid-row">
+        <div class="grid-cat">Edge cases</div>
+        <div class="grid-cells">
+          <div class="cell cell-pass" title="Empty file">empty</div>
+          <div class="cell cell-pass" title="Single read">1 read</div>
+          <div class="cell cell-pass" title="Very large">50 GB</div>
+          <div class="cell cell-pass" title="Paired end">PE</div>
+          <div class="cell cell-pass" title="Single end">SE</div>
+          <div class="cell cell-empty" title="Malformed">bad</div>
+        </div>
+      </div>
     </div>
-    <div class="blueprint-items">
-      <div class="blueprint-item">
-
-        <div class="blueprint-box">
-          <div class="blueprint-item-name">Hardware</div>
-          <div class="blueprint-item-detail">10-core M3 Max</div>
-        </div>
-      </div>
-      <div class="blueprint-item">
-
-        <div class="blueprint-box">
-          <div class="blueprint-item-name">Dataset</div>
-          <div class="blueprint-item-detail">GM12878 REP1, 10 GB</div>
-        </div>
-      </div>
-      <div class="blueprint-item">
-
-        <div class="blueprint-box">
-          <div class="blueprint-item-name">Commands</div>
-          <div class="blueprint-item-detail">exact CLI invocations</div>
-        </div>
-      </div>
-      <div class="blueprint-item">
-
-        <div class="blueprint-box">
-          <div class="blueprint-item-name">Expected outputs</div>
-          <div class="blueprint-item-detail">benchmarks/expected/</div>
-        </div>
-      </div>
+    <div class="grid-legend">
+      <span class="legend-item"><span class="legend-dot legend-dot-pass"></span>tested</span>
+      <span class="legend-item"><span class="legend-dot legend-dot-empty"></span>not yet</span>
     </div>
   </div>
-  <div class="blueprint-note">
-    Numbers without reproducibility are anecdotes.
-  </div>
-  <div class="blueprint-source">
-    Source: <a href="https://seqeralabs.github.io/RustQC/rna/benchmark-details/" target="_blank" rel="noopener">seqeralabs.github.io/RustQC</a>
+
+  <div class="bench-note">
+    Document benchmarks precisely and make them reproducible — ideally as a simple pipeline anyone can run.
   </div>
 </div>
 
 <style>
-  .blueprint-wrap {
+  .bench-wrap {
     background: var(--bg-secondary);
     border-left: 3px solid var(--section-color, var(--accent-gold));
     padding: var(--space-lg);
-  }
-
-  .blueprint-layout {
     display: flex;
     flex-direction: column;
     gap: var(--space-md);
-    margin-bottom: var(--space-md);
   }
 
-  .blueprint-header {
-    padding-bottom: var(--space-sm);
-    border-bottom: 2px solid var(--section-color, var(--accent-gold));
-  }
-
-  .blueprint-main-label {
-    font-family: var(--font-sans);
-    font-size: var(--text-lg);
-    font-weight: 700;
-    color: var(--text-primary);
-  }
-
-  .blueprint-main-sub {
-    font-family: var(--font-sans);
-    font-size: 0.8rem;
-    color: var(--section-color, var(--accent-gold));
-  }
-
-  .blueprint-items {
+  .bench-section {
     display: flex;
     flex-direction: column;
     gap: var(--space-sm);
-    flex: 1;
   }
 
-  .blueprint-item {
+  .bench-label {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--section-color, var(--accent-gold));
+  }
+
+  .grid-figure {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .grid-row {
     display: flex;
     align-items: center;
+    gap: var(--space-sm);
   }
 
-  .blueprint-box {
-    background: var(--bg-elevated);
-    border: 1px solid rgba(230, 225, 216, 0.06);
-    border-radius: 4px;
-    padding: 6px 10px;
-    flex: 1;
-  }
-
-  .blueprint-item-name {
+  .grid-cat {
     font-family: var(--font-sans);
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--text-primary);
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-tertiary);
+    width: 80px;
+    flex-shrink: 0;
+    text-align: right;
   }
 
-  .blueprint-item-detail {
+  .grid-cells {
+    display: flex;
+    gap: 4px;
+    flex-wrap: wrap;
+  }
+
+  .cell {
+    width: 40px;
+    height: 28px;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.65rem;
+    font-weight: 500;
+  }
+
+  .cell-pass {
+    background: rgba(93, 172, 114, 0.12);
+    border: 1px solid rgba(93, 172, 114, 0.25);
+    color: var(--color-pass);
+  }
+
+  .cell-empty {
+    background: none;
+    border: 1px dashed rgba(230, 225, 216, 0.12);
+    color: var(--text-tertiary);
+    opacity: 0.5;
+  }
+
+  .grid-legend {
+    display: flex;
+    gap: var(--space-md);
+    margin-top: var(--space-xs);
+    padding-left: 92px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
     color: var(--text-tertiary);
   }
 
-  .blueprint-note {
+  .legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+  }
+
+  .legend-dot-pass {
+    background: rgba(93, 172, 114, 0.3);
+    border: 1px solid rgba(93, 172, 114, 0.5);
+  }
+
+  .legend-dot-empty {
+    border: 1px dashed rgba(230, 225, 216, 0.2);
+  }
+
+  .bench-note {
     font-family: var(--font-serif);
     font-size: 0.83rem;
     color: var(--text-tertiary);
@@ -120,18 +174,5 @@
     padding-top: var(--space-sm);
     line-height: 1.6;
     font-style: italic;
-  }
-
-  .blueprint-source {
-    font-family: var(--font-serif);
-    font-size: 0.7rem;
-    color: var(--text-tertiary);
-    margin-top: var(--space-xs);
-  }
-
-  .blueprint-source a {
-    color: var(--color-link);
-    font-family: var(--font-mono);
-    text-decoration: none;
   }
 </style>

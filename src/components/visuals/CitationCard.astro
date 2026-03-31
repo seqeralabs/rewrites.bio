@@ -1,14 +1,14 @@
 ---
 // 1.1 — Credit the original authors
-// Shows: researcher uses RustQC → their paper must cite featureCounts (required) and optionally RustQC
+// Shows: researcher uses rewrite → must cite original (required) and optionally the rewrite
 ---
 
 <div class="provenance-wrap">
   <svg
     class="provenance-svg"
-    viewBox="0 0 340 440"
+    viewBox="0 0 340 370"
     role="img"
-    aria-label="Citation diagram showing that a paper using RustQC must cite the original featureCounts, and optionally cite RustQC"
+    aria-label="Citation diagram showing that a paper using a rewrite must cite the original tool, and optionally cite the rewrite"
     xmlns="http://www.w3.org/2000/svg"
   >
     <defs>
@@ -31,7 +31,7 @@
       fill="var(--text-primary)">Your paper</text>
     <text x="170" y="60" text-anchor="middle"
       font-family="var(--font-sans)" font-size="11"
-      fill="var(--text-tertiary)">uses RustQC for QC</text>
+      fill="var(--text-tertiary)">uses fastalign-rs</text>
 
     <!-- Arrow: Your paper → RustQC -->
     <line x1="170" y1="72" x2="170" y2="112"
@@ -44,10 +44,10 @@
       fill="var(--bg-primary)" stroke="var(--section-color, var(--accent-rust))" stroke-width="1.5" />
     <text x="170" y="146" text-anchor="middle"
       font-family="var(--font-mono)" font-size="15" font-weight="600"
-      fill="var(--section-color, var(--accent-rust))">RustQC</text>
+      fill="var(--section-color, var(--accent-rust))">fastalign-rs</text>
     <text x="170" y="164" text-anchor="middle"
       font-family="var(--font-sans)" font-size="11"
-      fill="var(--text-tertiary)">AI-assisted rewrite · 2024</text>
+      fill="var(--text-tertiary)">rewrite</text>
 
     <!-- Arrow: RustQC → featureCounts -->
     <line x1="170" y1="176" x2="170" y2="216"
@@ -60,10 +60,10 @@
       fill="var(--bg-primary)" stroke="var(--text-tertiary)" stroke-width="1" />
     <text x="170" y="250" text-anchor="middle"
       font-family="var(--font-mono)" font-size="14" font-weight="600"
-      fill="var(--text-secondary)">featureCounts</text>
+      fill="var(--text-secondary)">slowalign</text>
     <text x="170" y="268" text-anchor="middle"
       font-family="var(--font-sans)" font-size="11"
-      fill="var(--text-tertiary)">Liao, Smyth &amp; Shi · 2014</text>
+      fill="var(--text-tertiary)">original tool</text>
 
     <!-- DOI badge -->
     <rect x="110" y="286" width="120" height="20" rx="3"
@@ -71,7 +71,7 @@
     <text x="130" y="300" font-family="var(--font-mono)" font-size="8.5"
       font-weight="700" fill="var(--text-tertiary)">DOI</text>
     <text x="152" y="300" font-family="var(--font-mono)" font-size="8.5"
-      fill="var(--text-secondary)">10.1093/btt656</text>
+      fill="var(--text-secondary)">10.xxxx/xxxxxx</text>
 
     <!-- Citation arrows from "Your paper" -->
 
