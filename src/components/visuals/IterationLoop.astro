@@ -68,6 +68,13 @@
       stroke="var(--color-pass)" stroke-width="1.5" marker-end="url(#arrow-pass)" />
     <text x="110" y="300" text-anchor="middle"
       font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--color-pass)">Match → next function</text>
+
+    <!-- Animated dot tracing the mismatch loop: 02 → 03 → mismatch curve → back to 02 -->
+    <circle r="4" fill="var(--color-fail)" opacity="0" class="loop-dot">
+      <animate attributeName="opacity" values="0;0.8;0.8;0" dur="3s" keyTimes="0;0.05;0.9;1" repeatCount="indefinite" />
+      <animateMotion dur="3s" repeatCount="indefinite"
+        path="M110,148 L110,208 L210,208 C260,208 260,123 210,123 L110,123 L110,148" />
+    </circle>
   </svg>
 </div>
 
@@ -92,6 +99,12 @@
     height: auto;
     display: block;
     margin: 0 auto;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .loop-dot {
+      display: none;
+    }
   }
 
   .loop-note {

@@ -76,20 +76,20 @@
     <!-- Citation arrows from "Your paper" -->
 
     <!-- Required: cite featureCounts (solid, prominent) -->
-    <path d="M56,44 L20,44 L20,252 L62,252"
+    <path class="citation-line-required" d="M56,44 L20,44 L20,252 L62,252"
       fill="none" stroke="var(--section-color, var(--accent-rust))" stroke-width="2"
       marker-end="url(#arr-req)" />
-    <text x="14" y="160" text-anchor="middle"
+    <text class="citation-label" x="14" y="160" text-anchor="middle"
       font-family="var(--font-sans)" font-size="11" font-weight="700"
       fill="var(--section-color, var(--accent-rust))"
       transform="rotate(-90, 14, 160)">must cite</text>
 
     <!-- Optional: cite RustQC (dashed, subtle) -->
-    <path d="M284,44 L320,44 L320,148 L278,148"
+    <path class="citation-line-optional" d="M284,44 L320,44 L320,148 L278,148"
       fill="none" stroke="var(--text-tertiary)" stroke-width="1.2"
       stroke-dasharray="5,4"
       marker-end="url(#arr-opt)" />
-    <text x="326" y="104" text-anchor="middle"
+    <text class="citation-label" x="326" y="104" text-anchor="middle"
       font-family="var(--font-sans)" font-size="10"
       fill="var(--text-tertiary)"
       transform="rotate(90, 326, 104)">optional</text>
@@ -120,6 +120,21 @@
     height: auto;
     display: block;
     margin: 0 auto;
+  }
+
+  .citation-line-required.pulsing {
+    animation: citation-brightness 2.5s ease-in-out infinite;
+  }
+
+  @keyframes citation-brightness {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .citation-line-required.pulsing {
+      animation: none;
+    }
   }
 
   .provenance-note {

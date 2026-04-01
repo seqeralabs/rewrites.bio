@@ -90,6 +90,47 @@
     border: 1px solid rgba(212, 86, 90, 0.2);
   }
 
+  @keyframes puzzle-shake-and-idle {
+    /* Initial shake (0–8.75% ≈ 0.7s of 8s) */
+    0% { transform: rotate(0deg); }
+    1.5% { transform: rotate(-5deg); }
+    3% { transform: rotate(4deg); }
+    4.5% { transform: rotate(-3deg); }
+    6% { transform: rotate(2.5deg); }
+    7.5% { transform: rotate(-1deg); }
+    8.75% { transform: rotate(2.5deg); }
+    /* Long calm */
+    90% { transform: rotate(2.5deg); }
+    /* Subtle idle tremble */
+    92% { transform: rotate(0.5deg); }
+    94% { transform: rotate(3.5deg); }
+    96% { transform: rotate(1deg); }
+    98% { transform: rotate(3deg); }
+    100% { transform: rotate(2.5deg); }
+  }
+
+  .puzzle-bad.animated .puzzle-icon {
+    animation: puzzle-shake-and-idle 8s ease-in-out infinite;
+  }
+
+  .puzzle-bad .puzzle-icon {
+    transition: transform 0.3s ease-out;
+  }
+
+  .puzzle-bad:hover .puzzle-icon {
+    transform: rotate(6deg) !important;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .puzzle-bad.animated .puzzle-icon {
+      animation: none;
+      transform: rotate(2.5deg);
+    }
+    .puzzle-bad:hover .puzzle-icon {
+      transform: rotate(6deg) !important;
+    }
+  }
+
   .puzzle-note {
     font-family: var(--font-serif);
     font-size: 0.83rem;

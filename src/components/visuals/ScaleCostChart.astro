@@ -121,6 +121,31 @@
   .bar-old {
     background: var(--color-fail);
     opacity: 0.5;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .bar-old::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+    animation: bar-shimmer 3s ease-in-out infinite;
+    animation-delay: 1.5s;
+  }
+
+  @keyframes bar-shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(350%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bar-old::after {
+      display: none;
+    }
   }
 
   .bar-new {

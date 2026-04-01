@@ -299,13 +299,17 @@ const ogImage = `${siteUrl}/og-image.png`;
 
         // Checklist items appearing
         function animateChecklist(wrap) {
-          const items = wrap.querySelectorAll('.check-item, .gov-item, .flywheel-item');
+          const items = wrap.querySelectorAll('.check-item, .gov-item, .oss-benefit');
           items.forEach((item, i) => {
             item.style.opacity = '0';
-            item.animate(
+            const anim = item.animate(
               [{ opacity: 0, transform: 'translateX(-6px)' }, { opacity: 1, transform: 'translateX(0)' }],
               { duration: 350, easing: 'ease-out', fill: 'forwards', delay: i * 80 }
             );
+            anim.finished.then(() => {
+              item.style.opacity = '1';
+              anim.cancel();
+            }).catch(() => {});
           });
         }
 
@@ -317,6 +321,121 @@ const ogImage = `${siteUrl}/og-image.png`;
           );
         }
 
+        // Citation card: panel entrance + SVG line draw + brightness pulse after
+        function animateCitation(wrap) {
+          animatePanel(wrap);
+          const reqPath = wrap.querySelector('.citation-line-required');
+          if (reqPath && reqPath.getTotalLength) {
+            const len = reqPath.getTotalLength();
+            reqPath.style.strokeDasharray = len;
+            reqPath.style.strokeDashoffset = len;
+            reqPath.style.transition = 'stroke-dashoffset 1.2s ease-out';
+            setTimeout(() => { reqPath.style.strokeDashoffset = '0'; }, 400);
+            // Start brightness pulse after line-draw completes (400ms delay + 1200ms draw)
+            setTimeout(() => {
+              reqPath.style.strokeDasharray = '';
+              reqPath.style.strokeDashoffset = '';
+              reqPath.style.transition = '';
+              reqPath.classList.add('pulsing');
+            }, 1700);
+          }
+          const optPath = wrap.querySelector('.citation-line-optional');
+          if (optPath) {
+            optPath.style.opacity = '0';
+            optPath.style.transition = 'opacity 0.8s ease-out';
+            setTimeout(() => {
+              optPath.style.opacity = '1';
+              setTimeout(() => { optPath.style.transition = ''; }, 800);
+            }, 900);
+          }
+          wrap.querySelectorAll('.citation-label').forEach((el, i) => {
+            el.style.opacity = '0';
+            el.style.transition = 'opacity 0.5s ease-out';
+            setTimeout(() => {
+              el.style.opacity = '1';
+              setTimeout(() => { el.style.transition = ''; }, 500);
+            }, 700 + i * 200);
+          });
+        }
+
+        // Puzzle: panel entrance + shake the bad piece (delayed so it's noticeable)
+        function animatePuzzle(wrap) {
+          animatePanel(wrap);
+          setTimeout(() => {
+            const bad = wrap.querySelector('.puzzle-bad');
+            if (bad) bad.classList.add('animated');
+          }, 800);
+        }
+
+        // AI Badge: typewriter ALL text, box grows as content appears
+        function animateTypewriter(wrap) {
+          animatePanel(wrap);
+          const heading = wrap.querySelector('.readme-heading');
+          const body = wrap.querySelector('.readme-body');
+          const badges = wrap.querySelector('.readme-badge-row');
+          const note = wrap.querySelector('.readme-note');
+
+          // Store original content
+          const headingText = heading ? heading.textContent.trim() : '';
+          const paragraphs = body ? [...body.querySelectorAll('p')] : [];
+          const paraData = paragraphs.map(p => ({ text: p.textContent, html: p.innerHTML }));
+
+          // Clear everything — box starts small and grows
+          if (heading) heading.textContent = '';
+          paragraphs.forEach(p => { p.textContent = ''; p.style.display = 'none'; });
+          if (badges) badges.style.opacity = '0';
+          if (note) note.style.opacity = '0';
+
+          const CHAR_DELAY = 5;
+
+          function typeInto(el, text, cb) {
+            el.textContent = '';
+            el.style.display = '';
+            let i = 0;
+            const iv = setInterval(() => {
+              if (i < text.length) {
+                el.textContent += text[i];
+                i++;
+              } else {
+                clearInterval(iv);
+                if (cb) cb();
+              }
+            }, CHAR_DELAY);
+          }
+
+          function typeParagraphs(idx) {
+            if (idx >= paragraphs.length) {
+              // All text done — pop in badges & note
+              if (badges) {
+                badges.animate(
+                  [{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'translateY(0)' }],
+                  { duration: 250, fill: 'forwards' }
+                );
+              }
+              if (note) {
+                note.animate(
+                  [{ opacity: 0 }, { opacity: 1 }],
+                  { duration: 250, fill: 'forwards', delay: 100 }
+                );
+              }
+              return;
+            }
+            const p = paragraphs[idx];
+            typeInto(p, paraData[idx].text, () => {
+              p.innerHTML = paraData[idx].html; // restore <code> formatting
+              typeParagraphs(idx + 1);
+            });
+          }
+
+          setTimeout(() => {
+            if (heading) {
+              typeInto(heading, headingText, () => {
+                typeParagraphs(0);
+              });
+            }
+          }, 200);
+        }
+
         const observer = new IntersectionObserver((entries) => {
           entries.forEach((entry) => {
             if (!entry.isIntersecting || animated.has(entry.target)) return;
@@ -326,11 +445,17 @@ const ogImage = `${siteUrl}/og-image.png`;
             // Determine which animation to run based on content
             if (el.querySelector('.bar-track')) {
               animateBars(el);
+            } else if (el.querySelector('.citation-line-required')) {
+              animateCitation(el);
+            } else if (el.querySelector('.puzzle-bad')) {
+              animatePuzzle(el);
+            } else if (el.querySelector('.readme-block')) {
+              animateTypewriter(el);
             } else if (el.querySelector('.diff-row')) {
               animateDiffRows(el);
             } else if (el.querySelector('.loop-step') || el.querySelector('.step-box') || el.querySelector('.tool-box')) {
               animateSteps(el);
-            } else if (el.querySelector('.check-item') || el.querySelector('.gov-item') || el.querySelector('.flywheel-item')) {
+            } else if (el.querySelector('.check-item') || el.querySelector('.gov-item') || el.querySelector('.oss-benefit')) {
               animateChecklist(el);
             } else {
               animatePanel(el);

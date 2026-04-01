@@ -120,10 +120,20 @@
     gap: var(--space-sm);
     padding: 6px 8px;
     border-radius: 4px;
+    transition: transform 0.2s ease-out, background 0.2s ease-out;
+  }
+
+  .gov-item:hover {
+    transform: translateX(4px);
+    background: rgba(107, 145, 122, 0.08);
   }
 
   .gov-phase-ongoing .gov-item {
     background: rgba(107, 145, 122, 0.04);
+  }
+
+  .gov-phase-ongoing .gov-item:hover {
+    background: rgba(107, 145, 122, 0.12);
   }
 
   .gov-icon {
