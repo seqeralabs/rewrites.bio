@@ -1,0 +1,268 @@
+---
+const badges = [
+  { id: "flat", file: "flat.svg" },
+  { id: "flat-square", file: "flat-square.svg" },
+  { id: "for-the-badge", file: "for-the-badge.svg" },
+  { id: "plastic", file: "plastic.svg" },
+];
+const altText = "rewrites.bio - Follows best practice principles for rewriting bioinformatics tools with AI";
+const defaultBadge = badges[0];
+---
+
+<div class="badge-picker">
+  <p class="badge-picker-title">Add a badge to your README</p>
+
+  <div class="badge-row">
+    <button class="badge-nav" type="button" id="badge-prev" aria-label="Previous style">&lsaquo;</button>
+    <div class="badge-center">
+      <img
+        src={`/badges/${defaultBadge.file}`}
+        alt={altText}
+        class="badge-preview"
+        id="badge-preview"
+      />
+      <div class="badge-dots">
+        {badges.map((_, i) => (
+          <button
+            class={`badge-dot ${i === 0 ? "badge-dot--active" : ""}`}
+            data-index={i}
+            type="button"
+            aria-label={`Badge style ${i + 1}`}
+          />
+        ))}
+      </div>
+    </div>
+    <button class="badge-nav" type="button" id="badge-next" aria-label="Next style">&rsaquo;</button>
+  </div>
+
+  <div class="badge-code-row">
+    <pre class="badge-code"><code id="badge-code-output">{`[![${altText}](https://rewrites.bio/badges/${defaultBadge.file})](https://rewrites.bio)`}</code></pre>
+    <button class="badge-copy-btn" type="button" id="badge-copy-btn">Copy</button>
+  </div>
+</div>
+
+<script>
+  function initBadgePicker() {
+    const badges = [
+      { id: "flat", file: "flat.svg" },
+      { id: "flat-square", file: "flat-square.svg" },
+      { id: "for-the-badge", file: "for-the-badge.svg" },
+      { id: "plastic", file: "plastic.svg" },
+    ];
+
+    const altText = "rewrites.bio - Follows best practice principles for rewriting bioinformatics tools with AI";
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const fadeDuration = prefersReducedMotion ? 0 : 120;
+
+    let current = 0;
+    let fadeTimer = 0;
+    let copyTimer = 0;
+    const preview = document.getElementById("badge-preview") as HTMLImageElement | null;
+    const codeOutput = document.getElementById("badge-code-output");
+    const copyBtn = document.getElementById("badge-copy-btn");
+    const dots = document.querySelectorAll(".badge-dot");
+    const prevBtn = document.getElementById("badge-prev");
+    const nextBtn = document.getElementById("badge-next");
+
+    if (!preview || !codeOutput || !copyBtn || !dots.length || !prevBtn || !nextBtn) return;
+
+    function update() {
+      const badge = badges[current];
+      clearTimeout(fadeTimer);
+      if (fadeDuration > 0) {
+        preview!.style.opacity = "0";
+        fadeTimer = window.setTimeout(() => {
+          preview!.src = `/badges/${badge.file}`;
+          preview!.style.opacity = "1";
+        }, fadeDuration);
+      } else {
+        preview!.src = `/badges/${badge.file}`;
+      }
+      codeOutput!.textContent = `[![${altText}](https://rewrites.bio/badges/${badge.file})](https://rewrites.bio)`;
+      dots.forEach((d, i) => d.classList.toggle("badge-dot--active", i === current));
+    }
+
+    function navigate(delta: number) {
+      current = (current + delta + badges.length) % badges.length;
+      update();
+    }
+
+    prevBtn.addEventListener("click", () => navigate(-1));
+    nextBtn.addEventListener("click", () => navigate(1));
+
+    dots.forEach((dot) => {
+      dot.addEventListener("click", () => {
+        current = parseInt((dot as HTMLElement).dataset.index || "0", 10);
+        update();
+      });
+    });
+
+    copyBtn.addEventListener("click", () => {
+      const text = codeOutput.textContent || "";
+      navigator.clipboard.writeText(text).then(() => {
+        clearTimeout(copyTimer);
+        copyBtn.textContent = "Copied!";
+        copyTimer = window.setTimeout(() => { copyBtn.textContent = "Copy"; }, 2000);
+      }).catch(() => {
+        const range = document.createRange();
+        range.selectNodeContents(codeOutput);
+        const sel = window.getSelection();
+        sel?.removeAllRanges();
+        sel?.addRange(range);
+      });
+    });
+  }
+
+  initBadgePicker();
+  document.addEventListener("astro:after-swap", initBadgePicker);
+</script>
+
+<style>
+  .badge-picker {
+    margin-top: var(--space-lg);
+    margin-bottom: var(--space-lg);
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .badge-picker-title {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--text-tertiary);
+    margin-bottom: var(--space-sm);
+    text-align: center;
+  }
+
+  .badge-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: var(--space-sm);
+  }
+
+  .badge-center {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .badge-preview {
+    height: 20px;
+    display: block;
+    transition: opacity 0.12s ease;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .badge-preview {
+      transition: none;
+    }
+  }
+
+  .badge-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    align-self: stretch;
+    background: var(--bg-secondary);
+    border: 1px solid rgba(230, 225, 216, 0.1);
+    border-radius: 4px;
+    color: var(--text-tertiary);
+    font-size: 14px;
+    line-height: 1;
+    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+    padding: 0;
+  }
+
+  .badge-nav:hover {
+    border-color: rgba(230, 225, 216, 0.25);
+    color: var(--text-secondary);
+  }
+
+  .badge-dots {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .badge-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: none;
+    padding: 0;
+    background: var(--text-tertiary);
+    opacity: 0.35;
+    cursor: pointer;
+    transition: opacity 0.15s;
+  }
+
+  .badge-dot:hover {
+    opacity: 0.6;
+  }
+
+  .badge-dot--active {
+    opacity: 1;
+    background: var(--accent-rust);
+  }
+
+  .badge-code-row {
+    display: flex;
+    align-items: center;
+    background: var(--bg-secondary);
+    border: 1px solid rgba(230, 225, 216, 0.08);
+    border-radius: 5px;
+    overflow: hidden;
+  }
+
+  .badge-code {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    padding: 6px var(--space-sm);
+    overflow-x: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(230, 225, 216, 0.1) transparent;
+  }
+
+  .badge-code::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .badge-code::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .badge-code::-webkit-scrollbar-thumb {
+    background: rgba(230, 225, 216, 0.1);
+    border-radius: 2px;
+  }
+
+  .badge-code code {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    color: var(--text-tertiary);
+    white-space: nowrap;
+  }
+
+  .badge-copy-btn {
+    flex-shrink: 0;
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--color-link);
+    background: none;
+    border: none;
+    border-left: 1px solid rgba(230, 225, 216, 0.08);
+    cursor: pointer;
+    padding: 6px 10px;
+    transition: background 0.15s;
+  }
+
+  .badge-copy-btn:hover {
+    background: rgba(141, 189, 210, 0.08);
+  }
+</style>

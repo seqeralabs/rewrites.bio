@@ -25,3 +25,4 @@ pnpm-debug.log*
 .vscode/
 
 .impeccable.md
+.playwright-mcp

@@ -4,6 +4,7 @@ import Hero from "../components/Hero.astro";
 import Section from "../components/Section.astro";
 import Principle from "../components/Principle.astro";
 import Footer from "../components/Footer.astro";
+import BadgePicker from "../components/BadgePicker.astro";
 import TableOfContents from "../components/TableOfContents.astro";
 
 import ScaleCostChart from "../components/visuals/ScaleCostChart.astro";
@@ -386,9 +387,11 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       <div class="closing-line"></div>
       <p class="closing-text">These principles are a starting point, not a checklist.</p>
       <p class="closing-body">
-        Every rewrite will weigh these differently. What matters is that the intent shapes
-        the decisions you make when the easy path and the right path diverge.
+        Every rewrite will weigh these principles differently.
+        Let them shape the questions you ask along the way.
       </p>
+      <BadgePicker />
+
       <p class="closing-attribution">
         Discuss and contribute at <a href="https://github.com/seqeralabs/rewrites.bio">github.com/seqeralabs/rewrites.bio</a>
       </p>
