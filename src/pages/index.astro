@@ -43,8 +43,8 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
           <div class="preamble-layout">
             <div class="preamble-text reveal-stagger">
               <p class="reveal">
-                Bioinformatics datasets have grown faster than the tools that process them. Slow
-                tools cost real money, real carbon, and real scientific progress.
+                Bioinformatics datasets have grown faster than the tools that process them. The
+                cost shows up in compute bills, carbon footprint, and time to results.
               </p>
               <ul class="preamble-list reveal">
                 <li><strong>Scale:</strong> A pipeline like nf-core/rnaseq runs on millions of samples per year. Ten wasted minutes per sample is decades of compute, annually.</li>
@@ -52,9 +52,9 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
                 <li><strong>Science:</strong> Hours waiting for results are hours not spent testing hypotheses or exploring new directions.</li>
               </ul>
               <p class="reveal">
-                What has changed is the cost of solving this. AI coding assistants let a domain
-                expert produce a working reimplementation in days rather than years. Fast code is
-                now cheap. Scientific insight, validation, and trust are not.
+                AI coding assistants now let a domain expert produce a working reimplementation
+                in days rather than years. Fast code is now cheap. Scientific insight, validation,
+                and trust are not.
               </p>
             </div>
             <div class="preamble-visual reveal">
@@ -84,10 +84,8 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
 
           <div class="preamble-cta">
             <div class="preamble-callout reveal">
-              <p>A wave of AI-assisted rewrites is coming.</p>
-              <p>The question is not <strong>whether</strong> it will happen, but whether it will happen <strong>well</strong>.</p>
+              <p>A wave of AI-assisted rewrites is coming. The question is not whether it will happen, but whether it will happen well.</p>
             </div>
-            <p class="preamble-closing reveal">These are the principles we follow.</p>
           </div>
         </div>
       </div>
@@ -97,16 +95,16 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       id="philosophy"
       number="1"
       title="Philosophy"
-      intro="Before writing any code, three commitments shape everything else. These are not procedural rules. They are a statement of values."
+      intro="Before writing any code, three commitments shape everything else."
     >
       <Principle id="credit-authors" number="1.1" title="Credit the original authors">
         <div slot="description">
           <p>
             Behind every bioinformatics tool is years of work: algorithm design, edge-case hunting,
-            user feedback, and maintenance - often unpaid. A rewrite stands entirely on that
+            user feedback, and maintenance. A rewrite stands entirely on that
             foundation. Without the original, a rewrite cannot even be validated.
           </p>
-          <p>Credit belongs everywhere:</p>
+          <p>Make credit visible:</p>
           <ul>
             <li><strong>README</strong> and documentation</li>
             <li><strong>Papers</strong> and preprints</li>
@@ -125,7 +123,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       <Principle id="emulate-exactly" number="1.2" title="Emulate exactly">
         <div slot="description">
           <p>
-            The goal is not a better tool - it's a faster one that produces the same results.
+            The goal is a faster tool that produces the same results.
             A rewrite that changes outputs, even as "improvements", is a different tool. It
             cannot inherit the original's validation or be substituted without re-validation.
           </p>
@@ -142,9 +140,8 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       <Principle id="transparent-ai" number="1.3" title="Be transparent about AI">
         <div slot="description">
           <p>
-            When an AI writes the implementation, that is a material fact. It does not mean the
-            software is untrustworthy - correctness is determined by output comparison, not by
-            who wrote the code. But users deserve to know how it was built.
+            When an AI writes the implementation, say so. Correctness is determined by output
+            comparison, not by who wrote the code - but users should know how it was built.
           </p>
           <p>Document clearly in the README and any paper:</p>
           <ul>
@@ -153,8 +150,8 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
             <li><strong>Gaps:</strong> where validation coverage is thin or incomplete</li>
           </ul>
           <p>
-            Output comparison catches what you tested, not edge cases you haven't encountered.
-            Being transparent means committing to ongoing validation as new use cases emerge.
+            Output comparison catches what you tested, not what you haven't. Commit to ongoing
+            validation as new use cases emerge.
           </p>
         </div>
         <AIBadge slot="visual" />
@@ -181,8 +178,8 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
             <li><strong>Intermediate files:</strong> can steps share data in memory instead of writing gigabytes of temporary BAM files?</li>
           </ul>
           <p>
-            The goal is not an unvalidatable monolith. But consider what a pipeline designed from
-            scratch - knowing where the bottlenecks are - would actually look like.
+            This doesn't mean building an unvalidatable monolith. But consider what a pipeline
+            designed from scratch would look like, knowing where the bottlenecks are.
           </p>
         </div>
         <PipelineIO slot="visual" />
@@ -213,7 +210,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       id="building"
       number="3"
       title="Building"
-      intro="Good intentions don't ship correct software. The building phase is where principles meet reality: data that behaves unexpectedly, performance that doesn't match theory, users who need the tool to work before they will trust it."
+      intro="The building phase is where principles meet reality: data that behaves unexpectedly, performance that doesn't match theory, and users who need the tool to work before they trust it."
     >
       <Principle id="test-and-benchmark" number="3.1" title="Test and benchmark with real data">
         <div slot="description">
@@ -230,7 +227,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
           <p>
             Speed claims need evidence. Document your hardware, dataset, and exact commands so
             anyone can reproduce the comparison. If performance varies across data types, show
-            that too — honest benchmarks build trust.
+            that too.
           </p>
         </div>
         <BenchmarkComparison slot="visual" />
@@ -285,13 +282,13 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       id="stewardship"
       number="4"
       title="Stewardship"
-      intro="A rewrite is not a one-time act. Once other researchers build pipelines on your tool, you have made a commitment. Stewardship means honouring it: maintaining correctness as upstream tools evolve, governing transparently, and giving back to the ecosystem that made the rewrite possible."
+      intro="A rewrite is not a one-time act. Once other researchers build pipelines on your tool, you owe them continued correctness as upstream tools evolve, transparent governance, and responsible engagement with the original projects."
     >
       <Principle id="maintain" number="4.1" title="Maintain and govern">
         <div slot="description">
           <p>
-            Shipping is just the beginning. Someone needs to be responsible for what comes next,
-            and that needs to be visible before you release.
+            Someone needs to be responsible for what comes next, and that should be visible
+            before you release.
           </p>
           <p>Plan for the long term:</p>
           <ul>
@@ -389,10 +386,8 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       <div class="closing-line"></div>
       <p class="closing-text">These principles are a starting point, not a checklist.</p>
       <p class="closing-body">
-        Every rewrite is different. Some principles will be easier to honour than others in
-        your context. What matters is that the intent behind each one shapes the decisions you
-        make when the easy path and the right path diverge. The wave is coming. Let's make
-        sure it lifts all boats.
+        Every rewrite will weigh these differently. What matters is that the intent shapes
+        the decisions you make when the easy path and the right path diverge.
       </p>
       <p class="closing-attribution">
         Discuss and contribute at <a href="https://github.com/seqeralabs/rewrites.bio">github.com/seqeralabs/rewrites.bio</a>

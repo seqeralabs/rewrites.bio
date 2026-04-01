@@ -7,16 +7,17 @@
 ---
 
 <div class="chart-wrap">
-  <div class="chart-title">Time per sample — QC on 10 GB BAM</div>
+  <div class="chart-example">Example: RustQC</div>
+  <div class="chart-title">Time per sample - RustQC on 10 GB BAM</div>
 
   <div class="chart-group">
     <div class="bar-row">
-      <div class="bar-name">Legacy</div>
+      <div class="bar-name">Traditional tools</div>
       <div class="bar-track"><div class="bar bar-old" style="width: 100%"></div></div>
       <span class="bar-val">15:34:00</span>
     </div>
     <div class="bar-row">
-      <div class="bar-name">Rewrite</div>
+      <div class="bar-name">RustQC</div>
       <div class="bar-track"><div class="bar bar-new" style="width: 1.6%"></div></div>
       <span class="bar-val">00:14:54</span>
     </div>
@@ -66,6 +67,14 @@
     padding: var(--space-lg);
   }
 
+  .chart-example {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--section-color, var(--accent-rust));
+    margin-bottom: var(--space-xs);
+  }
+
   .chart-title {
     font-family: var(--font-sans);
     font-size: var(--text-sm);
@@ -90,7 +99,7 @@
     font-family: var(--font-sans);
     font-size: 0.72rem;
     color: var(--text-tertiary);
-    width: 50px;
+    width: 95px;
     flex-shrink: 0;
     text-align: right;
   }
