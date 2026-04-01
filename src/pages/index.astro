@@ -34,12 +34,12 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       <div class="container">
         <div class="preamble-header" data-section-entrance>
           <a class="preamble-header-inner" href="#introduction">
-            <span class="preamble-number">0</span>
+            <span class="preamble-number">1</span>
             <h2 class="preamble-title">Introduction</h2>
           </a>
         </div>
         <div class="preamble-section" id="introduction-opportunity">
-          <a class="preamble-heading reveal" href="#introduction-opportunity"><span class="preamble-sub-number">0.1</span>The opportunity<span class="anchor-link">#</span></a>
+          <a class="preamble-heading reveal" href="#introduction-opportunity"><span class="preamble-sub-number">1.1</span>The opportunity<span class="anchor-link">#</span></a>
           <div class="preamble-layout">
             <div class="preamble-text reveal-stagger">
               <p class="reveal">
@@ -64,7 +64,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
         </div>
 
         <div class="preamble-section preamble-risk" id="introduction-risk">
-          <a class="preamble-heading reveal" href="#introduction-risk"><span class="preamble-sub-number">0.2</span>The risk<span class="anchor-link">#</span></a>
+          <a class="preamble-heading reveal" href="#introduction-risk"><span class="preamble-sub-number">1.2</span>The risk<span class="anchor-link">#</span></a>
           <div class="preamble-text-full reveal-stagger">
             <p class="reveal">
               Cheap code is not the same as correct code. AI-generated implementations are fluent
@@ -93,11 +93,11 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
 
     <Section
       id="philosophy"
-      number="1"
+      number="2"
       title="Philosophy"
       intro="Before writing any code, three commitments shape everything else."
     >
-      <Principle id="credit-authors" number="1.1" title="Credit the original authors">
+      <Principle id="credit-authors" number="2.1" title="Credit the original authors">
         <div slot="description">
           <p>
             Behind every bioinformatics tool is years of work: algorithm design, edge-case hunting,
@@ -120,7 +120,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
         <CitationCard slot="visual" />
       </Principle>
 
-      <Principle id="emulate-exactly" number="1.2" title="Emulate exactly">
+      <Principle id="emulate-exactly" number="2.2" title="Emulate exactly">
         <div slot="description">
           <p>
             The goal is a faster tool that produces the same results.
@@ -137,7 +137,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
         <OutputDiff slot="visual" />
       </Principle>
 
-      <Principle id="transparent-ai" number="1.3" title="Be transparent about AI">
+      <Principle id="transparent-ai" number="2.3" title="Be transparent about AI">
         <div slot="description">
           <p>
             When an AI writes the implementation, say so. Correctness is determined by output
@@ -160,11 +160,11 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
 
     <Section
       id="planning"
-      number="2"
+      number="3"
       title="Planning"
       intro="The decisions made before you write the first function determine most of the outcome. Scope, validation strategy, and architecture all matter more than the choice of language."
     >
-      <Principle id="think-big" number="2.1" title="Think big">
+      <Principle id="think-big" number="3.1" title="Think big">
         <div slot="description">
           <p>
             The biggest performance wins come from rethinking architecture, not just porting code.
@@ -185,7 +185,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
         <PipelineIO slot="visual" />
       </Principle>
 
-      <Principle id="work-small" number="2.2" title="Work small">
+      <Principle id="work-small" number="3.2" title="Work small">
         <div slot="description">
           <p>
             Thinking big about architecture does not mean building big in one go. The implementation
@@ -208,11 +208,11 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
 
     <Section
       id="building"
-      number="3"
+      number="4"
       title="Building"
       intro="The building phase is where principles meet reality: data that behaves unexpectedly, performance that doesn't match theory, and users who need the tool to work before they trust it."
     >
-      <Principle id="test-and-benchmark" number="3.1" title="Test and benchmark with real data">
+      <Principle id="test-and-benchmark" number="4.1" title="Test and benchmark with real data">
         <div slot="description">
           <p>
             Synthetic data is useful for quick iteration but insufficient for validation. Real
@@ -233,7 +233,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
         <BenchmarkComparison slot="visual" />
       </Principle>
 
-      <Principle id="build-what-you-need" number="3.2" title="Build only what you need">
+      <Principle id="build-what-you-need" number="4.2" title="Build only what you need">
         <div slot="description">
           <p>
             Feature completeness is not the goal - output correctness on the features that matter
@@ -255,7 +255,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
         <FeatureChecklist slot="visual" />
       </Principle>
 
-      <Principle id="pin-versions" number="3.3" title="Pin versions and document">
+      <Principle id="pin-versions" number="4.3" title="Pin versions and document">
         <div slot="description">
           <p>
             Every equivalence claim is implicitly about a specific version. <em>"Compatible with
@@ -280,11 +280,11 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
 
     <Section
       id="stewardship"
-      number="4"
+      number="5"
       title="Stewardship"
       intro="A rewrite is not a one-time act. Once other researchers build pipelines on your tool, you owe them continued correctness as upstream tools evolve, transparent governance, and responsible engagement with the original projects."
     >
-      <Principle id="maintain" number="4.1" title="Maintain and govern">
+      <Principle id="maintain" number="5.1" title="Maintain and govern">
         <div slot="description">
           <p>
             Someone needs to be responsible for what comes next, and that should be visible
@@ -305,7 +305,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
         <GovernanceChecklist slot="visual" />
       </Principle>
 
-      <Principle id="preserve-compatibility" number="4.2" title="Preserve compatibility">
+      <Principle id="preserve-compatibility" number="5.2" title="Preserve compatibility">
         <div slot="description">
           <p>
             The strongest argument for adopting a rewrite is zero migration cost. Identical outputs
@@ -326,7 +326,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
         <HotSwapDiagram slot="visual" />
       </Principle>
 
-      <Principle id="open-source" number="4.3" title="Release as open source">
+      <Principle id="open-source" number="5.3" title="Release as open source">
         <div slot="description">
           <p>
             The tools you are rewriting were built by the open-source community, validated
@@ -351,7 +351,7 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
         <OpenSourceFlywheel slot="visual" />
       </Principle>
 
-      <Principle id="contribute-upstream" number="4.4" title="Contribute upstream responsibly">
+      <Principle id="contribute-upstream" number="5.4" title="Contribute upstream responsibly">
         <div slot="description">
           <p>
             Building a rewrite puts you in an unusual position: you've studied the original
