@@ -3,10 +3,9 @@
 ---
 
 <div class="loop-wrap">
-  <div class="loop-label">The Validation Loop</div>
   <svg
     class="loop-svg"
-    viewBox="0 0 280 360"
+    viewBox="0 0 320 310"
     role="img"
     aria-label="Validation loop: pick one function, write rewrite, compare outputs. Mismatch loops back to step 2, match proceeds to next function."
     xmlns="http://www.w3.org/2000/svg"
@@ -27,53 +26,49 @@
     </defs>
 
     <!-- Down arrows between nodes -->
-    <line x1="140" y1="60" x2="140" y2="88"
+    <line x1="110" y1="60" x2="110" y2="88"
       stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" marker-end="url(#arrow-blue)" />
-    <line x1="140" y1="150" x2="140" y2="178"
+    <line x1="110" y1="150" x2="110" y2="178"
       stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" marker-end="url(#arrow-blue)" />
 
     <!-- Node 1: Pick one function -->
-    <rect x="40" y="10" width="200" height="50" rx="6"
+    <rect x="10" y="10" width="200" height="50" rx="6"
       fill="var(--bg-primary)" stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" />
-    <text x="140" y="32" text-anchor="middle"
+    <text x="110" y="32" text-anchor="middle"
       font-family="var(--font-mono)" font-size="10" fill="var(--section-color, var(--accent-blue))">01</text>
-    <text x="140" y="48" text-anchor="middle"
+    <text x="110" y="48" text-anchor="middle"
       font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">Pick one function</text>
 
     <!-- Node 2: Write rewrite -->
-    <rect x="40" y="98" width="200" height="50" rx="6"
+    <rect x="10" y="98" width="200" height="50" rx="6"
       fill="var(--bg-primary)" stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" />
-    <text x="140" y="120" text-anchor="middle"
+    <text x="110" y="120" text-anchor="middle"
       font-family="var(--font-mono)" font-size="10" fill="var(--section-color, var(--accent-blue))">02</text>
-    <text x="140" y="136" text-anchor="middle"
+    <text x="110" y="136" text-anchor="middle"
       font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">Write rewrite</text>
 
     <!-- Node 3: Compare outputs -->
-    <rect x="40" y="188" width="200" height="50" rx="6"
+    <rect x="10" y="188" width="200" height="50" rx="6"
       fill="var(--bg-primary)" stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" />
-    <text x="140" y="210" text-anchor="middle"
+    <text x="110" y="210" text-anchor="middle"
       font-family="var(--font-mono)" font-size="10" fill="var(--section-color, var(--accent-blue))">03</text>
-    <text x="140" y="226" text-anchor="middle"
+    <text x="110" y="226" text-anchor="middle"
       font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">Compare outputs</text>
 
     <!-- Mismatch: loops back up from node 3 to node 2, curving to the right -->
-    <path d="M240,208 C270,208 270,123 240,123"
+    <path d="M210,208 C260,208 260,123 210,123"
       fill="none" stroke="var(--color-fail)" stroke-width="1.5"
       stroke-dasharray="5,3"
       marker-end="url(#arrow-fail)" />
-    <text x="268" y="170" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="10" font-weight="600" fill="var(--color-fail)"
-      transform="rotate(90, 268, 170)">Mismatch</text>
+    <text x="260" y="168" text-anchor="start"
+      font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--color-fail)">Mismatch</text>
 
     <!-- Match: exits down from node 3 -->
-    <line x1="140" y1="238" x2="140" y2="280"
+    <line x1="110" y1="238" x2="110" y2="280"
       stroke="var(--color-pass)" stroke-width="1.5" marker-end="url(#arrow-pass)" />
-    <text x="140" y="300" text-anchor="middle"
+    <text x="110" y="300" text-anchor="middle"
       font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--color-pass)">Match → next function</text>
   </svg>
-  <div class="loop-note">
-    Never move on until the current step validates.
-  </div>
 </div>
 
 <style>
@@ -93,10 +88,10 @@
 
   .loop-svg {
     width: 100%;
-    max-width: 280px;
+    max-width: 320px;
     height: auto;
     display: block;
-    margin: 0 auto var(--space-md);
+    margin: 0 auto;
   }
 
   .loop-note {

@@ -5,7 +5,7 @@
 
 <div class="pipeline-wrap">
   <div class="scenario">
-    <div class="scenario-label scenario-before">Before — each tool reads the file independently</div>
+    <div class="scenario-label scenario-before">Before - each tool reads the file independently</div>
     <svg class="pipeline-svg" viewBox="0 0 400 200" role="img" aria-label="12 separate tools each reading the same file sequentially" xmlns="http://www.w3.org/2000/svg">
 
       <!-- Tool boxes: 6 top, 6 bottom -->
@@ -90,13 +90,12 @@
       <rect x="168" y="78" width="64" height="44" rx="5" fill="var(--bg-primary)" stroke="var(--text-tertiary)" stroke-width="1.5" />
       <text x="200" y="104" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--text-secondary)">input</text>
     </svg>
-    <div class="cost-label cost-bad">12 reads of the same file</div>
   </div>
 
   <div class="pipeline-divider">↓ rethink the architecture</div>
 
   <div class="scenario">
-    <div class="scenario-label scenario-after">After — single pass</div>
+    <div class="scenario-label scenario-after">After - single pass</div>
     <svg class="pipeline-svg" viewBox="0 0 400 80" role="img" aria-label="One combined tool reading the file once" xmlns="http://www.w3.org/2000/svg">
       <!-- File -->
       <rect x="168" y="18" width="64" height="44" rx="5" fill="var(--bg-primary)" stroke="var(--text-tertiary)" stroke-width="1.5" />
@@ -115,7 +114,6 @@
         <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.083;1" keyPoints="0;1;1" calcMode="linear" path="M200,40 L282,40" />
       </circle>
     </svg>
-    <div class="cost-label cost-good">1 read</div>
   </div>
 </div>
 

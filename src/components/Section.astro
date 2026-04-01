@@ -9,10 +9,10 @@ interface Props {
 const { id, number, title, intro } = Astro.props;
 
 const sectionColorMap: Record<string, string> = {
-  '1': 'var(--accent-rust)',
-  '2': 'var(--accent-blue)',
-  '3': 'var(--accent-gold)',
-  '4': 'var(--accent-sage)',
+  '2': 'var(--accent-rust)',
+  '3': 'var(--accent-blue)',
+  '4': 'var(--accent-gold)',
+  '5': 'var(--accent-sage)',
 };
 const sectionColor = sectionColorMap[number] || 'var(--accent-rust)';
 ---
