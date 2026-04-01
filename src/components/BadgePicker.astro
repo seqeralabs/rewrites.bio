@@ -1,5 +1,6 @@
 ---
 const badges = [
+  { id: "custom", file: "custom.svg" },
   { id: "flat", file: "flat.svg" },
   { id: "flat-square", file: "flat-square.svg" },
   { id: "for-the-badge", file: "for-the-badge.svg" },
@@ -10,17 +11,25 @@ const defaultBadge = badges[0];
 ---
 
 <div class="badge-picker">
-  <p class="badge-picker-title">Add a badge to your README</p>
+  <p class="badge-picker-title">
+    Add a badge to your README
+    <span class="badge-format-sep">&middot;</span>
+    <button class="badge-format-btn badge-format-btn--active" type="button" data-format="svg">SVG</button>
+    <span class="badge-format-divider">|</span>
+    <button class="badge-format-btn" type="button" data-format="png">PNG</button>
+  </p>
 
   <div class="badge-row">
     <button class="badge-nav" type="button" id="badge-prev" aria-label="Previous style">&lsaquo;</button>
     <div class="badge-center">
-      <img
-        src={`/badges/${defaultBadge.file}`}
-        alt={altText}
-        class="badge-preview"
-        id="badge-preview"
-      />
+      <div class="badge-preview-wrap">
+        <img
+          src={`/badges/${defaultBadge.file}`}
+          alt={altText}
+          class="badge-preview"
+          id="badge-preview"
+        />
+      </div>
       <div class="badge-dots">
         {badges.map((_, i) => (
           <button
@@ -44,6 +53,7 @@ const defaultBadge = badges[0];
 <script>
   function initBadgePicker() {
     const badges = [
+      { id: "custom", file: "custom.svg" },
       { id: "flat", file: "flat.svg" },
       { id: "flat-square", file: "flat-square.svg" },
       { id: "for-the-badge", file: "for-the-badge.svg" },
@@ -55,6 +65,7 @@ const defaultBadge = badges[0];
     const fadeDuration = prefersReducedMotion ? 0 : 120;
 
     let current = 0;
+    let format = "svg";
     let fadeTimer = 0;
     let copyTimer = 0;
     const preview = document.getElementById("badge-preview") as HTMLImageElement | null;
@@ -63,22 +74,28 @@ const defaultBadge = badges[0];
     const dots = document.querySelectorAll(".badge-dot");
     const prevBtn = document.getElementById("badge-prev");
     const nextBtn = document.getElementById("badge-next");
+    const formatBtns = document.querySelectorAll(".badge-format-btn");
 
     if (!preview || !codeOutput || !copyBtn || !dots.length || !prevBtn || !nextBtn) return;
 
+    function badgeFile() {
+      const base = badges[current].id;
+      return `${base}.${format}`;
+    }
+
     function update() {
-      const badge = badges[current];
+      const file = badgeFile();
       clearTimeout(fadeTimer);
       if (fadeDuration > 0) {
         preview!.style.opacity = "0";
         fadeTimer = window.setTimeout(() => {
-          preview!.src = `/badges/${badge.file}`;
+          preview!.src = `/badges/${file}`;
           preview!.style.opacity = "1";
         }, fadeDuration);
       } else {
-        preview!.src = `/badges/${badge.file}`;
+        preview!.src = `/badges/${file}`;
       }
-      codeOutput!.textContent = `[![${altText}](https://rewrites.bio/badges/${badge.file})](https://rewrites.bio)`;
+      codeOutput!.textContent = `[![${altText}](https://rewrites.bio/badges/${file})](https://rewrites.bio)`;
       dots.forEach((d, i) => d.classList.toggle("badge-dot--active", i === current));
     }
 
@@ -93,6 +110,14 @@ const defaultBadge = badges[0];
     dots.forEach((dot) => {
       dot.addEventListener("click", () => {
         current = parseInt((dot as HTMLElement).dataset.index || "0", 10);
+        update();
+      });
+    });
+
+    formatBtns.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        format = (btn as HTMLElement).dataset.format || "svg";
+        formatBtns.forEach((b) => b.classList.toggle("badge-format-btn--active", b === btn));
         update();
       });
     });
@@ -119,7 +144,7 @@ const defaultBadge = badges[0];
 
 <style>
   .badge-picker {
-    margin-top: var(--space-lg);
+    margin-top: var(--space-md);
     margin-bottom: var(--space-lg);
     max-width: 480px;
     margin-left: auto;
@@ -133,6 +158,37 @@ const defaultBadge = badges[0];
     color: var(--text-tertiary);
     margin-bottom: var(--space-sm);
     text-align: center;
+  }
+
+  .badge-format-sep {
+    margin: 0 4px;
+  }
+
+  .badge-format-btn {
+    font-family: var(--font-mono);
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    opacity: 0.5;
+    transition: opacity 0.15s;
+  }
+
+  .badge-format-btn:hover {
+    opacity: 0.8;
+  }
+
+  .badge-format-btn--active {
+    opacity: 1;
+    color: var(--text-secondary);
+  }
+
+  .badge-format-divider {
+    color: var(--text-tertiary);
+    opacity: 0.3;
+    margin: 0 2px;
   }
 
   .badge-row {
@@ -149,8 +205,15 @@ const defaultBadge = badges[0];
     gap: 10px;
   }
 
+  .badge-preview-wrap {
+    width: 231px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .badge-preview {
-    height: 20px;
     display: block;
     transition: opacity 0.12s ease;
   }
