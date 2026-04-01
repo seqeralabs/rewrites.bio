@@ -1,10 +1,10 @@
 ---
 const badges = [
-  { id: "custom", file: "custom.svg" },
-  { id: "flat", file: "flat.svg" },
-  { id: "flat-square", file: "flat-square.svg" },
-  { id: "for-the-badge", file: "for-the-badge.svg" },
-  { id: "plastic", file: "plastic.svg" },
+  { id: "custom", file: "rewrites-bio" },
+  { id: "flat", file: "rewrites-bio-flat" },
+  { id: "flat-square", file: "rewrites-bio-flat-square" },
+  { id: "for-the-badge", file: "rewrites-bio-for-the-badge" },
+  { id: "plastic", file: "rewrites-bio-plastic" },
 ];
 const altText = "rewrites.bio - Follows best practice principles for rewriting bioinformatics tools with AI";
 const defaultBadge = badges[0];
@@ -24,7 +24,7 @@ const defaultBadge = badges[0];
     <div class="badge-center">
       <div class="badge-preview-wrap">
         <img
-          src={`/badges/${defaultBadge.file}`}
+          src={`/badges/${defaultBadge.file}.svg`}
           alt={altText}
           class="badge-preview"
           id="badge-preview"
@@ -45,7 +45,7 @@ const defaultBadge = badges[0];
   </div>
 
   <div class="badge-code-row">
-    <pre class="badge-code"><code id="badge-code-output">{`[![${altText}](https://rewrites.bio/badges/${defaultBadge.file})](https://rewrites.bio)`}</code></pre>
+    <pre class="badge-code"><code id="badge-code-output">{`[![${altText}](https://rewrites.bio/badges/${defaultBadge.file}.svg)](https://rewrites.bio)`}</code></pre>
     <button class="badge-copy-btn" type="button" id="badge-copy-btn">Copy</button>
   </div>
 </div>
@@ -53,11 +53,11 @@ const defaultBadge = badges[0];
 <script>
   function initBadgePicker() {
     const badges = [
-      { id: "custom", file: "custom.svg" },
-      { id: "flat", file: "flat.svg" },
-      { id: "flat-square", file: "flat-square.svg" },
-      { id: "for-the-badge", file: "for-the-badge.svg" },
-      { id: "plastic", file: "plastic.svg" },
+      { id: "custom", file: "rewrites-bio" },
+      { id: "flat", file: "rewrites-bio-flat" },
+      { id: "flat-square", file: "rewrites-bio-flat-square" },
+      { id: "for-the-badge", file: "rewrites-bio-for-the-badge" },
+      { id: "plastic", file: "rewrites-bio-plastic" },
     ];
 
     const altText = "rewrites.bio - Follows best practice principles for rewriting bioinformatics tools with AI";
@@ -79,8 +79,7 @@ const defaultBadge = badges[0];
     if (!preview || !codeOutput || !copyBtn || !dots.length || !prevBtn || !nextBtn) return;
 
     function badgeFile() {
-      const base = badges[current].id;
-      return `${base}.${format}`;
+      return `${badges[current].file}.${format}`;
     }
 
     function update() {
@@ -216,6 +215,12 @@ const defaultBadge = badges[0];
   .badge-preview {
     display: block;
     transition: opacity 0.12s ease;
+    height: 20px;
+  }
+
+  .badge-preview[src$="rewrites-bio.svg"],
+  .badge-preview[src$="rewrites-bio.png"] {
+    height: 28px;
   }
 
   @media (prefers-reduced-motion: reduce) {
