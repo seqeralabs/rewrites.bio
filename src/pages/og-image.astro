@@ -43,23 +43,25 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 20px;
+      gap: 16px;
+      margin-top: 24px;
     }
 
     .pre-text {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 15px;
+      font-size: 20px;
       font-weight: 500;
       text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: #5a6270;
+      letter-spacing: 0.1em;
+      color: #737b87;
+      margin-bottom: 24px;
     }
 
     .title {
       font-family: 'Newsreader', Georgia, serif;
-      font-size: 128px;
+      font-size: 148px;
       font-weight: 700;
-      color: #e6e1d8;
+      color: #f0ece4;
       line-height: 1;
       letter-spacing: -0.03em;
     }
@@ -76,26 +78,31 @@
       width: 64px;
       height: 3px;
       background: #c2512e;
-      margin-top: 8px;
+      margin-top: 4px;
     }
 
     .tagline {
       font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 26px;
+      font-size: 32px;
       font-weight: 400;
-      color: #a0a5ad;
+      color: #c0c5cd;
       letter-spacing: 0.01em;
+      margin-top: 18px;
     }
 
-    .subtitle {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 18px;
-      color: #5a6270;
-      max-width: 640px;
-      line-height: 1.6;
+    /* Seqera logo */
+    .seqera-logo {
+      margin-top: 12px;
+      opacity: 0.3;
     }
 
-    /* Subtle left border accent */
+    .seqera-logo img {
+      height: 80px;
+      width: auto;
+      filter: grayscale(1) brightness(2);
+    }
+
+    /* Subtle side border accents */
     .side-accent {
       position: absolute;
       left: 40px;
@@ -104,6 +111,11 @@
       width: 3px;
       background: #c2512e;
       opacity: 0.3;
+    }
+
+    .side-accent-right {
+      left: auto;
+      right: 40px;
     }
   </style>
 </head>
@@ -116,13 +128,16 @@
     <span style="background: #6b917a;"></span>
   </div>
   <div class="side-accent"></div>
+  <div class="side-accent side-accent-right"></div>
 
   <div class="content">
     <div class="pre-text">A manifesto for bioinformatics</div>
     <div class="title">rewrites<span class="dot">.</span><span class="bio">bio</span></div>
     <div class="divider"></div>
     <div class="tagline">Rewriting bioinformatics tools with AI. Responsibly.</div>
-    <div class="subtitle">Principles for responsible AI-assisted rewriting of scientific software</div>
+    <div class="seqera-logo">
+      <img src="/seqera-logo.svg" alt="Seqera" />
+    </div>
   </div>
 
 </body>

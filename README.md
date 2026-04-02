@@ -1,5 +1,5 @@
 <h1 align="center">
-  <a href="https://rewrites.bio"><img src="public/og-image.png" alt="rewrites.bio" /></a>
+  <a href="https://rewrites.bio"><img src="public/og-image.svg" alt="rewrites.bio" /></a>
 </h1>
 
 ## rewrites.bio
