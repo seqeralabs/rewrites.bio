@@ -177,6 +177,8 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
             <li><strong>Upstream:</strong> what preprocessing does this tool assume? Can that be folded in?</li>
             <li><strong>Downstream:</strong> what immediately consumes the output? Can that be folded in too?</li>
             <li><strong>Intermediate files:</strong> can steps share data in memory instead of writing gigabytes of temporary BAM files?</li>
+            <li><strong>Supporting different hardware:</strong> consider supporting different hardware architectures, such as <code>#aarch64</code> for balancing performance and sustainability. Supporting accelerators (GPU/TPU) should be considered where it makes sense, but we recommend not doing so without very robust validation in place. Even then, we recommend doing so only after the first iteration is released and accepted.
+            </li>
           </ul>
           <p>
             This doesn't mean building an unvalidatable monolith. But consider what a pipeline
