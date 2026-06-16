@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
+Content-Signal: ai-train=no, search=yes, ai-input=yes
 
 # AI agent instructions
 Llms-Txt: /llms.txt
+
+Sitemap: https://rewrites.bio/sitemap.xml

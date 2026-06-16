@@ -7,3 +7,12 @@ rewrites.bio is a manifesto and set of guiding principles for the responsible AI
 ## Docs
 
 - [The Manifesto](https://rewrites.bio/manifesto.md): The full set of 12 principles for responsible AI-assisted bioinformatics rewrites
+- [Agent Instructions](https://rewrites.bio/.well-known/agent.md): Discovery metadata and content negotiation for AI agents
+- [Agent Skills](https://rewrites.bio/.well-known/agent-skills/index.json): Machine-readable skill index
+- [API Catalog](https://rewrites.bio/.well-known/api-catalog): Content endpoint catalog (RFC 9727)
+- [Auth](https://rewrites.bio/auth.md): Public access — no authentication required
+
+## Optional
+
+- [Source repository](https://github.com/seqeralabs/rewrites.bio): Site source on GitHub
+- [MCP Server Card](https://rewrites.bio/.well-known/mcp/server-card.json): Agent tool and resource discovery

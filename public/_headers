@@ -1,0 +1,24 @@
+/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </manifesto.md>; rel="alternate"; type="text/markdown"; title="Manifesto", </.well-known/agent.md>; rel="describedby", </llms.txt>; rel="describedby", </.well-known/agent-skills/index.json>; rel="describedby"
+  Vary: Accept
+
+/manifesto.md
+  Content-Type: text/markdown; charset=utf-8
+
+/index.md
+  Content-Type: text/markdown; charset=utf-8
+
+/.well-known/agent.md
+  Content-Type: text/markdown; charset=utf-8
+
+/auth.md
+  Content-Type: text/markdown; charset=utf-8
+
+/.well-known/api-catalog
+  Content-Type: application/linkset+json; profile="https://www.rfc-editor.org/info/rfc9727"
+
+/.well-known/agent-skills/index.json
+  Content-Type: application/json; charset=utf-8
+
+/.well-known/mcp/server-card.json
+  Content-Type: application/json; charset=utf-8
