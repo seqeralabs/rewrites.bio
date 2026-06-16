@@ -1,0 +1,14 @@
+# Build output and generated files
+dist/
+.astro/
+.netlify/
+
+# Dependencies and lockfiles
+node_modules/
+package-lock.json
+
+# Tooling caches
+.playwright-mcp/
+
+# Hand-authored assets — don't let the HTML parser reflow them
+*.svg

@@ -1,0 +1,41 @@
+# Configuration for `prek`, a fast Rust reimplementation of pre-commit.
+#   https://prek.j178.dev
+#
+# Usage:
+#   prek install            # set up the git hook (one-time, per clone)
+#   prek run --all-files    # run every hook against the whole repo
+#:schema https://www.schemastore.org/prek.json
+
+default_install_hook_types = ["pre-commit"]
+
+# Prettier — formats Astro, TS/JS, CSS, JSON, YAML, HTML and Markdown.
+# Runs the project's own prettier (see devDependencies) so the editor, CI
+# and this hook all share one pinned version and resolve plugins identically.
+[[repos]]
+repo = "local"
+hooks = [
+  { id = "prettier", name = "prettier", entry = "npx prettier --write --ignore-unknown", language = "system", files = '\.(astro|ts|tsx|js|mjs|cjs|jsx|css|md|markdown|json|jsonc|ya?ml|html)$' },
+]
+
+# Spell-check prose and code (the manifesto is text-heavy).
+[[repos]]
+repo = "https://github.com/crate-ci/typos"
+rev = "v1.47.2"
+hooks = [
+  { id = "typos" },
+]
+
+# General hygiene checks — prek ships builtin implementations, so no repo is cloned.
+[[repos]]
+repo = "builtin"
+hooks = [
+  { id = "trailing-whitespace", args = ["--markdown-linebreak-ext=md"] },
+  { id = "end-of-file-fixer" },
+  { id = "mixed-line-ending", args = ["--fix=lf"] },
+  { id = "check-merge-conflict" },
+  { id = "check-case-conflict" },
+  { id = "check-added-large-files", args = ["--maxkb=1024"] },
+  { id = "check-yaml" },
+  { id = "check-json" },
+  { id = "check-toml" },
+]
