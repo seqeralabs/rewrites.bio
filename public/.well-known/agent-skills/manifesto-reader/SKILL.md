@@ -9,7 +9,7 @@ Use when an agent needs the full manifesto text or a specific principle without 
 ## Resources
 
 - Markdown: `https://rewrites.bio/manifesto.md`
-- HTML: `https://rewrites.bio/`
+- Homepage: `https://rewrites.bio/` — serves HTML to browsers, and markdown to clients that send `Accept: text/markdown`
 - Agent instructions: `https://rewrites.bio/.well-known/agent.md`
 
 ## Sections

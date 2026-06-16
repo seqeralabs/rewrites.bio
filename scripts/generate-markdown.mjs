@@ -11,7 +11,8 @@
  *   dist/.well-known/api-catalog
  *   dist/.well-known/agent-skills/index.json
  *   dist/.well-known/mcp/server-card.json
- *   dist/auth.md
+ *
+ * Note: dist/auth.md is a static file served straight from public/auth.md.
  */
 
 import {
@@ -373,38 +374,6 @@ writeFileSync(
   JSON.stringify(mcpServerCard, null, 2),
 );
 
-const authMd = `# auth.md
-
-> Agent authentication for rewrites.bio
-
-## Audience
-
-AI agents and automated clients accessing rewrites.bio content.
-
-## Authentication
-
-All content on rewrites.bio is **public**. No registration, credentials, or OAuth tokens are required.
-
-## Access methods
-
-| Resource | URL | Auth |
-|---|---|---|
-| Manifesto (markdown) | ${siteUrl}/manifesto.md | None |
-| Manifesto (HTML) | ${siteUrl}/ | None |
-| Markdown negotiation | \`Accept: text/markdown\` on ${siteUrl}/ | None |
-| Agent instructions | ${siteUrl}/.well-known/agent.md | None |
-
-## Registration
-
-Not applicable — this is a read-only public manifesto site with no protected APIs.
-
-## Contact
-
-Source repository: https://github.com/seqeralabs/rewrites.bio
-`;
-
-writeFileSync(distPath("auth.md"), authMd);
-
 // Mirror sitemap-0.xml as /sitemap.xml for scanners expecting that path
 const sitemap0Path = distPath("sitemap-0.xml");
 try {
@@ -418,7 +387,7 @@ try {
 }
 
 console.log(
-  "Generated: dist/index.md, dist/manifesto.md, dist/auth.md, " +
+  "Generated: dist/index.md, dist/manifesto.md, " +
     "dist/.well-known/agent.md, dist/.well-known/api-catalog, " +
     "dist/.well-known/agent-skills/index.json, dist/.well-known/mcp/server-card.json",
 );
