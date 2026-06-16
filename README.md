@@ -8,8 +8,6 @@ A manifesto for AI-assisted modernisation of bioinformatics software.
 
 Live site: [https://rewrites.bio](https://rewrites.bio)
 
-
-
 ## Development
 
 ```sh

@@ -26,6 +26,7 @@ There is **no test framework**, no linter, and no formatter configured. No `npm 
 All manifesto content is defined in **`src/pages/index.astro`** and its Astro components — this is the single source of truth.
 
 At build time, `scripts/generate-markdown.mjs` reads `dist/index.html`, strips visuals and navigation, and converts the content to clean markdown. Output files:
+
 - `dist/index.md`
 - `dist/manifesto.md` (copy of index.md)
 - `dist/.well-known/agent.md` (short summary for AI agent discovery)
@@ -112,6 +113,7 @@ public/          # Static assets (favicon, og-image, robots.txt, llms.txt)
 ## Dependencies
 
 Two production dependencies (no devDependencies):
+
 - `astro` — static site framework
 - `turndown` — HTML-to-markdown conversion for post-build markdown generation
 
@@ -120,6 +122,7 @@ Keep dependencies minimal. This is a simple static site — avoid adding framewo
 ## AI / LLM Discoverability
 
 The site is designed for AI discoverability:
+
 - `public/llms.txt` — LLM-friendly site index
 - `public/robots.txt` — includes `Llms-Txt` directive
 - `dist/.well-known/agent.md` — auto-generated from HTML at build time

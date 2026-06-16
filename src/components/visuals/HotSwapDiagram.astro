@@ -1,28 +1,41 @@
 ---
 // 4.2 — Preserve compatibility: swap one piece in a pipeline
 // Interactive drag-and-drop: drag either piece onto the other to swap
-const d = "M192 104.8c0-9.2-5.8-17.3-13.2-22.8c-11.6-8.7-18.8-20.7-18.8-34c0-26.5 28.7-48 64-48s64 21.5 64 48c0 13.3-7.2 25.3-18.8 34c-7.4 5.5-13.2 13.6-13.2 22.8c0 12.8 10.4 23.2 23.2 23.2H336c26.5 0 48 21.5 48 48v56.8c0 12.8 10.4 23.2 23.2 23.2c9.2 0 17.3-5.8 22.8-13.2c8.7-11.6 20.7-18.8 34-18.8c26.5 0 48 28.7 48 64s-21.5 64-48 64c-13.3 0-25.3-7.2-34-18.8c-5.5-7.4-13.6-13.2-22.8-13.2c-12.8 0-23.2 10.4-23.2 23.2V464c0 26.5-21.5 48-48 48h-56.8c-12.8 0-23.2-10.4-23.2-23.2c0-9.2 5.8-17.3 13.2-22.8c11.6-8.7 18.8-20.7 18.8-34c0-26.5-28.7-48-64-48s-64 21.5-64 48c0 13.3 7.2 25.3 18.8 34c7.4 5.5 13.2 13.6 13.2 22.8c0 12.8-10.4 23.2-23.2 23.2H48c-26.5 0-48-21.5-48-48V343.2C0 330.4 10.4 320 23.2 320c9.2 0 17.3 5.8 22.8 13.2c8.7 11.6 20.7 18.8 34 18.8c26.5 0 48-28.7 48-64s-21.5-64-48-64c-13.3 0-25.3 7.2-34 18.8c-5.5 7.4-13.6 13.2-22.8 13.2C10.4 256 0 245.6 0 232.8V176c0-26.5 21.5-48 48-48h120.8c12.8 0 23.2-10.4 23.2-23.2";
+const d =
+  "M192 104.8c0-9.2-5.8-17.3-13.2-22.8c-11.6-8.7-18.8-20.7-18.8-34c0-26.5 28.7-48 64-48s64 21.5 64 48c0 13.3-7.2 25.3-18.8 34c-7.4 5.5-13.2 13.6-13.2 22.8c0 12.8 10.4 23.2 23.2 23.2H336c26.5 0 48 21.5 48 48v56.8c0 12.8 10.4 23.2 23.2 23.2c9.2 0 17.3-5.8 22.8-13.2c8.7-11.6 20.7-18.8 34-18.8c26.5 0 48 28.7 48 64s-21.5 64-48 64c-13.3 0-25.3-7.2-34-18.8c-5.5-7.4-13.6-13.2-22.8-13.2c-12.8 0-23.2 10.4-23.2 23.2V464c0 26.5-21.5 48-48 48h-56.8c-12.8 0-23.2-10.4-23.2-23.2c0-9.2 5.8-17.3 13.2-22.8c11.6-8.7 18.8-20.7 18.8-34c0-26.5-28.7-48-64-48s-64 21.5-64 48c0 13.3 7.2 25.3 18.8 34c7.4 5.5 13.2 13.6 13.2 22.8c0 12.8-10.4 23.2-23.2 23.2H48c-26.5 0-48-21.5-48-48V343.2C0 330.4 10.4 320 23.2 320c9.2 0 17.3 5.8 22.8 13.2c8.7 11.6 20.7 18.8 34 18.8c26.5 0 48-28.7 48-64s-21.5-64-48-64c-13.3 0-25.3 7.2-34 18.8c-5.5 7.4-13.6 13.2-22.8 13.2C10.4 256 0 245.6 0 232.8V176c0-26.5 21.5-48 48-48h120.8c12.8 0 23.2-10.4 23.2-23.2";
 ---
 
 <div class="swap-wrap">
   <div class="swap-pipeline">
     <div class="swap-piece swap-piece-dim">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d={d}/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+        ><path fill="currentColor" d={d}></path></svg
+      >
     </div>
-    <div class="swap-piece swap-piece-active swap-piece-pipeline swap-draggable">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d={d}/></svg>
+    <div
+      class="swap-piece swap-piece-active swap-piece-pipeline swap-draggable"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+        ><path fill="currentColor" d={d}></path></svg
+      >
       <span class="swap-piece-label">original</span>
     </div>
     <div class="swap-piece swap-piece-dim">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d={d}/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+        ><path fill="currentColor" d={d}></path></svg
+      >
     </div>
   </div>
 
   <div class="swap-hint">drag to swap</div>
 
   <div class="swap-replacement">
-    <div class="swap-piece swap-piece-active swap-piece-replacement swap-draggable">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d={d}/></svg>
+    <div
+      class="swap-piece swap-piece-active swap-piece-replacement swap-draggable"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
+        ><path fill="currentColor" d={d}></path></svg
+      >
       <span class="swap-piece-label">rewrite</span>
     </div>
   </div>
@@ -30,27 +43,34 @@ const d = "M192 104.8c0-9.2-5.8-17.3-13.2-22.8c-11.6-8.7-18.8-20.7-18.8-34c0-26.
 
 <script>
   function initSwapDrag() {
-    document.querySelectorAll('.swap-wrap').forEach(wrap => {
+    document.querySelectorAll(".swap-wrap").forEach((wrap) => {
       if (wrap.dataset.swapInit) return;
-      wrap.dataset.swapInit = '1';
+      wrap.dataset.swapInit = "1";
 
-      const pipeline = wrap.querySelector('.swap-piece-pipeline');
-      const replacement = wrap.querySelector('.swap-piece-replacement');
+      const pipeline = wrap.querySelector(".swap-piece-pipeline");
+      const replacement = wrap.querySelector(".swap-piece-replacement");
       if (!pipeline || !replacement) return;
 
       let swapped = false;
       let dragging = null;
       let ghost = null;
       let startRect = null;
-      let offsetX = 0, offsetY = 0;
-      let dx = 0, dy = 0;
+      let offsetX = 0,
+        offsetY = 0;
+      let dx = 0,
+        dy = 0;
 
       function getTarget(piece) {
         return piece === pipeline ? replacement : pipeline;
       }
 
       function rectsOverlap(a, b) {
-        return !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
+        return !(
+          a.right < b.left ||
+          a.left > b.right ||
+          a.bottom < b.top ||
+          a.top > b.bottom
+        );
       }
 
       function getDragRect(e) {
@@ -73,17 +93,21 @@ const d = "M192 104.8c0-9.2-5.8-17.3-13.2-22.8c-11.6-8.7-18.8-20.7-18.8-34c0-26.
         dy = 0;
 
         piece.setPointerCapture(e.pointerId);
-        piece.style.zIndex = '100';
-        piece.style.transition = 'none';
-        piece.style.animation = 'none';
+        piece.style.zIndex = "100";
+        piece.style.transition = "none";
+        piece.style.animation = "none";
         // Pause target's wobble animation so CSS/JS transforms can work on it
-        getTarget(piece).style.animation = 'none';
+        getTarget(piece).style.animation = "none";
 
         // Ghost: dashed outline of puzzle shape at the origin position
-        const pathD = piece.querySelector('svg path').getAttribute('d');
-        ghost = document.createElement('div');
-        ghost.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;color:var(--text-tertiary);opacity:0.3';
-        ghost.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width:100px;height:100px"><path fill="none" stroke="currentColor" stroke-width="8" stroke-dasharray="20 12" d="' + pathD + '"/></svg>';
+        const pathD = piece.querySelector("svg path").getAttribute("d");
+        ghost = document.createElement("div");
+        ghost.style.cssText =
+          "position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;color:var(--text-tertiary);opacity:0.3";
+        ghost.innerHTML =
+          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" style="width:100px;height:100px"><path fill="none" stroke="currentColor" stroke-width="8" stroke-dasharray="20 12" d="' +
+          pathD +
+          '"/></svg>';
         piece.appendChild(ghost);
       }
 
@@ -91,99 +115,117 @@ const d = "M192 104.8c0-9.2-5.8-17.3-13.2-22.8c-11.6-8.7-18.8-20.7-18.8-34c0-26.
         if (!dragging) return;
         dx = e.clientX - offsetX - startRect.left;
         dy = e.clientY - offsetY - startRect.top;
-        dragging.style.transform = 'translate(' + dx + 'px,' + dy + 'px)';
+        dragging.style.transform = "translate(" + dx + "px," + dy + "px)";
 
         // Counter-transform the ghost so it stays at the origin
-        if (ghost) ghost.style.transform = 'translate(' + (-dx) + 'px,' + (-dy) + 'px)';
+        if (ghost)
+          ghost.style.transform = "translate(" + -dx + "px," + -dy + "px)";
 
         // Highlight drop target
         const target = getTarget(dragging);
-        target.classList.toggle('swap-drop-target', rectsOverlap(getDragRect(e), target.getBoundingClientRect()));
+        target.classList.toggle(
+          "swap-drop-target",
+          rectsOverlap(getDragRect(e), target.getBoundingClientRect()),
+        );
       }
 
       function endDrag(e) {
         if (!dragging) return;
         const target = getTarget(dragging);
-        const didDrop = rectsOverlap(getDragRect(e), target.getBoundingClientRect());
+        const didDrop = rectsOverlap(
+          getDragRect(e),
+          target.getBoundingClientRect(),
+        );
 
-        target.classList.remove('swap-drop-target');
-        if (ghost) { ghost.remove(); ghost = null; }
+        target.classList.remove("swap-drop-target");
+        if (ghost) {
+          ghost.remove();
+          ghost = null;
+        }
 
         const ref = dragging;
         dragging = null;
 
         if (didDrop) {
           // Read target rect AFTER removing the lift class so we get the true resting position
-          target.style.transition = 'none';
+          target.style.transition = "none";
           const trueTargetRect = target.getBoundingClientRect();
 
           const toTargetX = trueTargetRect.left - startRect.left;
           const toTargetY = trueTargetRect.top - startRect.top;
-          ref.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
-          ref.style.transform = 'translate(' + toTargetX + 'px,' + toTargetY + 'px)';
+          ref.style.transition =
+            "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)";
+          ref.style.transform =
+            "translate(" + toTargetX + "px," + toTargetY + "px)";
 
           const toOriginX = startRect.left - trueTargetRect.left;
           const toOriginY = startRect.top - trueTargetRect.top;
-          target.style.zIndex = '99';
-          target.style.transition = 'transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)';
-          target.style.transform = 'translate(' + toOriginX + 'px,' + toOriginY + 'px)';
+          target.style.zIndex = "99";
+          target.style.transition =
+            "transform 0.35s cubic-bezier(0.16, 1, 0.3, 1)";
+          target.style.transform =
+            "translate(" + toOriginX + "px," + toOriginY + "px)";
 
           // After animations finish: swap state and reset
-          setTimeout(function() {
-            const pSvg = pipeline.querySelector('svg');
-            const rSvg = replacement.querySelector('svg');
+          setTimeout(function () {
+            const pSvg = pipeline.querySelector("svg");
+            const rSvg = replacement.querySelector("svg");
 
             // Disable all transitions so the reset + color swap is instant
-            ref.style.transition = 'none';
-            target.style.transition = 'none';
-            pSvg.style.transition = 'none';
-            rSvg.style.transition = 'none';
+            ref.style.transition = "none";
+            target.style.transition = "none";
+            pSvg.style.transition = "none";
+            rSvg.style.transition = "none";
 
             // Remove transforms (pieces return to DOM positions)
-            ref.style.transform = '';
-            target.style.transform = '';
-            ref.style.zIndex = '';
-            target.style.zIndex = '';
+            ref.style.transform = "";
+            target.style.transform = "";
+            ref.style.zIndex = "";
+            target.style.zIndex = "";
 
             // Swap colors + labels to match the new visual positions
             swapped = !swapped;
-            wrap.classList.toggle('swapped', swapped);
-            pipeline.querySelector('.swap-piece-label').textContent = swapped ? 'rewrite' : 'original';
-            replacement.querySelector('.swap-piece-label').textContent = swapped ? 'original' : 'rewrite';
+            wrap.classList.toggle("swapped", swapped);
+            pipeline.querySelector(".swap-piece-label").textContent = swapped
+              ? "rewrite"
+              : "original";
+            replacement.querySelector(".swap-piece-label").textContent = swapped
+              ? "original"
+              : "rewrite";
 
             // Re-enable transitions and animation next frame
-            requestAnimationFrame(function() {
-              ref.style.transition = '';
-              ref.style.animation = '';
-              target.style.transition = '';
-              target.style.animation = '';
-              pSvg.style.transition = '';
-              rSvg.style.transition = '';
+            requestAnimationFrame(function () {
+              ref.style.transition = "";
+              ref.style.animation = "";
+              target.style.transition = "";
+              target.style.animation = "";
+              pSvg.style.transition = "";
+              rSvg.style.transition = "";
             });
           }, 360);
         } else {
           // Miss: snap back to origin
-          ref.style.transition = 'transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)';
-          ref.style.transform = '';
-          setTimeout(function() {
-            ref.style.zIndex = '';
-            ref.style.transition = '';
-            ref.style.animation = '';
+          ref.style.transition = "transform 0.3s cubic-bezier(0.16, 1, 0.3, 1)";
+          ref.style.transform = "";
+          setTimeout(function () {
+            ref.style.zIndex = "";
+            ref.style.transition = "";
+            ref.style.animation = "";
           }, 300);
         }
       }
 
-      [pipeline, replacement].forEach(piece => {
-        piece.addEventListener('pointerdown', e => startDrag(e, piece));
-        piece.addEventListener('pointermove', e => onMove(e));
-        piece.addEventListener('pointerup', e => endDrag(e));
-        piece.addEventListener('pointercancel', e => endDrag(e));
+      [pipeline, replacement].forEach((piece) => {
+        piece.addEventListener("pointerdown", (e) => startDrag(e, piece));
+        piece.addEventListener("pointermove", (e) => onMove(e));
+        piece.addEventListener("pointerup", (e) => endDrag(e));
+        piece.addEventListener("pointercancel", (e) => endDrag(e));
       });
     });
   }
 
   initSwapDrag();
-  document.addEventListener('astro:after-swap', initSwapDrag);
+  document.addEventListener("astro:after-swap", initSwapDrag);
 </script>
 
 <style>
@@ -252,7 +294,9 @@ const d = "M192 104.8c0-9.2-5.8-17.3-13.2-22.8c-11.6-8.7-18.8-20.7-18.8-34c0-26.
     cursor: grab;
     touch-action: none;
     user-select: none;
-    transition: transform 0.15s ease-out, filter 0.15s ease-out;
+    transition:
+      transform 0.15s ease-out,
+      filter 0.15s ease-out;
   }
 
   .swap-draggable:active {
@@ -297,12 +341,25 @@ const d = "M192 104.8c0-9.2-5.8-17.3-13.2-22.8c-11.6-8.7-18.8-20.7-18.8-34c0-26.
   }
 
   @keyframes swap-wobble {
-    0%, 85% { transform: rotate(0deg); }
-    88% { transform: rotate(-2deg); }
-    91% { transform: rotate(2deg); }
-    94% { transform: rotate(-1deg); }
-    97% { transform: rotate(1deg); }
-    100% { transform: rotate(0deg); }
+    0%,
+    85% {
+      transform: rotate(0deg);
+    }
+    88% {
+      transform: rotate(-2deg);
+    }
+    91% {
+      transform: rotate(2deg);
+    }
+    94% {
+      transform: rotate(-1deg);
+    }
+    97% {
+      transform: rotate(1deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

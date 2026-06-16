@@ -12,94 +12,329 @@
     xmlns="http://www.w3.org/2000/svg"
   >
     <defs>
-      <marker id="arr-sage" viewBox="0 0 10 10" refX="9" refY="5"
-        markerWidth="7" markerHeight="7" orient="auto">
-        <path d="M0,1 L10,5 L0,9z" fill="var(--accent-sage)" />
+      <marker
+        id="arr-sage"
+        viewBox="0 0 10 10"
+        refX="9"
+        refY="5"
+        markerWidth="7"
+        markerHeight="7"
+        orient="auto"
+      >
+        <path d="M0,1 L10,5 L0,9z" fill="var(--accent-sage)"></path>
       </marker>
-      <marker id="arr-dim" viewBox="0 0 10 10" refX="9" refY="5"
-        markerWidth="7" markerHeight="7" orient="auto">
-        <path d="M0,1 L10,5 L0,9z" fill="var(--text-tertiary)" />
+      <marker
+        id="arr-dim"
+        viewBox="0 0 10 10"
+        refX="9"
+        refY="5"
+        markerWidth="7"
+        markerHeight="7"
+        orient="auto"
+      >
+        <path d="M0,1 L10,5 L0,9z" fill="var(--text-tertiary)"></path>
       </marker>
     </defs>
 
     <!-- Start node -->
-    <rect x="100" y="10" width="260" height="44" rx="22"
-      fill="var(--bg-primary)" stroke="var(--text-secondary)" stroke-width="1.5" opacity="0.8" />
-    <text x="230" y="38" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="14" font-weight="600" fill="var(--text-primary)">Found a potential bug?</text>
+    <rect
+      x="100"
+      y="10"
+      width="260"
+      height="44"
+      rx="22"
+      fill="var(--bg-primary)"
+      stroke="var(--text-secondary)"
+      stroke-width="1.5"
+      opacity="0.8"></rect>
+    <text
+      x="230"
+      y="38"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="14"
+      font-weight="600"
+      fill="var(--text-primary)">Found a potential bug?</text
+    >
 
     <!-- Arrow down -->
-    <line x1="230" y1="54" x2="230" y2="86" stroke="var(--accent-sage)" stroke-width="1.5" marker-end="url(#arr-sage)" />
+    <line
+      x1="230"
+      y1="54"
+      x2="230"
+      y2="86"
+      stroke="var(--accent-sage)"
+      stroke-width="1.5"
+      marker-end="url(#arr-sage)"></line>
 
     <!-- Diamond 1 -->
-    <polygon points="230,90 340,140 230,190 120,140"
-      fill="var(--bg-primary)" stroke="var(--accent-sage)" stroke-width="1.5" />
-    <text x="230" y="135" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">Reproducible with</text>
-    <text x="230" y="151" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">original tool?</text>
+    <polygon
+      points="230,90 340,140 230,190 120,140"
+      fill="var(--bg-primary)"
+      stroke="var(--accent-sage)"
+      stroke-width="1.5"></polygon>
+    <text
+      x="230"
+      y="135"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="12"
+      fill="var(--text-secondary)">Reproducible with</text
+    >
+    <text
+      x="230"
+      y="151"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="12"
+      fill="var(--text-secondary)">original tool?</text
+    >
 
     <!-- Yes down -->
-    <line x1="230" y1="190" x2="230" y2="242" stroke="var(--accent-sage)" stroke-width="1.5" marker-end="url(#arr-sage)" />
-    <text x="240" y="216" font-family="var(--font-sans)" font-size="12" font-weight="700" fill="var(--accent-sage)">Yes</text>
+    <line
+      x1="230"
+      y1="190"
+      x2="230"
+      y2="242"
+      stroke="var(--accent-sage)"
+      stroke-width="1.5"
+      marker-end="url(#arr-sage)"></line>
+    <text
+      x="240"
+      y="216"
+      font-family="var(--font-sans)"
+      font-size="12"
+      font-weight="700"
+      fill="var(--accent-sage)">Yes</text
+    >
 
     <!-- No right → red terminal -->
-    <line x1="340" y1="140" x2="410" y2="140" stroke="var(--text-tertiary)" stroke-width="1.5" marker-end="url(#arr-dim)" />
-    <text x="370" y="132" font-family="var(--font-sans)" font-size="11" font-weight="700" fill="var(--color-fail)">No</text>
-    <rect x="414" y="120" width="100" height="40" rx="6"
-      fill="rgba(212, 86, 90, 0.08)" stroke="var(--color-fail)" stroke-width="1.2" />
-    <text x="464" y="137" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--color-fail)">Fix in your</text>
-    <text x="464" y="153" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--color-fail)">rewrite</text>
+    <line
+      x1="340"
+      y1="140"
+      x2="410"
+      y2="140"
+      stroke="var(--text-tertiary)"
+      stroke-width="1.5"
+      marker-end="url(#arr-dim)"></line>
+    <text
+      x="370"
+      y="132"
+      font-family="var(--font-sans)"
+      font-size="11"
+      font-weight="700"
+      fill="var(--color-fail)">No</text
+    >
+    <rect
+      x="414"
+      y="120"
+      width="100"
+      height="40"
+      rx="6"
+      fill="rgba(212, 86, 90, 0.08)"
+      stroke="var(--color-fail)"
+      stroke-width="1.2"></rect>
+    <text
+      x="464"
+      y="137"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="11"
+      font-weight="600"
+      fill="var(--color-fail)">Fix in your</text
+    >
+    <text
+      x="464"
+      y="153"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="11"
+      font-weight="600"
+      fill="var(--color-fail)">rewrite</text
+    >
 
     <!-- Diamond 2 -->
-    <polygon points="230,246 340,296 230,346 120,296"
-      fill="var(--bg-primary)" stroke="var(--accent-sage)" stroke-width="1.5" />
-    <text x="230" y="291" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">Verified with</text>
-    <text x="230" y="307" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">real data?</text>
+    <polygon
+      points="230,246 340,296 230,346 120,296"
+      fill="var(--bg-primary)"
+      stroke="var(--accent-sage)"
+      stroke-width="1.5"></polygon>
+    <text
+      x="230"
+      y="291"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="12"
+      fill="var(--text-secondary)">Verified with</text
+    >
+    <text
+      x="230"
+      y="307"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="12"
+      fill="var(--text-secondary)">real data?</text
+    >
 
     <!-- Yes down -->
-    <line x1="230" y1="346" x2="230" y2="398" stroke="var(--accent-sage)" stroke-width="1.5" marker-end="url(#arr-sage)" />
-    <text x="240" y="372" font-family="var(--font-sans)" font-size="12" font-weight="700" fill="var(--accent-sage)">Yes</text>
+    <line
+      x1="230"
+      y1="346"
+      x2="230"
+      y2="398"
+      stroke="var(--accent-sage)"
+      stroke-width="1.5"
+      marker-end="url(#arr-sage)"></line>
+    <text
+      x="240"
+      y="372"
+      font-family="var(--font-sans)"
+      font-size="12"
+      font-weight="700"
+      fill="var(--accent-sage)">Yes</text
+    >
 
     <!-- No right → amber terminal -->
-    <line x1="340" y1="296" x2="410" y2="296" stroke="var(--text-tertiary)" stroke-width="1.5" marker-end="url(#arr-dim)" />
-    <text x="370" y="288" font-family="var(--font-sans)" font-size="11" font-weight="700" fill="var(--accent-gold)">No</text>
-    <rect x="414" y="278" width="100" height="36" rx="6"
-      fill="rgba(201, 168, 76, 0.06)" stroke="var(--accent-gold)" stroke-width="1.2" />
-    <text x="464" y="301" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--accent-gold)">Verify first</text>
+    <line
+      x1="340"
+      y1="296"
+      x2="410"
+      y2="296"
+      stroke="var(--text-tertiary)"
+      stroke-width="1.5"
+      marker-end="url(#arr-dim)"></line>
+    <text
+      x="370"
+      y="288"
+      font-family="var(--font-sans)"
+      font-size="11"
+      font-weight="700"
+      fill="var(--accent-gold)">No</text
+    >
+    <rect
+      x="414"
+      y="278"
+      width="100"
+      height="36"
+      rx="6"
+      fill="rgba(201, 168, 76, 0.06)"
+      stroke="var(--accent-gold)"
+      stroke-width="1.2"></rect>
+    <text
+      x="464"
+      y="301"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="11"
+      font-weight="600"
+      fill="var(--accent-gold)">Verify first</text
+    >
 
     <!-- Diamond 3 -->
-    <polygon points="230,402 340,452 230,502 120,452"
-      fill="var(--bg-primary)" stroke="var(--accent-sage)" stroke-width="1.5" />
-    <text x="230" y="447" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">Can you explain</text>
-    <text x="230" y="463" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">why?</text>
+    <polygon
+      points="230,402 340,452 230,502 120,452"
+      fill="var(--bg-primary)"
+      stroke="var(--accent-sage)"
+      stroke-width="1.5"></polygon>
+    <text
+      x="230"
+      y="447"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="12"
+      fill="var(--text-secondary)">Can you explain</text
+    >
+    <text
+      x="230"
+      y="463"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="12"
+      fill="var(--text-secondary)">why?</text
+    >
 
     <!-- Yes down → green terminal -->
-    <line x1="230" y1="502" x2="230" y2="530" stroke="var(--accent-sage)" stroke-width="1.5" marker-end="url(#arr-sage)" />
-    <text x="240" y="520" font-family="var(--font-sans)" font-size="12" font-weight="700" fill="var(--accent-sage)">Yes</text>
+    <line
+      x1="230"
+      y1="502"
+      x2="230"
+      y2="530"
+      stroke="var(--accent-sage)"
+      stroke-width="1.5"
+      marker-end="url(#arr-sage)"></line>
+    <text
+      x="240"
+      y="520"
+      font-family="var(--font-sans)"
+      font-size="12"
+      font-weight="700"
+      fill="var(--accent-sage)">Yes</text
+    >
 
     <!-- No right → amber terminal -->
-    <line x1="340" y1="452" x2="410" y2="452" stroke="var(--text-tertiary)" stroke-width="1.5" marker-end="url(#arr-dim)" />
-    <text x="370" y="444" font-family="var(--font-sans)" font-size="11" font-weight="700" fill="var(--accent-gold)">No</text>
-    <rect x="414" y="434" width="100" height="36" rx="6"
-      fill="rgba(201, 168, 76, 0.06)" stroke="var(--accent-gold)" stroke-width="1.2" />
-    <text x="464" y="451" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--accent-gold)">Understand</text>
-    <text x="464" y="465" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--accent-gold)">first</text>
+    <line
+      x1="340"
+      y1="452"
+      x2="410"
+      y2="452"
+      stroke="var(--text-tertiary)"
+      stroke-width="1.5"
+      marker-end="url(#arr-dim)"></line>
+    <text
+      x="370"
+      y="444"
+      font-family="var(--font-sans)"
+      font-size="11"
+      font-weight="700"
+      fill="var(--accent-gold)">No</text
+    >
+    <rect
+      x="414"
+      y="434"
+      width="100"
+      height="36"
+      rx="6"
+      fill="rgba(201, 168, 76, 0.06)"
+      stroke="var(--accent-gold)"
+      stroke-width="1.2"></rect>
+    <text
+      x="464"
+      y="451"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="11"
+      font-weight="600"
+      fill="var(--accent-gold)">Understand</text
+    >
+    <text
+      x="464"
+      y="465"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="11"
+      font-weight="600"
+      fill="var(--accent-gold)">first</text
+    >
 
     <!-- Final: Report upstream -->
-    <rect x="130" y="534" width="200" height="44" rx="22"
-      fill="rgba(93, 172, 114, 0.08)" stroke="var(--color-pass)" stroke-width="1.5" />
-    <text x="230" y="561" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="14" font-weight="700" fill="var(--color-pass)">Report upstream</text>
+    <rect
+      x="130"
+      y="534"
+      width="200"
+      height="44"
+      rx="22"
+      fill="rgba(93, 172, 114, 0.08)"
+      stroke="var(--color-pass)"
+      stroke-width="1.5"></rect>
+    <text
+      x="230"
+      y="561"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="14"
+      font-weight="700"
+      fill="var(--color-pass)">Report upstream</text
+    >
   </svg>
 </div>
 

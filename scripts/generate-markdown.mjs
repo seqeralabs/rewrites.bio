@@ -198,7 +198,8 @@ turndown.addRule("sectionContent", {
 });
 
 turndown.addRule("manifestoSection", {
-  filter: (node) => node.nodeName === "SECTION" && hasClass(node, "manifesto-section"),
+  filter: (node) =>
+    node.nodeName === "SECTION" && hasClass(node, "manifesto-section"),
   replacement: (content) => content,
 });
 
@@ -210,10 +211,11 @@ md = md.replace(/\s*data-astro-cid-\w+="?[^"\s]*"?/g, "");
 md = md.trim();
 
 // Use the last git commit date of the content source, not the build date
-const updated = execSync("git log -1 --format=%cs -- src/pages/index.astro src/components/", {
-  cwd: root,
-  encoding: "utf-8",
-}).trim() || new Date().toISOString().split("T")[0];
+const updated =
+  execSync("git log -1 --format=%cs -- src/pages/index.astro src/components/", {
+    cwd: root,
+    encoding: "utf-8",
+  }).trim() || new Date().toISOString().split("T")[0];
 
 const frontmatter = `---
 title: rewrites.bio
@@ -232,7 +234,9 @@ copyFileSync(distPath("index.md"), distPath("manifesto.md"));
 copyFileSync(distPath("manifesto.md"), distPath("llms-full.txt"));
 
 mkdirSync(join(root, "dist", ".well-known"), { recursive: true });
-mkdirSync(join(root, "dist", ".well-known", "agent-skills"), { recursive: true });
+mkdirSync(join(root, "dist", ".well-known", "agent-skills"), {
+  recursive: true,
+});
 mkdirSync(join(root, "dist", ".well-known", "mcp"), { recursive: true });
 
 const agentMd = `---
@@ -270,9 +274,7 @@ const apiCatalog = {
   linkset: [
     {
       anchor: `${siteUrl}/.well-known/api-catalog`,
-      item: [
-        { href: `${siteUrl}/` },
-      ],
+      item: [{ href: `${siteUrl}/` }],
     },
     {
       anchor: `${siteUrl}/`,
@@ -308,11 +310,12 @@ const skillEntries = readdirSync(skillsDir, { withFileTypes: true })
   .map((entry) => {
     const skillPath = join(skillsDir, entry.name, "SKILL.md");
     const content = readFileSync(skillPath, "utf-8");
-    const firstParagraph = content
-      .split("\n\n")
-      .slice(1)
-      .find((block) => block.trim() && !block.startsWith("#"))
-      ?.trim() ?? "";
+    const firstParagraph =
+      content
+        .split("\n\n")
+        .slice(1)
+        .find((block) => block.trim() && !block.startsWith("#"))
+        ?.trim() ?? "";
     return {
       name: entry.name,
       type: "skill-md",

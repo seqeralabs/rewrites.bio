@@ -2,143 +2,151 @@
 // This page exists only to be screenshotted as an OG image.
 // It won't be linked from the site.
 ---
+
 <html>
-<head>
-  <meta charset="utf-8" />
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap');
+  <head>
+    <meta charset="utf-8" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap");
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-    body {
-      width: 1200px;
-      height: 630px;
-      background: #0d1117;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-    }
+      body {
+        width: 1200px;
+        height: 630px;
+        background: #0d1117;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
 
-    /* Section-colored accent bar at top */
-    .accent-bar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      display: flex;
-    }
+      /* Section-colored accent bar at top */
+      .accent-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4px;
+        display: flex;
+      }
 
-    .accent-bar span {
-      flex: 1;
-    }
+      .accent-bar span {
+        flex: 1;
+      }
 
-    .content {
-      position: relative;
-      z-index: 1;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      margin-top: 24px;
-    }
+      .content {
+        position: relative;
+        z-index: 1;
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        margin-top: 24px;
+      }
 
-    .pre-text {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 20px;
-      font-weight: 500;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: #737b87;
-      margin-bottom: 24px;
-    }
+      .pre-text {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: 20px;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: #737b87;
+        margin-bottom: 24px;
+      }
 
-    .title {
-      font-family: 'Newsreader', Georgia, serif;
-      font-size: 148px;
-      font-weight: 700;
-      color: #f0ece4;
-      line-height: 1;
-      letter-spacing: -0.03em;
-    }
+      .title {
+        font-family: "Newsreader", Georgia, serif;
+        font-size: 148px;
+        font-weight: 700;
+        color: #f0ece4;
+        line-height: 1;
+        letter-spacing: -0.03em;
+      }
 
-    .title .dot {
-      color: #c2512e;
-    }
+      .title .dot {
+        color: #c2512e;
+      }
 
-    .title .bio {
-      color: #c2512e;
-    }
+      .title .bio {
+        color: #c2512e;
+      }
 
-    .divider {
-      width: 64px;
-      height: 3px;
-      background: #c2512e;
-      margin-top: 4px;
-    }
+      .divider {
+        width: 64px;
+        height: 3px;
+        background: #c2512e;
+        margin-top: 4px;
+      }
 
-    .tagline {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      font-size: 32px;
-      font-weight: 400;
-      color: #c0c5cd;
-      letter-spacing: 0.01em;
-      margin-top: 18px;
-    }
+      .tagline {
+        font-family: "Plus Jakarta Sans", sans-serif;
+        font-size: 32px;
+        font-weight: 400;
+        color: #c0c5cd;
+        letter-spacing: 0.01em;
+        margin-top: 18px;
+      }
 
-    /* Seqera logo */
-    .seqera-logo {
-      margin-top: 12px;
-      opacity: 0.3;
-    }
+      /* Seqera logo */
+      .seqera-logo {
+        margin-top: 12px;
+        opacity: 0.3;
+      }
 
-    .seqera-logo img {
-      height: 80px;
-      width: auto;
-      filter: grayscale(1) brightness(2);
-    }
+      .seqera-logo img {
+        height: 80px;
+        width: auto;
+        filter: grayscale(1) brightness(2);
+      }
 
-    /* Subtle side border accents */
-    .side-accent {
-      position: absolute;
-      left: 40px;
-      top: 180px;
-      bottom: 180px;
-      width: 3px;
-      background: #c2512e;
-      opacity: 0.3;
-    }
+      /* Subtle side border accents */
+      .side-accent {
+        position: absolute;
+        left: 40px;
+        top: 180px;
+        bottom: 180px;
+        width: 3px;
+        background: #c2512e;
+        opacity: 0.3;
+      }
 
-    .side-accent-right {
-      left: auto;
-      right: 40px;
-    }
-  </style>
-</head>
-<body>
-  <div class="accent-bar">
-    <span style="background: #8a7e9b;"></span>
-    <span style="background: #c2512e;"></span>
-    <span style="background: #5b8fa8;"></span>
-    <span style="background: #c9a84c;"></span>
-    <span style="background: #6b917a;"></span>
-  </div>
-  <div class="side-accent"></div>
-  <div class="side-accent side-accent-right"></div>
-
-  <div class="content">
-    <div class="pre-text">A manifesto for bioinformatics</div>
-    <div class="title">rewrites<span class="dot">.</span><span class="bio">bio</span></div>
-    <div class="divider"></div>
-    <div class="tagline">Rewriting bioinformatics tools with AI. Responsibly.</div>
-    <div class="seqera-logo">
-      <img src="/seqera-logo.svg" alt="Seqera" />
+      .side-accent-right {
+        left: auto;
+        right: 40px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="accent-bar">
+      <span style="background: #8a7e9b;"></span>
+      <span style="background: #c2512e;"></span>
+      <span style="background: #5b8fa8;"></span>
+      <span style="background: #c9a84c;"></span>
+      <span style="background: #6b917a;"></span>
     </div>
-  </div>
+    <div class="side-accent"></div>
+    <div class="side-accent side-accent-right"></div>
 
-</body>
+    <div class="content">
+      <div class="pre-text">A manifesto for bioinformatics</div>
+      <div class="title">
+        rewrites<span class="dot">.</span><span class="bio">bio</span>
+      </div>
+      <div class="divider"></div>
+      <div class="tagline">
+        Rewriting bioinformatics tools with AI. Responsibly.
+      </div>
+      <div class="seqera-logo">
+        <img src="/seqera-logo.svg" alt="Seqera" />
+      </div>
+    </div>
+  </body>
 </html>

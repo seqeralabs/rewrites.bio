@@ -31,370 +31,561 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
     </aside>
 
     <main class="manifesto">
-    <div class="preamble" id="introduction">
-      <div class="container">
-        <div class="preamble-header" data-section-entrance>
-          <a class="preamble-header-inner" href="#introduction">
-            <span class="preamble-number">1</span>
-            <h2 class="preamble-title">Introduction</h2>
-          </a>
-        </div>
-        <div class="preamble-section" id="introduction-opportunity">
-          <a class="preamble-heading reveal" href="#introduction-opportunity"><span class="preamble-sub-number">1.1</span>The opportunity<span class="anchor-link">#</span></a>
-          <div class="preamble-layout">
-            <div class="preamble-text reveal-stagger">
+      <div class="preamble" id="introduction">
+        <div class="container">
+          <div class="preamble-header" data-section-entrance>
+            <a class="preamble-header-inner" href="#introduction">
+              <span class="preamble-number">1</span>
+              <h2 class="preamble-title">Introduction</h2>
+            </a>
+          </div>
+          <div class="preamble-section" id="introduction-opportunity">
+            <a class="preamble-heading reveal" href="#introduction-opportunity"
+              ><span class="preamble-sub-number">1.1</span>The opportunity<span
+                class="anchor-link">#</span
+              ></a
+            >
+            <div class="preamble-layout">
+              <div class="preamble-text reveal-stagger">
+                <p class="reveal">
+                  Bioinformatics datasets have grown faster than the tools that
+                  process them. The cost shows up in compute bills, carbon
+                  footprint, and time to results.
+                </p>
+                <ul class="preamble-list reveal">
+                  <li>
+                    <strong>Scale:</strong> A pipeline like nf-core/rnaseq runs on
+                    millions of samples per year. Ten wasted minutes per sample is
+                    decades of compute, annually.
+                  </li>
+                  <li>
+                    <strong>Environment:</strong> Wasted CPU-hours mean kilowatt-hours
+                    and CO2. Rewrites running 10-50× faster can save hundreds of tonnes
+                    of emissions.
+                  </li>
+                  <li>
+                    <strong>Science:</strong> Hours waiting for results are hours
+                    not spent testing hypotheses or exploring new directions.
+                  </li>
+                </ul>
+                <p class="reveal">
+                  AI coding assistants now let a domain expert produce a working
+                  reimplementation in days rather than years. Fast code is now
+                  cheap. Scientific insight, validation, and trust are not.
+                </p>
+              </div>
+              <div class="preamble-visual reveal">
+                <ScaleCostChart />
+              </div>
+            </div>
+          </div>
+
+          <div class="preamble-section preamble-risk" id="introduction-risk">
+            <a class="preamble-heading reveal" href="#introduction-risk"
+              ><span class="preamble-sub-number">1.2</span>The risk<span
+                class="anchor-link">#</span
+              ></a
+            >
+            <div class="preamble-text-full reveal-stagger">
               <p class="reveal">
-                Bioinformatics datasets have grown faster than the tools that process them. The
-                cost shows up in compute bills, carbon footprint, and time to results.
+                Cheap code is not the same as correct code. AI-generated
+                implementations are fluent and fast, but confidently wrong in
+                ways that are easy to miss.
               </p>
               <ul class="preamble-list reveal">
-                <li><strong>Scale:</strong> A pipeline like nf-core/rnaseq runs on millions of samples per year. Ten wasted minutes per sample is decades of compute, annually.</li>
-                <li><strong>Environment:</strong> Wasted CPU-hours mean kilowatt-hours and CO2. Rewrites running 10-50× faster can save hundreds of tonnes of emissions.</li>
-                <li><strong>Science:</strong> Hours waiting for results are hours not spent testing hypotheses or exploring new directions.</li>
+                <li>
+                  <strong>Correctness:</strong> A rewrite that silently produces different
+                  results poisons every analysis built on it.
+                </li>
+                <li>
+                  <strong>Attribution:</strong> Ignoring the original authors' contributions
+                  damages the incentive structures that made the tool possible.
+                </li>
+                <li>
+                  <strong>Fragmentation:</strong> Competing rewrites with different
+                  behaviour leave users unsure which to trust. Abandoned projects
+                  block better alternatives.
+                </li>
               </ul>
               <p class="reveal">
-                AI coding assistants now let a domain expert produce a working reimplementation
-                in days rather than years. Fast code is now cheap. Scientific insight, validation,
-                and trust are not.
+                The existing tools are correct, and that correctness is
+                hard-won. Rewrites inherit a responsibility: to match outputs
+                exactly, to credit the work they stand on, and to be honest
+                about what they have and have not validated.
               </p>
             </div>
-            <div class="preamble-visual reveal">
-              <ScaleCostChart />
-            </div>
-          </div>
-        </div>
 
-        <div class="preamble-section preamble-risk" id="introduction-risk">
-          <a class="preamble-heading reveal" href="#introduction-risk"><span class="preamble-sub-number">1.2</span>The risk<span class="anchor-link">#</span></a>
-          <div class="preamble-text-full reveal-stagger">
-            <p class="reveal">
-              Cheap code is not the same as correct code. AI-generated implementations are fluent
-              and fast, but confidently wrong in ways that are easy to miss.
-            </p>
-            <ul class="preamble-list reveal">
-              <li><strong>Correctness:</strong> A rewrite that silently produces different results poisons every analysis built on it.</li>
-              <li><strong>Attribution:</strong> Ignoring the original authors' contributions damages the incentive structures that made the tool possible.</li>
-              <li><strong>Fragmentation:</strong> Competing rewrites with different behaviour leave users unsure which to trust. Abandoned projects block better alternatives.</li>
-            </ul>
-            <p class="reveal">
-              The existing tools are correct, and that correctness is hard-won. Rewrites inherit
-              a responsibility: to match outputs exactly, to credit the work they stand on, and
-              to be honest about what they have and have not validated.
-            </p>
-          </div>
-
-          <div class="preamble-cta">
-            <div class="preamble-callout reveal">
-              <p>A wave of AI-assisted rewrites is coming. The question is not whether it will happen, but whether it will happen well.</p>
+            <div class="preamble-cta">
+              <div class="preamble-callout reveal">
+                <p>
+                  A wave of AI-assisted rewrites is coming. The question is not
+                  whether it will happen, but whether it will happen well.
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <Section
-      id="philosophy"
-      number="2"
-      title="Philosophy"
-      intro="Before writing any code, three commitments shape everything else."
-    >
-      <Principle id="credit-authors" number="2.1" title="Credit the original authors">
-        <div slot="description">
-          <p>
-            Behind every bioinformatics tool is years of work: algorithm design, edge-case hunting,
-            user feedback, and maintenance. A rewrite stands entirely on that
-            foundation. Without the original, a rewrite cannot even be validated.
-          </p>
-          <p>Make credit visible:</p>
-          <ul>
-            <li><strong>README</strong> and documentation</li>
-            <li><strong>Papers</strong> and preprints</li>
-            <li><strong>Downstream reports</strong> using the rewrite's results</li>
-            <li><strong>Credits page</strong> with citations, DOIs, author lists, and versions</li>
-          </ul>
-          <p>
-            When users cite your rewrite, they should know to cite the original too. This is how
-            science tracks provenance. Obscuring lineage undermines the incentives that produced
-            the original work.
-          </p>
-        </div>
-        <CitationCard slot="visual" />
-      </Principle>
+      <Section
+        id="philosophy"
+        number="2"
+        title="Philosophy"
+        intro="Before writing any code, three commitments shape everything else."
+      >
+        <Principle
+          id="credit-authors"
+          number="2.1"
+          title="Credit the original authors"
+        >
+          <div slot="description">
+            <p>
+              Behind every bioinformatics tool is years of work: algorithm
+              design, edge-case hunting, user feedback, and maintenance. A
+              rewrite stands entirely on that foundation. Without the original,
+              a rewrite cannot even be validated.
+            </p>
+            <p>Make credit visible:</p>
+            <ul>
+              <li><strong>README</strong> and documentation</li>
+              <li><strong>Papers</strong> and preprints</li>
+              <li>
+                <strong>Downstream reports</strong> using the rewrite's results
+              </li>
+              <li>
+                <strong>Credits page</strong> with citations, DOIs, author lists,
+                and versions
+              </li>
+            </ul>
+            <p>
+              When users cite your rewrite, they should know to cite the
+              original too. This is how science tracks provenance. Obscuring
+              lineage undermines the incentives that produced the original work.
+            </p>
+          </div>
+          <CitationCard slot="visual" />
+        </Principle>
 
-      <Principle id="emulate-exactly" number="2.2" title="Emulate exactly">
-        <div slot="description">
-          <p>
-            The goal is a faster tool that produces the same results.
-            A rewrite that changes outputs, even as "improvements", is a different tool. It
-            cannot inherit the original's validation or be substituted without re-validation.
-          </p>
-          <p>Emulate exactly means:</p>
-          <ul>
-            <li><strong>Deterministic tools:</strong> byte-for-byte identical output files</li>
-            <li><strong>Floating-point tools:</strong> results within acceptable numerical precision (defined by scientists, not convenience)</li>
-            <li><strong>Everything counts:</strong> header formats, column ordering, file naming, summary statistics</li>
-          </ul>
-        </div>
-        <OutputDiff slot="visual" />
-      </Principle>
+        <Principle id="emulate-exactly" number="2.2" title="Emulate exactly">
+          <div slot="description">
+            <p>
+              The goal is a faster tool that produces the same results. A
+              rewrite that changes outputs, even as "improvements", is a
+              different tool. It cannot inherit the original's validation or be
+              substituted without re-validation.
+            </p>
+            <p>Emulate exactly means:</p>
+            <ul>
+              <li>
+                <strong>Deterministic tools:</strong> byte-for-byte identical output
+                files
+              </li>
+              <li>
+                <strong>Floating-point tools:</strong> results within acceptable numerical
+                precision (defined by scientists, not convenience)
+              </li>
+              <li>
+                <strong>Everything counts:</strong> header formats, column ordering,
+                file naming, summary statistics
+              </li>
+            </ul>
+          </div>
+          <OutputDiff slot="visual" />
+        </Principle>
 
-      <Principle id="transparent-ai" number="2.3" title="Be transparent about AI">
-        <div slot="description">
-          <p>
-            When an AI writes the implementation, say so. Correctness is determined by output
-            comparison, not by who wrote the code - but users should know how it was built.
-          </p>
-          <p>Document clearly in the README and any paper:</p>
-          <ul>
-            <li><strong>AI tools:</strong> which were used and what role they played</li>
-            <li><strong>Verification:</strong> how correctness was validated (e.g., "against mytool v1.0 on real sequencing data")</li>
-            <li><strong>Gaps:</strong> where validation coverage is thin or incomplete</li>
-          </ul>
-          <p>
-            Output comparison catches what you tested, not what you haven't. Commit to ongoing
-            validation as new use cases emerge.
-          </p>
-        </div>
-        <AIBadge slot="visual" />
-      </Principle>
-    </Section>
+        <Principle
+          id="transparent-ai"
+          number="2.3"
+          title="Be transparent about AI"
+        >
+          <div slot="description">
+            <p>
+              When an AI writes the implementation, say so. Correctness is
+              determined by output comparison, not by who wrote the code - but
+              users should know how it was built.
+            </p>
+            <p>Document clearly in the README and any paper:</p>
+            <ul>
+              <li>
+                <strong>AI tools:</strong> which were used and what role they played
+              </li>
+              <li>
+                <strong>Verification:</strong> how correctness was validated (e.g.,
+                "against mytool v1.0 on real sequencing data")
+              </li>
+              <li>
+                <strong>Gaps:</strong> where validation coverage is thin or incomplete
+              </li>
+            </ul>
+            <p>
+              Output comparison catches what you tested, not what you haven't.
+              Commit to ongoing validation as new use cases emerge.
+            </p>
+          </div>
+          <AIBadge slot="visual" />
+        </Principle>
+      </Section>
 
-    <Section
-      id="planning"
-      number="3"
-      title="Planning"
-      intro="The decisions made before you write the first function determine most of the outcome. Scope, validation strategy, and architecture all matter more than the choice of language."
-    >
-      <Principle id="think-big" number="3.1" title="Think big">
-        <div slot="description">
-          <p>
-            The biggest performance wins come from rethinking architecture, not just porting code.
-            Modern pipelines chain discrete tools, each doing I/O. A straight port to a faster
-            language captures only a fraction of what is available.
-          </p>
-          <p>Questions to ask:</p>
-          <ul>
-            <li><strong>Upstream:</strong> what preprocessing does this tool assume? Can that be folded in?</li>
-            <li><strong>Downstream:</strong> what immediately consumes the output? Can that be folded in too?</li>
-            <li><strong>Intermediate files:</strong> can steps share data in memory instead of writing gigabytes of temporary BAM files?</li>
-            <li><strong>Hardware:</strong> consider other architectures likw <code>#aarch64</code> to balance performance and sustainability. Accelerators (GPU/TPU) can help too, but only with robust validation.</li>
-          </ul>
-          <p>
-            This doesn't mean building an unvalidatable monolith. But consider what a pipeline
-            designed from scratch would look like, knowing where the bottlenecks are.
-          </p>
-        </div>
-        <PipelineIO slot="visual" />
-      </Principle>
+      <Section
+        id="planning"
+        number="3"
+        title="Planning"
+        intro="The decisions made before you write the first function determine most of the outcome. Scope, validation strategy, and architecture all matter more than the choice of language."
+      >
+        <Principle id="think-big" number="3.1" title="Think big">
+          <div slot="description">
+            <p>
+              The biggest performance wins come from rethinking architecture,
+              not just porting code. Modern pipelines chain discrete tools, each
+              doing I/O. A straight port to a faster language captures only a
+              fraction of what is available.
+            </p>
+            <p>Questions to ask:</p>
+            <ul>
+              <li>
+                <strong>Upstream:</strong> what preprocessing does this tool assume?
+                Can that be folded in?
+              </li>
+              <li>
+                <strong>Downstream:</strong> what immediately consumes the output?
+                Can that be folded in too?
+              </li>
+              <li>
+                <strong>Intermediate files:</strong> can steps share data in memory
+                instead of writing gigabytes of temporary BAM files?
+              </li>
+              <li>
+                <strong>Hardware:</strong> consider other architectures likw <code
+                  >#aarch64</code
+                > to balance performance and sustainability. Accelerators (GPU/TPU)
+                can help too, but only with robust validation.
+              </li>
+            </ul>
+            <p>
+              This doesn't mean building an unvalidatable monolith. But consider
+              what a pipeline designed from scratch would look like, knowing
+              where the bottlenecks are.
+            </p>
+          </div>
+          <PipelineIO slot="visual" />
+        </Principle>
 
-      <Principle id="work-small" number="3.2" title="Work small">
-        <div slot="description">
-          <p>
-            Thinking big about architecture does not mean building big in one go. The implementation
-            strategy should be the opposite: small, tight iteration loops, each step validated
-            against the original before moving on.
-          </p>
-          <p>Why this matters:</p>
-          <ul>
-            <li><strong>Localised debugging:</strong> when something is wrong, you already know where to look</li>
-            <li><strong>Continuous validation:</strong> AI agents are unreliable for correctness - validate every step</li>
-            <li><strong>Productive iteration:</strong> "output doesn't match on paired-end data" is actionable; "implement the whole pipeline" is not</li>
-          </ul>
-          <p>
-            Start with the simplest function that produces testable output. Validate it. Then extend.
-          </p>
-        </div>
-        <IterationLoop slot="visual" />
-      </Principle>
-    </Section>
+        <Principle id="work-small" number="3.2" title="Work small">
+          <div slot="description">
+            <p>
+              Thinking big about architecture does not mean building big in one
+              go. The implementation strategy should be the opposite: small,
+              tight iteration loops, each step validated against the original
+              before moving on.
+            </p>
+            <p>Why this matters:</p>
+            <ul>
+              <li>
+                <strong>Localised debugging:</strong> when something is wrong, you
+                already know where to look
+              </li>
+              <li>
+                <strong>Continuous validation:</strong> AI agents are unreliable for
+                correctness - validate every step
+              </li>
+              <li>
+                <strong>Productive iteration:</strong> "output doesn't match on paired-end
+                data" is actionable; "implement the whole pipeline" is not
+              </li>
+            </ul>
+            <p>
+              Start with the simplest function that produces testable output.
+              Validate it. Then extend.
+            </p>
+          </div>
+          <IterationLoop slot="visual" />
+        </Principle>
+      </Section>
 
-    <Section
-      id="building"
-      number="4"
-      title="Building"
-      intro="The building phase is where principles meet reality: data that behaves unexpectedly, performance that doesn't match theory, and users who need the tool to work before they trust it."
-    >
-      <Principle id="test-and-benchmark" number="4.1" title="Test and benchmark with real data">
-        <div slot="description">
-          <p>
-            Synthetic data is useful for quick iteration but insufficient for validation. Real
-            sequencing data has error patterns and quality profiles that generators don't replicate.
-          </p>
-          <p>Test comprehensively:</p>
-          <ul>
-            <li><strong>Diversity:</strong> multiple organisms, platforms, and library preps</li>
-            <li><strong>Edge cases:</strong> empty files, single-read files, very large files</li>
-            <li><strong>Benchmarks:</strong> document hardware, dataset, exact commands, and output comparison</li>
-          </ul>
-          <p>
-            Speed claims need evidence. Document your hardware, dataset, and exact commands so
-            anyone can reproduce the comparison. If performance varies across data types, show
-            that too.
-          </p>
-        </div>
-        <BenchmarkComparison slot="visual" />
-      </Principle>
+      <Section
+        id="building"
+        number="4"
+        title="Building"
+        intro="The building phase is where principles meet reality: data that behaves unexpectedly, performance that doesn't match theory, and users who need the tool to work before they trust it."
+      >
+        <Principle
+          id="test-and-benchmark"
+          number="4.1"
+          title="Test and benchmark with real data"
+        >
+          <div slot="description">
+            <p>
+              Synthetic data is useful for quick iteration but insufficient for
+              validation. Real sequencing data has error patterns and quality
+              profiles that generators don't replicate.
+            </p>
+            <p>Test comprehensively:</p>
+            <ul>
+              <li>
+                <strong>Diversity:</strong> multiple organisms, platforms, and library
+                preps
+              </li>
+              <li>
+                <strong>Edge cases:</strong> empty files, single-read files, very
+                large files
+              </li>
+              <li>
+                <strong>Benchmarks:</strong> document hardware, dataset, exact commands,
+                and output comparison
+              </li>
+            </ul>
+            <p>
+              Speed claims need evidence. Document your hardware, dataset, and
+              exact commands so anyone can reproduce the comparison. If
+              performance varies across data types, show that too.
+            </p>
+          </div>
+          <BenchmarkComparison slot="visual" />
+        </Principle>
 
-      <Principle id="build-what-you-need" number="4.2" title="Build only what you need">
-        <div slot="description">
-          <p>
-            Feature completeness is not the goal - output correctness on the features that matter
-            is. Most tools have accumulated flags and edge cases over years; not all are used in
-            your target pipeline.
-          </p>
-          <p>A focused approach:</p>
-          <ul>
-            <li><strong>Audit usage:</strong> identify exactly which capabilities your pipeline uses</li>
-            <li><strong>Fail loudly:</strong> for unsupported features, error with a clear message pointing to the original</li>
-            <li><strong>Never ignore:</strong> silently dropping flags or producing wrong output breaks trust</li>
-          </ul>
-          <p>
-            A rewrite that does four things correctly is more valuable than one that claims fifteen
-            and does twelve right. Scope can expand as the project matures; it cannot easily
-            contract once users depend on it.
-          </p>
-        </div>
-        <FeatureChecklist slot="visual" />
-      </Principle>
+        <Principle
+          id="build-what-you-need"
+          number="4.2"
+          title="Build only what you need"
+        >
+          <div slot="description">
+            <p>
+              Feature completeness is not the goal - output correctness on the
+              features that matter is. Most tools have accumulated flags and
+              edge cases over years; not all are used in your target pipeline.
+            </p>
+            <p>A focused approach:</p>
+            <ul>
+              <li>
+                <strong>Audit usage:</strong> identify exactly which capabilities
+                your pipeline uses
+              </li>
+              <li>
+                <strong>Fail loudly:</strong> for unsupported features, error with
+                a clear message pointing to the original
+              </li>
+              <li>
+                <strong>Never ignore:</strong> silently dropping flags or producing
+                wrong output breaks trust
+              </li>
+            </ul>
+            <p>
+              A rewrite that does four things correctly is more valuable than
+              one that claims fifteen and does twelve right. Scope can expand as
+              the project matures; it cannot easily contract once users depend
+              on it.
+            </p>
+          </div>
+          <FeatureChecklist slot="visual" />
+        </Principle>
 
-      <Principle id="pin-versions" number="4.3" title="Pin versions and document">
-        <div slot="description">
-          <p>
-            Every equivalence claim is implicitly about a specific version. <em>"Compatible with
-            mytool"</em> is meaningless. <em>"Bit-identical output to mytool v1.0, validated on
-            the dataset in benchmarks/"</em> is testable.
-          </p>
-          <p>Document in the repository (not a blog post):</p>
-          <ul>
-            <li><strong>Versions:</strong> exact version of every original tool validated against</li>
-            <li><strong>Commands:</strong> exact command lines used for comparison</li>
-            <li><strong>Data:</strong> datasets, methodology, and date</li>
-            <li><strong>Policy:</strong> how you handle upstream version updates</li>
-          </ul>
-          <p>
-            When the original releases a new version, you need a process: major bumps often change
-            formats, patches may fix bugs affecting your outputs. Communicate your policy to users.
-          </p>
-        </div>
-        <VersionPin slot="visual" />
-      </Principle>
-    </Section>
+        <Principle
+          id="pin-versions"
+          number="4.3"
+          title="Pin versions and document"
+        >
+          <div slot="description">
+            <p>
+              Every equivalence claim is implicitly about a specific version. <em
+                >"Compatible with mytool"</em
+              > is meaningless. <em
+                >"Bit-identical output to mytool v1.0, validated on the dataset
+                in benchmarks/"</em
+              > is testable.
+            </p>
+            <p>Document in the repository (not a blog post):</p>
+            <ul>
+              <li>
+                <strong>Versions:</strong> exact version of every original tool validated
+                against
+              </li>
+              <li>
+                <strong>Commands:</strong> exact command lines used for comparison
+              </li>
+              <li><strong>Data:</strong> datasets, methodology, and date</li>
+              <li>
+                <strong>Policy:</strong> how you handle upstream version updates
+              </li>
+            </ul>
+            <p>
+              When the original releases a new version, you need a process:
+              major bumps often change formats, patches may fix bugs affecting
+              your outputs. Communicate your policy to users.
+            </p>
+          </div>
+          <VersionPin slot="visual" />
+        </Principle>
+      </Section>
 
-    <Section
-      id="stewardship"
-      number="5"
-      title="Stewardship"
-      intro="A rewrite is not a one-time act. Once other researchers build pipelines on your tool, you owe them continued correctness as upstream tools evolve, transparent governance, and responsible engagement with the original projects."
-    >
-      <Principle id="maintain" number="5.1" title="Maintain and govern">
-        <div slot="description">
-          <p>
-            Someone needs to be responsible for what comes next, and that should be visible
-            before you release.
-          </p>
-          <p>Plan for the long term:</p>
-          <ul>
-            <li><strong>Triage issues</strong> as users find edge cases your test suite missed</li>
-            <li><strong>Re-validate</strong> when the original tool releases updates</li>
-            <li><strong>Expand benchmarks</strong> as new data types and edge cases surface</li>
-            <li><strong>Review PRs</strong> and grow a contributor community</li>
-          </ul>
-          <p>
-            Put governance in place before release: CONTRIBUTING.md, CHANGELOG.md, versioned
-            tags, changelogs, and a commitment to acknowledge issues.
-          </p>
-        </div>
-        <GovernanceChecklist slot="visual" />
-      </Principle>
+      <Section
+        id="stewardship"
+        number="5"
+        title="Stewardship"
+        intro="A rewrite is not a one-time act. Once other researchers build pipelines on your tool, you owe them continued correctness as upstream tools evolve, transparent governance, and responsible engagement with the original projects."
+      >
+        <Principle id="maintain" number="5.1" title="Maintain and govern">
+          <div slot="description">
+            <p>
+              Someone needs to be responsible for what comes next, and that
+              should be visible before you release.
+            </p>
+            <p>Plan for the long term:</p>
+            <ul>
+              <li>
+                <strong>Triage issues</strong> as users find edge cases your test
+                suite missed
+              </li>
+              <li>
+                <strong>Re-validate</strong> when the original tool releases updates
+              </li>
+              <li>
+                <strong>Expand benchmarks</strong> as new data types and edge cases
+                surface
+              </li>
+              <li>
+                <strong>Review PRs</strong> and grow a contributor community
+              </li>
+            </ul>
+            <p>
+              Put governance in place before release: CONTRIBUTING.md,
+              CHANGELOG.md, versioned tags, changelogs, and a commitment to
+              acknowledge issues.
+            </p>
+          </div>
+          <GovernanceChecklist slot="visual" />
+        </Principle>
 
-      <Principle id="preserve-compatibility" number="5.2" title="Preserve compatibility">
-        <div slot="description">
-          <p>
-            The strongest argument for adopting a rewrite is zero migration cost. Identical outputs
-            mean swapping into an existing pipeline is a one-line config change.
-          </p>
-          <p>What identical means:</p>
-          <ul>
-            <li><strong>File names:</strong> same output naming conventions</li>
-            <li><strong>Formats:</strong> same column headers, same ordering, same summary statistics</li>
-            <li><strong>Parsing:</strong> every MultiQC module and downstream script works unchanged</li>
-          </ul>
-          <p>
-            This reversibility makes adoption risk-free. Researchers running production pipelines
-            cannot re-validate their entire analysis history every time they update a tool - but
-            they will try a rewrite they can test on one run, confirm matches, and roll back if needed.
-          </p>
-        </div>
-        <HotSwapDiagram slot="visual" />
-      </Principle>
+        <Principle
+          id="preserve-compatibility"
+          number="5.2"
+          title="Preserve compatibility"
+        >
+          <div slot="description">
+            <p>
+              The strongest argument for adopting a rewrite is zero migration
+              cost. Identical outputs mean swapping into an existing pipeline is
+              a one-line config change.
+            </p>
+            <p>What identical means:</p>
+            <ul>
+              <li>
+                <strong>File names:</strong> same output naming conventions
+              </li>
+              <li>
+                <strong>Formats:</strong> same column headers, same ordering, same
+                summary statistics
+              </li>
+              <li>
+                <strong>Parsing:</strong> every MultiQC module and downstream script
+                works unchanged
+              </li>
+            </ul>
+            <p>
+              This reversibility makes adoption risk-free. Researchers running
+              production pipelines cannot re-validate their entire analysis
+              history every time they update a tool - but they will try a
+              rewrite they can test on one run, confirm matches, and roll back
+              if needed.
+            </p>
+          </div>
+          <HotSwapDiagram slot="visual" />
+        </Principle>
 
-      <Principle id="open-source" number="5.3" title="Release as open source">
-        <div slot="description">
-          <p>
-            The tools you are rewriting were built by the open-source community, validated
-            against publicly funded data, and distributed freely. A rewrite that closes the
-            source extracts value without contributing back.
-          </p>
-          <p>Open source matters for adoption:</p>
-          <ul>
-            <li><strong>Transparency:</strong> researchers need to inspect code to understand what it does to their data</li>
-            <li><strong>Accessibility:</strong> HPC clusters often don't have commercial software available</li>
-            <li><strong>Continuity:</strong> users can fork if the project is abandoned</li>
-          </ul>
-          <p>
-            Check licenses before you start. Permissive licenses (MIT, Apache-2.0, BSD) let you
-            release under any license; copyleft (GPL) requires compatible licensing. Whether a
-            reimplementation is a "derived work" depends on jurisdiction - err on the side of caution.
-          </p>
-          <p>
-            License archaeology is far easier before you ship than after.
-          </p>
-        </div>
-        <OpenSourceFlywheel slot="visual" />
-      </Principle>
+        <Principle id="open-source" number="5.3" title="Release as open source">
+          <div slot="description">
+            <p>
+              The tools you are rewriting were built by the open-source
+              community, validated against publicly funded data, and distributed
+              freely. A rewrite that closes the source extracts value without
+              contributing back.
+            </p>
+            <p>Open source matters for adoption:</p>
+            <ul>
+              <li>
+                <strong>Transparency:</strong> researchers need to inspect code to
+                understand what it does to their data
+              </li>
+              <li>
+                <strong>Accessibility:</strong> HPC clusters often don't have commercial
+                software available
+              </li>
+              <li>
+                <strong>Continuity:</strong> users can fork if the project is abandoned
+              </li>
+            </ul>
+            <p>
+              Check licenses before you start. Permissive licenses (MIT,
+              Apache-2.0, BSD) let you release under any license; copyleft (GPL)
+              requires compatible licensing. Whether a reimplementation is a
+              "derived work" depends on jurisdiction - err on the side of
+              caution.
+            </p>
+            <p>License archaeology is far easier before you ship than after.</p>
+          </div>
+          <OpenSourceFlywheel slot="visual" />
+        </Principle>
 
-      <Principle id="contribute-upstream" number="5.4" title="Contribute upstream responsibly">
-        <div slot="description">
-          <p>
-            Building a rewrite puts you in an unusual position: you've studied the original
-            closely and found its edge cases. A reproducible bug report is a real contribution
-            to science. But be careful - AI agents are confidently wrong in subtle ways.
-          </p>
-          <p>Before filing upstream:</p>
-          <ul>
-            <li><strong>Verify manually</strong> with the original tool on clean, well-understood data</li>
-            <li><strong>Rule out</strong> your reimplementation, malformed input, or a misread spec</li>
-            <li><strong>Never use</strong> AI-generated test cases as evidence</li>
-          </ul>
-          <p>
-            Do not automate bug reports. Open-source maintainers are usually volunteers - a firehose
-            of issues burns out people whose work benefits everyone.
-          </p>
-          <p>
-            The bar for filing: you fully understand the problem yourself, you can create a minimal
-            reproducible example using the upstream tool that demonstrates it, and you've considered
-            whether you can also contribute a fix.
-          </p>
-        </div>
-        <BugReportDecisionTree slot="visual" />
-      </Principle>
-    </Section>
-
-  </main>
+        <Principle
+          id="contribute-upstream"
+          number="5.4"
+          title="Contribute upstream responsibly"
+        >
+          <div slot="description">
+            <p>
+              Building a rewrite puts you in an unusual position: you've studied
+              the original closely and found its edge cases. A reproducible bug
+              report is a real contribution to science. But be careful - AI
+              agents are confidently wrong in subtle ways.
+            </p>
+            <p>Before filing upstream:</p>
+            <ul>
+              <li>
+                <strong>Verify manually</strong> with the original tool on clean,
+                well-understood data
+              </li>
+              <li>
+                <strong>Rule out</strong> your reimplementation, malformed input,
+                or a misread spec
+              </li>
+              <li>
+                <strong>Never use</strong> AI-generated test cases as evidence
+              </li>
+            </ul>
+            <p>
+              Do not automate bug reports. Open-source maintainers are usually
+              volunteers - a firehose of issues burns out people whose work
+              benefits everyone.
+            </p>
+            <p>
+              The bar for filing: you fully understand the problem yourself, you
+              can create a minimal reproducible example using the upstream tool
+              that demonstrates it, and you've considered whether you can also
+              contribute a fix.
+            </p>
+          </div>
+          <BugReportDecisionTree slot="visual" />
+        </Principle>
+      </Section>
+    </main>
   </div>
 
   <div class="closing">
     <div class="container">
       <div class="closing-line"></div>
-      <p class="closing-text">These principles are a starting point, not a checklist.</p>
+      <p class="closing-text">
+        These principles are a starting point, not a checklist.
+      </p>
       <p class="closing-body">
-        Every rewrite will weigh these principles differently.
-        We hope that they can be a guide to help you shape the questions you ask along the way.
+        Every rewrite will weigh these principles differently. We hope that they
+        can be a guide to help you shape the questions you ask along the way.
       </p>
       <BadgePicker />
 
       <p class="closing-attribution">
-        Discuss and contribute at <a href="https://github.com/seqeralabs/rewrites.bio">github.com/seqeralabs/rewrites.bio</a>
+        Discuss and contribute at <a
+          href="https://github.com/seqeralabs/rewrites.bio"
+          >github.com/seqeralabs/rewrites.bio</a
+        >
       </p>
     </div>
   </div>
@@ -461,7 +652,9 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
       transform: translateY(-10px);
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.2s ease, transform 0.2s ease;
+      transition:
+        opacity 0.2s ease,
+        transform 0.2s ease;
     }
 
     .toc-sidebar.open {
@@ -528,14 +721,20 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
   }
 
   @keyframes drawBorderIntro {
-    from { background-size: 3px 0%; }
-    to { background-size: 3px 100%; }
+    from {
+      background-size: 3px 0%;
+    }
+    to {
+      background-size: 3px 100%;
+    }
   }
 
   .preamble-header[data-section-entrance] .preamble-number {
     opacity: 0;
     transform: translateX(-12px);
-    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .preamble-header[data-section-entrance].entered .preamble-number {
@@ -547,7 +746,9 @@ import BugReportDecisionTree from "../components/visuals/BugReportDecisionTree.a
   .preamble-header[data-section-entrance] .preamble-title {
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .preamble-header[data-section-entrance].entered .preamble-title {

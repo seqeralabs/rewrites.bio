@@ -11,69 +11,192 @@
     xmlns="http://www.w3.org/2000/svg"
   >
     <defs>
-      <marker id="arrow-blue" viewBox="0 0 10 8" refX="9" refY="4"
-        markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-        <path d="M0,0 L10,4 L0,8 Z" fill="var(--section-color, var(--accent-blue))" />
+      <marker
+        id="arrow-blue"
+        viewBox="0 0 10 8"
+        refX="9"
+        refY="4"
+        markerWidth="8"
+        markerHeight="6"
+        orient="auto-start-reverse"
+      >
+        <path
+          d="M0,0 L10,4 L0,8 Z"
+          fill="var(--section-color, var(--accent-blue))"></path>
       </marker>
-      <marker id="arrow-fail" viewBox="0 0 10 8" refX="9" refY="4"
-        markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-        <path d="M0,0 L10,4 L0,8 Z" fill="var(--color-fail)" />
+      <marker
+        id="arrow-fail"
+        viewBox="0 0 10 8"
+        refX="9"
+        refY="4"
+        markerWidth="8"
+        markerHeight="6"
+        orient="auto-start-reverse"
+      >
+        <path d="M0,0 L10,4 L0,8 Z" fill="var(--color-fail)"></path>
       </marker>
-      <marker id="arrow-pass" viewBox="0 0 10 8" refX="9" refY="4"
-        markerWidth="8" markerHeight="6" orient="auto-start-reverse">
-        <path d="M0,0 L10,4 L0,8 Z" fill="var(--color-pass)" />
+      <marker
+        id="arrow-pass"
+        viewBox="0 0 10 8"
+        refX="9"
+        refY="4"
+        markerWidth="8"
+        markerHeight="6"
+        orient="auto-start-reverse"
+      >
+        <path d="M0,0 L10,4 L0,8 Z" fill="var(--color-pass)"></path>
       </marker>
     </defs>
 
     <!-- Down arrows between nodes -->
-    <line x1="110" y1="60" x2="110" y2="88"
-      stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" marker-end="url(#arrow-blue)" />
-    <line x1="110" y1="150" x2="110" y2="178"
-      stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" marker-end="url(#arrow-blue)" />
+    <line
+      x1="110"
+      y1="60"
+      x2="110"
+      y2="88"
+      stroke="var(--section-color, var(--accent-blue))"
+      stroke-width="1.5"
+      marker-end="url(#arrow-blue)"></line>
+    <line
+      x1="110"
+      y1="150"
+      x2="110"
+      y2="178"
+      stroke="var(--section-color, var(--accent-blue))"
+      stroke-width="1.5"
+      marker-end="url(#arrow-blue)"></line>
 
     <!-- Node 1: Pick one function -->
-    <rect x="10" y="10" width="200" height="50" rx="6"
-      fill="var(--bg-primary)" stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" />
-    <text x="110" y="32" text-anchor="middle"
-      font-family="var(--font-mono)" font-size="10" fill="var(--section-color, var(--accent-blue))">01</text>
-    <text x="110" y="48" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">Pick one function</text>
+    <rect
+      x="10"
+      y="10"
+      width="200"
+      height="50"
+      rx="6"
+      fill="var(--bg-primary)"
+      stroke="var(--section-color, var(--accent-blue))"
+      stroke-width="1.5"></rect>
+    <text
+      x="110"
+      y="32"
+      text-anchor="middle"
+      font-family="var(--font-mono)"
+      font-size="10"
+      fill="var(--section-color, var(--accent-blue))">01</text
+    >
+    <text
+      x="110"
+      y="48"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="12"
+      fill="var(--text-secondary)">Pick one function</text
+    >
 
     <!-- Node 2: Write rewrite -->
-    <rect x="10" y="98" width="200" height="50" rx="6"
-      fill="var(--bg-primary)" stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" />
-    <text x="110" y="120" text-anchor="middle"
-      font-family="var(--font-mono)" font-size="10" fill="var(--section-color, var(--accent-blue))">02</text>
-    <text x="110" y="136" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">Write rewrite</text>
+    <rect
+      x="10"
+      y="98"
+      width="200"
+      height="50"
+      rx="6"
+      fill="var(--bg-primary)"
+      stroke="var(--section-color, var(--accent-blue))"
+      stroke-width="1.5"></rect>
+    <text
+      x="110"
+      y="120"
+      text-anchor="middle"
+      font-family="var(--font-mono)"
+      font-size="10"
+      fill="var(--section-color, var(--accent-blue))">02</text
+    >
+    <text
+      x="110"
+      y="136"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="12"
+      fill="var(--text-secondary)">Write rewrite</text
+    >
 
     <!-- Node 3: Compare outputs -->
-    <rect x="10" y="188" width="200" height="50" rx="6"
-      fill="var(--bg-primary)" stroke="var(--section-color, var(--accent-blue))" stroke-width="1.5" />
-    <text x="110" y="210" text-anchor="middle"
-      font-family="var(--font-mono)" font-size="10" fill="var(--section-color, var(--accent-blue))">03</text>
-    <text x="110" y="226" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="12" fill="var(--text-secondary)">Compare outputs</text>
+    <rect
+      x="10"
+      y="188"
+      width="200"
+      height="50"
+      rx="6"
+      fill="var(--bg-primary)"
+      stroke="var(--section-color, var(--accent-blue))"
+      stroke-width="1.5"></rect>
+    <text
+      x="110"
+      y="210"
+      text-anchor="middle"
+      font-family="var(--font-mono)"
+      font-size="10"
+      fill="var(--section-color, var(--accent-blue))">03</text
+    >
+    <text
+      x="110"
+      y="226"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="12"
+      fill="var(--text-secondary)">Compare outputs</text
+    >
 
     <!-- Mismatch: loops back up from node 3 to node 2, curving to the right -->
-    <path d="M210,208 C260,208 260,123 210,123"
-      fill="none" stroke="var(--color-fail)" stroke-width="1.5"
+    <path
+      d="M210,208 C260,208 260,123 210,123"
+      fill="none"
+      stroke="var(--color-fail)"
+      stroke-width="1.5"
       stroke-dasharray="5,3"
-      marker-end="url(#arrow-fail)" />
-    <text x="260" y="168" text-anchor="start"
-      font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--color-fail)">Mismatch</text>
+      marker-end="url(#arrow-fail)"></path>
+    <text
+      x="260"
+      y="168"
+      text-anchor="start"
+      font-family="var(--font-sans)"
+      font-size="11"
+      font-weight="600"
+      fill="var(--color-fail)">Mismatch</text
+    >
 
     <!-- Match: exits down from node 3 -->
-    <line x1="110" y1="238" x2="110" y2="280"
-      stroke="var(--color-pass)" stroke-width="1.5" marker-end="url(#arrow-pass)" />
-    <text x="110" y="300" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="11" font-weight="600" fill="var(--color-pass)">Match → next function</text>
+    <line
+      x1="110"
+      y1="238"
+      x2="110"
+      y2="280"
+      stroke="var(--color-pass)"
+      stroke-width="1.5"
+      marker-end="url(#arrow-pass)"></line>
+    <text
+      x="110"
+      y="300"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="11"
+      font-weight="600"
+      fill="var(--color-pass)">Match → next function</text
+    >
 
     <!-- Animated dot tracing the mismatch loop: 02 → 03 → mismatch curve → back to 02 -->
     <circle r="4" fill="var(--color-fail)" opacity="0" class="loop-dot">
-      <animate attributeName="opacity" values="0;0.8;0.8;0" dur="3s" keyTimes="0;0.05;0.9;1" repeatCount="indefinite" />
-      <animateMotion dur="3s" repeatCount="indefinite"
-        path="M110,148 L110,208 L210,208 C260,208 260,123 210,123 L110,123 L110,148" />
+      <animate
+        attributeName="opacity"
+        values="0;0.8;0.8;0"
+        dur="3s"
+        keyTimes="0;0.05;0.9;1"
+        repeatCount="indefinite"></animate>
+      <animateMotion
+        dur="3s"
+        repeatCount="indefinite"
+        path="M110,148 L110,208 L210,208 C260,208 260,123 210,123 L110,123 L110,148"
+      ></animateMotion>
     </circle>
   </svg>
 </div>

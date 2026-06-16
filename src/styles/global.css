@@ -4,7 +4,7 @@
    ============================================ */
 
 /* --- Google Fonts --- */
-@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,300;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,300;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
 
 /* --- CSS Custom Properties --- */
 :root {
@@ -41,18 +41,19 @@
   --space-2xl: 6rem;
 
   /* Typography */
-  --font-serif: 'Newsreader', Georgia, 'Times New Roman', serif;
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  --font-serif: "Newsreader", Georgia, "Times New Roman", serif;
+  --font-sans:
+    "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
 
   /* Type scale — 1.25 ratio (Major Third) */
-  --text-xs: 0.75rem;     /* 12px — captions, metadata */
-  --text-sm: 0.875rem;    /* 14px — small labels, ToC */
-  --text-base: 1rem;      /* 16px — minimum body */
-  --text-md: 1.0625rem;   /* 17px — body text */
-  --text-lg: 1.125rem;    /* 18px — lead paragraphs */
-  --text-xl: 1.375rem;    /* 22px — principle titles */
-  --text-2xl: 1.75rem;    /* 28px — sub-headings */
+  --text-xs: 0.75rem; /* 12px — captions, metadata */
+  --text-sm: 0.875rem; /* 14px — small labels, ToC */
+  --text-base: 1rem; /* 16px — minimum body */
+  --text-md: 1.0625rem; /* 17px — body text */
+  --text-lg: 1.125rem; /* 18px — lead paragraphs */
+  --text-xl: 1.375rem; /* 22px — principle titles */
+  --text-2xl: 1.75rem; /* 28px — sub-headings */
 
   /* Sizing */
   --max-width: 1100px;
@@ -126,11 +127,21 @@ a:hover {
 }
 
 /* Stagger children — subtle delays */
-.reveal-stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
-.reveal-stagger > .reveal:nth-child(2) { transition-delay: 80ms; }
-.reveal-stagger > .reveal:nth-child(3) { transition-delay: 160ms; }
-.reveal-stagger > .reveal:nth-child(4) { transition-delay: 240ms; }
-.reveal-stagger > .reveal:nth-child(5) { transition-delay: 320ms; }
+.reveal-stagger > .reveal:nth-child(1) {
+  transition-delay: 0ms;
+}
+.reveal-stagger > .reveal:nth-child(2) {
+  transition-delay: 80ms;
+}
+.reveal-stagger > .reveal:nth-child(3) {
+  transition-delay: 160ms;
+}
+.reveal-stagger > .reveal:nth-child(4) {
+  transition-delay: 240ms;
+}
+.reveal-stagger > .reveal:nth-child(5) {
+  transition-delay: 320ms;
+}
 
 /* Disable reveal animations on mobile and for users who prefer reduced motion */
 @media (max-width: 768px), (prefers-reduced-motion: reduce) {

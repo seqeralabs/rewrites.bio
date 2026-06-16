@@ -12,98 +12,256 @@
     xmlns="http://www.w3.org/2000/svg"
   >
     <defs>
-      <marker id="arr" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-        <path d="M0,0 L8,3 L0,6" fill="var(--text-tertiary)" />
+      <marker
+        id="arr"
+        markerWidth="8"
+        markerHeight="6"
+        refX="8"
+        refY="3"
+        orient="auto"
+      >
+        <path d="M0,0 L8,3 L0,6" fill="var(--text-tertiary)"></path>
       </marker>
-      <marker id="arr-req" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-        <path d="M0,0 L8,3 L0,6" fill="var(--section-color, var(--accent-rust))" />
+      <marker
+        id="arr-req"
+        markerWidth="8"
+        markerHeight="6"
+        refX="8"
+        refY="3"
+        orient="auto"
+      >
+        <path d="M0,0 L8,3 L0,6" fill="var(--section-color, var(--accent-rust))"
+        ></path>
       </marker>
-      <marker id="arr-opt" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
-        <path d="M0,0 L8,3 L0,6" fill="var(--text-tertiary)" />
+      <marker
+        id="arr-opt"
+        markerWidth="8"
+        markerHeight="6"
+        refX="8"
+        refY="3"
+        orient="auto"
+      >
+        <path d="M0,0 L8,3 L0,6" fill="var(--text-tertiary)"></path>
       </marker>
     </defs>
 
     <!-- Row 1: Your paper -->
-    <rect x="70" y="16" width="200" height="56" rx="6"
-      fill="var(--bg-elevated)" stroke="var(--text-tertiary)" stroke-width="1" />
-    <text x="170" y="42" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="14" font-weight="600"
-      fill="var(--text-primary)">Your paper</text>
-    <text x="170" y="60" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="11"
-      fill="var(--text-tertiary)">uses fastalign-rs</text>
+    <rect
+      x="70"
+      y="16"
+      width="200"
+      height="56"
+      rx="6"
+      fill="var(--bg-elevated)"
+      stroke="var(--text-tertiary)"
+      stroke-width="1"></rect>
+    <text
+      x="170"
+      y="42"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="14"
+      font-weight="600"
+      fill="var(--text-primary)">Your paper</text
+    >
+    <text
+      x="170"
+      y="60"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="11"
+      fill="var(--text-tertiary)">uses fastalign-rs</text
+    >
 
     <!-- Arrow: Your paper → RustQC -->
-    <line x1="170" y1="72" x2="170" y2="112"
-      stroke="var(--text-tertiary)" stroke-width="1.5" marker-end="url(#arr)" />
-    <text x="184" y="97" font-family="var(--font-sans)" font-size="10"
-      fill="var(--text-tertiary)">uses</text>
+    <line
+      x1="170"
+      y1="72"
+      x2="170"
+      y2="112"
+      stroke="var(--text-tertiary)"
+      stroke-width="1.5"
+      marker-end="url(#arr)"></line>
+    <text
+      x="184"
+      y="97"
+      font-family="var(--font-sans)"
+      font-size="10"
+      fill="var(--text-tertiary)">uses</text
+    >
 
     <!-- Row 2: RustQC -->
-    <rect x="70" y="120" width="200" height="56" rx="6"
-      fill="var(--bg-primary)" stroke="var(--section-color, var(--accent-rust))" stroke-width="1.5" />
-    <text x="170" y="146" text-anchor="middle"
-      font-family="var(--font-mono)" font-size="15" font-weight="600"
-      fill="var(--section-color, var(--accent-rust))">fastalign-rs</text>
-    <text x="170" y="164" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="11"
-      fill="var(--text-tertiary)">rewrite</text>
+    <rect
+      x="70"
+      y="120"
+      width="200"
+      height="56"
+      rx="6"
+      fill="var(--bg-primary)"
+      stroke="var(--section-color, var(--accent-rust))"
+      stroke-width="1.5"></rect>
+    <text
+      x="170"
+      y="146"
+      text-anchor="middle"
+      font-family="var(--font-mono)"
+      font-size="15"
+      font-weight="600"
+      fill="var(--section-color, var(--accent-rust))">fastalign-rs</text
+    >
+    <text
+      x="170"
+      y="164"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="11"
+      fill="var(--text-tertiary)">rewrite</text
+    >
 
     <!-- Arrow: RustQC → featureCounts -->
-    <line x1="170" y1="176" x2="170" y2="216"
-      stroke="var(--text-tertiary)" stroke-width="1.5" marker-end="url(#arr)" />
-    <text x="184" y="200" font-family="var(--font-sans)" font-size="10"
-      fill="var(--text-tertiary)">built on</text>
+    <line
+      x1="170"
+      y1="176"
+      x2="170"
+      y2="216"
+      stroke="var(--text-tertiary)"
+      stroke-width="1.5"
+      marker-end="url(#arr)"></line>
+    <text
+      x="184"
+      y="200"
+      font-family="var(--font-sans)"
+      font-size="10"
+      fill="var(--text-tertiary)">built on</text
+    >
 
     <!-- Row 3: featureCounts -->
-    <rect x="70" y="224" width="200" height="56" rx="6"
-      fill="var(--bg-primary)" stroke="var(--text-tertiary)" stroke-width="1" />
-    <text x="170" y="250" text-anchor="middle"
-      font-family="var(--font-mono)" font-size="14" font-weight="600"
-      fill="var(--text-secondary)">slowalign</text>
-    <text x="170" y="268" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="11"
-      fill="var(--text-tertiary)">original tool</text>
+    <rect
+      x="70"
+      y="224"
+      width="200"
+      height="56"
+      rx="6"
+      fill="var(--bg-primary)"
+      stroke="var(--text-tertiary)"
+      stroke-width="1"></rect>
+    <text
+      x="170"
+      y="250"
+      text-anchor="middle"
+      font-family="var(--font-mono)"
+      font-size="14"
+      font-weight="600"
+      fill="var(--text-secondary)">slowalign</text
+    >
+    <text
+      x="170"
+      y="268"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="11"
+      fill="var(--text-tertiary)">original tool</text
+    >
 
     <!-- DOI badge -->
-    <rect x="110" y="286" width="120" height="20" rx="3"
-      fill="var(--bg-elevated)" stroke="var(--text-tertiary)" stroke-width="0.5" />
-    <text x="130" y="300" font-family="var(--font-mono)" font-size="8.5"
-      font-weight="700" fill="var(--text-tertiary)">DOI</text>
-    <text x="152" y="300" font-family="var(--font-mono)" font-size="8.5"
-      fill="var(--text-secondary)">10.xxxx/xxxxxx</text>
+    <rect
+      x="110"
+      y="286"
+      width="120"
+      height="20"
+      rx="3"
+      fill="var(--bg-elevated)"
+      stroke="var(--text-tertiary)"
+      stroke-width="0.5"></rect>
+    <text
+      x="130"
+      y="300"
+      font-family="var(--font-mono)"
+      font-size="8.5"
+      font-weight="700"
+      fill="var(--text-tertiary)">DOI</text
+    >
+    <text
+      x="152"
+      y="300"
+      font-family="var(--font-mono)"
+      font-size="8.5"
+      fill="var(--text-secondary)">10.xxxx/xxxxxx</text
+    >
 
     <!-- Citation arrows from "Your paper" -->
 
     <!-- Required: cite featureCounts (solid, prominent) -->
-    <path class="citation-line-required" d="M56,44 L20,44 L20,252 L62,252"
-      fill="none" stroke="var(--section-color, var(--accent-rust))" stroke-width="2"
-      marker-end="url(#arr-req)" />
-    <text class="citation-label" x="14" y="160" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="11" font-weight="700"
+    <path
+      class="citation-line-required"
+      d="M56,44 L20,44 L20,252 L62,252"
+      fill="none"
+      stroke="var(--section-color, var(--accent-rust))"
+      stroke-width="2"
+      marker-end="url(#arr-req)"></path>
+    <text
+      class="citation-label"
+      x="14"
+      y="160"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="11"
+      font-weight="700"
       fill="var(--section-color, var(--accent-rust))"
-      transform="rotate(-90, 14, 160)">must cite</text>
+      transform="rotate(-90, 14, 160)">must cite</text
+    >
 
     <!-- Optional: cite RustQC (dashed, subtle) -->
-    <path class="citation-line-optional" d="M284,44 L320,44 L320,148 L278,148"
-      fill="none" stroke="var(--text-tertiary)" stroke-width="1.2"
+    <path
+      class="citation-line-optional"
+      d="M284,44 L320,44 L320,148 L278,148"
+      fill="none"
+      stroke="var(--text-tertiary)"
+      stroke-width="1.2"
       stroke-dasharray="5,4"
-      marker-end="url(#arr-opt)" />
-    <text class="citation-label" x="326" y="104" text-anchor="middle"
-      font-family="var(--font-sans)" font-size="10"
+      marker-end="url(#arr-opt)"></path>
+    <text
+      class="citation-label"
+      x="326"
+      y="104"
+      text-anchor="middle"
+      font-family="var(--font-sans)"
+      font-size="10"
       fill="var(--text-tertiary)"
-      transform="rotate(90, 326, 104)">optional</text>
+      transform="rotate(90, 326, 104)">optional</text
+    >
 
     <!-- Legend at bottom -->
-    <line x1="80" y1="330" x2="110" y2="330"
-      stroke="var(--section-color, var(--accent-rust))" stroke-width="2" />
-    <text x="118" y="334" font-family="var(--font-sans)" font-size="10"
-      fill="var(--text-secondary)">Required citation</text>
+    <line
+      x1="80"
+      y1="330"
+      x2="110"
+      y2="330"
+      stroke="var(--section-color, var(--accent-rust))"
+      stroke-width="2"></line>
+    <text
+      x="118"
+      y="334"
+      font-family="var(--font-sans)"
+      font-size="10"
+      fill="var(--text-secondary)">Required citation</text
+    >
 
-    <line x1="80" y1="352" x2="110" y2="352"
-      stroke="var(--text-tertiary)" stroke-width="1.2" stroke-dasharray="5,4" />
-    <text x="118" y="356" font-family="var(--font-sans)" font-size="10"
-      fill="var(--text-tertiary)">Optional citation</text>
+    <line
+      x1="80"
+      y1="352"
+      x2="110"
+      y2="352"
+      stroke="var(--text-tertiary)"
+      stroke-width="1.2"
+      stroke-dasharray="5,4"></line>
+    <text
+      x="118"
+      y="356"
+      font-family="var(--font-sans)"
+      font-size="10"
+      fill="var(--text-tertiary)">Optional citation</text
+    >
   </svg>
 </div>
 
@@ -127,8 +285,13 @@
   }
 
   @keyframes citation-brightness {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.4;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

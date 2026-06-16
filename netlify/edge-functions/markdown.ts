@@ -64,8 +64,7 @@ function preferredMarkdownType(accept: string): string | null {
   );
   const htmlEntry = types.find(
     (t) =>
-      t.mediaType === "text/html" ||
-      t.mediaType === "application/xhtml+xml",
+      t.mediaType === "text/html" || t.mediaType === "application/xhtml+xml",
   );
 
   if (!mdEntry) return null;
