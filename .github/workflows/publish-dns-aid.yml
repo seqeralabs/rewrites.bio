@@ -1,0 +1,35 @@
+name: Publish DNS-AID records
+
+on:
+  workflow_dispatch:
+    inputs:
+      command:
+        description: "publish-dns-aid.sh command"
+        required: true
+        default: publish
+        type: choice
+        options:
+          - publish
+          - verify
+          - dnssec
+
+permissions:
+  contents: read
+
+jobs:
+  dns-aid:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Run DNS-AID script
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          DNS_AID_DOMAIN: rewrites.bio
+        run: |
+          chmod +x scripts/publish-dns-aid.sh
+          ./scripts/publish-dns-aid.sh "${{ github.event.inputs.command }}"
