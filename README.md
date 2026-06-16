@@ -24,6 +24,7 @@ npm run preview   # Preview production build
 All manifesto content lives in the Astro source files (`src/pages/index.astro` and components). At build time, a post-build script converts the rendered HTML to clean markdown for LLM consumption:
 
 - **`/manifesto.md`** — Full manifesto in markdown
+- **`/llms-full.txt`** — Full manifesto in one file (copy of manifesto.md, for llms-full.txt consumers)
 - **`/llms.txt`** — LLM-friendly site index
 - **`/.well-known/agent.md`** — AI agent discovery
 

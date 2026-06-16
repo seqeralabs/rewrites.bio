@@ -7,6 +7,7 @@
  * Output:
  *   dist/index.md
  *   dist/manifesto.md        (copy)
+ *   dist/llms-full.txt       (copy of manifesto.md)
  *   dist/.well-known/agent.md
  *   dist/.well-known/api-catalog
  *   dist/.well-known/agent-skills/index.json
@@ -228,6 +229,7 @@ md = frontmatter + "\n\n" + md + footer;
 
 writeFileSync(distPath("index.md"), md);
 copyFileSync(distPath("index.md"), distPath("manifesto.md"));
+copyFileSync(distPath("manifesto.md"), distPath("llms-full.txt"));
 
 mkdirSync(join(root, "dist", ".well-known"), { recursive: true });
 mkdirSync(join(root, "dist", ".well-known", "agent-skills"), { recursive: true });
@@ -251,6 +253,7 @@ rewrites.bio is a manifesto defining principles for the responsible AI-assisted 
 ## How to access content
 
 - **Markdown version:** \`${siteUrl}/manifesto.md\` (preferred for agents)
+- **Full text (llms-full.txt):** \`${siteUrl}/llms-full.txt\` (same content as manifesto.md)
 - **HTML version:** \`${siteUrl}/\` (default for browsers)
 - **LLM index:** \`${siteUrl}/llms.txt\`
 - **Agent skills:** \`${siteUrl}/.well-known/agent-skills/index.json\`
@@ -366,6 +369,12 @@ const mcpServerCard = {
       description: "LLM-friendly site index",
       mimeType: "text/plain",
     },
+    {
+      uri: `${siteUrl}/llms-full.txt`,
+      name: "llms-full",
+      description: "Full manifesto in a single file (same as manifesto.md)",
+      mimeType: "text/plain",
+    },
   ],
 };
 
@@ -387,7 +396,7 @@ try {
 }
 
 console.log(
-  "Generated: dist/index.md, dist/manifesto.md, " +
+  "Generated: dist/index.md, dist/manifesto.md, dist/llms-full.txt, " +
     "dist/.well-known/agent.md, dist/.well-known/api-catalog, " +
     "dist/.well-known/agent-skills/index.json, dist/.well-known/mcp/server-card.json",
 );

@@ -4,9 +4,12 @@
 
 rewrites.bio is a manifesto and set of guiding principles for the responsible AI-assisted rewriting of established bioinformatics tools in faster, compiled languages. It covers 12 principles across 4 sections: Philosophy, Planning, Building, and Stewardship.
 
+For complete documentation in a single file, see [Full Documentation](https://rewrites.bio/llms-full.txt).
+
 ## Docs
 
 - [The Manifesto](https://rewrites.bio/manifesto.md): The full set of 12 principles for responsible AI-assisted bioinformatics rewrites
+- [Full Documentation](https://rewrites.bio/llms-full.txt): Complete manifesto in one file (same content as manifesto.md)
 - [Agent Instructions](https://rewrites.bio/.well-known/agent.md): Discovery metadata and content negotiation for AI agents
 - [Agent Skills](https://rewrites.bio/.well-known/agent-skills/index.json): Machine-readable skill index
 - [API Catalog](https://rewrites.bio/.well-known/api-catalog): Content endpoint catalog (RFC 9727)
