@@ -1,5 +1,5 @@
 /**
- * Post-build script: generates markdown from dist/index.html.
+ * Post-build script: generates markdown and agent discovery artifacts from dist/index.html.
  *
  * Strips visuals, navigation, and decorative elements, then converts the
  * remaining content HTML to clean markdown for LLM consumption.
@@ -8,16 +8,34 @@
  *   dist/index.md
  *   dist/manifesto.md        (copy)
  *   dist/.well-known/agent.md
+ *   dist/.well-known/api-catalog
+ *   dist/.well-known/agent-skills/index.json
+ *   dist/.well-known/mcp/server-card.json
+ *   dist/auth.md
  */
 
-import { readFileSync, writeFileSync, mkdirSync, copyFileSync } from "node:fs";
+import {
+  readFileSync,
+  writeFileSync,
+  mkdirSync,
+  copyFileSync,
+  readdirSync,
+  statSync,
+} from "node:fs";
 import { join } from "node:path";
 import { execSync } from "node:child_process";
+import { createHash } from "node:crypto";
 import TurndownService from "turndown";
 
 const root = join(import.meta.dirname, "..");
+const siteUrl = process.env.URL || "https://rewrites.bio";
+
 function distPath(filename) {
   return join(root, "dist", filename);
+}
+
+function sha256Digest(content) {
+  return `sha256:${createHash("sha256").update(content).digest("hex")}`;
 }
 
 let html = readFileSync(distPath("index.html"), "utf-8");
@@ -198,12 +216,12 @@ const updated = execSync("git log -1 --format=%cs -- src/pages/index.astro src/c
 const frontmatter = `---
 title: rewrites.bio
 description: Principles for AI-assisted rewrites of bioinformatics tools
-url: https://rewrites.bio
+url: ${siteUrl}
 source: https://github.com/seqeralabs/rewrites.bio
 updated: ${updated}
 ---`;
 
-const footer = `\n\n---\n\nWebsite: [rewrites.bio](https://rewrites.bio)\nSource: [github.com/seqeralabs/rewrites.bio](https://github.com/seqeralabs/rewrites.bio)\n`;
+const footer = `\n\n---\n\nWebsite: [rewrites.bio](${siteUrl})\nSource: [github.com/seqeralabs/rewrites.bio](https://github.com/seqeralabs/rewrites.bio)\n`;
 
 md = frontmatter + "\n\n" + md + footer;
 
@@ -211,10 +229,12 @@ writeFileSync(distPath("index.md"), md);
 copyFileSync(distPath("index.md"), distPath("manifesto.md"));
 
 mkdirSync(join(root, "dist", ".well-known"), { recursive: true });
+mkdirSync(join(root, "dist", ".well-known", "agent-skills"), { recursive: true });
+mkdirSync(join(root, "dist", ".well-known", "mcp"), { recursive: true });
 
 const agentMd = `---
 purpose: Context and instructions for AI agents
-url: https://rewrites.bio
+url: ${siteUrl}
 version: 1.0
 updated: ${updated}
 ---
@@ -229,11 +249,176 @@ rewrites.bio is a manifesto defining principles for the responsible AI-assisted 
 
 ## How to access content
 
-- **Markdown version:** \`https://rewrites.bio/manifesto.md\`
-- **HTML version:** \`https://rewrites.bio/\` (default)
-- **LLM index:** \`https://rewrites.bio/llms.txt\`
+- **Markdown version:** \`${siteUrl}/manifesto.md\` (preferred for agents)
+- **HTML version:** \`${siteUrl}/\` (default for browsers)
+- **LLM index:** \`${siteUrl}/llms.txt\`
+- **Agent skills:** \`${siteUrl}/.well-known/agent-skills/index.json\`
+- **API catalog:** \`${siteUrl}/.well-known/api-catalog\`
+
+## Content negotiation
+
+Send \`Accept: text/markdown\` to \`${siteUrl}/\` to receive the manifesto as markdown.
 `;
 
 writeFileSync(distPath(".well-known/agent.md"), agentMd);
 
-console.log("Generated: dist/index.md, dist/manifesto.md, dist/.well-known/agent.md");
+const apiCatalog = {
+  linkset: [
+    {
+      anchor: `${siteUrl}/.well-known/api-catalog`,
+      item: [
+        { href: `${siteUrl}/` },
+      ],
+    },
+    {
+      anchor: `${siteUrl}/`,
+      "service-desc": [
+        {
+          href: `${siteUrl}/manifesto.md`,
+          type: "text/markdown",
+        },
+      ],
+      "service-doc": [
+        {
+          href: `${siteUrl}/manifesto.md`,
+          type: "text/markdown",
+        },
+      ],
+      status: [
+        {
+          href: `${siteUrl}/`,
+        },
+      ],
+    },
+  ],
+};
+
+writeFileSync(
+  distPath(".well-known/api-catalog"),
+  JSON.stringify(apiCatalog, null, 2),
+);
+
+const skillsDir = join(root, "public", ".well-known", "agent-skills");
+const skillEntries = readdirSync(skillsDir, { withFileTypes: true })
+  .filter((entry) => entry.isDirectory())
+  .map((entry) => {
+    const skillPath = join(skillsDir, entry.name, "SKILL.md");
+    const content = readFileSync(skillPath, "utf-8");
+    const firstParagraph = content
+      .split("\n\n")
+      .slice(1)
+      .find((block) => block.trim() && !block.startsWith("#"))
+      ?.trim() ?? "";
+    return {
+      name: entry.name,
+      type: "skill-md",
+      description: firstParagraph.split("\n")[0],
+      url: `${siteUrl}/.well-known/agent-skills/${entry.name}/SKILL.md`,
+      digest: sha256Digest(content),
+    };
+  });
+
+const agentSkillsIndex = {
+  $schema: "https://schemas.agentskills.io/discovery/0.2.0/schema.json",
+  skills: skillEntries,
+};
+
+writeFileSync(
+  distPath(".well-known/agent-skills/index.json"),
+  JSON.stringify(agentSkillsIndex, null, 2),
+);
+
+const mcpServerCard = {
+  serverInfo: {
+    name: "rewrites.bio",
+    version: "1.0.0",
+  },
+  endpoint: `${siteUrl}/`,
+  transport: {
+    type: "webmcp",
+    description: "Browser-based tools via WebMCP on the homepage",
+  },
+  capabilities: {
+    resources: {
+      listChanged: false,
+    },
+    tools: {
+      listChanged: false,
+    },
+  },
+  resources: [
+    {
+      uri: `${siteUrl}/manifesto.md`,
+      name: "manifesto",
+      description: "Full manifesto in markdown",
+      mimeType: "text/markdown",
+    },
+    {
+      uri: `${siteUrl}/.well-known/agent.md`,
+      name: "agent-instructions",
+      description: "Agent discovery and usage instructions",
+      mimeType: "text/markdown",
+    },
+    {
+      uri: `${siteUrl}/llms.txt`,
+      name: "llms-index",
+      description: "LLM-friendly site index",
+      mimeType: "text/plain",
+    },
+  ],
+};
+
+writeFileSync(
+  distPath(".well-known/mcp/server-card.json"),
+  JSON.stringify(mcpServerCard, null, 2),
+);
+
+const authMd = `# auth.md
+
+> Agent authentication for rewrites.bio
+
+## Audience
+
+AI agents and automated clients accessing rewrites.bio content.
+
+## Authentication
+
+All content on rewrites.bio is **public**. No registration, credentials, or OAuth tokens are required.
+
+## Access methods
+
+| Resource | URL | Auth |
+|---|---|---|
+| Manifesto (markdown) | ${siteUrl}/manifesto.md | None |
+| Manifesto (HTML) | ${siteUrl}/ | None |
+| Markdown negotiation | \`Accept: text/markdown\` on ${siteUrl}/ | None |
+| Agent instructions | ${siteUrl}/.well-known/agent.md | None |
+
+## Registration
+
+Not applicable — this is a read-only public manifesto site with no protected APIs.
+
+## Contact
+
+Source repository: https://github.com/seqeralabs/rewrites.bio
+`;
+
+writeFileSync(distPath("auth.md"), authMd);
+
+// Mirror sitemap-0.xml as /sitemap.xml for scanners expecting that path
+const sitemap0Path = distPath("sitemap-0.xml");
+try {
+  writeFileSync(distPath("sitemap.xml"), readFileSync(sitemap0Path, "utf-8"));
+} catch {
+  const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>${siteUrl}/</loc><lastmod>${updated}</lastmod></url>
+</urlset>`;
+  writeFileSync(distPath("sitemap.xml"), sitemapXml);
+}
+
+console.log(
+  "Generated: dist/index.md, dist/manifesto.md, dist/auth.md, " +
+    "dist/.well-known/agent.md, dist/.well-known/api-catalog, " +
+    "dist/.well-known/agent-skills/index.json, dist/.well-known/mcp/server-card.json",
+);

@@ -63,6 +63,8 @@ const ogImage = `${siteUrl}/og-image.png`;
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="canonical" href={siteUrl} />
+    <link rel="alternate" type="text/markdown" href="/manifesto.md" title="Manifesto" />
   </head>
   <body>
     <nav class="site-nav">
@@ -522,12 +524,75 @@ const ogImage = `${siteUrl}/og-image.png`;
         }
       }
 
+      // Expose site tools to AI agents via WebMCP
+      function initWebMcp() {
+        const modelContext = navigator.modelContext;
+        if (!modelContext?.registerTool) return;
+
+        const sections = [
+          { id: 'introduction', title: 'Introduction' },
+          { id: 'philosophy', title: 'Philosophy' },
+          { id: 'planning', title: 'Planning' },
+          { id: 'building', title: 'Building' },
+          { id: 'stewardship', title: 'Stewardship' },
+        ];
+
+        modelContext.registerTool({
+          name: 'list_manifesto_sections',
+          description: 'List the top-level sections of the rewrites.bio manifesto.',
+          inputSchema: {
+            type: 'object',
+            properties: {},
+          },
+          execute: async () => ({
+            sections: sections.map(({ id, title }) => ({ id, title, url: `${location.origin}/#${id}` })),
+          }),
+        });
+
+        modelContext.registerTool({
+          name: 'navigate_to_section',
+          description: 'Scroll to a manifesto section or principle by anchor ID.',
+          inputSchema: {
+            type: 'object',
+            properties: {
+              sectionId: {
+                type: 'string',
+                description: 'Anchor ID, e.g. philosophy, test-and-benchmark, open-source',
+              },
+            },
+            required: ['sectionId'],
+          },
+          execute: async ({ sectionId }) => {
+            const target = document.getElementById(sectionId);
+            if (!target) {
+              return { error: `Section "${sectionId}" not found` };
+            }
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            return { navigated: sectionId, url: `${location.origin}/#${sectionId}` };
+          },
+        });
+
+        modelContext.registerTool({
+          name: 'get_manifesto_markdown_url',
+          description: 'Return the URL for the machine-readable markdown version of the manifesto.',
+          inputSchema: {
+            type: 'object',
+            properties: {},
+          },
+          execute: async () => ({
+            markdownUrl: `${location.origin}/manifesto.md`,
+            agentInstructions: `${location.origin}/.well-known/agent.md`,
+          }),
+        });
+      }
+
       initReveals();
       initTocTracker();
       initTocToggle();
 
       initVisualAnimations();
       initSectionEntrances();
+      initWebMcp();
 
       document.addEventListener('astro:after-swap', () => {
         initReveals();
@@ -536,7 +601,7 @@ const ogImage = `${siteUrl}/og-image.png`;
 
         initVisualAnimations();
         initSectionEntrances();
-
+        initWebMcp();
       });
     </script>
   </body>
