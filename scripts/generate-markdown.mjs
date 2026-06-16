@@ -22,7 +22,6 @@ import {
   mkdirSync,
   copyFileSync,
   readdirSync,
-  statSync,
 } from "node:fs";
 import { join } from "node:path";
 import { execSync } from "node:child_process";
@@ -206,7 +205,7 @@ turndown.addRule("manifestoSection", {
 let md = turndown.turndown(html);
 
 md = md.replace(/\n{3,}/g, "\n\n");
-md = md.replace(/^-   /gm, "- ");
+md = md.replace(/^- {3}/gm, "- ");
 md = md.replace(/\s*data-astro-cid-\w+="?[^"\s]*"?/g, "");
 md = md.trim();
 

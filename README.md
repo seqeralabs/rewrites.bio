@@ -15,7 +15,11 @@ npm install
 npm run dev       # Start dev server at localhost:4321
 npm run build     # Build to ./dist/
 npm run preview   # Preview production build
+npm run format    # Format with Prettier
+npm run lint      # Lint with ESLint
 ```
+
+Git hooks are managed with [prek](https://prek.j178.dev) (`prek install`, then commits auto-format via `prek.toml`).
 
 ## Content
 

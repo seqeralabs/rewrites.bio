@@ -8,13 +8,15 @@
 
 default_install_hook_types = ["pre-commit"]
 
-# Prettier — formats Astro, TS/JS, CSS, JSON, YAML, HTML and Markdown.
-# Runs the project's own prettier (see devDependencies) so the editor, CI
-# and this hook all share one pinned version and resolve plugins identically.
+# Local hooks run the project's own tooling (see devDependencies) so the editor,
+# CI and these hooks all share one pinned version and resolve config identically.
 [[repos]]
 repo = "local"
 hooks = [
+  # Prettier — formats Astro, TS/JS, CSS, JSON, YAML, HTML and Markdown.
   { id = "prettier", name = "prettier", entry = "npx prettier --write --ignore-unknown", language = "system", files = '\.(astro|ts|tsx|js|mjs|cjs|jsx|css|md|markdown|json|jsonc|ya?ml|html)$' },
+  # ESLint — lints Astro components and JS/TS (flat config in eslint.config.js).
+  { id = "eslint", name = "eslint", entry = "npx eslint --fix", language = "system", files = '\.(astro|ts|tsx|js|mjs|cjs|jsx)$' },
 ]
 
 # Spell-check prose and code (the manifesto is text-heavy).

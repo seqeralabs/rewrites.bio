@@ -15,11 +15,24 @@ npm install            # Install dependencies
 npm run dev            # Start dev server at localhost:4321
 npm run build          # Production build to ./dist/ (includes markdown generation)
 npm run preview        # Preview production build locally
+npm run format         # Format the repo with Prettier
+npm run format:check   # Check formatting without writing
+npm run lint           # Lint with ESLint
+npm run lint:fix       # Lint and auto-fix
 ```
 
 The `build` command runs `astro build` then `node scripts/generate-markdown.mjs` to generate markdown files from the built HTML.
 
-There is **no test framework**, no linter, and no formatter configured. No `npm test` script exists.
+There is **no test framework** and no `npm test` script. **Prettier** handles formatting (config under the `"prettier"` key in `package.json`) and **ESLint** handles linting (flat config in `eslint.config.js`: `typescript-eslint` + `eslint-plugin-astro`).
+
+### Formatting & linting / pre-commit (prek)
+
+Hooks are managed by [**prek**](https://prek.j178.dev) — a fast Rust reimplementation of pre-commit — configured in `prek.toml` (note: there is **no** `.pre-commit-config.yaml`; use `prek`, not `pre-commit`). Hooks: Prettier and ESLint (`local` hooks running the pinned binaries), `typos`, and builtin hygiene checks (trailing whitespace, EOF newline, etc.).
+
+```sh
+prek install           # Install the git hook (one-time, per clone)
+prek run --all-files   # Run every hook across the repo
+```
 
 ## Content Architecture (CRITICAL)
 
@@ -50,7 +63,7 @@ public/          # Static assets (favicon, og-image, robots.txt, llms.txt)
 
 ### General
 
-- No ESLint, Prettier, or Biome is configured — follow the existing style in each file.
+- **Prettier** (with `prettier-plugin-astro`) handles formatting and **ESLint** handles linting; both are enforced via prek. Run `npm run format` and `npm run lint`.
 - Use **2-space indentation** throughout (Astro, TS, JS, CSS, YAML).
 - Use **double quotes** for JavaScript/TypeScript strings.
 - Use **trailing commas** in function arguments and object literals.
@@ -112,10 +125,16 @@ public/          # Static assets (favicon, og-image, robots.txt, llms.txt)
 
 ## Dependencies
 
-Two production dependencies (no devDependencies):
+Production dependencies:
 
 - `astro` — static site framework
+- `@astrojs/sitemap` — sitemap generation
 - `turndown` — HTML-to-markdown conversion for post-build markdown generation
+
+Dev dependencies (tooling only, not shipped):
+
+- `prettier` + `prettier-plugin-astro` — formatting
+- `eslint`, `@eslint/js`, `typescript-eslint`, `eslint-plugin-astro`, `globals` — linting
 
 Keep dependencies minimal. This is a simple static site — avoid adding frameworks or heavy libraries.
 
