@@ -34,6 +34,10 @@ All manifesto content lives in the Astro source files (`src/pages/index.astro` a
 
 Configured for Netlify (see `netlify.toml`). Push to `main` to deploy.
 
+## DNS for AI Discovery (DNS-AID)
+
+Agent discovery via DNS requires SVCB/HTTPS records under `_agents.rewrites.bio` plus DNSSEC. Netlify DNS does not support those record types — see [`dns/README.md`](dns/README.md) and run `./scripts/publish-dns-aid.sh` with Cloudflare (or delegate `_agents.rewrites.bio` to a provider that supports SVCB).
+
 ## License
 
 Open source under the [MIT License](LICENSE).

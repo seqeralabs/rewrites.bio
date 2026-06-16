@@ -1,0 +1,31 @@
+{
+  "domain": "rewrites.bio",
+  "target": "rewrites.bio.",
+  "ttl": 3600,
+  "records": [
+    {
+      "name": "_index._agents",
+      "type": "HTTPS",
+      "priority": 1,
+      "target": "rewrites.bio.",
+      "params": "alpn=\"h3,h2\" port=443 mandatory=alpn,port",
+      "description": "Site index and discovery entrypoint"
+    },
+    {
+      "name": "_mcp._agents",
+      "type": "HTTPS",
+      "priority": 1,
+      "target": "rewrites.bio.",
+      "params": "alpn=\"h3,h2\" port=443 mandatory=alpn,port",
+      "description": "WebMCP tools and MCP server card on the homepage"
+    },
+    {
+      "name": "_a2a._agents",
+      "type": "SVCB",
+      "priority": 1,
+      "target": "rewrites.bio.",
+      "params": "alpn=\"h3,h2\" port=443 mandatory=alpn,port key65000=\"/.well-known/agent.md\"",
+      "description": "Agent-to-agent discovery via public content endpoints"
+    }
+  ]
+}

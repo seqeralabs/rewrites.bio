@@ -1,8 +1,13 @@
 ; DNS for AI Discovery (DNS-AID) records for rewrites.bio
-; Add these at your DNS provider and sign the zone with DNSSEC.
+; Generated reference — canonical source: dns/records.json
+; Netlify DNS does not support SVCB/HTTPS; use Cloudflare or delegate _agents.rewrites.bio.
+; Sign the zone with DNSSEC so validating resolvers return authenticated data.
 ;
 ; _index._agents — site index and discovery entrypoint
 _index._agents.rewrites.bio. 3600 IN HTTPS 1 rewrites.bio. alpn="h3,h2" port=443 mandatory=alpn,port
 
-; _a2a._agents — agent-to-agent discovery (content endpoints, no auth)
+; _mcp._agents — WebMCP tools and MCP server card on the homepage
+_mcp._agents.rewrites.bio. 3600 IN HTTPS 1 rewrites.bio. alpn="h3,h2" port=443 mandatory=alpn,port
+
+; _a2a._agents — agent-to-agent discovery (public content endpoints)
 _a2a._agents.rewrites.bio. 3600 IN SVCB 1 rewrites.bio. alpn="h3,h2" port=443 mandatory=alpn,port key65000="/.well-known/agent.md"
