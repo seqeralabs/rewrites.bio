@@ -6,7 +6,8 @@ const badges = [
   { id: "for-the-badge", file: "rewrites-bio-for-the-badge" },
   { id: "plastic", file: "rewrites-bio-plastic" },
 ];
-const altText = "rewrites.bio - Follows best practice principles for rewriting bioinformatics tools with AI";
+const altText =
+  "rewrites.bio - Follows best practice principles for rewriting bioinformatics tools with AI";
 const defaultBadge = badges[0];
 ---
 
@@ -14,13 +15,23 @@ const defaultBadge = badges[0];
   <p class="badge-picker-title">
     Add a badge to your README
     <span class="badge-format-sep">&middot;</span>
-    <button class="badge-format-btn badge-format-btn--active" type="button" data-format="svg">SVG</button>
+    <button
+      class="badge-format-btn badge-format-btn--active"
+      type="button"
+      data-format="svg">SVG</button
+    >
     <span class="badge-format-divider">|</span>
-    <button class="badge-format-btn" type="button" data-format="png">PNG</button>
+    <button class="badge-format-btn" type="button" data-format="png">PNG</button
+    >
   </p>
 
   <div class="badge-row">
-    <button class="badge-nav" type="button" id="badge-prev" aria-label="Previous style">&lsaquo;</button>
+    <button
+      class="badge-nav"
+      type="button"
+      id="badge-prev"
+      aria-label="Previous style">&lsaquo;</button
+    >
     <div class="badge-center">
       <div class="badge-preview-wrap">
         <img
@@ -31,22 +42,32 @@ const defaultBadge = badges[0];
         />
       </div>
       <div class="badge-dots">
-        {badges.map((_, i) => (
-          <button
-            class={`badge-dot ${i === 0 ? "badge-dot--active" : ""}`}
-            data-index={i}
-            type="button"
-            aria-label={`Badge style ${i + 1}`}
-          />
-        ))}
+        {
+          badges.map((_, i) => (
+            <button
+              class={`badge-dot ${i === 0 ? "badge-dot--active" : ""}`}
+              data-index={i}
+              type="button"
+              aria-label={`Badge style ${i + 1}`}
+            />
+          ))
+        }
       </div>
     </div>
-    <button class="badge-nav" type="button" id="badge-next" aria-label="Next style">&rsaquo;</button>
+    <button
+      class="badge-nav"
+      type="button"
+      id="badge-next"
+      aria-label="Next style">&rsaquo;</button
+    >
   </div>
 
   <div class="badge-code-row">
-    <pre class="badge-code"><code id="badge-code-output">{`[![${altText}](https://rewrites.bio/badges/${defaultBadge.file}.svg)](https://rewrites.bio)`}</code></pre>
-    <button class="badge-copy-btn" type="button" id="badge-copy-btn">Copy</button>
+    <pre
+      class="badge-code"><code id="badge-code-output">{`[![${altText}](https://rewrites.bio/badges/${defaultBadge.file}.svg)](https://rewrites.bio)`}</code></pre>
+    <button class="badge-copy-btn" type="button" id="badge-copy-btn"
+      >Copy</button
+    >
   </div>
 </div>
 
@@ -60,15 +81,20 @@ const defaultBadge = badges[0];
       { id: "plastic", file: "rewrites-bio-plastic" },
     ];
 
-    const altText = "rewrites.bio - Follows best practice principles for rewriting bioinformatics tools with AI";
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const altText =
+      "rewrites.bio - Follows best practice principles for rewriting bioinformatics tools with AI";
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const fadeDuration = prefersReducedMotion ? 0 : 120;
 
     let current = 0;
     let format = "svg";
     let fadeTimer = 0;
     let copyTimer = 0;
-    const preview = document.getElementById("badge-preview") as HTMLImageElement | null;
+    const preview = document.getElementById(
+      "badge-preview",
+    ) as HTMLImageElement | null;
     const codeOutput = document.getElementById("badge-code-output");
     const copyBtn = document.getElementById("badge-copy-btn");
     const dots = document.querySelectorAll(".badge-dot");
@@ -76,7 +102,15 @@ const defaultBadge = badges[0];
     const nextBtn = document.getElementById("badge-next");
     const formatBtns = document.querySelectorAll(".badge-format-btn");
 
-    if (!preview || !codeOutput || !copyBtn || !dots.length || !prevBtn || !nextBtn) return;
+    if (
+      !preview ||
+      !codeOutput ||
+      !copyBtn ||
+      !dots.length ||
+      !prevBtn ||
+      !nextBtn
+    )
+      return;
 
     function badgeFile() {
       return `${badges[current].file}.${format}`;
@@ -95,7 +129,9 @@ const defaultBadge = badges[0];
         preview!.src = `/badges/${file}`;
       }
       codeOutput!.textContent = `[![${altText}](https://rewrites.bio/badges/${file})](https://rewrites.bio)`;
-      dots.forEach((d, i) => d.classList.toggle("badge-dot--active", i === current));
+      dots.forEach((d, i) =>
+        d.classList.toggle("badge-dot--active", i === current),
+      );
     }
 
     function navigate(delta: number) {
@@ -116,24 +152,31 @@ const defaultBadge = badges[0];
     formatBtns.forEach((btn) => {
       btn.addEventListener("click", () => {
         format = (btn as HTMLElement).dataset.format || "svg";
-        formatBtns.forEach((b) => b.classList.toggle("badge-format-btn--active", b === btn));
+        formatBtns.forEach((b) =>
+          b.classList.toggle("badge-format-btn--active", b === btn),
+        );
         update();
       });
     });
 
     copyBtn.addEventListener("click", () => {
       const text = codeOutput.textContent || "";
-      navigator.clipboard.writeText(text).then(() => {
-        clearTimeout(copyTimer);
-        copyBtn.textContent = "Copied!";
-        copyTimer = window.setTimeout(() => { copyBtn.textContent = "Copy"; }, 2000);
-      }).catch(() => {
-        const range = document.createRange();
-        range.selectNodeContents(codeOutput);
-        const sel = window.getSelection();
-        sel?.removeAllRanges();
-        sel?.addRange(range);
-      });
+      navigator.clipboard
+        .writeText(text)
+        .then(() => {
+          clearTimeout(copyTimer);
+          copyBtn.textContent = "Copied!";
+          copyTimer = window.setTimeout(() => {
+            copyBtn.textContent = "Copy";
+          }, 2000);
+        })
+        .catch(() => {
+          const range = document.createRange();
+          range.selectNodeContents(codeOutput);
+          const sel = window.getSelection();
+          sel?.removeAllRanges();
+          sel?.addRange(range);
+        });
     });
   }
 
@@ -237,7 +280,9 @@ const defaultBadge = badges[0];
     font-size: 14px;
     line-height: 1;
     cursor: pointer;
-    transition: border-color 0.15s, color 0.15s;
+    transition:
+      border-color 0.15s,
+      color 0.15s;
     padding: 0;
   }
 

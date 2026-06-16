@@ -12,12 +12,12 @@ All content on rewrites.bio is **public**. No registration, credentials, or OAut
 
 ## Access methods
 
-| Resource | URL | Auth |
-|---|---|---|
-| Manifesto (markdown) | https://rewrites.bio/manifesto.md | None |
-| Manifesto (HTML) | https://rewrites.bio/ | None |
+| Resource             | URL                                              | Auth |
+| -------------------- | ------------------------------------------------ | ---- |
+| Manifesto (markdown) | https://rewrites.bio/manifesto.md                | None |
+| Manifesto (HTML)     | https://rewrites.bio/                            | None |
 | Markdown negotiation | `Accept: text/markdown` on https://rewrites.bio/ | None |
-| Agent instructions | https://rewrites.bio/.well-known/agent.md | None |
+| Agent instructions   | https://rewrites.bio/.well-known/agent.md        | None |
 
 ## Registration
 

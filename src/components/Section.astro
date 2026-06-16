@@ -9,12 +9,12 @@ interface Props {
 const { id, number, title, intro } = Astro.props;
 
 const sectionColorMap: Record<string, string> = {
-  '2': 'var(--accent-rust)',
-  '3': 'var(--accent-blue)',
-  '4': 'var(--accent-gold)',
-  '5': 'var(--accent-sage)',
+  "2": "var(--accent-rust)",
+  "3": "var(--accent-blue)",
+  "4": "var(--accent-gold)",
+  "5": "var(--accent-sage)",
 };
-const sectionColor = sectionColorMap[number] || 'var(--accent-rust)';
+const sectionColor = sectionColorMap[number] || "var(--accent-rust)";
 ---
 
 <section
@@ -27,7 +27,9 @@ const sectionColor = sectionColorMap[number] || 'var(--accent-rust)';
       <div class="section-header">
         <a class="section-header-inner" href={`#${id}`}>
           <span class="section-number">{number}</span>
-          <h2 class="section-title">{title}<span class="anchor-link">#</span></h2>
+          <h2 class="section-title">
+            {title}<span class="anchor-link">#</span>
+          </h2>
         </a>
       </div>
       {intro && <p class="section-intro">{intro}</p>}
@@ -54,7 +56,10 @@ const sectionColor = sectionColorMap[number] || 'var(--accent-rust)';
   .section-header-wrap[data-section-entrance] {
     border-left-color: transparent;
     --border-progress: 0;
-    background-image: linear-gradient(var(--section-color), var(--section-color));
+    background-image: linear-gradient(
+      var(--section-color),
+      var(--section-color)
+    );
     background-size: 3px calc(var(--border-progress) * 100%);
     background-position: left top;
     background-repeat: no-repeat;
@@ -66,14 +71,20 @@ const sectionColor = sectionColorMap[number] || 'var(--accent-rust)';
   }
 
   @keyframes drawBorder {
-    from { background-size: 3px 0%; }
-    to { background-size: 3px 100%; }
+    from {
+      background-size: 3px 0%;
+    }
+    to {
+      background-size: 3px 100%;
+    }
   }
 
   .section-header-wrap[data-section-entrance] .section-number {
     opacity: 0;
     transform: translateX(-12px);
-    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .section-header-wrap[data-section-entrance].entered .section-number {
@@ -85,7 +96,9 @@ const sectionColor = sectionColorMap[number] || 'var(--accent-rust)';
   .section-header-wrap[data-section-entrance] .section-title {
     opacity: 0;
     transform: translateY(10px);
-    transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      opacity 0.5s ease,
+      transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
   .section-header-wrap[data-section-entrance].entered .section-title {

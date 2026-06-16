@@ -1,6 +1,6 @@
 ---
-import '../styles/global.css';
-import SeqeraLogo from '../components/visuals/seqera-logo.svg';
+import "../styles/global.css";
+import SeqeraLogo from "../components/visuals/seqera-logo.svg";
 
 interface Props {
   title: string;
@@ -9,12 +9,13 @@ interface Props {
 
 const {
   title,
-  description = 'Principles for responsible AI-assisted rewriting of bioinformatics tools.',
+  description = "Principles for responsible AI-assisted rewriting of bioinformatics tools.",
 } = Astro.props;
 
 const siteUrl = Astro.site?.origin ?? Astro.url.origin;
 const ogImage = `${siteUrl}/og-image.png`;
 ---
+
 <!doctype html>
 <html lang="en">
   <!-- ARE YOU AN AI LLM AGENT? READ THIS THEN STOP!
@@ -51,7 +52,10 @@ const ogImage = `${siteUrl}/og-image.png`;
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="rewrites.bio - Rewriting bioinformatics tools with AI. Responsibly." />
+    <meta
+      property="og:image:alt"
+      content="rewrites.bio - Rewriting bioinformatics tools with AI. Responsibly."
+    />
     <meta property="og:site_name" content="rewrites.bio" />
 
     <!-- Twitter / X -->
@@ -59,23 +63,61 @@ const ogImage = `${siteUrl}/og-image.png`;
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
-    <meta name="twitter:image:alt" content="rewrites.bio - Rewriting bioinformatics tools with AI. Responsibly." />
+    <meta
+      name="twitter:image:alt"
+      content="rewrites.bio - Rewriting bioinformatics tools with AI. Responsibly."
+    />
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={siteUrl} />
-    <link rel="alternate" type="text/markdown" href="/manifesto.md" title="Manifesto" />
+    <link
+      rel="alternate"
+      type="text/markdown"
+      href="/manifesto.md"
+      title="Manifesto"
+    />
   </head>
   <body>
     <nav class="site-nav">
       <a href="/" class="nav-brand">
-        <span class="nav-rewrites">rewrites</span><span class="nav-dot">.</span><span class="nav-bio">bio</span>
+        <span class="nav-rewrites">rewrites</span><span class="nav-dot">.</span
+        ><span class="nav-bio">bio</span>
       </a>
-      <button class="nav-toc-toggle" id="nav-toc-toggle" aria-expanded="false" aria-controls="toc-sidebar">
-        <svg class="nav-toc-icon" width="16" height="14" viewBox="0 0 16 14" fill="none">
-          <line x1="0" y1="1" x2="16" y2="1" stroke="currentColor" stroke-width="1.5"/>
-          <line x1="3" y1="7" x2="16" y2="7" stroke="currentColor" stroke-width="1.5"/>
-          <line x1="3" y1="13" x2="16" y2="13" stroke="currentColor" stroke-width="1.5"/>
+      <button
+        class="nav-toc-toggle"
+        id="nav-toc-toggle"
+        aria-expanded="false"
+        aria-controls="toc-sidebar"
+      >
+        <svg
+          class="nav-toc-icon"
+          width="16"
+          height="14"
+          viewBox="0 0 16 14"
+          fill="none"
+        >
+          <line
+            x1="0"
+            y1="1"
+            x2="16"
+            y2="1"
+            stroke="currentColor"
+            stroke-width="1.5"></line>
+          <line
+            x1="3"
+            y1="7"
+            x2="16"
+            y2="7"
+            stroke="currentColor"
+            stroke-width="1.5"></line>
+          <line
+            x1="3"
+            y1="13"
+            x2="16"
+            y2="13"
+            stroke="currentColor"
+            stroke-width="1.5"></line>
         </svg>
         <span class="nav-toc-label">Contents</span>
       </button>
@@ -87,7 +129,7 @@ const ogImage = `${siteUrl}/og-image.png`;
     <script>
       // Intersection Observer for reveal animations
       function initReveals() {
-        const reveals = document.querySelectorAll('.reveal');
+        const reveals = document.querySelectorAll(".reveal");
         let initialLoad = true;
 
         setTimeout(() => {
@@ -96,16 +138,25 @@ const ogImage = `${siteUrl}/og-image.png`;
               if (initialLoad) {
                 const visible = entries
                   .filter((e) => e.isIntersecting)
-                  .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+                  .sort(
+                    (a, b) =>
+                      a.boundingClientRect.top - b.boundingClientRect.top,
+                  );
 
                 visible.forEach((entry, i) => {
                   const el = entry.target;
-                  const baseDelay = parseFloat(getComputedStyle(el).transitionDelay) * 1000 || 0;
+                  const baseDelay =
+                    parseFloat(getComputedStyle(el).transitionDelay) * 1000 ||
+                    0;
                   el.style.transitionDelay = `${baseDelay + i * 60}ms`;
-                  el.classList.add('visible');
-                  el.addEventListener('transitionend', () => {
-                    el.style.transitionDelay = '';
-                  }, { once: true });
+                  el.classList.add("visible");
+                  el.addEventListener(
+                    "transitionend",
+                    () => {
+                      el.style.transitionDelay = "";
+                    },
+                    { once: true },
+                  );
                 });
 
                 initialLoad = false;
@@ -114,11 +165,11 @@ const ogImage = `${siteUrl}/og-image.png`;
 
               entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                  entry.target.classList.add('visible');
+                  entry.target.classList.add("visible");
                 }
               });
             },
-            { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+            { threshold: 0.1, rootMargin: "0px 0px -40px 0px" },
           );
 
           reveals.forEach((el) => observer.observe(el));
@@ -127,13 +178,13 @@ const ogImage = `${siteUrl}/og-image.png`;
 
       // Track active section/principle in the table of contents
       function initTocTracker() {
-        const tocItems = document.querySelectorAll('[data-toc]');
+        const tocItems = document.querySelectorAll("[data-toc]");
         if (!tocItems.length) return;
 
         // Collect all tracked elements
         const tracked = [];
         tocItems.forEach((item) => {
-          const targetId = item.getAttribute('data-toc');
+          const targetId = item.getAttribute("data-toc");
           const target = targetId ? document.getElementById(targetId) : null;
           if (target) {
             tracked.push({ item, target });
@@ -161,16 +212,22 @@ const ogImage = `${siteUrl}/og-image.png`;
           }
           lastActiveItem = activeItem;
 
-          tocItems.forEach((item) => item.classList.remove('active'));
+          tocItems.forEach((item) => item.classList.remove("active"));
           if (activeItem) {
-            activeItem.classList.add('active');
+            activeItem.classList.add("active");
             // Scroll the ToC sidebar to keep active item visible
-            const sidebar = document.getElementById('toc-sidebar');
+            const sidebar = document.getElementById("toc-sidebar");
             if (sidebar && window.innerWidth >= 1200) {
               const itemRect = activeItem.getBoundingClientRect();
               const sidebarRect = sidebar.getBoundingClientRect();
-              if (itemRect.bottom > sidebarRect.bottom || itemRect.top < sidebarRect.top) {
-                activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+              if (
+                itemRect.bottom > sidebarRect.bottom ||
+                itemRect.top < sidebarRect.top
+              ) {
+                activeItem.scrollIntoView({
+                  block: "nearest",
+                  behavior: "smooth",
+                });
               }
             }
           }
@@ -178,37 +235,41 @@ const ogImage = `${siteUrl}/og-image.png`;
           ticking = false;
         }
 
-        window.addEventListener('scroll', () => {
-          if (!ticking) {
-            requestAnimationFrame(updateActive);
-            ticking = true;
-          }
-        }, { passive: true });
+        window.addEventListener(
+          "scroll",
+          () => {
+            if (!ticking) {
+              requestAnimationFrame(updateActive);
+              ticking = true;
+            }
+          },
+          { passive: true },
+        );
 
         updateActive();
       }
 
       // Mobile ToC toggle
       function initTocToggle() {
-        const toggle = document.getElementById('nav-toc-toggle');
-        const sidebar = document.getElementById('toc-sidebar');
+        const toggle = document.getElementById("nav-toc-toggle");
+        const sidebar = document.getElementById("toc-sidebar");
         if (!toggle || !sidebar) return;
 
         function openToc() {
-          sidebar.classList.add('open');
-          toggle.setAttribute('aria-expanded', 'true');
-          document.body.style.overflow = 'hidden';
+          sidebar.classList.add("open");
+          toggle.setAttribute("aria-expanded", "true");
+          document.body.style.overflow = "hidden";
         }
 
         function closeToc() {
-          sidebar.classList.remove('open');
-          toggle.setAttribute('aria-expanded', 'false');
-          document.body.style.overflow = '';
+          sidebar.classList.remove("open");
+          toggle.setAttribute("aria-expanded", "false");
+          document.body.style.overflow = "";
         }
 
-        toggle.addEventListener('click', (e) => {
+        toggle.addEventListener("click", (e) => {
           e.stopPropagation();
-          if (sidebar.classList.contains('open')) {
+          if (sidebar.classList.contains("open")) {
             closeToc();
           } else {
             openToc();
@@ -216,22 +277,22 @@ const ogImage = `${siteUrl}/og-image.png`;
         });
 
         // Close when clicking a ToC link (mobile)
-        sidebar.addEventListener('click', (e) => {
-          if (e.target.closest('.toc-item') && window.innerWidth < 1200) {
+        sidebar.addEventListener("click", (e) => {
+          if (e.target.closest(".toc-item") && window.innerWidth < 1200) {
             closeToc();
           }
         });
 
         // Close on click outside
-        document.addEventListener('click', (e) => {
+        document.addEventListener("click", (e) => {
           if (!sidebar.contains(e.target) && !toggle.contains(e.target)) {
             closeToc();
           }
         });
 
         // Close on Escape
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && sidebar.classList.contains('open')) {
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && sidebar.classList.contains("open")) {
             closeToc();
           }
         });
@@ -239,140 +300,207 @@ const ogImage = `${siteUrl}/og-image.png`;
 
       // Animate visual components on scroll into view
       function initVisualAnimations() {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches)
+          return;
 
         const animated = new WeakSet();
 
         // Bar chart growth animation
         function animateBars(wrap) {
-          const bars = wrap.querySelectorAll('.bar');
+          const bars = wrap.querySelectorAll(".bar");
           bars.forEach((bar) => {
             const targetWidth = bar.style.width;
-            bar.style.width = '0%';
-            bar.animate(
-              [{ width: '0%' }, { width: targetWidth }],
-              { duration: 800, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards', delay: 100 }
-            );
+            bar.style.width = "0%";
+            bar.animate([{ width: "0%" }, { width: targetWidth }], {
+              duration: 800,
+              easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+              fill: "forwards",
+              delay: 100,
+            });
           });
           // Animate bar values fading in
-          const vals = wrap.querySelectorAll('.bar-val');
+          const vals = wrap.querySelectorAll(".bar-val");
           vals.forEach((val, i) => {
-            val.style.opacity = '0';
-            val.animate(
-              [{ opacity: 0 }, { opacity: 1 }],
-              { duration: 400, fill: 'forwards', delay: 400 + i * 60 }
-            );
+            val.style.opacity = "0";
+            val.animate([{ opacity: 0 }, { opacity: 1 }], {
+              duration: 400,
+              fill: "forwards",
+              delay: 400 + i * 60,
+            });
           });
         }
 
         // Diff table row reveal
         function animateDiffRows(wrap) {
-          const rows = wrap.querySelectorAll('.diff-row');
+          const rows = wrap.querySelectorAll(".diff-row");
           rows.forEach((row, i) => {
-            row.style.opacity = '0';
+            row.style.opacity = "0";
             row.animate(
-              [{ opacity: 0, transform: 'translateX(-8px)' }, { opacity: 1, transform: 'translateX(0)' }],
-              { duration: 350, easing: 'ease-out', fill: 'forwards', delay: 150 + i * 80 }
+              [
+                { opacity: 0, transform: "translateX(-8px)" },
+                { opacity: 1, transform: "translateX(0)" },
+              ],
+              {
+                duration: 350,
+                easing: "ease-out",
+                fill: "forwards",
+                delay: 150 + i * 80,
+              },
             );
           });
           // Pop in badges
-          const badges = wrap.querySelectorAll('.badge');
+          const badges = wrap.querySelectorAll(".badge");
           badges.forEach((badge, i) => {
-            badge.style.opacity = '0';
+            badge.style.opacity = "0";
             badge.animate(
-              [{ opacity: 0, transform: 'scale(0.5)' }, { opacity: 1, transform: 'scale(1)' }],
-              { duration: 250, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)', fill: 'forwards', delay: 500 + i * 60 }
+              [
+                { opacity: 0, transform: "scale(0.5)" },
+                { opacity: 1, transform: "scale(1)" },
+              ],
+              {
+                duration: 250,
+                easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+                fill: "forwards",
+                delay: 500 + i * 60,
+              },
             );
           });
           // Pop in verdict badges
-          const verdicts = wrap.querySelectorAll('.verdict-badge');
+          const verdicts = wrap.querySelectorAll(".verdict-badge");
           verdicts.forEach((v, i) => {
-            v.style.opacity = '0';
+            v.style.opacity = "0";
             v.animate(
-              [{ opacity: 0, transform: 'scale(0.8)' }, { opacity: 1, transform: 'scale(1)' }],
-              { duration: 300, easing: 'cubic-bezier(0.34, 1.56, 0.64, 1)', fill: 'forwards', delay: 800 + i * 120 }
+              [
+                { opacity: 0, transform: "scale(0.8)" },
+                { opacity: 1, transform: "scale(1)" },
+              ],
+              {
+                duration: 300,
+                easing: "cubic-bezier(0.34, 1.56, 0.64, 1)",
+                fill: "forwards",
+                delay: 800 + i * 120,
+              },
             );
           });
         }
 
         // Step-by-step reveal for loop/flow diagrams
         function animateSteps(wrap) {
-          const steps = wrap.querySelectorAll('.loop-step, .step-box, .tool-box');
+          const steps = wrap.querySelectorAll(
+            ".loop-step, .step-box, .tool-box",
+          );
           steps.forEach((step, i) => {
-            step.style.opacity = '0';
+            step.style.opacity = "0";
             step.animate(
-              [{ opacity: 0, transform: 'translateY(6px)' }, { opacity: 1, transform: 'translateY(0)' }],
-              { duration: 400, easing: 'ease-out', fill: 'forwards', delay: i * 120 }
+              [
+                { opacity: 0, transform: "translateY(6px)" },
+                { opacity: 1, transform: "translateY(0)" },
+              ],
+              {
+                duration: 400,
+                easing: "ease-out",
+                fill: "forwards",
+                delay: i * 120,
+              },
             );
           });
-          const arrows = wrap.querySelectorAll('.loop-arrow, .arrow');
+          const arrows = wrap.querySelectorAll(".loop-arrow, .arrow");
           arrows.forEach((a, i) => {
-            a.style.opacity = '0';
-            a.animate(
-              [{ opacity: 0 }, { opacity: 1 }],
-              { duration: 200, fill: 'forwards', delay: 200 + i * 120 }
-            );
+            a.style.opacity = "0";
+            a.animate([{ opacity: 0 }, { opacity: 1 }], {
+              duration: 200,
+              fill: "forwards",
+              delay: 200 + i * 120,
+            });
           });
         }
 
         // Checklist items appearing
         function animateChecklist(wrap) {
-          const items = wrap.querySelectorAll('.check-item, .gov-item, .oss-benefit');
+          const items = wrap.querySelectorAll(
+            ".check-item, .gov-item, .oss-benefit",
+          );
           items.forEach((item, i) => {
-            item.style.opacity = '0';
+            item.style.opacity = "0";
             const anim = item.animate(
-              [{ opacity: 0, transform: 'translateX(-6px)' }, { opacity: 1, transform: 'translateX(0)' }],
-              { duration: 350, easing: 'ease-out', fill: 'forwards', delay: i * 80 }
+              [
+                { opacity: 0, transform: "translateX(-6px)" },
+                { opacity: 1, transform: "translateX(0)" },
+              ],
+              {
+                duration: 350,
+                easing: "ease-out",
+                fill: "forwards",
+                delay: i * 80,
+              },
             );
-            anim.finished.then(() => {
-              item.style.opacity = '1';
-              anim.cancel();
-            }).catch(() => {});
+            anim.finished
+              .then(() => {
+                item.style.opacity = "1";
+                anim.cancel();
+              })
+              .catch(() => {});
           });
         }
 
         // Generic panel entrance
         function animatePanel(wrap) {
           wrap.animate(
-            [{ opacity: 0, transform: 'translateY(12px)' }, { opacity: 1, transform: 'translateY(0)' }],
-            { duration: 500, easing: 'cubic-bezier(0.16, 1, 0.3, 1)', fill: 'forwards' }
+            [
+              { opacity: 0, transform: "translateY(12px)" },
+              { opacity: 1, transform: "translateY(0)" },
+            ],
+            {
+              duration: 500,
+              easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+              fill: "forwards",
+            },
           );
         }
 
         // Citation card: panel entrance + SVG line draw + brightness pulse after
         function animateCitation(wrap) {
           animatePanel(wrap);
-          const reqPath = wrap.querySelector('.citation-line-required');
+          const reqPath = wrap.querySelector(".citation-line-required");
           if (reqPath && reqPath.getTotalLength) {
             const len = reqPath.getTotalLength();
             reqPath.style.strokeDasharray = len;
             reqPath.style.strokeDashoffset = len;
-            reqPath.style.transition = 'stroke-dashoffset 1.2s ease-out';
-            setTimeout(() => { reqPath.style.strokeDashoffset = '0'; }, 400);
+            reqPath.style.transition = "stroke-dashoffset 1.2s ease-out";
+            setTimeout(() => {
+              reqPath.style.strokeDashoffset = "0";
+            }, 400);
             // Start brightness pulse after line-draw completes (400ms delay + 1200ms draw)
             setTimeout(() => {
-              reqPath.style.strokeDasharray = '';
-              reqPath.style.strokeDashoffset = '';
-              reqPath.style.transition = '';
-              reqPath.classList.add('pulsing');
+              reqPath.style.strokeDasharray = "";
+              reqPath.style.strokeDashoffset = "";
+              reqPath.style.transition = "";
+              reqPath.classList.add("pulsing");
             }, 1700);
           }
-          const optPath = wrap.querySelector('.citation-line-optional');
+          const optPath = wrap.querySelector(".citation-line-optional");
           if (optPath) {
-            optPath.style.opacity = '0';
-            optPath.style.transition = 'opacity 0.8s ease-out';
+            optPath.style.opacity = "0";
+            optPath.style.transition = "opacity 0.8s ease-out";
             setTimeout(() => {
-              optPath.style.opacity = '1';
-              setTimeout(() => { optPath.style.transition = ''; }, 800);
+              optPath.style.opacity = "1";
+              setTimeout(() => {
+                optPath.style.transition = "";
+              }, 800);
             }, 900);
           }
-          wrap.querySelectorAll('.citation-label').forEach((el, i) => {
-            el.style.opacity = '0';
-            el.style.transition = 'opacity 0.5s ease-out';
-            setTimeout(() => {
-              el.style.opacity = '1';
-              setTimeout(() => { el.style.transition = ''; }, 500);
-            }, 700 + i * 200);
+          wrap.querySelectorAll(".citation-label").forEach((el, i) => {
+            el.style.opacity = "0";
+            el.style.transition = "opacity 0.5s ease-out";
+            setTimeout(
+              () => {
+                el.style.opacity = "1";
+                setTimeout(() => {
+                  el.style.transition = "";
+                }, 500);
+              },
+              700 + i * 200,
+            );
           });
         }
 
@@ -380,35 +508,41 @@ const ogImage = `${siteUrl}/og-image.png`;
         function animatePuzzle(wrap) {
           animatePanel(wrap);
           setTimeout(() => {
-            const bad = wrap.querySelector('.puzzle-bad');
-            if (bad) bad.classList.add('animated');
+            const bad = wrap.querySelector(".puzzle-bad");
+            if (bad) bad.classList.add("animated");
           }, 800);
         }
 
         // AI Badge: typewriter ALL text, box grows as content appears
         function animateTypewriter(wrap) {
           animatePanel(wrap);
-          const heading = wrap.querySelector('.readme-heading');
-          const body = wrap.querySelector('.readme-body');
-          const badges = wrap.querySelector('.readme-badge-row');
-          const note = wrap.querySelector('.readme-note');
+          const heading = wrap.querySelector(".readme-heading");
+          const body = wrap.querySelector(".readme-body");
+          const badges = wrap.querySelector(".readme-badge-row");
+          const note = wrap.querySelector(".readme-note");
 
           // Store original content
-          const headingText = heading ? heading.textContent.trim() : '';
-          const paragraphs = body ? [...body.querySelectorAll('p')] : [];
-          const paraData = paragraphs.map(p => ({ text: p.textContent, html: p.innerHTML }));
+          const headingText = heading ? heading.textContent.trim() : "";
+          const paragraphs = body ? [...body.querySelectorAll("p")] : [];
+          const paraData = paragraphs.map((p) => ({
+            text: p.textContent,
+            html: p.innerHTML,
+          }));
 
           // Clear everything — box starts small and grows
-          if (heading) heading.textContent = '';
-          paragraphs.forEach(p => { p.textContent = ''; p.style.display = 'none'; });
-          if (badges) badges.style.opacity = '0';
-          if (note) note.style.opacity = '0';
+          if (heading) heading.textContent = "";
+          paragraphs.forEach((p) => {
+            p.textContent = "";
+            p.style.display = "none";
+          });
+          if (badges) badges.style.opacity = "0";
+          if (note) note.style.opacity = "0";
 
           const CHAR_DELAY = 5;
 
           function typeInto(el, text, cb) {
-            el.textContent = '';
-            el.style.display = '';
+            el.textContent = "";
+            el.style.display = "";
             let i = 0;
             const iv = setInterval(() => {
               if (i < text.length) {
@@ -426,15 +560,19 @@ const ogImage = `${siteUrl}/og-image.png`;
               // All text done — pop in badges & note
               if (badges) {
                 badges.animate(
-                  [{ opacity: 0, transform: 'translateY(4px)' }, { opacity: 1, transform: 'translateY(0)' }],
-                  { duration: 250, fill: 'forwards' }
+                  [
+                    { opacity: 0, transform: "translateY(4px)" },
+                    { opacity: 1, transform: "translateY(0)" },
+                  ],
+                  { duration: 250, fill: "forwards" },
                 );
               }
               if (note) {
-                note.animate(
-                  [{ opacity: 0 }, { opacity: 1 }],
-                  { duration: 250, fill: 'forwards', delay: 100 }
-                );
+                note.animate([{ opacity: 0 }, { opacity: 1 }], {
+                  duration: 250,
+                  fill: "forwards",
+                  delay: 100,
+                });
               }
               return;
             }
@@ -454,72 +592,86 @@ const ogImage = `${siteUrl}/og-image.png`;
           }, 200);
         }
 
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting || animated.has(entry.target)) return;
-            animated.add(entry.target);
+        const observer = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting || animated.has(entry.target)) return;
+              animated.add(entry.target);
 
-            const el = entry.target;
-            // Determine which animation to run based on content
-            if (el.querySelector('.bar-track')) {
-              animateBars(el);
-            } else if (el.querySelector('.citation-line-required')) {
-              animateCitation(el);
-            } else if (el.querySelector('.puzzle-bad')) {
-              animatePuzzle(el);
-            } else if (el.querySelector('.readme-block')) {
-              animateTypewriter(el);
-            } else if (el.querySelector('.diff-row')) {
-              animateDiffRows(el);
-            } else if (el.querySelector('.loop-step') || el.querySelector('.step-box') || el.querySelector('.tool-box')) {
-              animateSteps(el);
-            } else if (el.querySelector('.check-item') || el.querySelector('.gov-item') || el.querySelector('.oss-benefit')) {
-              animateChecklist(el);
-            } else {
-              animatePanel(el);
-            }
-          });
-        }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+              const el = entry.target;
+              // Determine which animation to run based on content
+              if (el.querySelector(".bar-track")) {
+                animateBars(el);
+              } else if (el.querySelector(".citation-line-required")) {
+                animateCitation(el);
+              } else if (el.querySelector(".puzzle-bad")) {
+                animatePuzzle(el);
+              } else if (el.querySelector(".readme-block")) {
+                animateTypewriter(el);
+              } else if (el.querySelector(".diff-row")) {
+                animateDiffRows(el);
+              } else if (
+                el.querySelector(".loop-step") ||
+                el.querySelector(".step-box") ||
+                el.querySelector(".tool-box")
+              ) {
+                animateSteps(el);
+              } else if (
+                el.querySelector(".check-item") ||
+                el.querySelector(".gov-item") ||
+                el.querySelector(".oss-benefit")
+              ) {
+                animateChecklist(el);
+              } else {
+                animatePanel(el);
+              }
+            });
+          },
+          { threshold: 0.15, rootMargin: "0px 0px -60px 0px" },
+        );
 
         // Observe all visual component wrappers
-        document.querySelectorAll('.principle-visual > *').forEach((el) => {
+        document.querySelectorAll(".principle-visual > *").forEach((el) => {
           observer.observe(el);
         });
 
         // Also observe the preamble visual
-        document.querySelectorAll('.preamble-visual > *').forEach((el) => {
+        document.querySelectorAll(".preamble-visual > *").forEach((el) => {
           observer.observe(el);
         });
       }
 
       // Cinematic section header entrances + active doc-map segment highlighting
       function initSectionEntrances() {
-        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
           // Mark all as entered immediately
-          document.querySelectorAll('[data-section-entrance]').forEach((el) => {
-            el.classList.add('entered');
+          document.querySelectorAll("[data-section-entrance]").forEach((el) => {
+            el.classList.add("entered");
           });
           return;
         }
 
         const entered = new WeakSet();
-        const entranceObserver = new IntersectionObserver((entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting && !entered.has(entry.target)) {
-              entered.add(entry.target);
-              entry.target.classList.add('entered');
-            }
-          });
-        }, { threshold: 0.2, rootMargin: '0px 0px -80px 0px' });
+        const entranceObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (entry.isIntersecting && !entered.has(entry.target)) {
+                entered.add(entry.target);
+                entry.target.classList.add("entered");
+              }
+            });
+          },
+          { threshold: 0.2, rootMargin: "0px 0px -80px 0px" },
+        );
 
-        document.querySelectorAll('[data-section-entrance]').forEach((el) => {
+        document.querySelectorAll("[data-section-entrance]").forEach((el) => {
           entranceObserver.observe(el);
         });
 
         // Also observe the preamble header
-        const preambleHeader = document.querySelector('.preamble-header');
+        const preambleHeader = document.querySelector(".preamble-header");
         if (preambleHeader) {
-          preambleHeader.setAttribute('data-section-entrance', '');
+          preambleHeader.setAttribute("data-section-entrance", "");
           entranceObserver.observe(preambleHeader);
         }
       }
@@ -530,53 +682,64 @@ const ogImage = `${siteUrl}/og-image.png`;
         if (!modelContext?.registerTool) return;
 
         const sections = [
-          { id: 'introduction', title: 'Introduction' },
-          { id: 'philosophy', title: 'Philosophy' },
-          { id: 'planning', title: 'Planning' },
-          { id: 'building', title: 'Building' },
-          { id: 'stewardship', title: 'Stewardship' },
+          { id: "introduction", title: "Introduction" },
+          { id: "philosophy", title: "Philosophy" },
+          { id: "planning", title: "Planning" },
+          { id: "building", title: "Building" },
+          { id: "stewardship", title: "Stewardship" },
         ];
 
         modelContext.registerTool({
-          name: 'list_manifesto_sections',
-          description: 'List the top-level sections of the rewrites.bio manifesto.',
+          name: "list_manifesto_sections",
+          description:
+            "List the top-level sections of the rewrites.bio manifesto.",
           inputSchema: {
-            type: 'object',
+            type: "object",
             properties: {},
           },
           execute: async () => ({
-            sections: sections.map(({ id, title }) => ({ id, title, url: `${location.origin}/#${id}` })),
+            sections: sections.map(({ id, title }) => ({
+              id,
+              title,
+              url: `${location.origin}/#${id}`,
+            })),
           }),
         });
 
         modelContext.registerTool({
-          name: 'navigate_to_section',
-          description: 'Scroll to a manifesto section or principle by anchor ID.',
+          name: "navigate_to_section",
+          description:
+            "Scroll to a manifesto section or principle by anchor ID.",
           inputSchema: {
-            type: 'object',
+            type: "object",
             properties: {
               sectionId: {
-                type: 'string',
-                description: 'Anchor ID, e.g. philosophy, test-and-benchmark, open-source',
+                type: "string",
+                description:
+                  "Anchor ID, e.g. philosophy, test-and-benchmark, open-source",
               },
             },
-            required: ['sectionId'],
+            required: ["sectionId"],
           },
           execute: async ({ sectionId }) => {
             const target = document.getElementById(sectionId);
             if (!target) {
               return { error: `Section "${sectionId}" not found` };
             }
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            return { navigated: sectionId, url: `${location.origin}/#${sectionId}` };
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            return {
+              navigated: sectionId,
+              url: `${location.origin}/#${sectionId}`,
+            };
           },
         });
 
         modelContext.registerTool({
-          name: 'get_manifesto_markdown_url',
-          description: 'Return the URL for the machine-readable markdown version of the manifesto.',
+          name: "get_manifesto_markdown_url",
+          description:
+            "Return the URL for the machine-readable markdown version of the manifesto.",
           inputSchema: {
-            type: 'object',
+            type: "object",
             properties: {},
           },
           execute: async () => ({
@@ -594,7 +757,7 @@ const ogImage = `${siteUrl}/og-image.png`;
       initSectionEntrances();
       initWebMcp();
 
-      document.addEventListener('astro:after-swap', () => {
+      document.addEventListener("astro:after-swap", () => {
         initReveals();
         initTocTracker();
         initTocToggle();
@@ -629,9 +792,15 @@ const ogImage = `${siteUrl}/og-image.png`;
     letter-spacing: -0.01em;
   }
 
-  .nav-rewrites { color: var(--text-primary); }
-  .nav-dot { color: var(--accent-rust); }
-  .nav-bio { color: var(--accent-rust); }
+  .nav-rewrites {
+    color: var(--text-primary);
+  }
+  .nav-dot {
+    color: var(--accent-rust);
+  }
+  .nav-bio {
+    color: var(--accent-rust);
+  }
 
   /* Mobile ToC toggle — hidden on desktop where sidebar is visible */
   .nav-toc-toggle {
@@ -647,7 +816,9 @@ const ogImage = `${siteUrl}/og-image.png`;
     font-weight: 500;
     color: var(--text-tertiary);
     cursor: pointer;
-    transition: color 0.15s ease, background 0.15s ease;
+    transition:
+      color 0.15s ease,
+      background 0.15s ease;
   }
 
   .nav-toc-toggle:hover {

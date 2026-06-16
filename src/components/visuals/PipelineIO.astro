@@ -5,90 +5,412 @@
 
 <div class="pipeline-wrap">
   <div class="scenario">
-    <div class="scenario-label scenario-before">Before - each tool reads the file independently</div>
-    <svg class="pipeline-svg" viewBox="0 0 400 200" role="img" aria-label="12 separate tools each reading the same file sequentially" xmlns="http://www.w3.org/2000/svg">
-
+    <div class="scenario-label scenario-before">
+      Before - each tool reads the file independently
+    </div>
+    <svg
+      class="pipeline-svg"
+      viewBox="0 0 400 200"
+      role="img"
+      aria-label="12 separate tools each reading the same file sequentially"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <!-- Tool boxes: 6 top, 6 bottom -->
-      <rect x="8"   y="8"  width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
-      <rect x="70"  y="8"  width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
-      <rect x="132" y="8"  width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
-      <rect x="214" y="8"  width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
-      <rect x="276" y="8"  width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
-      <rect x="338" y="8"  width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
-      <rect x="8"   y="152" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
-      <rect x="70"  y="152" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
-      <rect x="132" y="152" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
-      <rect x="214" y="152" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
-      <rect x="276" y="152" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
-      <rect x="338" y="152" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="rgba(212, 86, 90, 0.3)" stroke-width="1" />
+      <rect
+        x="8"
+        y="8"
+        width="54"
+        height="40"
+        rx="4"
+        fill="var(--bg-primary)"
+        stroke="rgba(212, 86, 90, 0.3)"
+        stroke-width="1"></rect>
+      <rect
+        x="70"
+        y="8"
+        width="54"
+        height="40"
+        rx="4"
+        fill="var(--bg-primary)"
+        stroke="rgba(212, 86, 90, 0.3)"
+        stroke-width="1"></rect>
+      <rect
+        x="132"
+        y="8"
+        width="54"
+        height="40"
+        rx="4"
+        fill="var(--bg-primary)"
+        stroke="rgba(212, 86, 90, 0.3)"
+        stroke-width="1"></rect>
+      <rect
+        x="214"
+        y="8"
+        width="54"
+        height="40"
+        rx="4"
+        fill="var(--bg-primary)"
+        stroke="rgba(212, 86, 90, 0.3)"
+        stroke-width="1"></rect>
+      <rect
+        x="276"
+        y="8"
+        width="54"
+        height="40"
+        rx="4"
+        fill="var(--bg-primary)"
+        stroke="rgba(212, 86, 90, 0.3)"
+        stroke-width="1"></rect>
+      <rect
+        x="338"
+        y="8"
+        width="54"
+        height="40"
+        rx="4"
+        fill="var(--bg-primary)"
+        stroke="rgba(212, 86, 90, 0.3)"
+        stroke-width="1"></rect>
+      <rect
+        x="8"
+        y="152"
+        width="54"
+        height="40"
+        rx="4"
+        fill="var(--bg-primary)"
+        stroke="rgba(212, 86, 90, 0.3)"
+        stroke-width="1"></rect>
+      <rect
+        x="70"
+        y="152"
+        width="54"
+        height="40"
+        rx="4"
+        fill="var(--bg-primary)"
+        stroke="rgba(212, 86, 90, 0.3)"
+        stroke-width="1"></rect>
+      <rect
+        x="132"
+        y="152"
+        width="54"
+        height="40"
+        rx="4"
+        fill="var(--bg-primary)"
+        stroke="rgba(212, 86, 90, 0.3)"
+        stroke-width="1"></rect>
+      <rect
+        x="214"
+        y="152"
+        width="54"
+        height="40"
+        rx="4"
+        fill="var(--bg-primary)"
+        stroke="rgba(212, 86, 90, 0.3)"
+        stroke-width="1"></rect>
+      <rect
+        x="276"
+        y="152"
+        width="54"
+        height="40"
+        rx="4"
+        fill="var(--bg-primary)"
+        stroke="rgba(212, 86, 90, 0.3)"
+        stroke-width="1"></rect>
+      <rect
+        x="338"
+        y="152"
+        width="54"
+        height="40"
+        rx="4"
+        fill="var(--bg-primary)"
+        stroke="rgba(212, 86, 90, 0.3)"
+        stroke-width="1"></rect>
 
       <!-- Connection lines -->
-      <line x1="200" y1="100" x2="35"  y2="48" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
-      <line x1="200" y1="100" x2="97"  y2="48" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
-      <line x1="200" y1="100" x2="159" y2="48" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
-      <line x1="200" y1="100" x2="241" y2="48" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
-      <line x1="200" y1="100" x2="303" y2="48" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
-      <line x1="200" y1="100" x2="365" y2="48" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
-      <line x1="200" y1="100" x2="35"  y2="152" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
-      <line x1="200" y1="100" x2="97"  y2="152" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
-      <line x1="200" y1="100" x2="159" y2="152" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
-      <line x1="200" y1="100" x2="241" y2="152" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
-      <line x1="200" y1="100" x2="303" y2="152" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
-      <line x1="200" y1="100" x2="365" y2="152" stroke="rgba(212, 86, 90, 0.12)" stroke-width="1" />
+      <line
+        x1="200"
+        y1="100"
+        x2="35"
+        y2="48"
+        stroke="rgba(212, 86, 90, 0.12)"
+        stroke-width="1"></line>
+      <line
+        x1="200"
+        y1="100"
+        x2="97"
+        y2="48"
+        stroke="rgba(212, 86, 90, 0.12)"
+        stroke-width="1"></line>
+      <line
+        x1="200"
+        y1="100"
+        x2="159"
+        y2="48"
+        stroke="rgba(212, 86, 90, 0.12)"
+        stroke-width="1"></line>
+      <line
+        x1="200"
+        y1="100"
+        x2="241"
+        y2="48"
+        stroke="rgba(212, 86, 90, 0.12)"
+        stroke-width="1"></line>
+      <line
+        x1="200"
+        y1="100"
+        x2="303"
+        y2="48"
+        stroke="rgba(212, 86, 90, 0.12)"
+        stroke-width="1"></line>
+      <line
+        x1="200"
+        y1="100"
+        x2="365"
+        y2="48"
+        stroke="rgba(212, 86, 90, 0.12)"
+        stroke-width="1"></line>
+      <line
+        x1="200"
+        y1="100"
+        x2="35"
+        y2="152"
+        stroke="rgba(212, 86, 90, 0.12)"
+        stroke-width="1"></line>
+      <line
+        x1="200"
+        y1="100"
+        x2="97"
+        y2="152"
+        stroke="rgba(212, 86, 90, 0.12)"
+        stroke-width="1"></line>
+      <line
+        x1="200"
+        y1="100"
+        x2="159"
+        y2="152"
+        stroke="rgba(212, 86, 90, 0.12)"
+        stroke-width="1"></line>
+      <line
+        x1="200"
+        y1="100"
+        x2="241"
+        y2="152"
+        stroke="rgba(212, 86, 90, 0.12)"
+        stroke-width="1"></line>
+      <line
+        x1="200"
+        y1="100"
+        x2="303"
+        y2="152"
+        stroke="rgba(212, 86, 90, 0.12)"
+        stroke-width="1"></line>
+      <line
+        x1="200"
+        y1="100"
+        x2="365"
+        y2="152"
+        stroke="rgba(212, 86, 90, 0.12)"
+        stroke-width="1"></line>
 
       <!-- Animated pulse dots (2.4s cycle) -->
       <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
-        <animate attributeName="opacity" values="0;1;0;0" dur="2.4s" keyTimes="0;0.01;0.083;1" repeatCount="indefinite" />
-        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.083;1" keyPoints="0;1;1" calcMode="linear" path="M200,100 L35,28" />
+        <animate
+          attributeName="opacity"
+          values="0;1;0;0"
+          dur="2.4s"
+          keyTimes="0;0.01;0.083;1"
+          repeatCount="indefinite"></animate>
+        <animateMotion
+          dur="2.4s"
+          repeatCount="indefinite"
+          keyTimes="0;0.083;1"
+          keyPoints="0;1;1"
+          calcMode="linear"
+          path="M200,100 L35,28"></animateMotion>
       </circle>
       <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
-        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.083;0.09;0.167;1" repeatCount="indefinite" />
-        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.083;0.167;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L97,28" />
+        <animate
+          attributeName="opacity"
+          values="0;0;1;0;0"
+          dur="2.4s"
+          keyTimes="0;0.083;0.09;0.167;1"
+          repeatCount="indefinite"></animate>
+        <animateMotion
+          dur="2.4s"
+          repeatCount="indefinite"
+          keyTimes="0;0.083;0.167;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+          path="M200,100 L97,28"></animateMotion>
       </circle>
       <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
-        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.167;0.174;0.25;1" repeatCount="indefinite" />
-        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.167;0.25;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L159,28" />
+        <animate
+          attributeName="opacity"
+          values="0;0;1;0;0"
+          dur="2.4s"
+          keyTimes="0;0.167;0.174;0.25;1"
+          repeatCount="indefinite"></animate>
+        <animateMotion
+          dur="2.4s"
+          repeatCount="indefinite"
+          keyTimes="0;0.167;0.25;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+          path="M200,100 L159,28"></animateMotion>
       </circle>
       <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
-        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.25;0.257;0.333;1" repeatCount="indefinite" />
-        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.25;0.333;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L241,28" />
+        <animate
+          attributeName="opacity"
+          values="0;0;1;0;0"
+          dur="2.4s"
+          keyTimes="0;0.25;0.257;0.333;1"
+          repeatCount="indefinite"></animate>
+        <animateMotion
+          dur="2.4s"
+          repeatCount="indefinite"
+          keyTimes="0;0.25;0.333;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+          path="M200,100 L241,28"></animateMotion>
       </circle>
       <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
-        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.333;0.34;0.417;1" repeatCount="indefinite" />
-        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.333;0.417;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L303,28" />
+        <animate
+          attributeName="opacity"
+          values="0;0;1;0;0"
+          dur="2.4s"
+          keyTimes="0;0.333;0.34;0.417;1"
+          repeatCount="indefinite"></animate>
+        <animateMotion
+          dur="2.4s"
+          repeatCount="indefinite"
+          keyTimes="0;0.333;0.417;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+          path="M200,100 L303,28"></animateMotion>
       </circle>
       <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
-        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.417;0.424;0.5;1" repeatCount="indefinite" />
-        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.417;0.5;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L365,28" />
+        <animate
+          attributeName="opacity"
+          values="0;0;1;0;0"
+          dur="2.4s"
+          keyTimes="0;0.417;0.424;0.5;1"
+          repeatCount="indefinite"></animate>
+        <animateMotion
+          dur="2.4s"
+          repeatCount="indefinite"
+          keyTimes="0;0.417;0.5;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+          path="M200,100 L365,28"></animateMotion>
       </circle>
       <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
-        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.5;0.507;0.583;1" repeatCount="indefinite" />
-        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.5;0.583;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L35,172" />
+        <animate
+          attributeName="opacity"
+          values="0;0;1;0;0"
+          dur="2.4s"
+          keyTimes="0;0.5;0.507;0.583;1"
+          repeatCount="indefinite"></animate>
+        <animateMotion
+          dur="2.4s"
+          repeatCount="indefinite"
+          keyTimes="0;0.5;0.583;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+          path="M200,100 L35,172"></animateMotion>
       </circle>
       <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
-        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.583;0.59;0.667;1" repeatCount="indefinite" />
-        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.583;0.667;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L97,172" />
+        <animate
+          attributeName="opacity"
+          values="0;0;1;0;0"
+          dur="2.4s"
+          keyTimes="0;0.583;0.59;0.667;1"
+          repeatCount="indefinite"></animate>
+        <animateMotion
+          dur="2.4s"
+          repeatCount="indefinite"
+          keyTimes="0;0.583;0.667;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+          path="M200,100 L97,172"></animateMotion>
       </circle>
       <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
-        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.667;0.674;0.75;1" repeatCount="indefinite" />
-        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.667;0.75;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L159,172" />
+        <animate
+          attributeName="opacity"
+          values="0;0;1;0;0"
+          dur="2.4s"
+          keyTimes="0;0.667;0.674;0.75;1"
+          repeatCount="indefinite"></animate>
+        <animateMotion
+          dur="2.4s"
+          repeatCount="indefinite"
+          keyTimes="0;0.667;0.75;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+          path="M200,100 L159,172"></animateMotion>
       </circle>
       <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
-        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.75;0.757;0.833;1" repeatCount="indefinite" />
-        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.75;0.833;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L241,172" />
+        <animate
+          attributeName="opacity"
+          values="0;0;1;0;0"
+          dur="2.4s"
+          keyTimes="0;0.75;0.757;0.833;1"
+          repeatCount="indefinite"></animate>
+        <animateMotion
+          dur="2.4s"
+          repeatCount="indefinite"
+          keyTimes="0;0.75;0.833;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+          path="M200,100 L241,172"></animateMotion>
       </circle>
       <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
-        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.833;0.84;0.917;1" repeatCount="indefinite" />
-        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.833;0.917;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L303,172" />
+        <animate
+          attributeName="opacity"
+          values="0;0;1;0;0"
+          dur="2.4s"
+          keyTimes="0;0.833;0.84;0.917;1"
+          repeatCount="indefinite"></animate>
+        <animateMotion
+          dur="2.4s"
+          repeatCount="indefinite"
+          keyTimes="0;0.833;0.917;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+          path="M200,100 L303,172"></animateMotion>
       </circle>
       <circle r="3.5" fill="var(--color-fail)" class="pulse-dot">
-        <animate attributeName="opacity" values="0;0;1;0;0" dur="2.4s" keyTimes="0;0.917;0.924;1" repeatCount="indefinite" />
-        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.917;1;1" keyPoints="0;0;1;1" calcMode="linear" path="M200,100 L365,172" />
+        <animate
+          attributeName="opacity"
+          values="0;0;1;0;0"
+          dur="2.4s"
+          keyTimes="0;0.917;0.924;1"
+          repeatCount="indefinite"></animate>
+        <animateMotion
+          dur="2.4s"
+          repeatCount="indefinite"
+          keyTimes="0;0.917;1;1"
+          keyPoints="0;0;1;1"
+          calcMode="linear"
+          path="M200,100 L365,172"></animateMotion>
       </circle>
 
       <!-- File in center (drawn last = on top) -->
-      <rect x="168" y="78" width="64" height="44" rx="5" fill="var(--bg-primary)" stroke="var(--text-tertiary)" stroke-width="1.5" />
-      <text x="200" y="104" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--text-secondary)">input</text>
+      <rect
+        x="168"
+        y="78"
+        width="64"
+        height="44"
+        rx="5"
+        fill="var(--bg-primary)"
+        stroke="var(--text-tertiary)"
+        stroke-width="1.5"></rect>
+      <text
+        x="200"
+        y="104"
+        text-anchor="middle"
+        font-family="var(--font-mono)"
+        font-size="11"
+        fill="var(--text-secondary)">input</text
+      >
     </svg>
   </div>
 
@@ -96,22 +418,68 @@
 
   <div class="scenario">
     <div class="scenario-label scenario-after">After - single pass</div>
-    <svg class="pipeline-svg" viewBox="0 0 400 80" role="img" aria-label="One combined tool reading the file once" xmlns="http://www.w3.org/2000/svg">
+    <svg
+      class="pipeline-svg"
+      viewBox="0 0 400 80"
+      role="img"
+      aria-label="One combined tool reading the file once"
+      xmlns="http://www.w3.org/2000/svg"
+    >
       <!-- File -->
-      <rect x="168" y="18" width="64" height="44" rx="5" fill="var(--bg-primary)" stroke="var(--text-tertiary)" stroke-width="1.5" />
-      <text x="200" y="44" text-anchor="middle" font-family="var(--font-mono)" font-size="11" fill="var(--text-secondary)">input</text>
+      <rect
+        x="168"
+        y="18"
+        width="64"
+        height="44"
+        rx="5"
+        fill="var(--bg-primary)"
+        stroke="var(--text-tertiary)"
+        stroke-width="1.5"></rect>
+      <text
+        x="200"
+        y="44"
+        text-anchor="middle"
+        font-family="var(--font-mono)"
+        font-size="11"
+        fill="var(--text-secondary)">input</text
+      >
 
       <!-- Arrow -->
-      <line x1="232" y1="40" x2="268" y2="40" stroke="var(--color-pass)" stroke-width="1.5" />
-      <polygon points="268,35 278,40 268,45" fill="var(--color-pass)" />
+      <line
+        x1="232"
+        y1="40"
+        x2="268"
+        y2="40"
+        stroke="var(--color-pass)"
+        stroke-width="1.5"></line>
+      <polygon points="268,35 278,40 268,45" fill="var(--color-pass)"></polygon>
 
       <!-- Single combined tool (same size as the 12 small boxes) -->
-      <rect x="282" y="18" width="54" height="40" rx="4" fill="var(--bg-primary)" stroke="var(--color-pass)" stroke-width="1.5" />
+      <rect
+        x="282"
+        y="18"
+        width="54"
+        height="40"
+        rx="4"
+        fill="var(--bg-primary)"
+        stroke="var(--color-pass)"
+        stroke-width="1.5"></rect>
 
       <!-- Pulse dot — same speed as the individual ones above (0.2s travel) -->
       <circle r="3.5" fill="var(--color-pass)" class="pulse-dot">
-        <animate attributeName="opacity" values="0;1;0;0" dur="2.4s" keyTimes="0;0.01;0.083;1" repeatCount="indefinite" />
-        <animateMotion dur="2.4s" repeatCount="indefinite" keyTimes="0;0.083;1" keyPoints="0;1;1" calcMode="linear" path="M200,40 L282,40" />
+        <animate
+          attributeName="opacity"
+          values="0;1;0;0"
+          dur="2.4s"
+          keyTimes="0;0.01;0.083;1"
+          repeatCount="indefinite"></animate>
+        <animateMotion
+          dur="2.4s"
+          repeatCount="indefinite"
+          keyTimes="0;0.083;1"
+          keyPoints="0;1;1"
+          calcMode="linear"
+          path="M200,40 L282,40"></animateMotion>
       </circle>
     </svg>
   </div>
@@ -140,8 +508,12 @@
     line-height: 1.5;
   }
 
-  .scenario-before { color: var(--color-fail); }
-  .scenario-after  { color: var(--color-pass); }
+  .scenario-before {
+    color: var(--color-fail);
+  }
+  .scenario-after {
+    color: var(--color-pass);
+  }
 
   .pipeline-svg {
     width: 100%;
@@ -155,8 +527,12 @@
     font-weight: 600;
   }
 
-  .cost-bad { color: var(--color-fail); }
-  .cost-good { color: var(--color-pass); }
+  .cost-bad {
+    color: var(--color-fail);
+  }
+  .cost-good {
+    color: var(--color-pass);
+  }
 
   .pipeline-divider {
     text-align: center;
