@@ -26,3 +26,7 @@ pnpm-debug.log*
 
 .impeccable.md
 .playwright-mcp
+
+# Local Netlify folder
+.netlify
+deno.lock
