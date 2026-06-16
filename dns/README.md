@@ -71,10 +71,10 @@ Human-readable reference: [`netlify/dns-aid-records.example`](../netlify/dns-aid
 
 Workflow [`.github/workflows/publish-dns-aid.yml`](../.github/workflows/publish-dns-aid.yml) can publish records when these repository secrets are set:
 
-| Secret | Purpose |
-| --- | --- |
-| `CLOUDFLARE_API_TOKEN` | Cloudflare API token |
-| `CLOUDFLARE_ZONE_ID` | Zone ID for `rewrites.bio` or delegated child zone |
+| Secret                 | Purpose                                            |
+| ---------------------- | -------------------------------------------------- |
+| `CLOUDFLARE_API_TOKEN` | Cloudflare API token                               |
+| `CLOUDFLARE_ZONE_ID`   | Zone ID for `rewrites.bio` or delegated child zone |
 
 Trigger manually via **Actions → Publish DNS-AID records → Run workflow**.
 
